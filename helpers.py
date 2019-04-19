@@ -20,3 +20,16 @@ def log(message):
     except Exception:
         print (traceback.format_exc())
 
+#============================
+#FILE READER
+#============================
+def readFile(fName):
+    try:
+        fileHandler=open((os.getcwd()+fName), 'r')
+        log("Loading "+fName+" ...")
+        rawFile=fileHandler.read()
+        fileHandler.close()
+        return [False,rawFile]
+    except Exception:
+        log(traceback.format_exc())
+        return [True,traceback.format_exc()]
