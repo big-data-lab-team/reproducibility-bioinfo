@@ -64,3 +64,38 @@ def parseFasta(content):
     except Exception:
         log(traceback.format_exc())
         return [True,traceback.format_exc()]
+#============================
+#DOWNLOAD/PARSE/WRITE TO FILE
+#============================
+def downloadCreateDataList(itemList,site,format,dataPath):
+    try:
+        
+        fileHandler=open((os.getcwd()+dataPath), 'a')
+        lastItemInList=itemList[len(itemList)-1]
+
+        for item in itemList:
+            log(item)
+            err,callResult=getFileFromURL(site,item,format)
+            if not err:
+                
+                err,parseResult = parseFasta(callResult.split("\n"))
+                if not err:
+                    
+                    fileHandler.write(">")
+                    fileHandler.write(item)
+                    fileHandler.write("\n")
+                    fileHandler.write(parseResult)
+                    
+                    if item!=lastItemInList:
+                        fileHandler.write("\n")
+                    
+                else:
+                    print(parseResult)
+            else:
+                print(callResult)
+        
+        fileHandler.close()
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
