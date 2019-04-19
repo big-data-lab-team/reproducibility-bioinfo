@@ -33,3 +33,23 @@ def readFile(fName):
     except Exception:
         log(traceback.format_exc())
         return [True,traceback.format_exc()]
+#============================
+#PROTEIN FASTA DOWNLOADER
+#============================
+def getFileFromURL(webAddress,pFile,extension):
+    try:
+        URL=webAddress.format(pFile,extension)
+        log("Sending request to ... ")
+        log(URL)
+        response = requests.get(URL)
+        time.sleep(1)
+        if response.ok:
+            return [False,response.text]
+        else:
+            raise Exception(
+                'Online Request Status for {} is {}'.format(
+                    pFile+"."+extension,response.status_code))
+
+    except Exception:
+        log(traceback.format_exc())
+        return [True,traceback.format_exc()]
