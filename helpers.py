@@ -53,3 +53,14 @@ def getFileFromURL(webAddress,pFile,extension):
     except Exception:
         log(traceback.format_exc())
         return [True,traceback.format_exc()]
+#============================
+#FASTA PARSER
+#============================
+def parseFasta(content):
+    try:
+        sequence = ("".join(content[1:]).replace("\n","")).replace(" ","")
+        log("Processing Data for Sequence...")
+        return [False,sequence]
+    except Exception:
+        log(traceback.format_exc())
+        return [True,traceback.format_exc()]
