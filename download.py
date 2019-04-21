@@ -12,8 +12,8 @@ def main():
     #Downloading the DATA for DATASET
     try:
         #Logging start of Program
-        log(time.time())
-        log("Running Download.py "+sys.argv[1])
+        log(time.strftime("%m/%d/%Y, %H:%M:%S",time.localtime()))
+        log("Running Download.py << on >>"+sys.argv[1])
         
         #Loading Json
         err,config=readFile("/config.json")
@@ -48,10 +48,6 @@ def main():
         log("[ "+sys.argv[1]+" ] Download Process Failed!!")
         log(traceback.format_exc())
 
-    #Feature Generation
-    #Training the SVM on train_test Data
-    #Downloading the DATA for Independent Dataset
-    #Testing the algorithm on the INdependent Dataset
 
 if __name__ == "__main__":
     main()
