@@ -2,7 +2,10 @@
 #PACKAGES
 #============================
 import sys
-from helpers import *
+import time
+import json
+import traceback
+from helpers import downloadCreateDataList,log,readFile
 
 #============================
 #MAIN
@@ -19,7 +22,7 @@ def main():
         err,config=readFile("/config.json")
         if not err:
             configJson = json.loads(config)    
-            downloadListAddress = configJson["downloadList"].format(sys.argv[1])
+            downloadListAddress = configJson["downloadList"].format(sys.argv[1]+".json")
             
             #Loading The Download List
             err,downloadList = readFile(downloadListAddress)
@@ -32,7 +35,7 @@ def main():
                         downloadListJson[item],
                         configJson["ncbi"],
                         'fasta',
-                        configJson["downloadPath"].format(sys.argv[1],item))
+                        configJson["downloadPath"].format(sys.argv[1],(item+".fasta")))
                 
                 log("[ "+sys.argv[1]+" ] Downloaded Succesfully!!")
 
