@@ -70,13 +70,16 @@ def parseFasta(content):
 def downloadCreateDataList(itemList,site,format,dataPath):
     try:
         try:
-            fileHandler=open((os.getcwd()+dataPath), 'a')
+            open((os.getcwd()+dataPath), 'w').close()
+            
         except Exception:
             newPath=dataPath.split("/")
             path = ("/".join(newPath[:(len(newPath)-1)]))
             os.mkdir(os.getcwd()+path)
+            
+        finally:
             fileHandler=open((os.getcwd()+dataPath), 'a')
-        
+
         lastItemInList=itemList[len(itemList)-1]
 
         for item in itemList:
