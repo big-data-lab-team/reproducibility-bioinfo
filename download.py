@@ -5,19 +5,16 @@ import sys
 from helpers import *
 
 #============================
-#GLOBALS
-#============================
-trainTestList="/dataset/trainTestList.json"
-ncbi="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id={}&rettype={}"
-downloadPath="/dataset/train_test/{}.fasta"
-
-#============================
 #MAIN
 #============================
 def main():
 
     #Downloading the DATA for DATASET
     try:
+        #Logging start of Program
+        log(time.time())
+        log("Running Download.py "+sys.argv[1])
+        
         #Loading Json
         err,config=readFile("/config.json")
         if not err:
