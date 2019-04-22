@@ -22,7 +22,7 @@ So, following the process being discussed in the paper, the `extractFeature.py` 
     python3 extractFeature.py aac trainTest
     ```
 
-    This syntax calculates `Amino Acid Composition (aac)` feature from the `train/test` dataset in `.csv` format. Two following files will be placed in [features\trainTest\](https://github.com/HamidHeyde/reproducibility-bioinfo/tree/master/features/trainTest) folder by program after running the syntax.
+    This syntax calculates `Amino Acid Composition (aac)` feature from the `train/test` dataset in `.csv` format. Two following files will be placed in [trainTest] folder in [features] folder by program after running the syntax.
 
     * `aac1.csv` which contains the Amino Acid Composition percentage for all sequences in the dataset (except non-transporters). Each sequence is labeled as `amino, anion, cation, electron, protein, sugar, other` which corresponds to  membrane transport proteins that transports this specific substrate.
 
@@ -31,5 +31,6 @@ So, following the process being discussed in the paper, the `extractFeature.py` 
 
 ### Reference
 ***
-[TrSSp]:https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0100278
+[trainTest]:(https://github.com/HamidHeyde/reproducibility-bioinfo/tree/master/features/trainTest)
+[features]:(https://github.com/HamidHeyde/reproducibility-bioinfo/tree/master/features)
 ##### [Prediction of Membrane Transport Proteins and Their Substrate Specificities Using Primary Sequence Information](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0100278) Nitish K. Mishra,Junil Chang,Patrick X. Zhao (2014)
