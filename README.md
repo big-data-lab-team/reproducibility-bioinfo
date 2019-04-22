@@ -19,6 +19,10 @@ So, for the purpose of our study, we programmed `download.py` to download all th
 python3 download.py trainTest
 ```
 
+This syntax downloads the `train/test` dataset using the [TrainTest.json](/dataset/trainTest.json) file. The outputs for the process are eight files with `.fasta` extension in [TrainTest](/dataset/trainTest) folder as a subfolder to [Dataset](/dataset).
+
+Each protein is dowloaded in `FASTA` format by submiting a HTTP request to `NCBI`. The results are processed further to put all the related sequences in one single file (like the original one available on [TrSSp](http://bioinfo.noble.org/TrSSP/?dowhat=Datasets) website)
+
 ## Features
 According to the paper, they have develeoped 2 different models: 
 > * [The first model] were developed to predict the substrate specificity of seven transporter classes: amino acid, anion, cation, electron, protein/mRNA, sugar, and other transporters.
