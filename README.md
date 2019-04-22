@@ -1,4 +1,4 @@
-In this project and through the following pipeline, we tried to reproduce the results for the [TrSSP](#1-prediction-of-membrane-transport-proteins-and-their-substrate-specificities-using-primary-sequence-information) paper using python(3.7.0), Scikit-Learn, Numpy, Pandas, Matplotlib.
+In this project and through the following pipeline, we tried to reproduce the results for the [TrSSP](#prediction-of-membrane-transport-proteins-and-their-substrate-specificities-using-primary-sequence-information-nitish-k-mishrajunil-changpatrick-x-zhao2014) paper using python(3.7.0), Scikit-Learn, Numpy, Pandas, Matplotlib.
 
 ### Before Running the program
 ***
