@@ -12,7 +12,7 @@ According to the paper, they have put together two different datasets:
 So, for the purpose of our study, we programmed `download.py` to download all the sequenecs form `ncbi` database by submitting a HTTP request. The protein IDs and the sequences are availbale at their [TrSSp](http://bioinfo.noble.org/TrSSP/?dowhat=Datasets) website. We put all those IDs together and and categorized them through different classes in a `.json` file for both [TrainTest](/dataset/trainTest.json) dataset and [Independent](/dataset/independent) dataset.
 <br>Further on, we realized that some of those sequences has been updated through time, So, we checked all the downloaded sequences against the ones available on their website and modified our dataset (by adding the right version to the ID in the JSON file) to match the original dataset.
 
-#### * Downlading the train/test dataset
+#### `Downlading the train/test dataset`
 
 ```python
 python3 download.py trainTest
@@ -26,7 +26,7 @@ According to the paper, they have develeoped 2 different models:
 
 So, following the process being discussed in the paper, the `extractFeature.py` program generates two different files for each feature in `.csv` format.
 
-#### * Extracting features from the dataset.
+#### `Extracting features from the dataset`
 
 ```python
 python3 extractFeature.py aac trainTest
