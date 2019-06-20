@@ -6,19 +6,22 @@
 \usepackage{graphicx}
 \graphicspath{../figures}
 
+\usepackage{color}
+
 %%%%%%SETTINGS
 \usepackage{multicol}
 \usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in]{geometry}
 
 \setcounter{secnumdepth}{4}
-\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\myparagraph}[1]{\paragraph*{#1}\mbox{}\\}
+\newcommand{\TG}[1]{\color{blue}From Tristan: #1 \color{black}}
 
 %%%%%%TITLE 
-\title {Reproducible Machine Learning Results' Checklist in Bioinformatics}
-\author{ \large Hamidreza Heidarzadeh, Tristan Glatard \\  
-         \small Department of Computer Science and Software Engineering\\  
-         \small Concordia University, Montréal, Québec, Canada
-         }
+\title {Membrane Protein Classification: a Reproducibility Study}
+\author{Hamidreza Heidarzadeh, Tristan Glatard \\  
+        Department of Computer Science and Software Engineering\\  
+        Concordia University, Montréal, Québec, Canada
+}
 \date{}
 
 %%%%%%PAPER 
@@ -26,23 +29,14 @@
 
 \maketitle
 
+\abstract{Abstract goes here (it's not a section)}
+
 %%%%%%SECTIONS
-\input{sections/1abstract.tex}
-\vspace{8mm}
-\input{sections/2introduction.tex}
-\vspace{8mm}
-\input{sections/3materials.tex}
-\vspace{8mm}
-\input{sections/4results.tex}
-\vspace{8mm}
-\input{sections/5discussion.tex}
-\vspace{8mm}
-\input{sections/6conclusion.tex}
-\vspace{8mm}
-
-
-
-
+\input{sections/introduction.tex}
+\input{sections/materials.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
 
 %%%%%%BIBLIOGRAPHY 
 \bibliographystyle{plain}
