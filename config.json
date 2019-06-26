@@ -1,0 +1,7 @@
+{
+    "ncbi": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id={}&rettype={}",
+    "downloadList": "/dataset/{}",
+    "downloadPath": "/dataset/{}/{}",
+    "datasetPath": "/dataset/{}/",
+    "featuresPath": "/features/{}/{}"
+}
