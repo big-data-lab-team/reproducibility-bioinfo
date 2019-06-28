@@ -1,7 +1,19 @@
 \section{Materials and Methods}
-    \subsection{Dataset}
+
+    \subsection{Dataset}   
+
+    The dataset contains 780 transporter proteins classified into 7 substrate specific classes (70 amino acid transporters, 
+    60 anion transporters, 260 cation transporters, 60 electron transporters, 70 protein/mRNA transporters, 60 sugar 
+    transporters, 200 other transporters) and one none-transporter class (600 proteins) for a total of 1,380 protein 
+    sequences which are available at  \trssp{?dowhat=Datasets}{TrSSP} website.\\
+    For the purpose of our study, we coded a program (\git{download.py}{download.py}) to download all the sequences from the 
+    \ncbi{protein}{NCBI} database using the sequence accession number from TrSSP website. 
+    Considering the fact that some sequences could be updated through time, we checked all the \git{dataset/trainTest/}{downloaded ones} 
+    against the originals to make sure all of our sequences match those of the TrSSP. We then updated the 
+    the modified sequences and their accession numbers accordingly.
+
     \subsection{Feature extraction}
-    \subsection{Data Preprocessing} \TG{This isn't really pre-processing. Maybe this should go to evaluation}
+    \subsection{Construction of the main dataset}
         \myparagraph{5-Fold Cross-Validation on a shuffled dataset}
         \myparagraph{5-Fold Cross-Validation out of each class}
         \myparagraph{Subsampling}
@@ -17,3 +29,4 @@
     \subsection{Evaluation}
         \myparagraph{Metrics from the paper}
         \myparagraph{Micro vs Macro}
+        \myparagraph{SVM-Light vs Scikit-Learn}
