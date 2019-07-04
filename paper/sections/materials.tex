@@ -5,14 +5,38 @@
     The dataset contains 780 transporter proteins classified into 7 substrate specific classes (70 amino acid transporters, 
     60 anion transporters, 260 cation transporters, 60 electron transporters, 70 protein/mRNA transporters, 60 sugar 
     transporters, 200 other transporters) and one none-transporter class (600 proteins) for a total of 1,380 protein 
-    sequences which are available at  \trssp{?dowhat=Datasets}{TrSSP} website.\\
+    sequences which are available at  \trssp{?dowhat=Datasets}{TrSSP} website.
+    
     For the purpose of our study, we coded a program (\git{download.py}{download.py}) to download all the sequences from the 
     \ncbi{protein}{NCBI} database using the sequence accession number from TrSSP website. 
     Considering the fact that some sequences could be updated through time, we checked all the \git{dataset/trainTest/}{downloaded ones} 
     against the originals to make sure all of our sequences match those of the TrSSP. We then updated the 
-    the modified sequences and their accession numbers accordingly.
+    modified sequences and their accession numbers accordingly.
 
     \subsection{Feature extraction}
+
+    The authors \cite{mishra2014prediction} have extracted five features out of the dataset sequences. They have then built-up different Support Vector Machine based 
+    computational models using a combination of these features. Following the descriptions from the paper, we generated all the 
+    \git{features/}{features} in Comma Separated Values (.csv) format adding one more column for the labels.
+
+    Table \ref{tab:table1} in the original paper, compares different models based on 4 evaluation metrics (Sensitivity, Specificity, Accuracy and MCC) for 
+    "all seven substrate-specific transporter classes". Also, under "Data Compilation" section, it has been mentioned that the five-fold 
+    cross-validation has been applied to "1,380 proteins in the main dataset" that is the total number of sequences available across 
+    all 8-classes being put together.
+
+    So, to clear up any doubts, for each feature we generated the ".csv" file for both 7-class (all seven transporter classes) and 8-class 
+    (all seven classes plus non-transporters) based models using \git{extractFeature.py}{extractFeature.py} program.
+    
+    
+    \myparagraph{\small Amino Acid Composition (AAC)}
+    The Amino Acid (Monopeptide) Composition is the number of amino acids of each type normalized with the total number of 
+    residues \cite{gromiha2010protein}. The percentage of each amino acid was calculated using the following formula:
+    \begin{equation}
+        \text{percentage of amino acid (i)} = \frac {\text{total number of amino acid (i)}} {\text{total number of amino acids in protein}} * 100
+    \end{equation}
+    where i represents one of the 20 standard amino acids \cite{mishra2014prediction} 
+    
+
     \subsection{Construction of the main dataset}
         \myparagraph{5-Fold Cross-Validation on a shuffled dataset}
         \myparagraph{5-Fold Cross-Validation out of each class}
