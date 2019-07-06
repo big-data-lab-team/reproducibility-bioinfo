@@ -40,8 +40,8 @@ def readFile(fName):
 def getFileFromURL(webAddress,pFile,extension):
     try:
         URL=webAddress.format(pFile,extension)
-        log("Sending request to ... ")
-        log(URL)
+        # log("Sending request to ... ")
+        # log(URL)
         response = requests.get(URL)
         time.sleep(1)
         if response.ok:
@@ -59,7 +59,7 @@ def getFileFromURL(webAddress,pFile,extension):
 def parseFasta(content):
     try:
         sequence = ("".join(content[1:]).replace(os.linesep,"")).replace(" ","")
-        log("Processing Data for Sequence...")
+        log("Processing Downloaded Data for Sequence ...")
         return sequence
     except Exception:
         raise Exception(traceback.format_exc())
@@ -85,7 +85,7 @@ def downloadCreateDataList(itemList,site,format,dataPath):
         lastItemInList=itemList[len(itemList)-1]
 
         for item in itemList:
-            log(item)
+            log( "Downloading ... "+item)
             callResult=getFileFromURL(site,item,format)
                 
             parseResult = parseFasta(callResult.split(os.linesep))

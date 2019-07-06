@@ -3,6 +3,7 @@
 #PACKAGES
 #============================
 import argparse
+import os
 import sys
 import time
 import json
@@ -24,8 +25,8 @@ def main():
     try:
         #Logging start of Program
         log(time.strftime("%m/%d/%Y, %H:%M:%S",time.localtime()))
-        log("Running Download.py << on >>"+_list)
-        
+        # log("Running Download.py << on >>"+_list)
+            
         #Loading Json
         config=readFile("/config.json")
         
@@ -37,14 +38,20 @@ def main():
         
         
         downloadListJson=json.loads(downloadList)
-        
+    
         for item in downloadListJson:
-            downloadCreateDataList(
-                downloadListJson[item],
-                configJson["ncbi"],
-                'fasta',
-                configJson["downloadPath"].format(_list,(item+".fasta")))
-        
+            try:
+                _path = os.getcwd()+configJson["downloadPath"].format(_list,(item+".fasta"))
+                open(_path, 'r').close()
+                log(item+".fasta >> already downloaded!")
+
+            except Exception:
+                downloadCreateDataList(
+                    downloadListJson[item],
+                    configJson["ncbi"],
+                    'fasta',
+                    configJson["downloadPath"].format(_list,(item+".fasta")))
+            
         log("[ "+_list+" ] Downloaded Succesfully!!")
         
     except Exception:
