@@ -38,6 +38,7 @@ def main():
         #Features
         if feature=='aac':
             extractAAC(configJson,dataset,feature)
+            log("AAC being extracted from [ "+dataset+" ] successfully!!!")
         
     except Exception:
         log("[ "+sys.argv[1]+" ] Feature Extraction Process Failed!!")
