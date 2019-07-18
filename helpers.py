@@ -31,8 +31,9 @@ def log(message):
 
 def readFile(fName):
     try:
-        if fName[0] == os.sep or fName[0] == "/":
-            fName = fName[1:]
+        if fName[0] == os.sep:
+            fName = fName[(len(os.sep)):]
+            
         fileHandler = open(os.path.join(os.getcwd(), fName), 'r')
         log("Loading "+fName+" ...")
         rawFile = fileHandler.read()
@@ -85,9 +86,9 @@ def downloadCreateDataList(itemList, site, format, dataPath):
             open((os.getcwd()+dataPath), 'w').close()
 
         except Exception:
-            newPath = dataPath.split("/")
-            path = ("/".join(newPath[:(len(newPath)-1)]))
-            os.mkdir(os.getcwd()+path)
+            newPath = (dataPath).split((os.sep))
+            path = ((os.sep).join(newPath[:(len(newPath)-1)]))
+            os.makedirs((os.getcwd()+path), mode=0o777, exist_ok=False)
 
         finally:
             fileHandler = open((os.getcwd()+dataPath), 'a')

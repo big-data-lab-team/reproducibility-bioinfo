@@ -28,7 +28,7 @@ def main():
         # log("Running Download.py << on >>"+_list)
             
         #Loading Json
-        config=readFile("/config.json")
+        config=readFile("config.json")
         
         configJson = json.loads(config)    
         downloadListAddress = configJson["downloadList"].format(_list+".json")
