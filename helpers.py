@@ -10,6 +10,17 @@ import time
 import numpy as np
 
 # ============================
+# SETTINGS
+# ============================
+config = {
+    "ncbi": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id={}&rettype={}",
+    "datasetPath": os.path.join(os.getcwd(), "dataset", "{}"),
+    "downloadPath": os.path.join(os.getcwd(), "dataset", "{}", "{}"),
+    "featuresPath": os.path.join(os.getcwd(), "features", "{}", "{}")
+}
+
+
+# ============================
 # LOG HANDLER
 # ============================
 
@@ -31,10 +42,7 @@ def log(message):
 
 def readFile(fName):
     try:
-        if fName[0] == os.sep:
-            fName = fName[(len(os.sep)):]
-            
-        fileHandler = open(os.path.join(os.getcwd(), fName), 'r')
+        fileHandler = open(fName, 'r')
         log("Loading "+fName+" ...")
         rawFile = fileHandler.read()
         fileHandler.close()
@@ -83,15 +91,15 @@ def parseFasta(content):
 def downloadCreateDataList(itemList, site, format, dataPath):
     try:
         try:
-            open((os.getcwd()+dataPath), 'w').close()
+            open(dataPath, 'w').close()
 
         except Exception:
             newPath = (dataPath).split((os.sep))
             path = ((os.sep).join(newPath[:(len(newPath)-1)]))
-            os.makedirs((os.getcwd()+path), mode=0o777, exist_ok=False)
+            os.makedirs(path, mode=0o777, exist_ok=False)
 
         finally:
-            fileHandler = open((os.getcwd()+dataPath), 'a')
+            fileHandler = open(dataPath, 'a')
 
         lastItemInList = itemList[len(itemList)-1]
 
@@ -132,13 +140,13 @@ def removeSpaceNewLine(seq):
 def clearFile(fileAddress):
         # Trying to create directories (If does not exist)
     try:
-        open((os.getcwd()+fileAddress), 'w').close()
+        open(fileAddress, 'w').close()
     except:
         newPath = (fileAddress).split((os.sep))
         path = ((os.sep).join(newPath[:(len(newPath)-1)]))
-        os.makedirs((os.getcwd()+path), mode=0o777, exist_ok=False)
+        os.makedirs(path, mode=0o777, exist_ok=False)
     finally:
-        open((os.getcwd()+fileAddress), 'w').close()
+        open(fileAddress, 'w').close()
 
 # ============================
 # Calculates AAC(each Sequence)
@@ -183,7 +191,7 @@ def calcAAC(aminoLetters, source, label, destination):
 # ============================
 # Extract AAC
 # ============================
-def extractAAC(config, dataset, feature):
+def extractAAC(dataset, feature):
 
     try:
         aminoLetters = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K',
@@ -205,13 +213,11 @@ def extractAAC(config, dataset, feature):
 
         # List DataFiles from the Source
         log("Listing data files from "+source)
-        # trasnporters = [file[:-6] for file in os.listdir(os.getcwd()+source) if "nonTransporter" not in file]
-        # nonTransporters = [file[:-6] for file in os.listdir(os.getcwd()+source) if "nonTransporter" in file]
 
         trasnporters = []
         nonTransporters = []
 
-        for file in os.listdir(os.getcwd()+source):
+        for file in os.listdir(source):
             if "nonTransporter" in file:
                 nonTransporters.append(file[:-6])
             else:
@@ -221,14 +227,14 @@ def extractAAC(config, dataset, feature):
         # AAC1
         # Transporters (amino-cation-anion-electron-sugar-protein-other)
         # Opening Destination1 and Printing the Header
-        aac1 = open((os.getcwd()+destination1), 'a')
+        aac1 = open(destination1, 'a')
         aac1.write((str(aminoLetters).replace(
             '[', '')).replace(']', '')+",Label")
 
         log("Extracting AAC from "+dataset+" for 7 classes")
         for transporter in trasnporters:
-            sourceFile = os.getcwd() + \
-                config["datasetPath"].format(dataset)+transporter+".fasta"
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
             calcAAC(aminoLetters, sourceFile, transporter, aac1)
 
         # Closing destination1
@@ -237,19 +243,19 @@ def extractAAC(config, dataset, feature):
         # AAC2
         # Transporter vs non-Transporters
         # Opening Destination1 and Printing the Header
-        aac2 = open((os.getcwd()+destination2), 'a')
+        aac2 = open(destination2, 'a')
         aac2.write((str(aminoLetters).replace(
             '[', '')).replace(']', '')+",Label")
 
         log("Extracting AAC from "+dataset +
             " for 8 classes(Including non-transporters)")
         for transporter in trasnporters:
-            sourceFile = os.getcwd() + \
-                config["datasetPath"].format(dataset)+transporter+".fasta"
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
             calcAAC(aminoLetters, sourceFile, "transporter", aac2)
 
-        sourceFile = os.getcwd() + \
-            config["datasetPath"].format(dataset)+"nonTransporter"+".fasta"
+        sourceFile = os.path.join(config["datasetPath"].format(
+            dataset), "nonTransporter.fasta")
         calcAAC(aminoLetters, sourceFile, "nonTransporter", aac2)
 
         # Closing destination2

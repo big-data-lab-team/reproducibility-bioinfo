@@ -30,17 +30,10 @@ def main():
         dataset = parser.parse_args().dataset
 
         log(time.strftime("%m/%d/%Y, %H:%M:%S", time.localtime()))
-        # log("Running extractFeature.py  << feature >> "+feature+" << dataset >> "+dataset)
-
-        # Loading Json
-        config = readFile("config.json")
-
-        # Config Json File
-        configJson = json.loads(config)
 
         # Features
         if feature == 'aac':
-            extractAAC(configJson, dataset, feature)
+            extractAAC(dataset, feature)
             log("AAC being extracted from [ "+dataset+" ] successfully!!!")
 
     except Exception:
