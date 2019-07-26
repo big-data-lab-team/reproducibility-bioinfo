@@ -252,7 +252,7 @@ def extractAAC(dataset, feature):
         for transporter in trasnporters:
             sourceFile = os.path.join(config["datasetPath"].format(
                 dataset), (transporter+".fasta"))
-            calcAAC(aminoLetters, sourceFile, "transporter", aac2)
+            calcAAC(aminoLetters, sourceFile, transporter, aac2)
 
         sourceFile = os.path.join(config["datasetPath"].format(
             dataset), "nonTransporter.fasta")
@@ -260,6 +260,128 @@ def extractAAC(dataset, feature):
 
         # Closing destination2
         aac2.close()
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
+
+# ============================
+# DPC FEATURE
+# ============================
+# CALC DPC
+# ============================
+
+
+def calcDPC(diPeptids, source, label, destination):
+    try:
+        _in = open(source, 'r')
+        _sequences = (_in.read()).split(os.linesep)
+        _in.close()
+
+        for line in _sequences:
+            if '>' not in line:
+                sequence = removeSpaceNewLine(line)
+                _length = (len(sequence))-1
+                
+                results=[]
+                for item in diPeptids:
+                    counter=0
+                    for ii in range(_length):
+                        if (sequence[ii]+sequence[ii+1])==item:
+                            counter=counter+1
+                    
+                    results.append(np.round(( counter/(_length) )*100,3))
+                
+                destination.write(os.linesep)
+
+                # if _label != "nonTransporter":
+                #     _label="transporter"
+
+                destination.write((str(results).replace(
+                    '[', '')).replace(']', '')+","+label)
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
+
+# ============================
+# Extract DPC
+# ============================
+
+
+def extractDPC(dataset, feature):
+
+    try:
+        aminoLetters = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K',
+                        'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
+
+        _diPeptids = []
+        for first in aminoLetters:
+            for second in aminoLetters:
+                _diPeptids.append((first+second))
+
+        source = config["datasetPath"].format(dataset)
+        destination1 = config["featuresPath"].format(dataset, feature+"7.csv")
+        destination2 = config["featuresPath"].format(dataset, feature+"8.csv")
+
+        # Creating Directory (if does not exist)
+        # Clearing the file (if already exist)
+        clearFile(destination1)
+        clearFile(destination2)
+
+        # Logging
+        log("Source : "+source)
+        log("destination : "+destination1)
+        log("destination : "+destination2)
+
+        # List DataFiles from the Source
+        log("Listing data files from "+source)
+        trasnporters = []
+        nonTransporters = []
+
+        for file in os.listdir(source):
+            if "nonTransporter" in file:
+                nonTransporters.append(file[:-6])
+            else:
+                if "fasta" in file:
+                    trasnporters.append(file[:-6])
+
+        # DPC1
+        # Transporters (amino-cation-anion-electron-sugar-protein-other)
+        # Opening Destination1 and Printing the Header
+        dpc1 = open(destination1, 'a')
+        dpc1.write((str(_diPeptids).replace(
+            '[', '')).replace(']', '')+",Label")
+
+        log("Extracting DPC from "+dataset+" for 7 classes")
+        for transporter in trasnporters:
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
+            calcDPC(_diPeptids, sourceFile, transporter, dpc1)
+
+        # Closing destination1
+        dpc1.close()
+
+        # DPC2
+        # Transporter vs non-Transporters
+        # Opening Destination1 and Printing the Header
+        dpc2 = open(destination2, 'a')
+        dpc2.write((str(_diPeptids).replace(
+            '[', '')).replace(']', '')+",Label")
+
+        log("Extracting DPC from "+dataset +
+            " for 8 classes(Including non-transporters)")
+        for transporter in trasnporters:
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
+            calcDPC(_diPeptids, sourceFile, transporter, dpc2)
+
+        sourceFile = os.path.join(config["datasetPath"].format(
+            dataset), ("nonTransporter"+".fasta"))
+        calcDPC(_diPeptids, sourceFile, "nonTransporter", dpc2)
+
+        # Closing destination2
+        dpc2.close()
 
     except Exception:
         log(traceback.format_exc())

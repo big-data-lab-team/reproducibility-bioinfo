@@ -7,7 +7,7 @@ import sys
 import json
 import time
 import traceback
-from helpers import extractAAC, log, readFile
+from helpers import extractAAC, log, readFile, extractDPC
 
 
 # ============================
@@ -32,9 +32,14 @@ def main():
         log(time.strftime("%m/%d/%Y, %H:%M:%S", time.localtime()))
 
         # Features
+        # AAC (Amino-acid Composition)
         if feature == 'aac':
             extractAAC(dataset, feature)
             log("AAC being extracted from [ "+dataset+" ] successfully!!!")
+        # DPC (Di-peptid composition)
+        elif feature == 'dpc':
+            extractDPC(dataset, feature)
+            log("DPC being extracted from [ "+dataset+" ] successfully!!!")
 
     except Exception:
         log("[ "+feature+" ] Feature Extraction Process Failed!!")
