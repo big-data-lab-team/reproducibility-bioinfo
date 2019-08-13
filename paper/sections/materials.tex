@@ -44,6 +44,17 @@
         \text{percentage of dipeptide (i)} = \frac {\text{total number of dipeptide (i)}} {\text{total number of dipeptides in protein}} * 100
     \end{equation}
 
+    \myparagraph{\small Physico-Chemical Composition (PHC)}
+    
+    The physico-chemical composition is the composition of the physico-chemical class residues in each protein sequence 
+    \cite{mishra2014prediction}. Percentage composition of following 11 physico-chemical properties is the input to our 
+    SVM models for this feature \cite{mishra2014prediction, kumar2008copid}:\\
+    
+    Aliphatic (I, L, V), Neutral (D, E, R, K, Q, N), Aromatic (F, H, W, Y),
+    Hydrophobic (C, V, L, I, M, F, W), Charged (D, E, K, H, R), Positively charged (H, K, R), 
+    Negatively charged (D, E), Polar (D, E, R, K, Q, N),
+    Small (E, H, I, L, K, M, N, P, Q, V), Large (F, R, W, Y), Tiny (A, C, D, G, S, T).
+
     \subsection{Construction of the main dataset}
         \myparagraph{5-Fold Cross-Validation on a shuffled dataset}
         \myparagraph{5-Fold Cross-Validation out of each class}
