@@ -282,16 +282,16 @@ def calcDPC(diPeptids, source, label, destination):
             if '>' not in line:
                 sequence = removeSpaceNewLine(line)
                 _length = (len(sequence))-1
-                
-                results=[]
+
+                results = []
                 for item in diPeptids:
-                    counter=0
+                    counter = 0
                     for ii in range(_length):
-                        if (sequence[ii]+sequence[ii+1])==item:
-                            counter=counter+1
-                    
-                    results.append(np.round(( counter/(_length) )*100,3))
-                
+                        if (sequence[ii]+sequence[ii+1]) == item:
+                            counter = counter+1
+
+                    results.append(np.round((counter/(_length))*100, 3))
+
                 destination.write(os.linesep)
 
                 # if _label != "nonTransporter":
@@ -382,6 +382,129 @@ def extractDPC(dataset, feature):
 
         # Closing destination2
         dpc2.close()
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
+    
+# ============================
+# PHC FEATURE
+# ============================
+# Extract PHC
+# ============================
+
+
+def calcPHC(phc, source, label, destination):
+    try:
+        _in = open(source, 'r')
+        _sequences = (_in.read()).split(os.linesep)
+        _in.close()
+
+        for line in _sequences:
+            if '>' not in line:
+
+                sequence = removeSpaceNewLine(line)
+                _length = len(sequence)
+
+                _percentage = []
+                for _property in phc:
+
+                    _percentage.append(
+                        np.round((sum([sequence.count(_item) for _item in _property])/_length)*100, 3))
+
+                destination.write(os.linesep)
+
+                # if label != "nonTransporter":
+                #     label="transporter"
+
+                destination.write((str(_percentage).replace(
+                    '[', '')).replace(']', '')+","+label)
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
+
+# ============================
+# Extract PHC
+# ============================
+
+
+def extractPHC(dataset, feature):
+    try:
+        phc_items = [
+            "charged", "aliphatic", "aromatic", "polar",
+            "neutral", "hydrophobic", "positively_charged",
+            "negatively_charged", "tiny", "small", "large"
+        ]
+        _phc = [
+            ["D", "E", "K", "H", "R"], ["I", "L", "V"],
+            ["F", "H", "W", "Y"], ["D", "E", "R", "K", "Q", "N"],
+            ["A", "G", "H", "P", "S", "T", "Y"], [
+                "C", "F", "I", "L", "M", "V", "W"],
+            ["K", "R", "H"], ["D", "E"], ["A", "C", "D", "G", "S", "T"],
+            ["E", "H", "I", "L", "K", "M", "N", "P", "Q", "V"], ["F", "R", "W", "Y"]
+        ]
+
+        source = config["datasetPath"].format(dataset)
+        destination1 = config["featuresPath"].format(dataset, feature+"7.csv")
+        destination2 = config["featuresPath"].format(dataset, feature+"8.csv")
+
+        # Creating Directory (if does not exist)
+        # Clearing the file (if already exist)
+        clearFile(destination1)
+        clearFile(destination2)
+
+        # Logging
+        log("Source : "+source)
+        log("destination : "+destination1)
+        log("destination : "+destination2)
+
+        # List DataFiles from the Source
+        log("Listing data files from "+source)
+        trasnporters = []
+        nonTransporters = []
+
+        for file in os.listdir(source):
+            if "nonTransporter" in file:
+                nonTransporters.append(file[:-6])
+            else:
+                if "fasta" in file:
+                    trasnporters.append(file[:-6])
+
+        # PHC1
+        # Transporters (amino-cation-anion-electron-sugar-protein-other)
+        # Opening Destination1 and Printing the Header
+        phc1 = open(destination1, 'a')
+        phc1.write((str(phc_items).replace('[', '')).replace(']', '')+",Label")
+
+        log("Extracting PHC from "+dataset+" for 7 classes")
+        for transporter in trasnporters:
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
+            calcPHC(_phc, sourceFile, transporter, phc1)
+
+        # Closing destination1
+        phc1.close()
+
+        # PHC2
+        # Transporter vs non-Transporters
+        # Opening Destination1 and Printing the Header
+        phc2 = open(destination2, 'a')
+        phc2.write((str(phc_items).replace('[', '')).replace(']', '')+",Label")
+
+        log("Extracting PHC from "+dataset +
+            " for 8 classes(Including non-transporters)")
+        for transporter in trasnporters:
+            sourceFile = os.path.join(config["datasetPath"].format(
+                dataset), (transporter+".fasta"))
+            calcPHC(_phc, sourceFile, transporter, phc2)
+
+        sourceFile = os.path.join(config["datasetPath"].format(
+            dataset), ("nonTransporter"+".fasta"))
+        calcPHC(_phc, sourceFile, "nonTransporter", phc2)
+
+        # Closing destination2
+        phc2.close()
 
     except Exception:
         log(traceback.format_exc())
