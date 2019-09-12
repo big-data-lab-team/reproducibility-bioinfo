@@ -1,6 +1,6 @@
 \section{Materials and Methods}
 
-    \subsection{Dataset}   
+    \subsection{Dataset}
 
     The dataset contains 780 transporter proteins classified into 7 substrate specific classes (70 amino acid transporters, 
     60 anion transporters, 260 cation transporters, 60 electron transporters, 70 protein/mRNA transporters, 60 sugar 
@@ -9,8 +9,8 @@
     
     For the purpose of our study, we coded a program (\git{download.py}{download.py}) to download all the sequences from the 
     \ncbi{protein}{NCBI} database using the sequence accession number from TrSSP website. 
-    Considering the fact that some sequences could be updated through time, we checked all the \git{dataset/trainTest/}{downloaded ones} 
-    against the originals to make sure all of our sequences match those of the TrSSP. We then updated the 
+    Considering the fact that some sequences could be updated through time, we checked all the \git{dataset/trainTest/}{downloaded} 
+    sequences against the originals to make sure all of our sequences match those of the TrSSP. We then updated the 
     modified sequences and their accession numbers accordingly.
 
     \subsection{Feature extraction}
@@ -19,30 +19,34 @@
     computational models using a combination of these features. Following the descriptions from the paper, we generated all the 
     \git{features/}{features} in Comma Separated Values (.csv) format adding one more column for the labels.
 
-    Table \ref{tab:table1} in the original paper, compares different models based on 4 evaluation metrics (Sensitivity, Specificity, Accuracy and MCC) for 
+    Table \ref{tab:table2} in the original paper, compares different models based on four evaluation metrics (Sensitivity, Specificity, Accuracy and MCC) for 
     "all seven substrate-specific transporter classes". Also, under "Data Compilation" section, it has been mentioned that the five-fold 
     cross-validation has been applied to "1,380 proteins in the main dataset" that is the total number of sequences available across 
     all 8-classes being put together.
 
     So, to clear up any doubts, for each feature we generated the ".csv" file for both 7-class (all seven transporter classes) and 8-class 
-    (all seven classes plus non-transporters) based models using \git{extractFeature.py}{extractFeature.py} program.
+    (all seven classes plus non-transporters) based models using \git{extractFeature.py}{extractFeature.py} program. We then run the 
+    classifier on both models to find out which model would produce the closest results to the ones being provided in the paper.
     
     
     \myparagraph{\small Amino Acid Composition (AAC)}
+    
     The Amino Acid (Monopeptide) Composition is the number of amino acids of each type normalized with the total number of 
-    residues \cite{gromiha2010protein}. The percentage of each amino acid was calculated using the following formula:
+    residues \cite{gromiha2010protein}. The percentage of each amino acid is calculated using following formula where $i$ 
+    represents one of the 20 standard amino acids \cite{mishra2014prediction} :
     \begin{equation}
         \text{percentage of amino acid (i)} = \frac {\text{total number of amino acid (i)}} {\text{total number of amino acids in protein}} * 100
-    \end{equation}
-    where i represents one of the 20 standard amino acids \cite{mishra2014prediction} 
+    \end{equation} 
     
     \myparagraph{\small Dipeptide Composition (DPC)}
+    
     The composition of dipeptides is a measure to quantify the preference of amino acid residue pairs in a sequence 
-    \cite{gromiha2010protein}. The percentage of each dipeptide is calculated using following formula where i 
+    \cite{gromiha2010protein}. The percentage of each dipeptide is calculated using following formula where $i$ 
     can be any dipeptide of 400 possible dipeptides. \cite{mishra2014prediction}:
     \begin{equation}
         \text{percentage of dipeptide (i)} = \frac {\text{total number of dipeptide (i)}} {\text{total number of dipeptides in protein}} * 100
     \end{equation}
+
 
     \myparagraph{\small Physico-Chemical Composition (PHC)}
     
@@ -55,6 +59,21 @@
     Negatively charged (D, E), Polar (D, E, R, K, Q, N),
     Small (E, H, I, L, K, M, N, P, Q, V), Large (F, R, W, Y), Tiny (A, C, D, G, S, T).
 
+    \myparagraph{\small Biochemical Composition (AAindex)}
+    
+    An amino acid index (AAindex) is a set of 20 numerical values (for 20 standard amino acids) representing various physico-chemical 
+    and biochemical properties of amino acids which are subsets of AAIndex database. \cite{aaindex} For this study, 49 physical, 
+    chemical, energetic, and conformational properties of amino acids are selected as an input feature to the SVM model. These properties 
+    has been used to study protein folding and stability and transporter classification.
+    \cite{zavaljevski2002support, gromiha1999importance, gromiha2006statistical} (The 49 selected properties and the details is 
+    available in our \git{aaindex.py}{GitHub}) The average of each property for each protein sequence is calculated using following formula:
+    \begin{equation}
+        \text{Amino Acid Index (i)} = \frac {\sum_{j=1}^{n} AAind_{ij}} {\text{n}}
+    \end{equation}
+    where $n$ is the length of the protein sequence, $AAind_{i}$ is the $ith$ biochemical property, $AAind_{ij}$ is the value of $ith$ 
+    biochemical property for the $jth$ amino acid in the sequence and $\sum_{j=1}^{n} AAind_{ij}$ is the sum of $ith$ property for all the
+    $n$ amino acids in a protein sequence.
+
     \subsection{Construction of the main dataset}
         \myparagraph{5-Fold Cross-Validation on a shuffled dataset}
         \myparagraph{5-Fold Cross-Validation out of each class}
@@ -66,9 +85,30 @@
 
     \subsection{Classifier}
         \myparagraph{Gamma and Cost}
+            \tba{One value set all classes}
+            \tba{Different value sets for each class}
+        
         \myparagraph{Thresholding}
 
     \subsection{Evaluation}
-        \myparagraph{Metrics from the paper}
+        
+        In this study, sensitivity, specificity, accuracy and Matthew's correlation coefficient (MCC) is used to measure the 
+        prediction performance. For evaluation, these metrics are calculated for each test dataset through the five-fold cross validation.
+        For the final value, the parameters computed from each subset were averaged across all five subsets . TP, FP, TN, FN are 
+        true positives, false positives, true negatives and false negatives, respectively. 
+
+        \begin{equation}
+            \text{Sensitivity} = \frac {\text{TP}}{\text{TP + FN}} * 100
+        \end{equation}
+        \begin{equation}
+            \text{Specificity} = \frac {\text{TN}}{\text{TN + FP}} * 100
+        \end{equation}
+        \begin{equation}
+            \text{Accuracy} = \frac {\text{TP + TN}}{\text{TP + FP + TN + FN}} * 100
+        \end{equation}
+        \begin{equation}
+            \text{MCC} = \frac {\text{(TP * TN) - (FN * FP)}}{\sqrt{(TP + FN) * (TN + FP) * (TP + FP) * (TN + FN)}}
+        \end{equation}
+
         \myparagraph{Micro vs Macro}
         \myparagraph{SVM-Light vs Scikit-Learn}
