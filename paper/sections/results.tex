@@ -1,5 +1,26 @@
 \section {Results}
-\subsection{Paper's Results vs. Reproduced Results}
+\subsection{Original Results vs. All Reproduced Models (AAC)}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|L || C C C C |}
+        \hline
+        Amino Acid Composition (AAC) &
+        Sensitivity  &  Specificity  &  Accuracy  &  MCC
+        \\
+        \hline \hline
+        \rowcolor{gray} Original Results & 74.65 & 73.22 & 73.74 & 0.46 \\
+        \hline
+
+    \end{tabular}
+    \captionsetup{font=small,width=12cm}
+    \caption{The average sensitivity, specificity, accuracy, and MCC for all seven 
+    substrate-specific transporter classes for AAC model on main dataset comparing 
+    the original results with different models being reproduced for the same feature}
+    \label{tab:table1}
+    
+\end{table}
+
+\subsection{Original Results vs. Best Reproduced Model (All Features)}
     \begin{table}[ht]
         \centering
 
@@ -41,14 +62,15 @@
         AAC + AAI + PSSM & 72.34 &  74.62& 73.90 &  0.44 & -- & -- & -- & --  \\
         \hline \hline
         \multicolumn{9}{|c|}{\multirow{3}{*}{\footnotesize AAC:amino acid composition, 
-        DPC:dipeptide composition, PHC:Physico-chemical class composition,}}\\
+        DPC:dipeptide composition, PHC:physico-chemical class composition,}}\\
         \multicolumn{9}{|c|}{}\\
         \multicolumn{9}{|c|}{\footnotesize AAI:biochemical composition(AAIndex), PSSM:position specific scoring matrix}\\
         \hline
         \end{tabular}
         
-        \captionsetup{font=small,width=11cm}
+        \captionsetup{font=small,width=12cm}
         \caption{The average sensitivity, specificity, accuracy, and MCC for all seven 
-        substrate-specific transporter classes for different models from the paper}
-        \label{tab:table1}
+        substrate-specific transporter classes for different SVM models on main dataset 
+        comparing original results with the best reproduced model}
+        \label{tab:table2}
     \end{table}
