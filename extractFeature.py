@@ -7,7 +7,7 @@ import sys
 import json
 import time
 import traceback
-from helpers import extractAAC, log, readFile, extractDPC
+from helpers import log, extractAAC, extractDPC, extractPHC, extractAAIndex
 
 
 # ============================
@@ -40,6 +40,18 @@ def main():
         elif feature == 'dpc':
             extractDPC(dataset, feature)
             log("DPC being extracted from [ "+dataset+" ] successfully!!!")
+        # PHC (Physico-Chemical Composition)
+        elif feature == 'phc':
+            extractPHC(dataset, feature)
+            log("PHC being extracted from [ "+dataset+" ] successfully!!!")
+        # AAIndex (BioChemical Composotion)
+        elif feature == 'aaindex':
+            extractAAIndex(dataset, feature)
+            log("AAIndex being extracted from [ "+dataset+" ] successfully!!!")
+        # PSSM (Position)
+        # elif feature == 'pssm':
+        #     extractPSSM(dataset, feature)
+        #     log("PSSM being extracted from [ "+dataset+" ] successfully!!!")
 
     except Exception:
         log("[ "+feature+" ] Feature Extraction Process Failed!!")
