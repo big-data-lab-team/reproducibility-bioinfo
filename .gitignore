@@ -113,3 +113,9 @@ venv.bak/
 *.pdf
 *.synctex.gz
 *.fdb_latexmk
+
+#svm_light application
+svmLight/application
+
+#swissprot database
+pssm/db
