@@ -1,3 +1,134 @@
 \section {Conclusion}
+\myparagraph{Guidelines for having reproducible experiment results}
 
-\TG{Mention what the conclusion will be about (from our first discussion about it)}
+Reproducible results are an essential requirement for computational studies including those based on machine learning techniques. 
+Researchers' studies are often based on previously published experiments being conducted by their team or other scientists 
+through the same field of study. 
+Throughout the process, they may apply a new computational technique or a new model to the problem, 
+approach the same problem from a different perspective or add up their own contribution to the field. \\
+
+Failing to achieve the based results after reproducing a reported experiment, can cause significant financial costs 
+and loss of time depending on the conducted study. The problem can be often addressed either through running the same 
+experiment in an environment different than the original one (caused by changes in technology and tools available to a 
+researcher at the time the study was conducted) or failing to report some details which may not look important but 
+can significantly affect the reproduced results. \\
+
+The solution for this common problem is sharing the work's dataset, features, source code and dependencies with other 
+researchers using available means. Considering the fact that this may not be possible all the time, we need to make 
+sure to report on all the details involved in the process. Through this work, we conducted a reproducibility study on a paper 
+in bio-informatics field to address the missing details that could affect the reproduced results and create a guideline for 
+having a reproducible experiment. 
+
+
+    \subsection{Data Provenance}
+
+    Data Provenance is a record that describes entities and processes involved in producing and delivering or otherwise influencing 
+    that resource. \cite{w3c}  In other words, all the details and processes involved in putting together a dataset from the raw data. 
+    We should make sure to report on the source(s) where the data (i.e. protein sequences) is taken from and the process(es) 
+    by which the final data for the dataset was produced (from the original data). \\
+    
+    Considering the fact that a sequence can get updated several times through years, for each sequence, the details should include 
+    the database it has been taken from (i.e. UniProt), the accession number, the version or the year and if any 
+    processes have been applied to the original sequence to create the final one for the dataset. Also if any software has been 
+    involved in the curation process, the details should be reported as mentioned in 
+    software provenance section(~\ref{sec:softwareProvenance})\\
+
+    Sharing the dataset through available means would be also a great practice which could save a great amount of time when
+    trying to replicate the whole experiment.
+    Providing details over the curation process along with sharing the dataset would further allow the scientists to contribute to the 
+    dataset by adding new sequences. The more sequences available for a problem, there would be a greater chance to develop a model 
+    that could improve the prediction stability and accuracy.
+
+    \subsection{Feature Provenance}
+
+    Feature provenance refers to the historical record of how a feature is generated from the dataset. For each feature, the process concept 
+    should be addressed in the report. For formulas, a clear description of the mathematical setting and parameters should be included. If 
+    anywhere throughout the process, use of a random function was required from any library, the utilized random seed along with the library 
+    details should be included. Also, the process or the pipeline that handles this task should be recorded, version-controlled and reported.
+    In case of involvement of any software, coded program or library in any part of the process, the details should be treated 
+    as mentioned in software provenance section(~\ref{sec:softwareProvenance}). Sharing the generated feature in any form is advised.\\
+
+    Describing the feature generation process along with sharing the final feature file or some certain rows from that feature ( a row 
+    in a feature contains all the generated numerical values for one input (i.e. sequence)) or any resource that could generate the same 
+    result by passing an input, would be the preferable practice as researchers would be able to tune their own pipeline to produce the same 
+    result. \\
+    
+    Considering the fact that some tools may become unavailable through time, this practice would allow the scientist to use 
+    any alternative available tools at the time of the experiment as long as the generated results are the same as the ones being reported 
+    or shared by the original report. Sharing the feature also paves the way for replacement of new tools with the old ones if they become 
+    unavailable as they could be evaluated by comparing the result from the alternative tool against the original one.
+
+    
+    \subsection{Model Provenance}
+    Model provenance refers to the historical record of how the model is trained and evaluated. This includes any possible 
+    data transformation (i.e. standardization), any applied feature selection or feature engineering technique, choice of 
+    the algorithm along with its hyperparameters, the trained model and the evaluation metrics.\\
+
+    Through the data pre-processing, various data transformation techniques could be applied to the original data available in the 
+    dataset. Some data could be excluded and some could be merged with others. For this phase, A clear explanation of any data 
+    that were excluded, the data transformation techniques with reasonable related details are expected. The data pre-processing steps 
+    and the order in which they have been applied to the original data should be described. Avoid any manual data manipulation and 
+    if through any stage manual data manipulation is required, report on correspondent details.\\ 
+
+    
+    Depending on the type of study, dealing with problems such as data with high dimensionality or imbalanced classes 
+    (where there are a disproportionate ratio of observations in each class) which are common problems in machine learning classification 
+    could be a possible case. In regards to these special cases, if certain instructions are followed or certain techniques are implemented, 
+    clear explanation over the methodology and any involved material 
+    (parameters, software, etc.) along with the correspondent details should be included in the report.\\
+
+    In case of involvement of any sampling technique, a clear description of the technique and the steps through which it was executed 
+    on the data is expected. Samples allocation for Training , Validation and Testing related details along with the cross validation-related 
+    parameters (if applied) should be reported. If the dataset is imbalanced, then the distribution of each 
+    individual class through each mentioned category above should be clearly explained. 
+    If the data is shuffled through this phase, then random seed should 
+    be included in the report.\\
+
+    The choice of the algorithm along with the range of hyper-parameters considered is expected. If the algorithm is applied through 
+    a library, the correspondent details should be reported. Also, the method through which the best hyper-parameter configuration 
+    is selected along with the specification to the final hyper-parameters used to generate published results should be documented. 
+    If the model is an ensemble of some sub-models, then the underlying sub-model structure along with the above specification for each model 
+    should be reported.\\
+
+    Depending on the type of problem and the purpose of the work, various metrics could be used to evaluate the results. 
+    A clear definition of the specific measure or statistics (along with any possible details when dealing with special problems
+    such as imbalance data) used for results evaluation should be included. In case of error bars, they should clearly defined and reported.\\
+
+    Overall, the whole pipeline along with the correspondent details should be recorded, version-controlled and reported. For an analysis 
+    that includes the use of a random function from any library, the random seed and the library should be included. Any involved 
+    software, coded programs and libraries should be documented as mentioned in software provenance 
+    section(~\ref{sec:softwareProvenance}).\\
+
+    Sharing the pipeline through available possible means along with the clear explanation through each stage is the preferable practice. It 
+    saves a great amount of time for the replication process and it would allow researchers to tune their own building blocks by 
+    making a comparison in between their own structure and the original one. It also makes any further update (for performance, 
+    or technology-related purposes) possible while preserving the original study results. 
+
+    \subsection{Software Provenance}
+    \label{sec:softwareProvenance}
+
+    From the data curation and putting together a dataset to results' prediction and model evaluation, different software and coded programs 
+    could get involved in some phase of a typical bio-informatics related problem. 
+    Throughout the replication process, failing to use the same software (with the parameters 
+    being set to the same state at the time of the experiment) through the same environment can also affect the final results. 
+    The report on this aspect should cover all the software, coded programs and libraries being involved throughout the whole pipeline. 
+    It should also include the environment-related software and dependencies in which the pipeline has been executed.\\
+
+    So, if any software has been involved in any part of the process, software-related details (version, dependencies, etc.) along 
+    with the environment-related details (operating system name, version, etc.), should be included in the report.
+    Also, in case of a coded program and any involved library, related details (programming language, version, dependencies, etc.) 
+    should be included in the report. Sharing the coded program through available means (i.e. GitHub) is considered a better practice.\\
+
+    Another important point to note is to version control the whole pipeline. Changing direction in an experiment or setting new targets 
+    for the study (while working on the same problem) is a common phenomenon that can take place throughout any research. 
+    In that case, you should make sure to label the original work, and start the new work with a copy of the original pipeline. If your 
+    current work is based on any other work, make sure to include all the details in your report or provide a link to the correspondent 
+    resource (paper, website, repository, etc.) that covers all the related details. Using a version control system (i.e. GitHub) 
+    that records changes to a file or set of files over time is a good practice as it would allow recall on specific versions 
+    later if needed.\\
+    
+
+    Another solution to this problem is the use of containers that enables researchers to freeze the experiment pipeline including all
+    the involved software, coded programs and dependencies along with the environment in the state where the results are produced. So, any 
+    further research on the same problem can be conducted through loading the container and running the same experiment. This would 
+    significantly speed up the process as there would be no more replication process.
