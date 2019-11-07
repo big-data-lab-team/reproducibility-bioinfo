@@ -33,11 +33,11 @@
 \setcounter{secnumdepth}{4}
 \newcolumntype{g}{>{\small\columncolor{gray}}c}
 \newcolumntype{C}{>{\small}c}
-\newcolumntype{L}{>{\small}l}
+\newcolumntype{L}[1]{>{\small}l{#1}}
+\newcolumntype{P}[1]{>{\small}p{#1}}
 \newcommand{\myparagraph}[1]{\paragraph*{#1}\mbox{}\\}
-\newcommand{\tba}[1]{\\\color{red}#1\color{black}}
-\newcommand{\TG}[1]{\color{blue}From Tristan: #1 \color{black}}
-\newcommand{\ntr}[1]{\color{teal} >=? #1\color{black}}
+\newcommand{\tbm}[1]{\color{teal}[ #1 ]\\ \color{black}}
+\newcommand{\TG}[1]{\color{blue}From Tristan: #1\\ \color{black}}
 \newcommand{\git}[1]{\href{https://github.com/big-data-lab-team/reproducibility-bioinfo/#1}}
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}
 \newcommand{\ncbi}[1]{\href{https://www.ncbi.nlm.nih.gov/#1}}
