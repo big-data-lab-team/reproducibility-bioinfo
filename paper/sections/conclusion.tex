@@ -1,5 +1,27 @@
 \section {Conclusion}
 
+\tbm{
+    add links and references to the good practices that we did for this paper in each section and 
+    for each point in the table
+}
+
+Through this work, we conducted a reproducibility study on a machine learning classification problem dealing with multiple imbalanced 
+classes of data in Bioinformatics to observe and address missing information that could affect replication process through 
+different phases of common machine learning problem. The research involves various techniques from data curation to model evaluation, 
+using an independent software for running Support Vector Machine (SVM) algorithm on the data, results aggregation and addressing 
+sharing concerns involved with output from each phase.\\
+
+Through Materials and Methods section, we addressed all the missing information that affects the replication process and the results (in 
+regards to provided information). In the next section, we discussed possible resources through which these sort of problems 
+could be handled when dealing with reproducibility. Through this work, we tried to implement our concerns in a project providing 
+a tangible reference for what we discussed in this paper.\\ 
+
+In this section, we provide general guidelines by which we believe one can create a reproducible work when dealing with such a problem. 
+According to W3C Incubator Group Report, provenance of a resource is a record that describes entities and processes involved in producing 
+and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.\cite{w3c} So, for addressing the human-readable provenance problems (as opposed to machine-readable provenances), 
+in this study, we organized our proposed guidelines under data provenance, feature provenance, model provenance, software provenance 
+and pipeline provenance. We also provided a table containing all the notes from each category along with a sample for each point (where possible).\\ 
+
 \subsection{Data Provenance and Sharing}
 
 
@@ -10,10 +32,10 @@
     
     If the study involves working on dataset of sequences, then, note that a sequence could get updated several times through years. 
     So, for each sequence, the details should include the database it has been taken from (i.e. UniProt), 
-    the accession number and the version. Also if any software has been involved in the curation \footnotemark process, 
+    the accession number and the version. Also if any software has been involved in the curation
+    (the organization and integration of data collected from various sources) process, 
     the details should be reported as mentioned in software provenance section (\ref{sec:softwareProvenance})\\
     
-    \footnotetext{Data curation is the organization and integration of data collected from various sources.}    
     
     Sharing the dataset through available means would be a better practice as it saves significant amount of time when
     trying to replicate the whole experiment.
@@ -63,9 +85,29 @@
     discussed in details.\\
     
     
+    Before fitting an algorithm, you need to split the data into train, validation and test subsets. Depending on the amount of 
+    available data to the work and the goal of the study, The sampling and allocation of of those sampled data to 
+    those three subsets above could be done through different techniques. Also, applying cross validation to the feature set, is a common 
+    practice for this phase. For this part, the description of the technique, the process, how it has been applied to the data, along with 
+    any involved parameter(s) and the expected result(s) should be included in the report.\\
     
     
+    For the model, a clear explanation over the choice of the algorithm along with its considered range of hyper-parameters and 
+    the associated values for producing the 
+    the published results should be included. In case of involvement of any technique for finding the optimal hyper-parameters for the model
+    (i.e. grid search), the description of the method, the process, how it has been applied to the project's data along with any involved 
+    parameter(s) should be included. 
+    If dealing with multiple classes, describe the process and how the results are aggregated.
+    If the model is an ensemble of sub-models, then the model structure, the included underlying models and the aggregation 
+    strategy should be clearly explained. Also, for each model, the details mentioned above should be included.\\
     
+
+    Depending on the problem type and the purpose of the work, various metrics could be used to evaluate the results. 
+    A clear definition of the statistical method used for results' evaluation should be included. 
+    When a numerical metric (i.e. accuracy) is calculated by averaging through multiple results, 
+    then explain over the choice of averaging method (micro versus macro) and 
+    any possible details involved with process. Also, Error bars should be clearly defined and reported (if any).\\
+  
     
     If a random function is used anywhere throughout the whole process, then, random function seed along 
     with the library details should be included. Any involved coded program, software or environment related parameters 
@@ -74,13 +116,15 @@
 \subsection{Software Provenance and Sharing}
     \label{sec:softwareProvenance}
 
-    From the data curation \footnotemark[\value{footnote}]
+    From the data curation (the organization and integration of data collected from various sources)
     and putting together a dataset, to model training and evaluation, different software and coded programs 
     could get involved in some phase of a typical Bioinformatics related problem. 
     Throughout the replication process, failing to use the same software (along with its parameters 
     being set to the same state or value at the time of the experiment) through the same environment, can also affect the final results. \\
     
-    The report on this aspect should cover all the software, coded programs and libraries details being involved throughout the whole process.
+    The report on this aspect should cover all the software, coded programs, libraries details being involved throughout the whole process. 
+    For software, name, version, installation details along with documentation should be reported.
+    For coded programs, programming language, version, libraries and any required deployment instructions should be described.
     If the pipeline (\ref{sec:PipelineProvenance}) is environment-dependent, then, It should also include the environment-related 
     details in which the pipeline has been executed.\\
 
@@ -94,7 +138,7 @@
 \subsection{Pipeline Provenance and Sharing}
     \label{sec:PipelineProvenance}
     
-    In software engineering, a pipeline is a chain of processing modules, in a way that so that, the output from each module is the 
+    In software engineering, a pipeline is a chain of processing modules, in a way that, the output from each module is the 
     input of the next. The pipeline should be designed and coded on a modular-basis. For example, if you have a process for data cleaning, 
     feature selection or feature extraction, each one of those should be coded as an independent runnable module. The pipeline is then formed 
     by chaining all the required modules for the problem. Following this practice, if one runs through some difficulties during the replication process, 
@@ -131,7 +175,8 @@
     further research on the same problem could be conducted by loading the container (or the virtual machine) and running 
     the same experiment through the same environment. This would significantly speed up the process as there would be no need for  
     replication process.
-    
+
+
 
 \myparagraph{Reproducible Experiment Report Checklist}
 \begin{table}[ht]
@@ -139,27 +184,23 @@
     \begin{tabular}{| P{14cm} || p{2cm} |}
         \hline
         \rowcolor{gray}\multicolumn{2}{|L|}{Data Provenance and Sharing} \\
-        \hline \hline
+        \hline
             \begin{itemize}
                 \item
                 {\small For the curation process:}
                     \begin{itemize}
                             \item
-                            {\footnotesize Report on the source(s) where the data (i.e. protein sequences) is taken from }
+                            {\footnotesize Report on the source(s) where the data is taken from 
+                            (for sequences, report on the database, accession number and the version of each sequence.)}
                            \item
-                            {\footnotesize Report the process(es) by which the final data for the dataset was produced (from the original data)}
-                            \item
-                            {\footnotesize Any involved coded program, software or environment related parameters should be reported as mentioned in (\ref{sec:softwareProvenance})}
+                            {\footnotesize Explain the process(es) by which the final data for the dataset was produced}
                     \end{itemize}
-                \item
-                {\small If the study involves working on dataset of sequences,then for each sequence, include the database 
-                it has been taken from (i.e. UniProt) along with its accession number and the version. }
                 \item
                 {\small  Share the final dataset and provide a link to downloadable version of the dataset.}
             \end{itemize} &\\
-        \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Feature Provenance and Sharing}\\
         \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|l|}{Feature Provenance and Sharing}\\
+        \hline
         \begin{itemize}
                 \item
                 {\small For each feature:}
@@ -171,38 +212,26 @@
                            \item
                             {\footnotesize For formulas, describe the associated parameters}
                             \item
-                            {\footnotesize If a random function has been used throughout the process, report on the random seed and the library 
-                            the function is used from}
-                            \item
-                            {\footnotesize Any involved coded program, software or environment related parameters should be reported as mentioned in (\ref{sec:softwareProvenance})}
-                            \item
                             {\footnotesize Share the extracted feature file. If sharing the entire generated result is not feasible, then, 
-                            share reasonable amount of rows (a row contains all the generated numerical values for a single input from the dataset) 
-                            from the final extracted feature file}
+                            share reasonable amount of rows from the final extracted feature file}
                     \end{itemize}
                 
             \end{itemize} &\\
-        \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Model Provenance and Sharing}\\
         \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|l|}{Model Provenance and Sharing}\\
+        \hline
         \multicolumn{2}{|L|}{Data Pre-processing}\\ 
         \hline
             \begin{itemize}
                     \item
-                    {\small For each technique being applied to the original data in dataset:}
+                    {\small For any technique being applied to the original data in dataset:}
                         \begin{itemize}
                             \item
-                            {\footnotesize Explain over the technique concept (i.e. Standardization, Ensemble feature selection, etc.) 
-                            or provide reference to an available resource}
+                            {\footnotesize Explain over the technique concept or provide reference to an available resource}
                             \item
-                            {\footnotesize Explain over the technique details including any involved formulas and its parameters
-                            (i.e. Z-score scaling for Standardization )}
+                            {\footnotesize Explain over the technique details including any involved formulas and its parameter(s)}
                             \item
-                            {\footnotesize Explain over how it has been applied to the original inputs}
-                            \item
-                            {\footnotesize If a random function is used anywhere throughout the whole process, then, random function seed along with the library details should be included.}
-                            \item
-                            {\footnotesize Any involved coded program, software or environment related parameters  should be reported as mentioned in (\ref{sec:softwareProvenance}). }
+                            {\footnotesize Explain how it has been applied to the original data}
                             \item
                             {\footnotesize Sharing the final transformed feature set is strongly advised.}
                         \end{itemize}
@@ -212,14 +241,35 @@
         \hline
             \begin{itemize}
                 \item
-                {\small ??}
+                {\small Explain over any applied sampling technique along with process and involved parameter(s) }
+                \item
+                {\small Describe the strategy for splitting the original data into train, validation and test subsets and all 
+                the related concept, process(s) and parameter(s)}
+                \item
+                {\small Explain the choice of the algorithm, considered range of hyper-parameters and the associated values for 
+                producing the the published results}
+                \item
+                {\small If specific optimal hyper-parameters search technique is used, then describe the method, 
+                any involved parameter(s), the process and how it has been applied to the project's data}
+                \item
+                {\small If dealing with multiple classes, describe the process and how the results are aggregated}
+                \item
+                {\small For ensemble models, report on the structure, underlying models and and the aggregation strategy. Also,
+                for each involved model, describe the details mentioned above.}
+                \item
+                {\small Sharing the results (where possible) is strongly advised}
             \end{itemize}&\\
+    
         \hline
         \multicolumn{2}{|L|}{Model Evaluation}\\ 
         \hline
             \begin{itemize}
                 \item
-                {\small ??}
+                {\small Describe the choice of statistical method used for results' evaluation}
+                \item
+                {\small If averaging through multiple results, describe the methodology (micro vs macro)}
+                \item
+                {\small Define error bars (if any)}
             \end{itemize}&\\
         \hline
 
@@ -235,49 +285,25 @@
     \begin{tabular}{| P{14cm} || p{2cm} |}
         \hline
         \rowcolor{gray}\multicolumn{2}{|l|}{Software Provenance and Sharing}\\
-        \hline \hline
-        \multicolumn{2}{|L|}{Software}\\ 
         \hline
             \begin{itemize}
+                \item
+                {\small For coded programs, report on programming language(s), version, libraries and any required deployment instructions.}
                 \item 
-                {\small In case of involvement of any software, the report should include software details (i.e. name, version) and a reference
-                to the software documentation.} 
+                {\small For any involved software, report on software details (i.e. name, version, installation process) and a reference
+                to the software documentation} 
                 \item
-                {\small  If there is no documentation available, explain over what the software does, how it has been deployed in the project and  
-                parameters associated with this software (if any)}
-            \end{itemize} &\\
-        \hline
-        \multicolumn{2}{|L|}{Environment}\\ 
-        \hline
-            \begin{itemize}
-                \item
-                {\small If your pipeline is environment-dependent (it works only if certain environment available), then provide details over the 
-                underlying infrastructure needed (i.e. Mac OS X 10.4 Tiger (Merlot) - 29 April 2005) and how to deploy it through that environment.}
+                {\small If your pipeline is environment-dependent, then, provide details over the underlying infrastructure 
+                and how to setup the pipeline through that environment.}
             \end{itemize} &\\
         \hline \hline
         \rowcolor{gray}\multicolumn{2}{|l|}{Pipeline Provenance and Sharing}\\
-        \hline \hline
-        \multicolumn{2}{|L|}{Code Design}\\ 
         \hline
             \begin{itemize}
                 \item
                 {\small Design and code your pipeline as a chain of independently runnable modules (i.e. a module for feature extraction) 
                 in a way that the output from each phase would be the input to the next one.}
-            \end{itemize} &\\
-        \hline
-        \multicolumn{2}{|L|}{Pipeline Sharing}\\ 
-        \hline
-            \begin{itemize}
-                \item
-                {\small Version control and share the entire project (including the output from each phase) through available means (i.e. GitHub)}
-                \item
-                {\small If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
-                the state that the results are produced.}
-            \end{itemize} &\\
-        \hline
-        \multicolumn{2}{|L|}{Pipeline Walk-through Guidelines}\\ 
-        \hline
-            \begin{itemize}
+                
                 \item
                 {\small Create a Jupyter Notebook (or any available alternative) to walk the reader through the pipeline 
                 starting from the feature extraction all the way to result generation. for each step:}
@@ -290,9 +316,22 @@
                         code cell there and explain why it is not feasible to run it through the notebook. Also, explain over the expected output 
                         from this process (if available, you can load and display the process result instead)}
                 \end{itemize}
+                \item
+                {\small If a random function is used anywhere throughout the whole process, then, 
+                report on random function seed and the library details}
                 
-                 \item
-                {\small If possible, host your pipeline on a container (or a virtual machine) and share the entire virtual environment instead.}
+                \item
+                {\small Report on any involved coded program, software or environment-related parameters, 
+                  according to section \ref{sec:softwareProvenance} guidelines. }
+                
+                \item
+                {\small Version control and share the entire project (including the output from each phase)}
+                \item
+                
+                {\small If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
+                the state that the results are produced.}
+                
+            
             \end{itemize} &\\
         \hline
 

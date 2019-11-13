@@ -1,0 +1,86 @@
+\section {Conclusion}
+
+\subsection{Software Provenance and Sharing}
+    \label{sec:softwareProvenance}
+
+    From the data curation and putting together a dataset, to model training and evaluation, different software and coded programs 
+    could get involved in some phase of a typical bio-informatics related problem. 
+    Throughout the replication process, failing to use the same software (along with its parameters 
+    being set to the same state or value at the time of the experiment) through the same environment, can also affect the final results. 
+    The report on this aspect should cover all the software, coded programs and libraries details being involved throughout the whole process. 
+    If the pipeline \footnote{In software engineering, a pipeline consists of a chain of processing elements, 
+    arranged so that the output of each element is the input of the next[wikipedia]} is environment-dependent, then,  It should also include the environment-related 
+    details in which the pipeline has been executed.\\
+
+    So, if any software has been involved in any part of the process, software-related details (version, dependencies, etc.) along 
+    with the environment-related details (operating system name, version, etc.), should be included in the report.
+    Also, in case of a coded program and any involved library, related details (programming language, version, dependencies, etc.) 
+    should be included in the report. Sharing the coded program through available means (i.e. GitHub) is considered a better practice.\\
+
+    Another important point to note is to version control the whole pipeline. Changing direction in an experiment or setting new targets 
+    for the study (while working on the same problem) is a common phenomenon that can take place throughout any research. 
+    In that case, you should make sure to label the original work, and start the new work with a copy of the original pipeline. If your 
+    current work is based on any other work, make sure to include all the details in your report or provide a link to the correspondent 
+    resource (paper, website, repository, etc.) that covers all the related details. Using a version control system (i.e. GitHub) 
+    that records changes to a file or set of files over time is a good practice as it would allow recall on specific versions 
+    later if needed.\\
+    
+
+    Another solution to this problem is the use of containers \footnote{OS-level virtualization refers to an operating system paradigm 
+    in which the kernel allows the existence of multiple isolated user space instances. Such instances, called containers, Zones, 
+    virtual private servers, partitions, virtual environments, virtual kernel or jails, may look like real computers from 
+    the point of view of programs running in them.[wikipedia]} (i.e. Docker) or virtual machines \footnote{In computing, 
+    a virtual machine (VM) is an emulation of a computer system. Virtual machines are based on computer architectures and 
+    provide functionality of a physical computer.[wikipedia]} (i.e. VMware Workstation) through which researchers could create  
+    a virtual computer and set up the experiment pipeline on that. They could then, leave the experiment 
+    pipeline as it is (including all the involved software, coded programs and dependencies along with the environment) 
+    in the state that the results are produced. 
+    The experiment could then be shared through sharing the virtual environment. So, any 
+    further research on the same problem could be conducted by loading the container (or the virtual machine) and running 
+    the same experiment through the same environment. This would significantly speed up the process as there would be no need for  
+    replication process.
+
+\myparagraph{Reproducible Experiment Report}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{| P{12cm} || p{4cm} |}
+        \hline
+        \rowcolor{gray}\multicolumn{2}{|L|}{Data Provenance and Sharing} \\
+        \hline \hline
+        Original Results & 74.65 \\
+        \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|L|}{Feature Provenance and Sharing}\\
+        \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|L|}{Model Provenance and Sharing}\\
+        \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|L|}{Software Provenance and Sharing}\\
+        \hline \hline
+        
+        $\bullet$
+        {Create a Jupyter Notebook to walk the reader through the pipeline starting from the feature extraction 
+        all the way to result generation. for each step:}&\\ 
+        \quad $\bullet$ 
+        {Explain briefly what the code does (or make a reference to the correspondent part in the paper) 
+        followed by runnable code that demonstrates how to run the code}&\\ 
+        \quad $\bullet$ 
+        {if running the whole code is not possible, you can provide explanation over how to run the code and provide the result
+        on the page as a reference on what to expect to make sure that you have run the code correctly}&\\ 
+        \quad $\bullet$ 
+        {make the code modular and show the reader how to run tha module and provide proper arguments }&\\ 
+        $\bullet$ 
+        {host the project on github or any alternative mean which provides version controlling. so, the required changes could be traced}&\\ 
+        $\bullet$ 
+        {Environment: if the pipeline is dependent on any specific environment, provide details over the environment details}&\\ 
+        $\bullet$ 
+        {if you have used a third party software or a provide details and link to the documentation}&\\ 
+        $\bullet$ 
+        {coded programs: provide languages and dependencies}&\\ 
+
+        \hline
+
+    \end{tabular}
+    \captionsetup{font=small,width=12cm}
+    \caption{Reproducible experiment checklist for a problem with imbalanced dataset}
+    \label{tab:table3}
+    
+\end{table}
