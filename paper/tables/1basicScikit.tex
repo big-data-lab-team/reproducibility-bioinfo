@@ -1,0 +1,30 @@
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|L || C C | C C |}
+        \hline
+        \rowcolor{gray}  Amino Acid Composition (AAC) &
+        Accuracy  &  MCC & Gamma & Cost
+        \\
+        \hline \hline
+        Original Results & 73.74 & 0.46 & 1-e-5 to 10 & 1 to 4\\
+        \hline
+        \multicolumn{5}{|x|} {7 class based models}\\
+        \hline
+        dataset & 18.33 & 0.03 & 0.02 & 5.0\\
+        dataset (shuffled) & 45.51 & 0.29 & 0.02 & 4.6\\
+        dataset (down-sampled) & 43.80 & 0.34 & 0.02 & 4.5\\
+        \hline
+        \multicolumn{5}{|x|} {8 class based models}\\
+        \hline
+        dataset & 39.05 & 0.05 & 0.02 & 4.1\\
+        dataset (shuffled) & 53.76 & 0.34 & 0.02 & 4.1\\
+        dataset (down-sampled) & 38.54 & 0.29 & 0.02 & 4.1\\
+        \hline
+
+    \end{tabular}
+    \captionsetup{font=small,width=10cm}
+    \caption{The average accuracy and MCC values for basic scikit-learn based 
+    models for amino acid composition (AAC).}
+    \label{tab:table1}
+    
+\end{table}

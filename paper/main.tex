@@ -32,7 +32,9 @@
 
 \setcounter{secnumdepth}{4}
 \newcolumntype{g}{>{\small\columncolor{gray}}c}
+\newcolumntype{x}{>{\small\columncolor{gray}}l}
 \newcolumntype{C}{>{\small}c}
+\newcolumntype{V}{>{\footnotesize}c}
 \newcolumntype{L}[1]{>{\small}l{#1}}
 \newcolumntype{P}[1]{>{\small}p{#1}}
 \newcommand{\myparagraph}[1]{\paragraph*{#1}\mbox{}\\}
@@ -41,7 +43,7 @@
 \newcommand{\git}[1]{\href{https://github.com/big-data-lab-team/reproducibility-bioinfo/#1}}
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}
 \newcommand{\ncbi}[1]{\href{https://www.ncbi.nlm.nih.gov/#1}}
-
+\newcommand{\pa}[1]{\small{#1}\normalsize}
 %%%%%%TITLE 
 \title {Membrane Protein Classification: a Reproducibility Study}
 \author{Hamidreza Heidarzadeh, Tristan Glatard \\  
@@ -60,9 +62,10 @@
 %%%%%%SECTIONS
 \input{sections/introduction.tex}
 \input{sections/materials.tex}
-\input{sections/results.tex}
+% \input{sections/results.tex}
 \input{sections/discussion.tex}
 \input{sections/conclusion.tex}
+\input{sections/results.tex}
 
 %%%%%%BIBLIOGRAPHY 
 \bibliographystyle{plain}

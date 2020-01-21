@@ -1,4 +1,7 @@
 \section{Materials and Methods}
+    ==> Normally, in machine learning related problems, the solution is divided into 4 phases, 1. putting 
+        together a dataset, 2. data preprocessing, 3. model building and 4. model evaluation\\
+        Some discussion over how the whole process works.(here or in introduction)\\
 
     \subsection{Dataset}
 
@@ -77,42 +80,318 @@
     \myparagraph{\small Position-specific scoring matrix (PSSM) profile}
         \myparagraph{iteration for PSSM??}
 
-    \subsection{Construction of the main dataset}
-        \myparagraph{5-Fold Cross-Validation on a shuffled dataset}
-        \myparagraph{5-Fold Cross-Validation out of each class}
-        \myparagraph{Subsampling}
+    
+  
+    \tbm{link to code?}
 
-    \subsection{Class definitions}
-        \myparagraph{\small 7-class-based model}
-        \myparagraph{\small 8-class-based model}
+    % =======================================================================================================================
+    % =======================================================================================================================
+    
+    \subsection{The Model}
+    After extracting all the features mentioned above and using the available information from the paper, 
+    the first model was built on 7 class-based amino acid composition (\pa{AAC}) feature. But the  reproduced 
+    results had considerable differences with the ones from the paper.  
+    Table \ref{tab:table1} shows the accuracy and MCC from  the first coded model compared to the original results.\\
 
-    \subsection{Classifier}
-        \myparagraph{Gamma and Cost}
-            \tbm{One value set all classes}
-            \tbm{Different value sets for each class}
+    In order to find the probable missing problem-related parameters from the report, 
+    we coded different models on the AAC feature to observe how different instances of those 
+    parameters could affect the predicted results and consequently the reported metrics.\\
+
+    Considering the imbalanced nature of the problem, we experimented on different instances of 
+    a single dataset (Normal, Shuffled, Downsampled), two instances of the main dataset (7 vs 8 class-based sets), 
+    two libraries for support vector machine classification algorithm (SVMLight and Scikit-learn), two different settings 
+    for Gamma and Cost, three different evaluation models (before voting, thresholding and after voting) and 
+    two averaging techniques (Micro vs Macro) to find the best model that could provide the closest results to the reported ones. 
+    Table \ref{tab:table4} and Table \ref{tab:table5} shows the average Accuracy, Sensitivity, Specificity and MCC 
+    results for all those models mentioned above.\\
+
+    We then used the settings of our best model, to build new computational models for the rest of the features. 
+    Table \ref{tab:table6} shows the average sensitivity, specificity, accuracy, and MCC of our best model 
+    along with its original published results for each feature. The order and combination of the features are the same 
+    as the ones mentioned in Table1 of the paper.\\
+
+
+    \subsubsection{Basic Scikit-Learn based model}
+    The basic model is completely based on Scikit-Learn library. In this model, for any involved 
+    computational, statistical or evaluation task (i.e. train/test data split, 5-fold cross-validation, grid search, etc.) 
+    we called on a built-in function from the Scikit-Learn library through our pipeline.\\
+
+    \myparagraph{Construction of the main dataset}
+
+    In this model, for the main dataset, we experimented on two different sets: the transporter proteins set 
+    (7 classes) and the combination of the transporter and non-transporter proteins set (8 classes). 
+    The 7 class-based dataset contains amino acid composition vectors for 780 transporter proteins classified into 
+    seven substrate-specific classes(amino acid, anion, cation, electron, others, protein and sugar). 
+    The 8-class based dataset contains 1380 amino acid composition vectors for 600 non-transporter proteins and 
+    780 transporter proteins mentioned above.\\
+
+    For the datasets mentioned above, we then generated three different instances of each (Normal, Shuffled, Downsampled) 
+    to observe how changes in order and number of the vectors could affect the results in an imbalanced dataset.\\
+    
+    The Normal set is the dataset in its original order. For example, the normal version of the 7 class-based set, 
+    contains 780 vectors. Each vector has 21 values (20 from the extracted amino acid composition feature and one for the label) 
+    and represents a transporter in that dataset. The set starts with all 70 vectors of the amino acid class 
+    followed by 60 anions, 260 cations, 60 electrons, 70 proteins/mRNAs, 60 sugar and 200 transporters from other class. 
+    The shuffled set is the shuffled version of the Normal set mentioned above. The transporter vectors in the set are 
+    shuffled by the random seed of 2.\\
+
+    The down-sampled set contains 60 sequences from each class (number of records in our anion class with 
+    the least amount of sequences) being taken randomly from that specific class. These subsamples were then put together in 
+    a random order (using the random seed mentioned above) to create a balanced final set. The final number of records 
+    are 420 for 7-class based dataset and 480 for the 8 class-based set.\\
+
+    
+    \myparagraph{Cross Validation}
+
+    Cross-validation is a model validation technique for assessing how the results of 
+    statistical analysis (a newly developed model) would generalize to an independent dataset. 
+    The goal of the cross-validation is to limit problems like overfitting and underfitting. 
+    For this problem, we applied 5-fold cross-validation to each one of those instances mentioned above using 
+    "KFold" function with the "n\_splits" parameter value of 5 from Scikit-Library.\\
+
+   
+    \myparagraph{Classification Algorithm}
+    
+    The support vector machine (SVM) is a universal machine learning approximator based on the structural risk minimization (SRM) 
+    principle of statistical learning theory \cite{vapnik1995}. The algorithm could be applied to both regression and 
+    classification problems. This technique is particularly attractive to biological sequence analysis because many biological 
+    problems involve high-dimensional noisy data, for which SVMs are known to behave well 
+    compared to the other ones.\cite{zavaljevski2002support}\\
+
+    For SVM classification algorithm, we tried both "OneVsRestClassifier" and "SVC" with the "decision\_function\_shape" 
+    being set to "ovr" (for One against all classification) from scikit-learn library. The results from both functions 
+    were very close. So, we picked "SVC" with “rbf” kernel and we set the "decision\_function\_shape" to "ovr" (one versus rest) 
+    for our experiment.\\
+
+    For Gamma and Cost values, the provided value range from the paper is 1-e-5 to 10 for the Gamma value and 1 to 4 for 
+    the Cost value. So, using the "Grid Search" function from Scikit-learn library, we searched for the best parameters 
+    on each one of those six instances (normal, shuffled and down-sampled for 7 and 8 class based datasets) and we 
+    used the correspondent results for each instance.\\
+  
+
+    \myparagraph{Evaluation}
+    To evaluate the models' performances, we used accuracy and Matthews correlation coefficient (MCC) metrics.
+    Table \ref{tab:table1} results are the product of "accuracy\_score" and "matthews\_corrcoef" functions from scikit-learn 
+    library in our pipeline.\\
+
+    \myparagraph{Results}
         
-        \myparagraph{Thresholding}
+    Table \ref{tab:table1} shows the average accuracy and matthew's correlation coefficient (\pa{MCC}) values for different 
+    basic scikit-learn based models for all seven and eight substrate-specific classes for amino acid composition (AAC) feature. 
+    The correspondent Gamma and Cost values for each model, is the result of a "Grid Search" on that model.\\
 
-    \subsection{Evaluation}
+    The best performance is achieved on the model with 8 shuffled classes in the main dataset (accuracy:53.76, MCC:0.34). 
+    Overall, the models with 8 classes of sequences in the dataset, show better performances compared to the 7 class-based sets. 
+    Because there is more information available (780 vectors compared to 1380) for the algorithm through the training phase.\\
+
+    Considering the imbalance nature of our data, when we divide the normal instance of the main dataset into 5 different folds, 
+    in each fold, there will be at least one class which is present in the test set but not in the test set. That means, 
+    the algorithm should decide on records of data that it hasn’t seen before through the training phase.\\
+
+    In the case of the shuffled instance of the main dataset, we can be sure that in the train and test sets of 
+    each fold, there would be a portion of each class available. So, the algorithm will be trained on all the 
+    transporter or non-transporter classes. But the number of vectors from each class present in either train or 
+    test set would be different in each fold.\\
+
+    In the case of the downsampled instance of the main dataset, we have created a balanced set with an equal number of 
+    sequences from each class. The problem is that we lose some information throughout the process. We would have 420 items 
+    for 7 class-based sets (compared to 780 items before downsampling) and 480 items for 8 class-based sets 
+    (compared to the 1380 records before downsampling). But, we can be sure that there will be an equal number of sequences 
+    from each class present in the train and the test set of each fold.\\
+
+    
+    % Table 1
+    \input{tables/1basicScikit.tex}
+
+    \subsubsection{One vs All model}
+    Considering the differences in between our results from the basic Scikit-Learn model and the ones of 
+    the paper on AAC feature, we tried a One vs All model to improve the results. In this model, we coded all 
+    the phases without making any call on functions from different libraries (except for the classification algorithm) 
+    to gain more insight on the other problem-related parameters that could affect the model performance.\\
+
+    \myparagraph{Construction of the main dataset}
+    
+    Trough this model and for the main dataset, we experimented on two following sets: the transporter proteins set 
+    (7 classes) and the combination of the transporter and non-transporter proteins set (8 classes). 
+    The 7 class-based dataset contains amino acid composition vectors for 780 transporter proteins classified into 
+    seven substrate-specific classes(amino acid, anion, cation, electron, others, protein and sugar). 
+    The 8-class based dataset contains 1380 amino acid composition vectors for 600 non-transporter proteins and 
+    780 transporter proteins mentioned above.\\
+
+    Considering the imbalanced nature of our dataset, for each set mentioned above, we then generated 
+    three different instances (Normal, Shuffled, Downsampled) to observe how changes in order 
+    and number of the vectors could affect the results in that setting.\\
+
+    For the normal insrance of the dataset, we classified all sequences under seven (for the 7 class-based sets) or 
+    eight (for 8 class-based sets) categories. We then applied cross-validation to each category where we created 
+    5 folds with its correspondent train and test sets for each one of those classes. For each final fold 
+    (i.e. final dataset's first fold), we attached the related fold from all the classes (i.e. first fold from 
+    the amino acid, anion, cation, etc.) This way, considering the imbalanced nature of our dataset, for each fold, 
+    we could make sure that we have an equal portion of each class in train (4/5th of the class sequences) and test 
+    (1/5th of the class sequences) sets.\\
+
+    For the shuffled set, we first, shuffled the main dataset using random seed of 2. 
+    We then applied 5-fold cross-validation and created the correspondent train and test sets.\\
+
+    The down-sampled set contains 60 sequences from each class (number of records in our anion class with 
+    the least amount of sequences) being taken randomly from that specific class. These subsamples were then put together in 
+    a random order (using the random seed mentioned above) to create a balanced final set. Like the normal set, we then 
+    classified them under seven (for the 7 class-based sets) or eight (for 8 class-based sets) categories, applied 
+    5-fold cross-validation to each one and then attached the correspondent folds together to create the final folds.
+    The final number of records are 420 for 7-class based dataset and 480 for the 8 class-based set.\\
+
+    For each one of those 6 datasets mentioned above (normal, shuffled and down-sampled for 7 and 8 class based sets), 
+    and for each fold, we transformed the set into "One against All" format. In this format, in each fold, 
+    from each set (train or test), we produced seven (for the 7 class-based sets) or eight (for 8 class-based sets) 
+    sets in a way that, for each class (i.e. anion transporters), we labeled the records from that class (i.e. anion) 
+    with "+1" and the rest of the classes with "-1". So, for example, for fold one of 7-class based dataset, 
+    we generated 7 new sets through which for example for amino acid class, we would have 70 classes 
+    (amino acid transporters) with "+1" label and 710 other records with "-1" label. 
+    Same thing has been done for the rest of the classes in the same fold. 
+    A sample generated set is available at the paper’s GitHub. \\
+
+    \myparagraph{Classification}
+
+    \myparagraph{\footnotesize{Choice of classification algorithm}}
+    In this paper, for the classification algorithm, we both experimented with SVMLight software, 
+    and the Scikit-Learn's "SVC" classifiers in our models. \\
+
+    \myparagraph{\footnotesize{Gamma and Cost}}
+    For the Gamma and Cost, we once tried classification with
+    the best values for all classes (being chosen through Grid Search) and the other time for 
+    each class we assigned a different Gamma and Cost values specific to that class (being chosen by applying Grid Search to 
+    that specific class instead of the whole dataset).\\
+
+    So, for each dataset (7 vs 8 class based dataset), we tried 6 different 
+    scenarios(i.e. shuffled 7-class set wiht one Gamma and Cost values for all classes versus the same set with values 
+    different for each class.)\\
+
+    \myparagraph{\footnotesize{Before Voting}}
+    We also considered 3 different following approaches for producing the results:\\ 
+    First, for each fold, for each class (i.e. amino acids vs all others), we evaluated the classification 
+    results for that class (accuracy, sensitivity, specificity, MCC) and then we averaged through the results for 
+    all classes in a fold, for the results for that fold. we then averaged through all 5 folds, for the final results. In the 
+    Tables for results (2,3,4,5,6,7) we referred to this one as "Before Voting".\\
+    
+    \myparagraph{\footnotesize{Thresholding}}
+    Compared to the original results, the results we produced above, were close but the difference in between thr metrics were not 
+    in the same range.(i.e. higher values for accuracy and specificity close values for MCC and lower values for sensitivity). 
+    For the next one, we went through the same process, but we applied a threshold value to all the classes (and through 
+    all folds) for balancing out the results (We referred to this model as "Thresholding" through the tables' of results)\\
+
+    After classification (for both scikit-learn and SVMLight) and through each fold, for each class, we produced probability values 
+    for each row of values. In the Normal mode, we considered the ones less than 0 as class -1 and the ones above 
+    that value as +1. and from that, we calculated the 4 elements of confusion matrix (TP, FP, TN, FN) and then we calculated the 
+    metrics from those. For thresholding model, we considered the (0 - threshold) as the border value for classification in between 
+    positive and negative results(+1 vs -1).\\
+
+    For Scikit-learn, there is possibility where the SVC algorithm could provide you with both the probability or the 
+    predicted label(+1 or -1). For this experiment and for each classification case, we produced both results. For the ones with 
+    the prediction label of "-1" we multiplied the probability by -1 and then save it to the file. So, ??\\
+    
+    \myparagraph{\footnotesize{After Voting}}
+    Through the third model, instead of averaging in between all the classes results for each fold, we did voting through each fold 
+    (in between 7 classifiers) and then using the final results, we evaluated the results for all 7 classes against the original labels 
+    for that fold and then produced the metrics' values(accuracy, sensitivity, specificity, MCC). we then averaged through all 5 folds 
+    for the final values(We referred to this model as "After voting" through the tables' of results).\\
+
+    
+
+    \myparagraph{Evaluation}
         
         In this study, sensitivity, specificity, accuracy and Matthew's correlation coefficient (MCC) is used to measure the 
         prediction performance. For evaluation, these metrics are calculated for each test dataset through the five-fold cross validation.
         For the final value, the parameters computed from each subset were averaged across all five subsets . TP, FP, TN, FN are 
-        true positives, false positives, true negatives and false negatives, respectively. 
+        true positives, false positives, true negatives and false negatives, respectively. \\
 
+        Sensitivity is a measure of the proportion of actual positive cases that got predicted as positive (or true positive). 
+        Sensitivity is also termed as Recall (and in this case is the percentage of transporters 
+        that were correctly predicted as transporters) and is calculated as follow:
         \begin{equation}
             \text{Sensitivity} = \frac {\text{TP}}{\text{TP + FN}} * 100
         \end{equation}
+
+        Specificity is defined as the proportion of actual negatives, which got predicted as the negative (or true negative) and 
+        (the percentage of non-transporters that were correctly predicted as non-transport proteins) is computed using following formula:
         \begin{equation}
             \text{Specificity} = \frac {\text{TN}}{\text{TN + FP}} * 100
         \end{equation}
+
+        Accuracy is the overall percentage of the correctly predicted classes (either true positive or true negative) to all the 
+        predictions. In this case it's the overall percentage of transporters and non-transporters 
+        that were correctly predicted and calculated using following formula:
         \begin{equation}
             \text{Accuracy} = \frac {\text{TP + TN}}{\text{TP + FP + TN + FN}} * 100
         \end{equation}
+
+        The Matthews correlation coefficient (MCC) is used in machine learning as a measure of the quality of binary 
+        classifications, introduced by biochemist Brian W. Matthews in 1975. The coefficient takes into account true 
+        and false positives and negatives and is generally regarded as a balanced measure which can be used even if the classes 
+        are of very different sizes. The MCC is in essence a correlation coefficient between the observed and predicted binary 
+        classifications. it returns a value between -1 and +1. A coefficient of +1 represents a perfect prediction, 0 no better than 
+        random prediction and -1 indicates total disagreement between prediction and observation. It is computed using the following 
+        formula: 
+
         \begin{equation}
             \text{MCC} = \frac {\text{(TP * TN) - (FN * FP)}}{\sqrt{(TP + FN) * (TN + FP) * (TP + FP) * (TN + FN)}}
         \end{equation}
 
-        \myparagraph{Micro vs Macro}
-        \myparagraph{SVM-Light vs Scikit-Learn}
-        \myparagraph{Each fold, after voting or before voting?}
+        \myparagraph{\footnotesize{Micro vs Macro}}
+        Micro- and macro-averages (for any metric) will compute slightly different things, and thus their interpretation differs. 
+        A macro-average will compute the metric independently for each class and then take the average (hence treating 
+        all classes equally), whereas a micro-average will aggregate the contributions of all classes to compute the average metric.\\
+
+        For each model, whenever we averaged through results (in-between all classes to produce results of one fold or 
+        in-between all folds for the final results) we tried both Micro and Macro averaging. 
+
+        \myparagraph{Results}
+        Regarding the number of classes in the dataset, for 7-class based dataset we had 780 sequences and for 8-class based set, 
+        we had 1380 sequences in our set. Through all the models, The results are better for 8-class set as we have more information 
+        available. But the noticeable difference (because of which we decided to go with 8-class based set) is on the MCC metric. 
+        The best MCC value achieved for 7-class based dataset was 0.38 using SVMLight and 0.39 using the Scikit-Learn SVC classifier. 
+        But for 8-class based set, the best results are 0.49 for SVMLight and 0.48 for Scikit-Learn classifier, which is higher than 
+        original value (0.46). and through introducing a threshold, we could get it close to that value.\\
+
+        Regarding the different kind of datasets (normal, shuffled, down-sampled), the results are very close for normal and shuffled 
+        sets but for down-sampled sets the sensitivity and MCC are lower than those of the shuffled and normal sets. The reason is, 
+        in normal set, we get the the same portion of each class in the train/test sets in each fold, althogh in shuffled version, the 
+        we dont have the same portion of the set from each class in each fold, but the difference is not very big. so the results are not 
+        than different,.  in down-sampled version we loose lots of information (480 compared to 1380) but its balanced. so, beside 
+        the accuracy which is close, the others are different .... because we loose lots of true positives on majority classes 
+        (Cation, non-transporter)
+
+
+        Regarding the Gamma and Cost Values, For each class, once we assigned values specific to that class, 
+        and the other time we used one global Gamma and Cost value for all classes. The results are very close, but overall
+        through first scenario, we achieved better results for the mterics as each class had a better True Positive rate using 
+        values being accustomed to its data model.\\
+
+        Regarding SVMLight vs Scikit-learn, for accuracy the results are close. SVMLight provides better results for sensitivity, 
+        MCC and overall a more balanced results. but scikit produces lower sensitivity and higher specificity compared to SVM light.\\
+
+        Regarding Micro vs Macro averaging, through results, accuracy, sensitivity and 
+        specificity results are really close (and sometimes even the same) for all models, the only noticeable 
+        difference is on MCC value (When it is not a down-sampled set). 
+        [Table ... shows that] on all models, Macro averaging values could never get close to the 
+        original values of the paper (on MCC) but Micro averaging produced the expected results on MCC.\\
+
+        Overall compared to original results (\pa{Accuracy: 73.74, Sensitivity: 74.65, 
+        Specificity: 73.22 , MCC: 0.46}) the best results were achieved oin following scenarios:\\
+
+        On 7-class based datasets, the best results are achieved by using the threshold model on Normal version of a dataset when 
+        assigning different Gamma and Cost values for each class when using SVMLight for classification 
+        (\pa{Accuracy: 74.04, Sensitivity: 74.74, Specificity: 73.93 , MCC: 0.36}). 
+        The only problem is with the MCC value with the a difference of 0.10.
+
+        \myparagraph{8-class}
+        For 8-class based datasets, the results with highest values are reproduced by SVM classifier with different Gamma and Cost 
+        value for each class when Micro averaging the folds' results on 
+        "Before Voting" model being applied to either normal or shuffle version of the the dataset.
+        (\pa{Accuracy: 87.33, Sensitivity: 64.92, Specificity: 90.53 , MCC: 0.49}). Through this model, although all the metrics' 
+        values are above the reported values, but, the sensitivity was lower than than reported one compared to the rest of the 3.
+        so, the best result which provides us with values closer to the reported one which balances out specificity and sensitivity, 
+        is when you apply the same algorithm (with the same Gamma and cost strategy) to thresholding model, on normal or shuffled sets 
+        and applying micro averaging. (\pa{Accuracy: 79.98, Sensitivity: 79.78, Specificity: 80.01 , MCC: 0.44}).\\
+
+% =======================================================================================================================
+% =======================================================================================================================

@@ -1,0 +1,79 @@
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|L |V V V V g g g V V V V |}
+        \hline
+        \multicolumn{12}{|g|}{Amino Acid Composition (AAC)}\\
+        \hline
+        \multicolumn{1}{|l|}{\multirow{2}{*}{\footnotesize{Original Results}}}
+        &
+        \multicolumn{2}{g}{Accuracy} & \multicolumn{3}{g}{Sensitivity} &
+        \multicolumn{3}{g}{Specificity} & \multicolumn{3}{g|}{MCC}\\
+        \cline{2-12}&
+        \multicolumn{2}{C}{73.74} & \multicolumn{3}{C}{74.65} &
+        \multicolumn{3}{C}{73.22} & \multicolumn{3}{C|}{0.46} \\
+        \hline
+        
+        \multicolumn{12}{|g|} {SVM Light}\\
+        \multicolumn{12}{|g|} {8 class based model}\\
+        \cline{1-12}\multicolumn{1}{|g}{}&
+        \multicolumn{4}{g} {Gamma-Cost different for each class}&
+        \multicolumn{3}{g}{}&
+        \multicolumn{4}{g|} {same Gamma-Cost for all classes}\\
+        \cline{2-5}\cline{9-12}\multicolumn{1}{|g}{}&
+        \multicolumn{1}{g}{accuracy}&\multicolumn{1}{g}{sensitivity}&
+        \multicolumn{1}{g}{specificity}&\multicolumn{1}{g}{mcc}&
+        \multicolumn{3}{g}{}&
+        \multicolumn{1}{g}{accuracy}&\multicolumn{1}{g}{sensitivity}&
+        \multicolumn{1}{g}{specificity}&\multicolumn{1}{g|}{mcc}\\
+        \hline
+
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Before Voting}}}
+        
+        & 87.33 & 64.92 & 90.53 & 0.49 &    n&&n                & 86.22 & 63.40 & 89.48 & 0.46 \\
+        & 85.86 & 34.16 & 93.24 & 0.30 &    d&\small{Micro}&d   & 85.02 & 40.83 & 91.34 & 0.32 \\
+        & 87.02 & 63.98 & 90.31 & 0.48 &    sh&&sh              & 86.24 & 62.46 & 89.63 & 0.46 \\
+        
+        \cline{3-4}\cline{6-8}\cline{10-11}
+        
+        & 87.33 & 39.91 & 88.02 & 0.30 &    n&&n                & 86.22 & 34.78 & 86.71 & 0.25 \\
+        & 85.85 & 34.16 & 93.24 & 0.28 &    d&\small{Macro}&d   & 85.02 & 40.83 & 91.34 & 0.30 \\
+        & 87.02 & 38.81 & 87.71 & 0.28 &    sh&&sh              & 86.24 & 33.57 & 86.89 & 0.23 \\
+        
+        \hline
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Thresholding}}}
+
+        & 79.59 & 78.26 & 79.78 & 0.43 &    n&&n                & 79.59 & 78.26 & 79.78 & 0.43 \\
+        & 76.14 & 60.00 & 78.45 & 0.28 &    d&\small{Micro}&d   & 73.09 & 63.54 & 74.46 & 0.27 \\
+        & 81.47 & 75.07 & 82.39 & 0.44 &    sh&&sh              & 79.49 & 76.66 & 79.89 & 0.42 \\
+        
+        \cline{3-4}\cline{6-8}\cline{10-11}
+
+        & 79.59 & 57.34 & 76.24 & 0.28 &    n&&n                & 79.59 & 57.34 & 76.24 & 0.28 \\
+        & 76.14 & 60.00 & 78.45 & 0.28 &    d&\small{Macro}&d   & 73.09 & 63.54 & 4.46 & 0.27 \\
+        & 81.47 & 54.90 & 79.26 & 0.28 &    sh&&sh              & 79.49 & 54.96 & 76.35 & 0.26 \\
+        
+        \hline
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{After Voting}}}
+
+        & 88.91 & 55.65 & 93.66 & 0.49 &    n&&n                & 88.51 & 54.05 & 93.43 & 0.47 \\
+        & 84.84 & 39.37 & 91.33 & 0.30 &    d&\small{Micro}&d   & 84.79 & 39.16 & 91.30 & 0.30 \\
+        & 88.44 & 53.76 & 93.39 & 0.47 &    sh&&sh              & 88.33 & 53.33 & 93.33 & 0.46 \\
+        
+        \cline{3-4}\cline{6-8}\cline{10-11}
+
+        & 88.91 & 29.87 & 91.65 & 0.26 &    n&&n                & 88.51 & 25.93 & 91.35 & 0.22 \\
+        & 84.84 & 39.37 & 91.34 & 0.29 &    d&\small{Macro}&d   & 84.79 & 39.16 & 91.31 & 0.28 \\
+        & 88.44 & 27.85 & 91.28 & 0.23 &    sh&&sh              & 88.33 & 24.93 & 91.22 & 0.20 \\
+        
+        \hline
+        
+       
+
+    \end{tabular}
+    \captionsetup{font=small,width=12cm}
+    \caption{The average sensitivity, specificity, accuracy, and MCC for all seven 
+    substrate-specific transporter classes for AAC model on main dataset comparing 
+    the original results with different models being reproduced for the same feature}
+    \label{tab:table5}
+    
+\end{table}
