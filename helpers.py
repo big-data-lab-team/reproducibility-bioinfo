@@ -8,6 +8,7 @@ import requests
 import traceback
 import time
 import numpy as np
+import pandas as pd
 from aaindex import AAIndex
 
 # ============================
@@ -18,7 +19,8 @@ config = {
     "datasetPath": os.path.join(os.getcwd(), "dataset", "{}"),
     "downloadPath": os.path.join(os.getcwd(), "dataset", "{}", "{}"),
     "featuresPath": os.path.join(os.getcwd(), "features", "{}", "{}"),
-    "SVMLightFeaturesPath": os.path.join(os.getcwd(), "svmLight", "features","{}", "{}")
+    "SVMLightFeaturesPath": os.path.join(os.getcwd(), "svmLight", "features","{}", "{}"),
+    "pssmPath": os.path.join(os.getcwd(), "pssm", "{}"),
 }
 
 
@@ -628,5 +630,136 @@ def extractAAIndex(dataset, feature):
 # ============================
 # PSSM FEATURE
 # ============================
+# PSSM to Feature
+# ============================
+def pssm_to_feature(filename):
+
+    handler = open(filename, "r")
+    data = handler.read().split(os.linesep)
+    handler.close()    
+
+    seq_len = int(data[len(data)-1])
+
+    data_by_space = [data[x].split(" ") for x in range(len(data))]
+    data_clean = [[data_by_space[y][k] for k in range(
+        len(data_by_space[y])) if data_by_space[y][k] != ""] for y in range(2, (2+1+seq_len))]
+
+    # Headers for the table
+    header = [(["ID", "Seq"]+data_clean[0])[c] for c in range(0, 22)]
+
+    data_trimed = [[data_clean[b][c]
+                    for c in range(0, 22)] for b in range(1, len(data_clean))]
+    
+    # Data to Table
+    table = pd.DataFrame(data_trimed, columns=header)
+    table.drop(['ID'], axis=1, inplace=True)
+    
+    # String to number
+    headers = table.columns
+    for i in range(1, len(headers)):
+        table[headers[i]] = pd.to_numeric(table[headers[i]], errors='coerce')
+    
+    # seq = table["Seq"].unique()
+    # dd = pd.concat([table[table["Seq"] == kk].groupby(
+    #     'Seq').aggregate(sum) for kk in seq], axis=0, sort=True)
+
+    _all_aminos=['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q',
+       'R', 'S', 'T', 'V', 'W', 'Y']
+    
+    dd=pd.DataFrame(data=None)
+
+    for seq in _all_aminos:
+        _temp=table[table["Seq"] == seq].groupby('Seq').aggregate(sum)
+        if _temp.empty:
+            _temp.loc[seq]=0
+        
+        if  seq=='Y':
+            dd=pd.concat([dd,_temp],axis=0,sort=True)
+        else:
+            dd=pd.concat([dd,_temp],axis=0)
+    
+    
+    dd=dd.sort_values(by=['Seq'])
+    dd=dd/seq_len
+    
+    _max=dd.values.max()
+    _min=dd.values.min()
+    
+    dd=dd-_min
+    dd=dd/(_max-_min)
+    
+    return(dd)
+# ============================
+# PSSM FEATURE
+# ============================
+# CALC PSSM
+# ============================
+def calcPSSM(source,num_of_classes,pssm_csv):
+    try:
+        _pssms= os.listdir( os.path.join(source,num_of_classes)) # PSSM 2 / 7
+        lableList=[label  for label in _pssms if "store" not in label.lower()]
+        # print(lableList)
+
+        for label in lableList:
+            label_pssms = os.listdir( os.path.join(source,num_of_classes,label)) # PSSM 2 / 7 / amino
+            pssm_files=[_file for _file in label_pssms if "store" not in _file.lower()]
+            
+            # print (len(pssm_files))
+            # print (pssm_files)
+            
+            for _file in pssm_files:
+                _file_address=os.path.join(source,num_of_classes,label,_file)
+                res =  pssm_to_feature(_file_address)
+                res_values=res.values
+                flated=[res_values[i][j] for i in range(len(res_values)) for j in range(len(res_values[i]))]
+                
+                # print(flated[:3])
+                pssm_csv.write(os.linesep)
+
+                # if label != "nonTransporter":
+                #     label="transporter"
+
+                pssm_csv.write((str(flated).replace(
+                    '[', '')).replace(']', '')+","+label)
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())
+
+# ============================
 # Extract PSSM
 # ============================
+
+
+def extractPSSM(dataset, feature):
+    try:
+
+        _classes=["7","8"]
+        _iterations=["2","3"]
+        
+        aminoLetters = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 
+        'L', 'M', 'N', 'P', 'Q','R', 'S', 'T', 'V', 'W', 'Y']
+        _pssm_headers = [(first+second)for first in aminoLetters for second in aminoLetters]
+
+        for _class in _classes:
+            for _iter in _iterations:
+                
+                log("Genrating {} iteration PSSM .csv file for {} classes".format(_iter,_class))
+                source = config["pssmPath"].format("pssm"+_iter) # PSSM 2
+                destination = config["featuresPath"].format(dataset, feature+_class+_iter+".csv") #PSSM 72
+                clearFile(destination)
+
+                log("Source : "+source)
+                log("destination : "+destination)
+
+                _pssm_csv = open(destination, 'a')
+                _pssm_csv.write((str(_pssm_headers).replace('[', '')).replace(']', '')+",Label")
+
+                calcPSSM(source,_class, _pssm_csv)
+
+                _pssm_csv.close()
+
+
+    except Exception:
+        log(traceback.format_exc())
+        raise Exception(traceback.format_exc())

@@ -7,7 +7,7 @@ import sys
 import json
 import time
 import traceback
-from helpers import log, extractAAC, extractDPC, extractPHC, extractAAIndex
+from helpers import log, extractAAC, extractDPC, extractPHC, extractAAIndex, extractPSSM
 
 
 # ============================
@@ -49,9 +49,9 @@ def main():
             extractAAIndex(dataset, feature)
             log("AAIndex being extracted from [ "+dataset+" ] successfully!!!")
         # PSSM (Position)
-        # elif feature == 'pssm':
-        #     extractPSSM(dataset, feature)
-        #     log("PSSM being extracted from [ "+dataset+" ] successfully!!!")
+        elif feature == 'pssm':
+            extractPSSM(dataset, feature)
+            log("PSSM being extracted from [ "+dataset+" ] successfully!!!")
 
     except Exception:
         log("[ "+feature+" ] Feature Extraction Process Failed!!")
