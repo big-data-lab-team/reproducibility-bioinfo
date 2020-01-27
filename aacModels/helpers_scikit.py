@@ -21,6 +21,23 @@ config = {
 # ============================
 # Functions
 # ============================
+def distance(metrics):
+
+    original = {}
+    original['accuracy'] = 0.7374
+    original['sensitivity'] = 0.7465
+    original['specificity'] = 0.7322
+    original['mcc'] = 0.46
+
+    distance = math.pow((metrics['accuracy'] -original['accuracy']),2)
+    distance = distance + math.pow((metrics['sensitivity'] -original['sensitivity']),2)
+    distance = distance + math.pow((metrics['specificity'] -original['specificity']),2)
+    distance = distance + math.pow((metrics['mcc'] -original['mcc']),2)
+
+    distance = math.sqrt(distance)
+
+    return distance
+
 def clearFile(fileAddress):
      # Tries to create directories (If does not exist)
     try:
@@ -165,12 +182,8 @@ def _scikitClassify(_classes,_num_of_folds,_params,feature):
             _final_res=[]
             for i in range(len(y_pred)):
 
-                if int(y_pred[i])== 1:
-                    _final_res.append(y_pred_prob[i][1])
-
-                elif int(y_pred[i])== -1:
-                    _final_res.append((y_pred_prob[i][-1]*-1))
-
+                pred_res = (y_pred_prob[i][1] - y_pred_prob[i][0])
+                _final_res.append(pred_res)
 
             pred = pd.DataFrame(_final_res,columns=[_class])
 
@@ -378,6 +391,12 @@ def _evaluate(classes,num_of_folds,feature,mode,_thresh=0):
     all_macros_mcc=np.sum([item[3] for item in all_macros]) / len(all_macros)
 
     _problem_macros=[all_macros_acc,all_macros_sens,all_macros_spec,all_macros_mcc]
+    _mac_distance = distance({
+        'accuracy':(all_macros_acc/100),
+        'sensitivity':(all_macros_sens/100),
+        'specificity':(all_macros_spec/100),
+        'mcc':all_macros_mcc/100
+        })
 
     all_micros_acc=np.sum([item[0] for item in all_micros]) / len(all_micros)
     all_micros_sens=np.sum([item[1] for item in all_micros]) / len(all_micros)
@@ -385,15 +404,22 @@ def _evaluate(classes,num_of_folds,feature,mode,_thresh=0):
     all_micros_mcc=np.sum([item[3] for item in all_micros]) / len(all_micros)
 
     _problem_micros=[all_micros_acc,all_micros_sens,all_micros_spec,all_micros_mcc]
-
+    _mic_distance = distance({
+        'accuracy':(all_micros_acc/100),
+        'sensitivity':(all_micros_sens/100),
+        'specificity':(all_micros_spec/100),
+        'mcc':all_micros_mcc/100
+        })
 
 
     print("acc===sens====spec=============mcc")
     print("==================================")
     print("Total Macro for problem")
     print(_problem_macros)
+    print("Mac Distance = ", _mac_distance)
     print("----------------------------------")
     print("Total Micro for problem")
     print(_problem_micros)
+    print("Mic Distance = ", _mic_distance)
     print("==================================")
     print("==================================")
