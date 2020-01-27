@@ -1,122 +1,136 @@
 
 \begin{table}[ht]
     \centering
-    \begin{tabular}{|L |V V V V g g g V V V V |}
+    \begin{tabular}{|L | V |V V V V g g g V V V V | V |}
         \hline
-        \multicolumn{12}{|g|}{7-class based model for AAC}\\
+        \multicolumn{14}{|g|}{7-class based model for AAC}\\
         \hline
         \multicolumn{1}{|l|}{\multirow{2}{*}{\footnotesize{Original Results}}}
         &
-        \multicolumn{2}{g}{Accuracy} & \multicolumn{3}{g}{Sensitivity} &
-        \multicolumn{3}{g}{Specificity} & \multicolumn{3}{g|}{MCC}\\
-        \cline{2-12}&
-        \multicolumn{2}{C}{73.74} & \multicolumn{3}{C}{74.65} &
-        \multicolumn{3}{C}{73.22} & \multicolumn{3}{C|}{0.46} \\
+        \multicolumn{3}{g}{Accuracy} & \multicolumn{3}{g}{Sensitivity} &
+        \multicolumn{3}{g}{Specificity} & \multicolumn{4}{g|}{MCC}\\
+        \cline{2-14}&
+        \multicolumn{3}{C}{73.74} & \multicolumn{3}{C}{74.65} &
+        \multicolumn{3}{C}{73.22} & \multicolumn{4}{C|}{0.46} \\
         \hline\hline
         
-        \multicolumn{12}{|g|} {SVM Light}\\
+        \multicolumn{14}{|g|} {SVM Light}\\
         \hline\hline
+        
         \cline{1-12}\multicolumn{1}{|g}{}&
-        \multicolumn{4}{g} {Gamma-Cost different for each class}&
+        
+        \multicolumn{1}{|g|}{\footnotesize{Dist}}&
+        \multicolumn{4}{g} {\footnotesize{Gamma-Cost different for each class}}&
         \multicolumn{3}{g}{}&
-        \multicolumn{4}{g|} {same Gamma-Cost for all classes}\\
-        \cline{2-5}\cline{9-12}\multicolumn{1}{|g}{}&
-        \multicolumn{1}{g}{accuracy}&\multicolumn{1}{g}{sensitivity}&
-        \multicolumn{1}{g}{specificity}&\multicolumn{1}{g}{mcc}&
+        \multicolumn{4}{g|} {\footnotesize{same Gamma-Cost for all classes}}&
+        \multicolumn{1}{g|}{\footnotesize{Dist}}\\
+        
+        \cline{3-6}\cline{10-13}\multicolumn{1}{|g}{}&
+        \multicolumn{1}{|g|}{\footnotesize{ance}}&
+        \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+        \multicolumn{1}{g}{spec}&\multicolumn{1}{g}{mcc}&
         \multicolumn{3}{g}{}&
-        \multicolumn{1}{g}{accuracy}&\multicolumn{1}{g}{sensitivity}&
-        \multicolumn{1}{g}{specificity}&\multicolumn{1}{g|}{mcc}\\
+        \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+        \multicolumn{1}{g}{spec}&\multicolumn{1}{g|}{mcc}&\multicolumn{1}{g|}{\footnotesize{ance}}\\
+
         \hline
 
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Before Voting}}}
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Class-based}}}
         
-        & 82.28 & 56.53 & 86.58 & 0.37 &    n&&n                & 80.73 & 60.00 & 84.18 & 0.37 \\
-        & 84.07 & 39.28 & 91.55 & 0.32 &    d&\small{Micro}&d   & 81.90 & 48.33 & 87.5 & 0.32 \\
-        & 81.74 & 54.74 & 86.24 & 0.36 &    sh&&sh              & 80.42 & 59.61 & 83.88 & 0.36 \\
+        & 0.25 & 82.28 & 56.53 & 86.58 & 0.37 &    n&&n                & 80.73 & 60.00 & 84.18 & 0.37 & 0.21 \\
+        & 0.43 & 84.07 & 39.28 & 91.55 & 0.32 &    d&\small{Micro}&d   & 81.90 & 48.33 & 87.5 & 0.32 & 0.33 \\
+        & 0.26 & 81.74 & 54.74 & 86.24 & 0.36 &    sh&&sh              & 80.42 & 59.61 & 83.88 & 0.36 & 0.21 \\
         
-        \cline{3-4}\cline{6-8}\cline{10-11}
+        \cline{2-5}\cline{7-9}\cline{11-14}
         
-        & 82.28 & 43.76 & 84.31 & 0.31 &    n&&n                & 80.73 & 46.64 & 81.69 & 0.30 \\
-        & 84.08 & 39.28 & 91.54 & 0.32 &    d&\small{Macro}&d   & 81.90 & 48.33 & 87.49 & 0.33 \\
-        & 81.73 & 43.27 & 84.06 & 0.28 &    sh&&sh              & 80.42 & 46.96 & 81.49 & 0.29 \\
-        
-        \hline
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Thresholding}}}
-
-        & 74.04 & 74.74 & 73.93 & 0.36 &    n&&n                & 73.07 & 76.66 & 72.47 & 0.36 \\
-        & 72.89 & 66.66 & 73.92 & 0.30 &    d&\small{Micro}&d   & 69.96 & 71.19 & 69.76 & 0.29 \\
-        & 73.88 & 72.18 & 74.16 & 0.34 &    sh&&sh              & 72.91 & 75.38 & 72.50 & 0.35 \\
-        
-        \cline{3-4}\cline{6-8}\cline{10-11}
-
-        & 74.04 & 63.58 & 70.80 & 0.28 &    n&&n                & 73.07 & 65.34 & 69.17 & 0.27 \\
-        & 72.89 & 66.66 & 73.92 & 0.30 &    d&\small{Macro}&d   & 69.96 & 71.19 & 69.76 & 0.30 \\
-        & 73.88 & 62.26 & 71.01 & 0.27 &    sh&&sh              & 72.91 & 64.46 & 69.24 & 0.26 \\
+        & 0.37 & 82.28 & 43.76 & 84.31 & 0.31 &    n&&n                & 80.73 & 46.64 & 81.69 & 0.30 & 0.33 \\
+        & 0.43 & 84.08 & 39.28 & 91.54 & 0.32 &    d&\small{Macro}&d   & 81.90 & 48.33 & 87.49 & 0.33 & 0.33 \\
+        & 0.38 & 81.73 & 43.27 & 84.06 & 0.28 &    sh&&sh              & 80.42 & 46.96 & 81.49 & 0.29 & 0.33 \\
         
         \hline
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{After Voting}}}
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Threshold-based}}}
 
-        & 84.87 & 47.05 & 91.17 & 0.38 &    n&&n                & 84.54 & 45.89 & 90.98 & 0.36 \\
-        & 84.35 & 45.24 & 90.87 & 0.36 &    d&\small{Micro}&d   & 83.87 & 43.57 & 90.59 & 0.34 \\
-        & 84.32 & 45.12 & 90.85 & 0.35 &    sh&&sh              & 84.21 & 44.74 & 90.79 & 0.35 \\
+        &\mrkm{0.09}{73.84}{75.25}{73.60}{0.36} &    n&&n                & \mrkm{74.10}{75.12}{73.93}{0.36}{0.09} \\
+        & 0.18 & 69.45 & 70.00 & 69.36 & 0.28 &     d&\small{Micro}&d   & 69.96 & 71.19 & 69.76 & 0.29 & 0.16 \\
+        & 0.11 & 72.06 & 76.15 & 71.39 & 0.34 &    sh&&sh              & 72.91 & 75.38 & 72.50 & 0.35 & 0.13 \\
         
-        \cline{3-4}\cline{6-8}\cline{10-11}
+        \cline{2-5}\cline{7-9}\cline{11-14}
 
-        & 84.87 & 34.05 & 89.58 & 0.28 &    n&&n                & 84.54 & 33.59 & 89.48 & 0.27 \\
-        & 84.35 & 45.23 & 90.87 & 0.34 &    d&\small{Macro}&d   & 83.87 & 43.57 & 90.59 & 0.33 \\
-        & 84.32 & 33.52 & 89.14 & 0.27 &    sh&&sh              & 84.21 & 33.47 & 89.15 & 0.27 \\
+        & 0.20 & 73.84 & 64.18 & 70.45 & 0.28 &    n&&n                & 74.10 & 63.42 & 70.70 & 0.28 &  0.21 \\
+        & 0.18 & 69.45 & 70.00 & 69.36 & 0.28 &     d&\small{Macro}&d   & 69.96 & 71.19 & 69.76 & 0.30 & 0.16 \\
+        & 0.20 & 72.06 & 66.89 & 68.16 & 0.27 &     sh&&sh              & 72.91 & 64.46 & 69.24 & 0.26 & 0.21 \\
+        
+        \hline
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Vote-based}}}
+
+        & 0.35 & 84.87 & 47.05 & 91.17 & \mrko{0.38} &    n&&n                & 84.54 & 45.89 & 90.98 & 0.36 & 0.36 \\
+        & 0.37 & 84.35 & 45.24 & 90.87 & 0.36 &    d&\small{Micro}&d   & 83.87 & 43.57 & 90.59 & 0.34 & 0.38 \\
+        & 0.37 & 84.32 & 45.12 & 90.85 & 0.35 &    sh&&sh              & 84.21 & 44.74 & 90.79 & 0.35 & 0.37 \\
+        
+        \cline{2-5}\cline{7-9}\cline{11-14}
+
+        & 0.48 & 84.87 & 34.05 & 89.58 & 0.28 &    n&&n                & 84.54 & 33.59 & 89.48 & 0.27 & 0.49 \\
+        & 0.37 & 84.35 & 45.23 & 90.87 & 0.34 &    d&\small{Macro}&d   & 83.87 & 43.57 & 90.59 & 0.33 & 0.39 \\
+        & 0.48 & 84.32 & 33.52 & 89.14 & 0.27 &    sh&&sh              & 84.21 & 33.47 & 89.15 & 0.27 & 0.48 \\
         
         \hline\hline
         
-        \multicolumn{12}{|g|} {Scikit Learn}\\
+        \multicolumn{14}{|g|} {Scikit Learn}\\
         \hline\hline
 
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Before Voting}}}
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Class-based}}}
         
-        & 87.42 & 34.10 & 96.30 & 0.39 &    n&&n                & 80.25 & 30.90 & 88.48 & 0.19 \\
-        & 87.07 & 24.28 & 97.53 & 0.33 &    d&\small{Micro}&d   & 86.62 & 25.00 & 96.90 & 0.31\\
-        & 86.75 & 31.92 & 95.90 & 0.36 &    sh&&sh              & 87.01 & 30.89 & 96.36 & 0.36\\
+        & 0.61 & 87.51 & 21.47 & 98.44 & 0.33 &    n&&n                 & 87.45 & 19.39 & 98.69 & 0.32 & 0.63 \\
+        & 0.65 & 87.03 & 17.43 & 98.60 & 0.29 &    d&\small{Micro}&d   & 86.68 & 15.28 & 98.56 & 0.27 & 0.68 \\
+        & 0.61 & 87.49 & 21.66 & 98.41 & 0.34 &    sh&&sh              & 87.55 & 20.878 & 98.63 & 0.34 & 0.62 \\
         
-        \cline{3-4}\cline{6-8}\cline{10-11}
+        \cline{2-5}\cline{7-9}\cline{11-14}
         
-        & 87.41 & 28.70 & 95.77 & 0.34 &    n&&n                 & 87.20 & 24.18 & 96.06 & 0.28 \\
-        & 87.07 & 24.28 & 97.53 & 0.30 &    d&\small{Macro}&d   & 86.63 & 25.00 & 96.90 & 0.28 \\
-        & 86.75 & 26.20 & 95.36 & 0.29 &    sh&&sh              & 87.014 & 24.19 & 95.84 & 0.27 \\
-        
-        \hline
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Thresholding}}}
-
-        & 74.52 & 35.26 & 81.07 & 0.14 &    n&&n                & 75.07 & 31.54 & 82.33 & 0.12 \\
-        & 80.13 & 24.52 & 89.40 & 0.14 &    d&\small{Micro}&d   & 79.25 & 25.00 & 88.29 & 0.13\\
-        & 73.07 & 32.81 & 79.78 & 0.10 &    sh&&sh               & 73.90 & 31.66 & 80.94 & 0.11\\
-        
-        \cline{3-4}\cline{6-8}\cline{10-11}
-
-        & 74.52 & 30.74 & 81.54 & 0.13 &    n&&n                & 75.07 & 25.34 & 82.74 & 0.09\\
-        & 80.13 & 24.52 & 89.40 & 0.17 &    d&\small{Macro}&d   & 79.24 & 25.00 & 88.29 & 0.15\\
-        & 73.07 & 27.74 & 80.28 & 0.09 &    sh&&sh              & 73.90 & 25.36 & 81.40 & 0.08 \\
+        & 0.66 & 87.49 & 18.29 & 98.20 & 0.24 &    n&&n                 & 87.44 & 14.87 & 98.46 & 0.20 & 0.71 \\
+        & 0.67 & 87.03 & 17.46 & 98.61 & 0.24 &    d&\small{Macro}&d   & 86.68 & 15.32 & 98.56 & 0.22 & 0.70 \\
+        & 0.67 & 87.47 & 17.52 & 98.18 & 0.23 &    sh&&sh              & 87.53 & 16.32 & 98.40 & 0.21 & 0.69 \\
         
         \hline
-        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{After Voting}}}
-
-        & 81.28 & 34.49 & 89.08 & 0.24 &    n&&n                & 80.25 & 30.90 & 88.49 & 0.19\\
-        & 78.84 & 25.95 & 87.65 & 0.13 &    d&\small{Micro}&d   & 79.18 & 27.14 & 87.86 & 0.15\\
-        & 80.66 & 32.308 & 88.72 & 0.21&    sh&&sh              & 80.51 & 31.79 & 88.63 & 0.20\\
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Threshold-based}}}
         
-        \cline{3-4}\cline{6-8}\cline{10-11}
+        & \mrkm{0.07}{75.33}{76.42}{75.13}{0.38} &    n&&n                 & \mrkm{75.33}{76.41}{75.15}{0.38}{0.07} \\
+        & 0.20 & 68.09 & 70.95 & 67.62 & 0.27 &    d&\small{Micro}&d   & 67.31 & 70.47 & 66.78 & 0.26 & 0.21 \\
+        & \mrkm{0.07}{75.32}{76.41}{75.15}{0.38} &    sh&&sh              & 73.46 & 75.25 & 73.16 & 0.35 & 0.10 \\
+        
+        \cline{2-5}\cline{7-9}\cline{11-14}
+        
+        & 0.20 & 75.32 & 61.79 & 71.51 & 0.29 &    n&&n                 & 75.32 & 61.79 & 71.51 & 0.30 & 0.20 \\
+        & 0.18 & 68.09 & 70.95 & 67.61 & 0.29 &    d&\small{Macro}&d   & 67.31 & 70.47 & 66.78 & 0.27 & 0.20 \\
+        & 0.20 & 75.32 & 61.79 & 71.22 & 0.29 &    sh&&sh              & 73.46 & 61.48 & 69.51 & 0.25 & 0.24 \\
+        
+        \hline
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Vote-based}}}
 
-        & 81.28 & 29.66 & 89.07 & 0.19 &    n&&n                & 80.26 & 24.75 & 88.53 & 0.13 \\
-        & 78.84 & 25.95 & 87.65 & 0.14&     d&\small{Macro}&d   & 79.18 & 27.14 & 87.85 & 0.14\\
-        & 80.65 & 27.29 & 88.71 & 0.15 &    sh&&sh              & 80.51 & 25.97 & 88.65 & 0.14 \\
+        & 0.34 & 85.38 & 48.84 & 91.47 & \mrko{0.40} &    n&&n          & 85.20 & 48.20 & 91.36 & 0.39 & 0.34 \\
+        & 0.37 & 84.21 & 44.76 & 90.79 & 0.35 &    d&\small{Micro}&d   & 84.14 & 44.52 & 90.75 & 0.35 & 0.37 \\
+        & 0.34 & 85.12 & 47.95 & 91.32 & 0.39 &    sh&&sh              & 85.12 & 47.94 & 91.32 & 0.39 & 0.34 \\
+        
+        \cline{2-5}\cline{7-9}\cline{11-14}
+
+        & 0.43 & 85.38 & 38.43 & 89.98 & 0.32 &    n&&n                 & 85.20 & 37.61 & 89.90 & 0.31 & 0.44 \\
+        & 0.38 & 84.21 & 44.76 & 90.79 & 0.32 &    d&\small{Macro}&d   & 84.14 & 44.52 & 90.75 & 0.33 & 0.38 \\
+        & 0.44 & 85.12 & 38.33 & 89.94 & 0.31 &    sh&&sh              & 85.12 & 36.43 & 89.85 & 0.30 & 0.46 \\
+        \hline\hline
+        
+        \multicolumn{14}{|c|} {\footnotesize{
+            N, D and SH are normal, down-sampled and shuffled instances of the main dataset.
+        }}\\
+        \multicolumn{14}{|c|} {\footnotesize{
+            Acc: Accuracy, Sens: Sensitivity, Spec: Specificity, Mcc: Matthews correlation coefficient
+        }}\\
+
         \hline
         
        
 
     \end{tabular}
-    \captionsetup{font=small,width=12cm}
-    \caption{The average sensitivity, specificity, accuracy, and MCC from all the 
-    models being built on 7 class-based dataset. n, d and sh are normal, 
-    downsampled and shuffled instances of the main dataset.}
+    \captionsetup{font=small,width=14cm}
+    \caption{The average sensitivity, specificity, accuracy, and MCC  for 7 class-based models.}
     \label{tab:table4}
     
 \end{table}
