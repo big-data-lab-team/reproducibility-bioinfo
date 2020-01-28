@@ -23,6 +23,7 @@
 \usepackage{color, colortbl}
 \definecolor{gray}{gray}{0.9}
 \definecolor{teal}{RGB}{0, 120, 120}
+\definecolor{brickred}{RGB}{199, 59, 55}
 \usepackage{indentfirst}
 \usepackage{array}
 \usepackage{caption}
@@ -44,6 +45,11 @@
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}
 \newcommand{\ncbi}[1]{\href{https://www.ncbi.nlm.nih.gov/#1}}
 \newcommand{\pa}[1]{\small{#1}\normalsize}
+\newcommand{\mrko}[1]{\color{brickred}{#1}\color{black}}
+\newcommand{\mrkm}[5]{
+        \color{brickred}{#1}&\color{brickred}{#2}&
+        \color{brickred}{#3}&\color{brickred}{#4}&
+        \color{brickred}{#5} \color{black}}
 %%%%%%TITLE 
 \title {Membrane Protein Classification: a Reproducibility Study}
 \author{Hamidreza Heidarzadeh, Tristan Glatard \\  
