@@ -1,55 +1,44 @@
 \section {Conclusion}
 
-\tbm{
-    Whats is the best solution? then i shoudl address the available solution,
-    for imbalanced data handling.
-}
-
-\tbm{
-    add links and references to the good practices that we did for this paper in each section and 
-    for each point in the table
-}
+\tbm{Whats is the best model?}
+\tbm{add links to the points mentioned in table, being implemented in our paper}
 
 Through this work, we conducted a reproducibility study on a machine learning classification problem dealing with multiple imbalanced 
-classes of data in Bioinformatics to observe and address missing information that could affect replication process through 
-different phases of common machine learning problem. The research involves various techniques from data curation to model evaluation, 
-using an independent software for running Support Vector Machine (SVM) algorithm on the data, results aggregation and addressing 
-sharing concerns involved with output from each phase.\\
+classes of data. The purpose of this study is to observe and address the missing information that could affect the replication process  
+through different phases of a common machine learning problem. In section \ref{sec:materials}, we addressed various scenarios that could 
+be assumed regarding the available flexibility in \cite{mishra2014prediction} for model parameters. In section \ref{sec:results}, we 
+provided the results from all the different scenarios mentioned above and the distance of performance metrics of each model 
+from the original ones. In section \ref{sec:discussion}, we discussed possible resources 
+through which these sort of problems could be handled when dealing with reproducibility. 
+Through this work, we tried to implement our concerns in a project to provide a tangible reference for what we discussed in this paper.\\ 
 
-Through Materials and Methods section, we addressed all the missing information that affects the replication process and the results (in 
-regards to provided information). In the next section, we discussed possible resources through which these sort of problems 
-could be handled when dealing with reproducibility. Through this work, we tried to implement our concerns in a project providing 
-a tangible reference for what we discussed in this paper.\\ 
-
-In this section, we provide general guidelines by which we believe one can create a reproducible work when dealing with such a problem. 
-According to W3C Incubator Group Report, provenance of a resource is a record that describes entities and processes involved in producing 
-and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.\cite{w3c} So, for addressing the human-readable provenance problems (as opposed to machine-readable provenances), 
+In this section, we provide the general guidelines by which we believe one can create a reproducible work when dealing with such a problem. 
+According to W3C Incubator Group Report \cite{w3c}, provenance of a resource is a record that describes entities and processes involved 
+in producing and delivering or otherwise influencing that resource. 
+Provenance provides a critical foundation for assessing authenticity, enabling trust, 
+and allowing reproducibility. So, for addressing the human-readable provenance problems (as opposed to machine-readable provenances), 
 in this study, we organized our proposed guidelines under data provenance, feature provenance, model provenance, software provenance 
-and pipeline provenance. We also provided a table containing all the notes from each category along with a sample for each point (where possible).\\ 
+and pipeline provenance. We also provided a table containing all the notes from each category along with a sample for each point 
+(where possible).\\ 
 
 \subsection{Data Provenance and Sharing}
-
-
-    Data Provenance is a record that describes entities and processes involved in producing and delivering or otherwise influencing 
-    that resource.\cite{w3c}  In other words, all the details and processes involved in putting together a dataset from the raw data. 
+    Data Provenance describes entities and processes involved in producing and delivering or otherwise influencing 
+    that resource \cite{w3c}. It includes all the details and processes involved in putting together a dataset from the raw data. 
     We should make sure to report on the source(s) where the data (i.e. protein sequences) is taken from and the process(es) 
     by which the final data for the dataset was produced (from the original data). \\
     
-    If the study involves working on dataset of sequences, then, note that a sequence could get updated several times through years. 
+    If the study involves working on dataset of sequences, then, note that a sequence receive get updated several times through years. 
     So, for each sequence, the details should include the database it has been taken from (i.e. UniProt), 
     the accession number and the version. Also if any software has been involved in the curation
     (the organization and integration of data collected from various sources) process, 
-    the details should be reported as mentioned in software provenance section (\ref{sec:softwareProvenance})\\
+    the details should be reported as mentioned in \ref{sec:softwareProvenance}.\\
     
-    
-    Sharing the dataset through available means would be a better practice as it saves significant amount of time when
-    trying to replicate the whole experiment.
+    A better practice would be sharing the dataset as it saves significant amount of time when trying to replicate the whole experiment.
     Providing details over the curation process along with sharing the dataset would further allow the scientists to contribute to the 
     dataset by adding new sequences. The more sequences available for a problem, there would be a greater chance to develop a model 
     that could improve the stability and accuracy of the results.
     
 \subsection{Feature Provenance and Sharing}
-
     Feature provenance refers to the historical record of how a feature is generated from the dataset. For each feature, explain 
     over the feature you are trying to extract from the dataset (i.e. Di-peptide Composition), the process details (through which the 
     feature is generated) and expected result from this process. For formulas, a clear description of the involved parameters should be 
@@ -58,11 +47,10 @@ and pipeline provenance. We also provided a table containing all the notes from 
     Any involved coded program, software or environment related parameters should be reported as mentioned in 
     (\ref{sec:softwareProvenance}). Sharing the generated feature in any format is strongly advised.\\
     
-    Describing the feature generation process along with sharing the final feature file or some certain rows from that feature ( a row 
-    in a feature contains all the generated numerical values for a single input (i.e. sequence)) or providing a reference to any available 
-    resource(s) (online or downloadable programs) that could produce the same numerical values, 
-    would be the preferable practice as this would allow tuning the replicated pipeline to the state in which the generated results 
-    would match the original ones. \\
+    Describing the feature generation process along with sharing the final feature file (or reasonable amount of the 
+    produced feature set) or providing a reference to any available resource(s) (online or downloadable programs) 
+    that could produce the same numerical values, would be the preferable practice as this would allow tuning the replicated 
+    pipeline to the state in which the generated results would match the original ones. \\
     
     Note that some tools (being used throughout the project pipeline at the time of the experiment) might become unavailable through years. 
     Following this practice allows use of any alternative tool available at the time of the study replication (if the generated results are 
@@ -70,7 +58,6 @@ and pipeline provenance. We also provided a table containing all the notes from 
     program (if needed) as the updated codes could be evaluated by comparing the new generated results against the original ones.
     
 \subsection{Model Provenance and Sharing}
-
     Model provenance refers to the historical record of how the model is trained and evaluated. This includes any possible 
     data transformation (i.e. standardization), any applied feature selection or feature engineering technique, choice of 
     the algorithm along with its hyper-parameters, the trained model and the evaluation metrics.\\
@@ -78,7 +65,7 @@ and pipeline provenance. We also provided a table containing all the notes from 
     Throughout the data pre-processing phase, various data transformation techniques (i.e. Standardization, Normalization, etc.)
     could be applied to the original data available in the dataset. If that is the case, then the technique 
     (i.e. Standardization (Z-score scaling)) along with any involved parameters 
-    (i.e. variables calculated as (V - mean of V)/s, where "s" is the standard deviation)
+    (i.e. variables calculated as (V - mean of V)/s, where `s' is the standard deviation)
     should be clearly explained. The description over how it has been applied to the original data  and the expected result 
     should be also included.\\
     
@@ -120,7 +107,6 @@ and pipeline provenance. We also provided a table containing all the notes from 
     
 \subsection{Software Provenance and Sharing}
     \label{sec:softwareProvenance}
-
     From the data curation (the organization and integration of data collected from various sources)
     and putting together a dataset, to model training and evaluation, different software and coded programs 
     could get involved in some phase of a typical Bioinformatics related problem. 
@@ -133,8 +119,8 @@ and pipeline provenance. We also provided a table containing all the notes from 
     If the pipeline (\ref{sec:PipelineProvenance}) is environment-dependent, then, It should also include the environment-related 
     details in which the pipeline has been executed.\\
 
-    A good practice (if applicable to the project) is including a "requirement.txt" file in your repository when sharing a project. 
-    Working on machine learning related studies, it’s common that you get a lot of libraries installed. 
+    A good practice (if applicable to the project) is including a `requirement.txt' file in your repository (for Python-based projects)
+    when sharing a project. Working on machine learning related studies, it’s common that you get a lot of libraries installed. 
     Following the instructions (available through documentation \cite{pipDoc}) you can export all the 
     installed packages and dependencies along with the current version in use into a file (Commonly named as "requirement.txt") in a state when
     the results are obtained.
@@ -142,7 +128,6 @@ and pipeline provenance. We also provided a table containing all the notes from 
 
 \subsection{Pipeline Provenance and Sharing}
     \label{sec:PipelineProvenance}
-    
     In software engineering, a pipeline is a chain of processing modules, in a way that, the output from each module is the 
     input of the next. The pipeline should be designed and coded on a modular-basis. For example, if you have a process for data cleaning, 
     feature selection or feature extraction, each one of those should be coded as an independent runnable module. The pipeline is then formed 
@@ -186,96 +171,64 @@ and pipeline provenance. We also provided a table containing all the notes from 
 \myparagraph{Reproducible Experiment Report Checklist}
 \begin{table}[ht]
     \centering
-    \begin{tabular}{| P{14cm} || p{2cm} |}
+    \begin{tabular}{| P{16cm} |}
         \hline
-        \rowcolor{gray}\multicolumn{2}{|L|}{Data Provenance and Sharing} \\
+        \rowcolor{gray}\multicolumn{1}{|L|}{\small{Data Provenance and Sharing}}\\
         \hline
             \begin{itemize}
-                \item
-                {\small For the curation process:}
-                    \begin{itemize}
-                            \item
-                            {\footnotesize Report on the source(s) where the data is taken from 
-                            (for sequences, report on the database, accession number and the version of each sequence.)}
-                           \item
-                            {\footnotesize Explain the process(es) by which the final data for the dataset was produced}
-                    \end{itemize}
-                \item
-                {\small  Share the final dataset and provide a link to downloadable version of the dataset.}
-            \end{itemize} &\\
+                \tabitem{Report on the datasource(s) (for sequences, report on the database, the accession number and the version}
+                \tabitem{Explain the process(es) by which the final data for the dataset was produced}
+                \tabitem{Share the final dataset (\git{tree/master/dataset/trainTest}{sample})}
+            \end{itemize}\\
         \hline \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Feature Provenance and Sharing}\\
+
+        \rowcolor{gray}\multicolumn{1}{|l|}{\small{Feature Provenance and Sharing}}\\
         \hline
         \begin{itemize}
-                \item
-                {\small For each feature:}
-                    \begin{itemize}
-                            \item
-                            {\footnotesize Explain the concept associated with the extracted feature }
-                            \item
-                            {\footnotesize Explain over the process through which the feature is extracted}
-                           \item
-                            {\footnotesize For formulas, describe the associated parameters}
-                            \item
-                            {\footnotesize Share the extracted feature file. If sharing the entire generated result is not feasible, then, 
-                            share reasonable amount of rows from the final extracted feature file}
-                    \end{itemize}
-                
-            \end{itemize} &\\
+                \tabitem{Explain the concept associated with the extracted feature }
+                \tabitem{Explain the process through which the feature is extracted}
+                \tabitem{For formulas, describe the associated parameters}
+                \tabitem {Share the extracted feature file. If sharing the entire generated result is not feasible, then, 
+                share reasonable amount of the final extracted feature file (\git{tree/master/features/trainTest}{sample})}
+            \end{itemize}\\
         \hline \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Model Provenance and Sharing}\\
+        \rowcolor{gray}\multicolumn{1}{|l|}{\small{Model Provenance and Sharing}}\\
         \hline
-        \multicolumn{2}{|L|}{Data Pre-processing}\\ 
-        \hline
-            \begin{itemize}
-                    \item
-                    {\small For any technique being applied to the original data in dataset:}
-                        \begin{itemize}
-                            \item
-                            {\footnotesize Explain over the technique concept or provide reference to an available resource}
-                            \item
-                            {\footnotesize Explain over the technique details including any involved formulas and its parameter(s)}
-                            \item
-                            {\footnotesize Explain how it has been applied to the original data}
-                            \item
-                            {\footnotesize Sharing the final transformed feature set is strongly advised.}
-                        \end{itemize}
-            \end{itemize}&\\
-        \hline
-        \multicolumn{2}{|L|}{Algorithm}\\ 
+        \multicolumn{1}{|L|}{\small{Data Pre-processing}}\\ 
         \hline
             \begin{itemize}
-                \item
-                {\small Explain over any applied sampling technique along with process and involved parameter(s) }
-                \item
-                {\small Describe the strategy for splitting the original data into train, validation and test subsets and all 
-                the related concept, process(s) and parameter(s)}
-                \item
-                {\small Explain the choice of the algorithm, considered range of hyper-parameters and the associated values for 
-                producing the the published results}
-                \item
-                {\small If specific optimal hyper-parameters search technique is used, then describe the method, 
-                any involved parameter(s), the process and how it has been applied to the project's data}
-                \item
-                {\small If dealing with multiple classes, describe the process and how the results are aggregated}
-                \item
-                {\small For ensemble models, report on the structure, underlying models and and the aggregation strategy. Also,
+                \tabitem{Explain the pre-processing technique concept or provide reference to an available resource}
+                \tabitem{Explain the pre-processing technique details including any involved formulas and its parameter(s)}
+                \tabitem{Explain how it has been applied to the original data}
+                \tabitem{Share the final transformed feature set,If sharing the entire generated result is not feasible, then, 
+                share reasonable amount of rows from the final transformed feature file}
+            \end{itemize}\\
+        \hline
+        \multicolumn{1}{|L|}{\small{Model Structure}}\\ 
+        \hline
+            \begin{itemize}
+                \tabitem{Explain over any applied sampling technique along with process and involved parameter(s) }
+                \tabitem{Describe the strategy for splitting the original data into train, validation and test subsets}
+                \tabitem{Explain the deployed algorithm, considered range of hyper-parameters and the associated values for 
+                obtaining the published results}
+                \tabitem{If a specific optimal hyper-parameters search technique is used, provide the final deployed values 
+                resulted from the process, describe the method, any involved parameter(s), the process and 
+                how it has been applied to the project's data. }
+                \tabitem{If dealing with multiple classes, describe the process and how the results are aggregated}
+                \tabitem{For ensemble models, report on the structure, underlying models and the aggregation strategy. Also,
                 for each involved model, describe the details mentioned above.}
-                \item
-                {\small Sharing the results (where possible) is strongly advised}
-            \end{itemize}&\\
+                \tabitem{Share reasonable amount of the generated results (where possible)}
+            \end{itemize}\\
     
         \hline
-        \multicolumn{2}{|L|}{Model Evaluation}\\ 
+        \multicolumn{1}{|L|}{\small{Model Evaluation}}\\ 
         \hline
             \begin{itemize}
-                \item
-                {\small Describe the choice of statistical method used for results' evaluation}
-                \item
-                {\small If averaging through multiple results, describe the methodology (micro vs macro)}
-                \item
-                {\small Define error bars (if any)}
-            \end{itemize}&\\
+                \tabitem{Describe the choice of statistical method used for evaluation of the results, any involved formula 
+                and its parameter(s)}
+                \tabitem{If averaging through multiple results, describe the methodology (micro vs macro)}
+                \tabitem{Define error bars (if any)}
+            \end{itemize}\\
         \hline
 
     \end{tabular}
@@ -287,57 +240,44 @@ and pipeline provenance. We also provided a table containing all the notes from 
 
 \begin{table}[ht]
     \centering
-    \begin{tabular}{| P{14cm} || p{2cm} |}
+    \begin{tabular}{| P{16cm} |}
         \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Software Provenance and Sharing}\\
+        \rowcolor{gray}\multicolumn{1}{|l|}{\small{Software Provenance and Sharing}}\\
         \hline
             \begin{itemize}
-                \item
-                {\small For coded programs, report on programming language(s), version, libraries and any required deployment instructions.}
-                \item 
-                {\small For any involved software, report on software details (i.e. name, version, installation process) and a reference
-                to the software documentation} 
-                \item
-                {\small If your pipeline is environment-dependent, then, provide details over the underlying infrastructure 
+                \tabitem{For coded programs, report on programming language(s), version, libraries and any required installation instructions.}
+                \tabitem{For any involved software, report on software details and a reference to the software documentation} 
+                \tabitem{If your pipeline is environment-dependent, then, provide details over the underlying infrastructure 
                 and how to setup the pipeline through that environment.}
-            \end{itemize} &\\
-        \hline \hline
-        \rowcolor{gray}\multicolumn{2}{|l|}{Pipeline Provenance and Sharing}\\
+            \end{itemize} \\
+        \hline
+        \rowcolor{gray}\multicolumn{1}{|l|}{\small{Pipeline Provenance and Sharing}}\\
         \hline
             \begin{itemize}
-                \item
-                {\small Design and code your pipeline as a chain of independently runnable modules (i.e. a module for feature extraction) 
+                \tabitem{Design and code your pipeline as a chain of independently runnable modules (i.e. a module for feature extraction) 
                 in a way that the output from each phase would be the input to the next one.}
                 
-                \item
-                {\small Create a Jupyter Notebook (or any available alternative) to walk the reader through the pipeline 
+                \tabitem{Create a Jupyter Notebook (or any available alternative) to walk the reader through the pipeline 
                 starting from the feature extraction all the way to result generation. for each step:}
                     \begin{itemize}
-                        \item
-                        {\footnotesize Explain briefly what the code does (or make a reference to the correspondent part in the paper) 
+                        \tabitem{Explain briefly what the code does (or make a reference to the correspondent part in the paper) 
                         followed by a runnable code cell demonstrating how to run the code.}
-                       \item
-                        {\footnotesize If running the entire code for a part (i.e. feature selection) is not feasible, then leave the runnable 
+                        \tabitem{If running the entire code for a part (i.e. feature selection) is not feasible, then leave the runnable 
                         code cell there and explain why it is not feasible to run it through the notebook. Also, explain over the expected output 
                         from this process (if available, you can load and display the process result instead)}
                 \end{itemize}
-                \item
-                {\small If a random function is used anywhere throughout the whole process, then, 
+                \tabitem{If a random function is used anywhere throughout the whole process, then, 
                 report on random function seed and the library details}
                 
-                \item
-                {\small Report on any involved coded program, software or environment-related parameters, 
-                  according to section \ref{sec:softwareProvenance} guidelines. }
+                \tabitem{Report on any involved coded program, software or environment-related parameters, 
+                  as mentioned in \ref{sec:softwareProvenance}. }
                 
-                \item
-                {\small Version control and share the entire project (including the output from each phase)}
-                \item
-                
-                {\small If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
+                \tabitem{Version control and share the entire project (including the output from each phase)}
+                \tabitem{If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
                 the state that the results are produced.}
                 
             
-            \end{itemize} &\\
+            \end{itemize} \\
         \hline
 
     \end{tabular}
