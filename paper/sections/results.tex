@@ -1,5 +1,103 @@
 \section {Results}
+\label{sec:results}
 
+\subsection{Scikit-learn prediction-based models}
+        
+    Table \ref{tab:table1} shows the average accuracy, sensitivity, specificity and Mathews correlation coefficient values for different 
+    scikit-learn prediction-based models being built on seven and eight substrate-specific classes for amino acid composition (AAC) 
+    feature being averaged using both micro and macro averaging techniques.
+    The reported metrics are obtained from running `SVC' classifier from scikit-learn library. We performed classification using both 
+    `OneVsRestClassifier' and `SVC' functions as mentioned in \ref{subsub:scikitPredAlg}. The results were very close, so, we picked 
+    `SVC' from `sklearn.svm' package as the classifier for our study for this section.\\
+
+    The performance metrics with the least distance from the original ones is obtained by applying micro averaging techinqe to the 
+    the results of the model with a shuffled eight class-based dataset. Among the models based on datasets with seven classes, 
+    the shuffled one also provides the results with the least distance from the original one when final results are calculated 
+    using micro averaging techinqe. On the same model mentioned above, the model with 8 classes shows better performance 
+    compared to the 7 class-based sets. That is due to the fact that, there are more information available 
+    (1380 vectors compared to 780) through the training phase. Oveall, micro and macro-averaging produce different results 
+    for the MCC value. But it does not have a noticeable impact on the final results in case of down-sampled instance.\\
+
+    Considering the imbalance nature of our data, when we divide the sorted instance of the main dataset into 5 different folds, 
+    in each fold, there will be at least one class which is present in the test set but not available in the training set. That means, 
+    the algorithm should predict a label it hasn’t seen before through the training phase.\\
+
+    In the case of the shuffled instance of the main dataset, we can see that in the train and test sets of 
+    each fold, there is a portion of each class present. So, the algorithm would be trained on all the 
+    transporter and non-transporter classes. But the number of data points from each class available in either train or 
+    test set would be different in each fold.\\
+
+    In the case of the down-sampled instance of the main dataset, we have created a balanced set with an equal number of 
+    sequences from each class. The problem is that we lose some information throughout the process. We would have 420 items 
+    for 7 class-based sets (compared to 780 items before down-sampling) and 480 elements for 8 class-based sets 
+    (compared to the 1380 elements before downsampling). So, the results are more balanced with lower values compared to the 
+    shuffled one.\\
+
+% Table 1
+% \input{tables/1basicScikit.tex}
+
+\subsection{SVMLight, Scikit-learn probability-based models}
+    Table \ref{tab:table4} and \ref{tab:table5} show the average accuracy, sensitivity, specificity and 
+    Mathews correlation coefficient values for all the 144 models being built on seven and eight class-based datasets 
+    through our probability-based approach using the SVMLight application and the `SVC' method from Scikit-learn library. 
+    The resulted performance metrics from both libraries for the models being based on seven transporter class datasets 
+    (780 sequences) are presented in Table \ref{tab:table4} while the results from models based on eight transporter and non-transporter 
+    classes (1380 sequences) are presented in Table \ref{tab:table5}.\\
+
+    Compared to the original results, some models produced higher values for accuracy and specificity, a lower value for 
+    sensitivity and a MCC value close to the reported one. Some others produced close values for accuracy, sensitivity 
+    and specificity but lower value for the MCC. So, we introduced a distance value as a measure for making a comparison 
+    across all the 144 models. The distance value for each model in Table \ref{tab:table4} and \ref{tab:table5}, 
+    is the distance of the results of that specific model from the original reported values.\\
+    
+    Overall, the 8 class-based models produced higher values for all 4 involved performance metrics compared to the same models 
+    being built on the dataset with 7 transporter classes due to having 600 more sequences in the main dataset which means more 
+    information through the training phase. But higher values also means a greater distance from the original results. 
+    With 7 class models we managed to obtain close balanced values for accuracy, sensitivity and specificity, 
+    but the MCC was always less than the original one. On the other hand, when we based our models on the 8 class-based set, 
+    we achieved higher values for all those four metrics.
+    So, adding the non-transporter class provides better results and a closer MCC value while increasing the distance 
+    in between the original and the reproduced results.\\
+    
+    Regarding the different instances of a dataset (balanced, shuffled and down-sampled version of an i.e. seven class-based set), 
+    the results for balanced and shuffled instances are very close. That is due to the fact that although the number of sequences 
+    (form each class) available in the train and test sets could be different from a balanced set to a shuffled one, 
+    but the amount of difference is not hight. Balanced and shuffled instances are both imbalanced sets and are created as 
+    mentioned in  \ref{sub:svmmodels}.
+    The down-sampled instance is the balanced version of main dataset containing less sequences (420 data points compared to 780 
+    for the 7 class-based sets and 480 elements compared to 1380 for the 8 class-based sets). 
+    So, due to the availability of less but balanced information, we obtained more balanced results 
+    but the values for metrics are less than those of the shuffled and balanced ones.\\ 
+    
+    Considering the imbalanced nature of shuffled and balanced instances, micro and macro-averaging produce different results 
+    for these two sets. But it does not have a noticeable impact on the final results in case of down-sampled instance. 
+    Micro averaging provides higher values for sensitivity and MCC metrics which leads to more balanced result 
+    with less distance from the original ones.\\
+    
+    Assigning different Gamma and Cost value pairs to each class, produces better results compared to assigning 
+    one single value pair to all classes. That is due to the fact that assigning different values to each class that is 
+    accustomed to the distribution of values in that specific class, produces more true positives for that class after 
+    classification which leads to a higher number for true positives for that fold. 
+    But overall the results are close in both cases. \\
+    
+    Compared to SVC function from scikit-learn, SVMLight performs better on class-based model. In threshold-based model, 
+    Scikit-learn provides results closer to the original ones while SVMLight provides higher MCC value and they both produce 
+    close results in vote-based model.\\
+    
+    Considering the imbalanced nature of the dataset, the class-based model could be used where 
+    there could more than one right answer (label) to the problem (multi-label classification). 
+    If that is the case, then in an imbalanced problem like ours, 
+    applying a threshold to the classification results (threshold-based model) can balance out the calculated metrics 
+    for the problem. The vote-based model is the case for multi-class classification problem where there could 
+    be one right label for the sequence.\\
+    
+    Overall, the closest results are achieved with micro-averaging the results on “threshold-based” model with either 
+    balanced or shuffled instance of the main dataset. Using seven transporters class dataset, the MCC value and the distance 
+    between reproduced and original results are less than the ones of the same model being built on eight class-based dataset, 
+    but the latter shows better performance and provides higher values for performance metrics.\\
+
+% Table 1
+\input{tables/1basicScikit.tex}
 \input{tables/77classifers.tex}
 \input{tables/88classifers.tex}
 \input{tables/6finalresults.tex}

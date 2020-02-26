@@ -24,14 +24,15 @@
 \definecolor{gray}{gray}{0.9}
 \definecolor{teal}{RGB}{0, 120, 120}
 \definecolor{brickred}{RGB}{199, 59, 55}
-\usepackage{indentfirst}
+% \usepackage{indentfirst}
 \usepackage{array}
+\usepackage{enumitem}
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{multicol}
 \usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in]{geometry}
 
-\setcounter{secnumdepth}{4}
+% \setcounter{secnumdepth}{4}
 \newcolumntype{g}{>{\small\columncolor{gray}}c}
 \newcolumntype{x}{>{\small\columncolor{gray}}l}
 \newcolumntype{C}{>{\small}c}
@@ -42,6 +43,7 @@
 \newcommand{\tbm}[1]{\color{teal} {\begin{itemize} \item {\footnotesize #1} \end{itemize}}  \normalsize \color{black}}
 \newcommand{\TG}[1]{\color{blue}From Tristan: #1\\ \color{black}}
 \newcommand{\git}[1]{\href{https://github.com/big-data-lab-team/reproducibility-bioinfo/#1}}
+\newcommand{\svm}{\href{http://svmlight.joachims.org}}
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}
 \newcommand{\ncbi}[1]{\href{https://www.ncbi.nlm.nih.gov/#1}}
 \newcommand{\pa}[1]{\small{#1}\normalsize}
@@ -50,6 +52,8 @@
         \color{brickred}{#1}&\color{brickred}{#2}&
         \color{brickred}{#3}&\color{brickred}{#4}&
         \color{brickred}{#5} \color{black}}
+\newcommand{\tabitem}[1]{\item[--]{\footnotesize{#1}}}
+\newcommand{\refitem}[1]{\item[]{\footnotesize{#1}}}
 %%%%%%TITLE 
 \title {Membrane Protein Classification: a Reproducibility Study}
 \author{Hamidreza Heidarzadeh, Tristan Glatard \\  
@@ -68,10 +72,10 @@
 %%%%%%SECTIONS
 \input{sections/introduction.tex}
 \input{sections/materials.tex}
-% \input{sections/results.tex}
+\input{sections/results.tex}
 \input{sections/discussion.tex}
 \input{sections/conclusion.tex}
-\input{sections/results.tex}
+% \input{sections/results.tex}
 
 %%%%%%BIBLIOGRAPHY 
 \bibliographystyle{plain}
