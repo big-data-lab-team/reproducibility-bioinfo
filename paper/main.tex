@@ -6,6 +6,12 @@
 \usepackage{graphicx}
 \graphicspath{{images/}}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{mainNode} = [rectangle, rounded corners, minimum width=3cm, text width=6cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{branchNode} = [rectangle, rounded corners, minimum width=3cm, text width=4cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
 \usepackage{color}
 
 \usepackage{hyperref}
@@ -54,6 +60,9 @@
         \color{brickred}{#5} \color{black}}
 \newcommand{\tabitem}[1]{\item[--]{\footnotesize{#1}}}
 \newcommand{\refitem}[1]{\item[]{\footnotesize{#1}}}
+
+
+
 %%%%%%TITLE 
 \title {Membrane Protein Classification: a Reproducibility Study}
 \author{Hamidreza Heidarzadeh, Tristan Glatard \\  
@@ -75,6 +84,7 @@
 \input{sections/results.tex}
 \input{sections/discussion.tex}
 \input{sections/conclusion.tex}
+\input{sections/supportingMaterials.tex}
 % \input{sections/results.tex}
 
 %%%%%%BIBLIOGRAPHY 
