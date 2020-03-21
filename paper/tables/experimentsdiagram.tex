@@ -1,0 +1,98 @@
+\begin{tikzpicture}[node distance=2cm]
+
+    \node (dataset) [mainNode] {\small{Main Dataset}};
+    \node (features) [branchNode, below of=dataset, yshift=0.5cm, xshift=2.5cm] {\small{Feature Extraction}};
+    \node (7class) [branchNode, below right of=dataset, xshift= 6.0cm,yshift=0.5cm] {\small{7 class-based set (780 sequences)}};
+    \node (8class) [branchNode, below of=7class,  yshift=0.75cm] {\small{8 class-based set (1380 sequences)}};
+    % Resampling
+    \node (resampling) [branchNode, below of=features, yshift=0.25cm, xshift=0cm] {\small{Re-sampling}};
+    % Sorted, normal, down-sampled, shuffled
+    \node (normal) [branchNode, below left of=dataset, xshift=-2.25cm, yshift=-0.0cm] {\small{Normal \footnotesize{(SVMLight and scikit probability-based)}}};
+    \node (sorted) [branchNode, below of=normal, yshift=0.75cm] {\small{Sorted \footnotesize{( scikit prediction-based)}}};
+    \node (shuffled) [branchNode, below of=sorted, yshift=0.75cm] {\small{Shuffled}};
+    \node (downsampled) [branchNode, below of=shuffled, yshift=0.75cm] {\small{Down-sampled}};
+    % Decomposition into binary problem
+    \node (decomposition) [mainNode, below of=resampling, yshift=0.75cm, xshift=3.75cm] {\small{dataset decomposition}};
+    % Algorithm
+    \node (algorithm) [branchNode, below of=features, yshift=-2.25cm] {\small{Classification Algorithm}};
+    % SVM, Parameters
+    \node (svm) [mainNode, below left of=algorithm, xshift=-2.25cm, yshift=-0.25cm] {\small{Support Vector Machine (kernel=rbf)}};
+    \node (parameters) [mainNode, below right of=algorithm, xshift=2.25cm, yshift=-0.25cm] {\small{Algorithm Parameters (gamma and cost)}};
+    % svm=> SVMLight, Scikit-prediction, scikit-probability
+    \node (svmLight) [branchNode, below of=svm, xshift=-2.5cm, yshift=0.5cm] {\small{SVMLight Application}};
+    \node (scikitprob) [branchNode, below of=svmLight, yshift=0.75cm] {\small{Scikit-learn Probality-based}};
+    \node (scikitpred) [branchNode, below of=scikitprob, yshift=0.75cm] {\small{Scikit-learn Prediction-based}};
+    % Confusion Matrix
+    \node (confusionMatrix) [branchNode, below of=scikitpred, yshift=0cm] {\small{Confusion Matrix}};
+    % gamma and cost => one for each class, one for the whole dataset
+    \node (onepair) [branchNode, below left of=parameters, xshift=3.75cm] {\small{one pair for the dataset}};
+    \node (multiplepairs) [branchNode, below of=onepair, yshift=0.5cm] {\small{different pairs for each class 
+     \footnotesize{(SVMLight and Scikit-learn probability-based)}}};
+    %Prediction Methods
+    \node (predMethods) [mainNode, below of=algorithm,  xshift=2cm, yshift=-4.25cm] {\small{Label Prediction Method}};
+    %  class-based, threshold-based, vote-based
+    \node (class) [branchNode, below right of=predMethods, xshift=2cm, yshift=0cm] {\small{Class-based}};
+    \node (thereshold) [branchNode, below of=class, yshift=0.75cm] {\small{Threshold-based}};
+    \node (vote) [branchNode, below of=thereshold, yshift=0.75cm] {\small{Vote-based}};
+    % Metrics
+    \node (metrics) [branchNode, below of=predMethods,  xshift=-4.75cm, yshift=-0.75cm] {\small{Metrics}};
+    %  Sensitivity, Specificity, MCC, Accuracy
+    \node (acc) [branchNode, below left of=metrics, xshift=-1.25cm, yshift=0] {\small{Accuracy}};
+    \node (sens) [branchNode, below of=acc, yshift=0.75cm] {\small{Sensitivity}};
+    \node (spec) [branchNode, below of=sens, yshift=0.75cm] {\small{Specificity}};
+    \node (mcc) [branchNode, below of=spec, yshift=0.75cm] {\small{MCC}};
+    %Averaging Techniques
+    \node (avg) [branchNode, below of=metrics,  xshift=3.5cm, yshift=-0.5cm] {\small{Averaging Technique}};
+    %  class-based, threshold-based, vote-based
+    \node (micro) [branchNode, below right of=avg, xshift=2cm, yshift=0cm] {\small{Micro}};
+    \node (macro) [branchNode, below of=micro, yshift=0.75cm] {\small{Macro}};
+
+    \draw [arrow] (dataset) |- (features);
+    \draw [arrow] (features) -- (7class);
+    \draw [arrow] (features) -- (8class);
+    % 
+    \draw [arrow] (7class) -- (8class);
+    \draw [arrow] (8class) |- node[anchor=south west] {\footnotesize{for each set}} (resampling);
+    % 
+    \draw [arrow] (resampling) -- (normal);
+    \draw [arrow] (resampling) -- (sorted);
+    \draw [arrow] (resampling) -- (shuffled);
+    \draw [arrow] (resampling) -- (downsampled);
+    % \draw [arrow] (8class) |- (algorithm);
+    % 
+    % \draw [arrow] (features) -- (resampling);
+    \draw [arrow] (resampling) |- (decomposition);
+    \draw [arrow] (decomposition) |- (algorithm);
+    % 
+    \draw [arrow] (algorithm) |- (svm);
+    \draw [arrow] (algorithm) |- (parameters);
+    % 
+    \draw [arrow] (svm) |- (svmLight);
+    \draw [arrow] (svm) |- (scikitpred);
+    \draw [arrow] (svm) |- (scikitprob);
+    % 
+    \draw [arrow] (parameters) |- (onepair);
+    \draw [arrow] (parameters) |- (multiplepairs);
+    % 
+    % \draw [arrow] (algorithm) -- (predMethods);
+    \draw [arrow] (svmLight) -| (predMethods);
+    \draw [arrow] (scikitprob) -| (predMethods);
+    % 
+    \draw [arrow] (scikitpred) -- (confusionMatrix);
+    \draw [arrow] (confusionMatrix) |- (metrics);
+    % 
+    \draw [arrow] (predMethods) |- (class);
+    \draw [arrow] (predMethods) |- (thereshold);
+    \draw [arrow] (predMethods) |- (vote);
+    %
+    \draw [arrow] (predMethods) -| (metrics);
+    \draw [arrow] (metrics) |- (acc);
+    \draw [arrow] (metrics) |- (sens);
+    \draw [arrow] (metrics) |- (spec);
+    \draw [arrow] (metrics) |- (mcc);
+    %
+    \draw [arrow] (metrics) -| (avg);
+    \draw [arrow] (avg) |- (micro);
+    \draw [arrow] (avg) |- (macro);
+
+\end{tikzpicture}

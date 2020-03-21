@@ -1,0 +1,154 @@
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{| P{15cm} || p{1cm} |}
+        \hline
+        \rowcolor{gray}\multicolumn{2}{|L|}{\small{Data Provenance and Sharing}}\label{tb:dataprovenance}\\
+        \hline
+            \begin{itemize}
+                \tabitem{Report on the datasource(s) (for sequences, report on the database, the accession number and the version)}
+                \tabitem{Explain the process(es) by which the final data for the dataset was produced}
+                \tabitem{Share the final dataset and provide a link to downloadable version of the dataset}
+            \end{itemize} &\\
+        \hline \hline
+
+        \rowcolor{gray}\multicolumn{2}{|l|}{\small{Feature Provenance and Sharing}}\label{tb:featureprovenance}\\
+        \hline
+        \begin{itemize}
+                \tabitem{Explain the concept associated with the extracted feature }
+                \tabitem{Explain the process through which the feature is extracted}
+                \tabitem{For formulas, describe the associated parameters}
+                \tabitem {Share the extracted feature file. If sharing the entire generated result is not feasible, then, 
+                share reasonable amount of rows from the final extracted feature file}
+            \end{itemize} &\\
+        \hline \hline
+        \rowcolor{gray}\multicolumn{2}{|l|}{\small{Model Provenance and Sharing}}\label{tb:modelprovenance}\\
+        \hline
+        \multicolumn{2}{|L|}{\small{Data Pre-processing}}\label{tb:preprocessing}\\ 
+        \hline
+            \begin{itemize}
+                \tabitem{Explain the pre-processing technique concept or provide reference to an available resource}
+                \tabitem{Explain the pre-processing technique details including any involved formulas and its parameter(s)}
+                \tabitem{Explain how it has been applied to the original data}
+                \tabitem{Share the final transformed feature set,If sharing the entire generated result is not feasible, then, 
+                share reasonable amount of rows from the final transformed feature file}
+            \end{itemize}&\\
+        \hline
+        \multicolumn{2}{|L|}{\small{Model Structure}}\label{tb:modelstructure}\\ 
+        \hline
+            \begin{itemize}
+                \tabitem{Explain over any applied sampling technique along with process and involved parameter(s) }
+                \tabitem{Describe the strategy for splitting the original data into train, validation and test subsets}
+                \tabitem{Explain the deployed algorithm, considered range of hyper-parameters and the associated values for 
+                obtaining the published results}
+                \tabitem{If a specific optimal hyper-parameters search technique is used, provide the final deployed values 
+                resulted from the process, describe the method, any involved parameter(s), the process and 
+                how it has been applied to the project's data. }
+                \tabitem{If dealing with multiple classes, describe the process and how the results are aggregated}
+                \tabitem{For ensemble models, report on the structure, underlying models and the aggregation strategy. Also,
+                for each involved model, describe the details mentioned above.}
+                \tabitem{Share reasonable amount of the generated results (where possible)}
+            \end{itemize}&\\
+    
+        \hline
+        \multicolumn{2}{|L|}{\small{Model Evaluation}}\label{tb:modelevaluation}\\ 
+        \hline
+            \begin{itemize}
+                \tabitem{Describe the choice of statistical method used for evaluation of the results, any involved formula 
+                and its parameter(s)}
+                \tabitem{If averaging through multiple results, describe the methodology (micro vs macro)}
+                \tabitem{Define error bars (if any)}
+            \end{itemize}&\\
+        \hline
+        \rowcolor{gray}\multicolumn{2}{|l|}{\small{Software Provenance and Sharing}}\label{tb:softwareprovenance}\\
+        \hline
+            \begin{itemize}
+                \tabitem{For coded programs, report on programming language(s), version, libraries and any required installation instructions.}
+                \tabitem{For any involved software, report on software details and a reference to the software documentation} 
+                \tabitem{If your pipeline is environment-dependent, then, provide details over the underlying infrastructure 
+                and how to setup the pipeline through that environment.}
+            \end{itemize} &\\
+        \hline
+        \rowcolor{gray}\multicolumn{2}{|l|}{\small{Pipeline Provenance and Sharing}}\label{tb:pipelineprovenance}\\
+        \hline
+            \begin{itemize}
+                \tabitem{Design and code your pipeline as a chain of independently runnable modules (i.e. a module for feature extraction) 
+                in a way that the output from each phase would be the input to the next one.}
+                
+                \tabitem{Create a Jupyter Notebook (or any available alternative) to walk the reader through the pipeline 
+                starting from the feature extraction all the way to result generation. for each step:}
+                    \begin{itemize}
+                        \tabitem{Explain briefly what the code does (or make a reference to the correspondent part in the paper) 
+                        followed by a runnable code cell demonstrating how to run the code.}
+                        \tabitem{If running the entire code for a part (i.e. feature selection) is not feasible, then leave the runnable 
+                        code cell there and explain why it is not feasible to run it through the notebook. Also, explain over the expected output 
+                        from this process (if available, you can load and display the process result instead)}
+                \end{itemize}
+                \tabitem{If a random function is used anywhere throughout the whole process, then, 
+                report on random function seed and the library details}
+                
+                \tabitem{Report on any involved coded program, software or environment-related parameters, 
+                  according to section \ref{sec:softwareProvenance} guidelines. }
+                
+                \tabitem{Version control and share the entire project (including the output from each phase)}
+                \tabitem{If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
+                the state that the results are produced.}
+                
+            
+            \end{itemize} &\\
+        \hline
+
+    \end{tabular}
+    \captionsetup{font=small,width=12cm}
+    \caption{Reproducible experiment report checklist}
+    \label{tab:table3}
+    
+\end{table}
+
+% \begin{table}[ht]
+%     \centering
+%     \begin{tabular}{| P{14cm} || p{2cm} |}
+%         \hline
+%         \rowcolor{gray}\multicolumn{2}{|l|}{\small{Pipeline Provenance and Sharing}}\label{tb:pipelineprovenance}\\
+%         \hline
+%             \begin{itemize}
+%                 \item
+%                 {\small Design and code your pipeline as a chain of independently runnable modules (i.e. a module for feature extraction) 
+%                 in a way that the output from each phase would be the input to the next one.}
+                
+%                 \item
+%                 {\small Create a Jupyter Notebook (or any available alternative) to walk the reader through the pipeline 
+%                 starting from the feature extraction all the way to result generation. for each step:}
+%                     \begin{itemize}
+%                         \item
+%                         {\footnotesize Explain briefly what the code does (or make a reference to the correspondent part in the paper) 
+%                         followed by a runnable code cell demonstrating how to run the code.}
+%                        \item
+%                         {\footnotesize If running the entire code for a part (i.e. feature selection) is not feasible, then leave the runnable 
+%                         code cell there and explain why it is not feasible to run it through the notebook. Also, explain over the expected output 
+%                         from this process (if available, you can load and display the process result instead)}
+%                 \end{itemize}
+%                 \item
+%                 {\small If a random function is used anywhere throughout the whole process, then, 
+%                 report on random function seed and the library details}
+                
+%                 \item
+%                 {\small Report on any involved coded program, software or environment-related parameters, 
+%                   according to section \ref{sec:softwareProvenance} guidelines. }
+                
+%                 \item
+%                 {\small Version control and share the entire project (including the output from each phase)}
+%                 \item
+                
+%                 {\small If possible, setup your pipeline on a container (or a virtual machine) and share the entire virtual environment in 
+%                 the state that the results are produced.}
+                
+            
+%             \end{itemize} &\\
+%         \hline
+
+%     \end{tabular}
+%     \captionsetup{font=small,width=12cm}
+%     \caption{Reproducible experiment report checklist (continued)}
+%     \label{tab:table3}
+    
+% \end{table}
