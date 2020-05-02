@@ -26,6 +26,7 @@
 
 %%%%%%SETTINGS
 \usepackage{multirow}
+\usepackage{natbib}
 \usepackage{color, colortbl}
 \definecolor{gray}{gray}{0.9}
 \definecolor{teal}{RGB}{0, 120, 120}
@@ -48,6 +49,7 @@
 \newcommand{\myparagraph}[1]{\paragraph*{#1}\mbox{}\\}
 \newcommand{\tbm}[1]{\color{teal} {\begin{itemize} \item {\footnotesize #1} \end{itemize}}  \normalsize \color{black}}
 \newcommand{\TG}[1]{\color{blue}From Tristan: #1\\ \color{black}}
+\newcommand{\GK}[1]{\color{blue}From Greg: #1\\ \color{black}}
 \newcommand{\git}[1]{\href{https://github.com/big-data-lab-team/reproducibility-bioinfo/#1}}
 \newcommand{\svm}{\href{http://svmlight.joachims.org}}
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}
@@ -88,7 +90,7 @@
 % \input{sections/results.tex}
 
 %%%%%%BIBLIOGRAPHY 
-\bibliographystyle{plain}
-\bibliography{references}
+\bibliographystyle{agsm}
+\bibliography{main}
 
 \end{document}
