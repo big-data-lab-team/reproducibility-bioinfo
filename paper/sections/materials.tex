@@ -51,8 +51,8 @@ remains flexibility along various axes in the analysis, namely:
 \item the sorting and balancing of samples within the dataset,
 \item the selected SVM hyperparameters, gamma and cost,
 \item the uniformity (or possible lack of) SVM hyperparameters across binary classifiers,
-\item the prediction method for the final labels, and 
-\item the aggregation technique applied prior to computing model performance.
+\item the aggregation technique applied to binary classifiers, and
+\item the prediction method for the final labels.
 \end{enumerate}
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
@@ -89,9 +89,16 @@ scenarios, gamma and cost values were either uniform or varied across classes (A
 the SKlearn Prediction model permitted only uniform pairs across all classes.
 
 \subsubsection{Performance Evaluation}
+Model performance was evaluated through standard measures of sensitivity, specificity, accuracy, true positives (TP),
+false positives (FP), true negatives (TN), false negatives (FN), and Matthew's Correlation Coefficient (MCC) which is a
+measure of correlation suitable for imbalanced classification problems~\citep{mcc2017optimal}. As micro- and
+macro-averaging approaches -- evaluating binary classifiers before or after aggregation into a multi-class model,
+respectively -- lead to different results in an imbalanced classification setting, both approaches were used for
+scoring here (Addr: 5).
+
 In the case of both the SVMLight and SKlearn Probability models, the resulting classification and performance for each
 model was determined by the aggregation of independent binary classifiers according to three distinct methods: maximum
-probability, unweighted average, and balanced average (Addr: 5). The maximum probability method assigns each sample a
+probability, unweighted average, and balanced average (Addr: 6). The maximum probability method assigns each sample a
 label corresponding to the binary classifier with the highest certainty, resulting in a non-overlapping classification
 result which was evaluated. In the case of both averaging methods, each probability is converted into a  binary
 classification through thresholding and is scored independently prior to aggregating the performance of all classifiers.
@@ -99,11 +106,5 @@ The unweighted average thresholds probabilities at the median value, whereas the
 proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
 pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
-Model performance was evaluated through standard measures of sensitivity, specificity, accuracy, true positives (TP),
-false positives (FP), true negatives (TN), false negatives (FN), and Matthew's Correlation Coefficient (MCC) which is a
-measure of correlation suitable for imbalanced classification problems~\citep{mcc2017optimal}. As micro- and
-macro-averaging approaches -- evaluating binary classifiers before or after aggregation into a multi-class model,
-respectively -- lead to different results in an imbalanced classification setting, both approaches were used for
-scoring here (Addr: 6).
 
 \GK{Unrelated to here, but it would be good to replace or augment tables 2 and 3 with a contour density plot!}
