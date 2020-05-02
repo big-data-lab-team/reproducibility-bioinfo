@@ -13,10 +13,11 @@ The SwissProt UniProt database consisting of $10,780$ proteins with rich sequenc
 annotations~\citep{boeckmann2003swiss} was subsampled to include $780$ membrane transport proteins and $660$
 non-transport proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
 transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
-transporters, $70$ protein/mRNA transporters, and $200$ other transporters) and 600 non-transporter proteins for a
-total of $1,380$ protein sequences. \GK{Hamid: state explicitly the discrepancy between the 780 transporters we are
-using versus the 900 included in the original paper. This total appears to correspond to the ''main'' section of the
-dataset described in the original paper, which suggests we threw out the validation set? We should be clear about this}.
+transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
+proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid: state explicitly the discrepancy between
+the 780 transporters we are using versus the 900 included in the original paper. This total appears to correspond to
+the ''main'' section of the dataset described in the original paper, which suggests we threw out the validation set?
+We should be clear about this}
 
 Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
 Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
@@ -56,7 +57,7 @@ remains flexibility along various axes in the analysis, namely:
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
 to train and evaluate model parameters. The best perfoming model using AAC was then re-trained using the full feature
-set. In the following section, the experimental design is described in detail with reference to axis of flexibility,
+set. In the following section, the experimental design is described in detail with reference to the axes of flexibility,
 above. Diagram~\ref{sec:supporingMaterials} provides a graphic representation of the parameters explored in this
 section alongside the process through which the study was conducted.
 
@@ -83,9 +84,9 @@ samples to $60$ observations per class. This resulted in $6$ distinct training m
 \subsubsection{Model Hyperparameters}
 For all models, the Radial Basis Function (RBF) kernel was used and the gamma and cost parameters for the model ranged
 from $1e^{-5}$ -- $10$ and $1$ -- $4$, respectively, consistent with those presented by~\cite{mishra2014prediction}.
-Specific values were determined through a grid search using the MCC as a cost function (Addr: 3). In the case of
-SVMLight and SKLearn Probabilty scenarios, gamma and cost values were either uniform or varied across classes (Addr: 4),
-whereas the implementation of the SKlearn Prediction model permitted only uniform pairs across all classes.
+Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and SKLearn Probabilty
+scenarios, gamma and cost values were either uniform or varied across classes (Addr: 4), whereas the implementation of
+the SKlearn Prediction model permitted only uniform pairs across all classes.
 
 \subsubsection{Performance Evaluation}
 In the case of both the SVMLight and SKlearn Probability models, the resulting classification and performance for each
