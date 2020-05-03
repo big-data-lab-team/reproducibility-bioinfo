@@ -1,352 +1,110 @@
 \section{Materials and Methods}
 \label{sec:materials}
+The materials and methods described in this section present a replication of the study performed
+by~\citet{mishra2014prediction}. In cases where insufficient details were provided for replication,
+these decision points were noted and several sensible options selected and compared. All software 
+developed to curate the dataset and perform the experiment, including a Jupyter notebook to reproduce our key results, can be found publicly available on
+our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility-bioinfo/}.
 
-    \subsection{Dataset}
-    \label{sec:dataset}
+\subsection{Dataset}
+\label{sec:dataset}
 
-    The dataset contains 780 transporter proteins classified into 7 substrate specific classes (70 amino acid transporters, 
-    60 anion transporters, 260 cation transporters, 60 electron transporters,  60 sugar transporters, 
-    200 other transporters and 70 protein/mRNA transporters) and 600 non-transporter proteins for a total of 1,380 protein 
-    sequences available at \git{dataset}{dataset} section of the GitHub repository.\\
+The SwissProt UniProt database consisting of $10,780$ proteins with rich sequence and substrate
+annotations~\citep{boeckmann2003swiss} was subsampled to include $780$ membrane transport proteins and $660$
+non-transport proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
+transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
+transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
+proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid: state explicitly the discrepancy between
+the 780 transporters we are using versus the 900 included in the original paper. This total appears to correspond to
+the ''main'' section of the dataset described in the original paper, which suggests we threw out the validation set?
+We should be clear about this}
 
-    The original paper \cite{mishra2014prediction} reports on the performance of the both (1) transporter-based models, 
-    which includes 780 sequences from 7 transporter classes of the dataset (amino acid, anion, cation, electron, sugar, protein/mRNA and others)
-    and (2) 8 class-based models with 7 transporter and 1 non-transporter classes 
-    covering the whole 1380 sequences of the dataset. Considering the available flexibility and 
-    the range of conducted experiments in \cite{mishra2014prediction}, in our study, we also produced and 
-    experimented on these two sets to observe which one provides the closest results to the reported ones of the paper.
+Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
+Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
+profile. Each feature was computed identically to the methods described by~\citet{mishra2014prediction} and are briefly
+summarized below:
 
-    \subsection{Feature extraction}
+\begin{itemize}
+\item \textbf{Amino Acid Composition (AAC)}: a feature vector of $20$ values ranging from $0$ -- $100$ indicating the
+percentage of all standard amino acids present within a protein, as defined by~\citet{gromiha2010protein}. Also known
+as Monopeptide Composition (MPC).
+\item \textbf{Dipeptide Composition (DPC)}: a feature vector of $400$ values ranging from $0$ -- $100$ indicating the
+percentage of all possible ordered dipeptide pairs present within a protein, as defined by~\cite{gromiha2010protein}.
+\item \textbf{Physico-Chemical Composition (PHC)}: a feature vector of $11$ present/absent binary values corresponding
+to physico-chemical residue classes, including: Aliphatic, Neutral, Aromatic, Hydrophobic, Charged, Positively charged,
+Negatively charged, Polar, Small, Large, and Tiny. 
+\item \textbf{Biochemical Composition (AAindex)}: a feature vector of $49$ physical, chemical, energetic, and
+conformational amino acid properties which have been averaged across all amino acids present within the protein.
+\item \textbf{Position-specific scoring matrix (PSSM) profile}: a feature vector of $400$ min-maxed scaled probabilities
+for the occurrence of each amino acid residue and position combination within the sequence. \GK{Hamid, please verify this sentence}.
+\end{itemize}
 
-    To reproduce the experiment in \cite{mishra2014prediction}, we extracted Amino Acid Composition (AAC), Dipeptide Composition (DPC), 
-    Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM) profile 
-    features from the dataset mentioned in \ref{sec:dataset}. To experiment on 7 and 8 class-based datasets,
-    for each one of those features mentioned above, we produced 2 sets. The first one includes the computed feature for all 
-    the 1380 transporter and non-transporter sequences (8 class-based dataset) and the second one is a subset of the 
-    first one which covers the computed feature for just the 780 transporter class sequences (7 class-based dataset).
-    We coded a \git{blob/master/notebook.ipynb}{program} to extracts the features from the dataset and the resulted sets 
-    (7 and 8-class based feature sets) are available at \git{tree/master/features/trainTest}{feature} section of the repository.
+% =====================================================================================================================
+% =====================================================================================================================
+\subsection{Model Flexibility}
+\label{sec:modelflex}
+Though the majority of dataset and model specifications were clearly specified by~\cite{mishra2014prediction}, there
+remains flexibility along various axes in the analysis, namely:
 
+\begin{enumerate}
+\item the number of involved classes in the classification task,
+\item the sorting and balancing of samples within the dataset,
+\item the selected SVM hyperparameters, gamma and cost,
+\item the uniformity (or possible lack of) SVM hyperparameters across binary classifiers,
+\item the aggregation technique applied to binary classifiers, and
+\item the prediction method for the final labels.
+\end{enumerate}
 
-    \myparagraph{\small Amino Acid Composition (AAC)}
-    The Amino Acid (Monopeptide) Composition is the number of amino acids of each type normalized with the total number of 
-    residues \cite{gromiha2010protein}. The percentage of each amino acid is calculated using following formula where $i$ 
-    represents one of the 20 standard amino acids. Monopeptide composition would provide 20 features for each sequence.
-    \begin{equation}
-        \text{percentage of amino acid (i)} = \frac {\text{total number of amino acid (i)}} {\text{total number of amino acids in protein}} * 100
-    \end{equation} 
-    
-    \myparagraph{\small Dipeptide Composition (DPC)}
-    The composition of dipeptides is a measure to quantify the preference of amino acid residue pairs in a sequence 
-    \cite{gromiha2010protein}. For this feature, the percentage of each available dipeptide in the sequence is calculated using 
-    following formula where $i$ could be any of the 400 possible dipeptides. This process would result in fixed pattern of 
-    400 (20*20) features for each sequence.  
-    \begin{equation}
-        \text{percentage of dipeptide (i)} = \frac {\text{total number of dipeptide (i)}} {\text{total number of dipeptides in protein}} * 100
-    \end{equation}
+Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
+to train and evaluate model parameters. The best perfoming model using AAC was then re-trained using the full feature
+set. In the following section, the experimental design is described in detail with reference to the axes of flexibility,
+above. Diagram~\ref{sec:supporingMaterials} provides a graphic representation of the parameters explored in this
+section alongside the process through which the study was conducted.
 
+\subsection{Experimental Design}
+\label{sec:experimentaldesign}
+Despite the multi-class nature of this task, the models developed and evaluated below were constructed in a binary
+classification scenario. This was accomplished using the ``one versus rest'' strategy which was performed either prior
+to training or automatically depending on the classifier. Support Vector Machine (SVM) Classifiers were initially built
+using the SVMLight library, originally used by~\citet{mishra2014prediction}, which reported a probability of class
+membership in each binary setting which were then combined as a multi-class confusion matrix. These models were
+replicated using SciKit-learn (SKlearn), a popular library for machine learning in Python, in both an identical setting
+to SVMLight (termed: SKlearn Probability) and an approach which automatically performs the class reconstruction and
+prediction described above (termed: SKlearn Prediction).
 
-    \myparagraph{\small Physico-Chemical Composition (PHC)}
-    The physico-chemical composition is the composition of the physico-chemical class residues in each protein sequence. 
-    For this feature we computed the composition of Aliphatic (I, L, V), Neutral (D, E, R, K, Q, N), 
-    Aromatic (F, H, W, Y), Hydrophobic (C, V, L, I, M, F, W), Charged (D, E, K, H, R), 
-    Positively charged (H, K, R), Negatively charged (D, E), Polar (D, E, R, K, Q, N), Small (E, H, I, L, K, M, N, P, Q, V), 
-    Large (F, R, W, Y) and Tiny (A, C, D, G, S, T) residues being mentioned in \cite{mishra2014prediction}. 
-    Physico-Chemical Composition provides 11 features for each sequence.\\
+\subsubsection{Training}
+All models were fit for both $7$ and $8$ class scenarios (Addr: 1) -- excluding and including non-transport proteins,
+respectively. The models were fit using $3$ distinct training paradigms: i) balanced, ii) shuffled, and iii)
+downsampled (Addr: 2). In the balanced case, training- and testing-sets were created for each model through $5$-fold
+cross validation (CV) that were randomly generated and stratified to balance class membership across folds. The
+shuffled case was perfomed similarly to the balanced case without stratification guaranteeing balanced class membership
+across folds. The downsampled case was also performed in accordance to the balanced case following a reduction in
+samples to $60$ observations per class. This resulted in $6$ distinct training methods.
 
-    \myparagraph{\small Biochemical Composition (AAindex)}
-    An amino acid index (AAindex) is a set of 20 numerical values (for 20 standard amino acids) representing various physico-chemical 
-    and biochemical properties of amino acids which are subsets of AAIndex database \cite{aaindex}. For this study, 49 physical, 
-    chemical, energetic, and conformational properties of amino acids are selected as an input feature to the 
-    SVM model as mentioned in \cite{mishra2014prediction}. The average of each property for each protein sequence 
-    is calculated using following formula where $n$ is the length of the protein sequence, $AAind_{i}$ is the $ith$ biochemical property, $AAind_{ij}$ is the value of $ith$ 
-    biochemical property for the $jth$ amino acid in the sequence and $\sum_{j=1}^{n} AAind_{ij}$ is the sum of $ith$ property for all the
-    $n$ amino acids in a protein sequence. This process produces 49 features for each sequence.
-    \begin{equation}
-        \text{Amino Acid Index (i)} = \frac {\sum_{j=1}^{n} AAind_{ij}} {\text{n}}
-    \end{equation}
+\subsubsection{Model Hyperparameters}
+For all models, the Radial Basis Function (RBF) kernel was used and the gamma and cost parameters for the model ranged
+from $1e^{-5}$ -- $10$ and $1$ -- $4$, respectively, consistent with those presented by~\cite{mishra2014prediction}.
+Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and SKLearn Probabilty
+scenarios, gamma and cost values were either uniform or varied across classes (Addr: 4), whereas the implementation of
+the SKlearn Prediction model permitted only uniform pairs across all classes.
 
-    \myparagraph{\small Position-specific scoring matrix (PSSM) profile}
-    BLAST (Basic Local Alignment Search Tool) is a sequence similarity search method, in which a query protein 
-    is compared to protein sequences in a target database to identify regions of local alignment. PSI-BLAST 
-    (Position-Specific Iterative Basic Local Alignment Search Tool) derives a position-specific scoring profile (PSSM) 
-    from the multiple sequence alignment of sequences detected above a given score threshold using 
-    protein–protein BLAST \cite{bergman2007comparative}. It is a popular tool for the detection of distantly related proteins.
-    The newly generated profile is then used iteratively to perform subsequent BLAST searches, 
-    and the result of each iteration is in turn used to refine the PSSM profile.\\ 
-    
-    We ran PSI-BLAST against the Swissprot protein database with the BLOSUM62 matrix. For each profile, we then 
-    summed up all the rows in the PSSM that correspond to the same amino acid in the primary sequence. as mentioned in \cite{mishra2014prediction} 
-    we then divided each element  of that vector by the length of the sequence and scaled it to the 0–1 range using the following formula 
-    where where $Value$ is the individual final sum of the PSSM score for each amino acid. 
-    This process results in 400 features for each sequence.
-    \begin{equation}
-        \text{Normalized Value} = \frac {\text{Value - Minimum}} {\text{Maximum - Minimum}}
-    \end{equation}
+\subsubsection{Performance Evaluation}
+Model performance was evaluated through standard measures of sensitivity, specificity, accuracy, true positives (TP),
+false positives (FP), true negatives (TN), false negatives (FN), and Matthew's Correlation Coefficient (MCC) which is a
+measure of correlation suitable for imbalanced classification problems~\citep{mcc2017optimal}. As micro- and
+macro-averaging approaches -- evaluating binary classifiers before or after aggregation into a multi-class model,
+respectively -- lead to different results in an imbalanced classification setting, both approaches were used for
+scoring here (Addr: 5).
 
-
-    % =======================================================================================================================
-    % =======================================================================================================================
-    
-    % \myparagraph{\textbf{\large{The Models}}}
-    \subsection{The Models}
-    The first model was built on 7 class-based amino acid composition (\pa{AAC}) feature. Considering the available 
-    flexibility in \cite{mishra2014prediction} for model parameters, we coded different models on the AAC feature 
-    to find the model that could produce the closest results to the original reported ones.  
-    Section \ref{sec:results} reports on how different instances of those parameters affect the prediction results 
-    and consequently the reported metrics. We then used the settings of our best model, to build new computational models 
-    for the rest of the features.\\
-
-    Given the imbalanced nature of the problem, the parameters with no explicit declaration that could affect the final 
-    performance results are 
-    (1) the number of involved classes in the main dataset 
-    (2) the order of the included data points in the dataset
-    (3) considering having multiple SVM classifiers for a model, whether there is one gamma and cost value pair for the whole 
-    dataset or each involved class uses its own value pair by the time of the classification 
-    (4) applied gamma and cost values associated with the RBF kernel of the support vector machine classifier in either of the 
-    scenarios mentioned above
-    (5) the prediction method for the final labels and 
-    (6) the averaging technique through which the final results for a model are computed.\\
-    
-    So, considering the available ranges in \cite{mishra2014prediction} for the model parameters mentioned above, 
-    we experimented on (1) two instances of the main dataset (7 vs 8 class-based sets) as mentioned in \ref{sec:dataset} 
-    (2) three normal, shuffled and down-sampled instances of each one of those sets 
-    (3) two different settings for the gamma and cost values associated with the RBF kernel of the SVM classifier 
-    (one pair for the whole dataset vs one pair for each involved class) (4) grid search for finding the best gamma and cost value pairs 
-    through each one of those scenarios mentioned above 
-    (5) three different label prediction methods for the models (class-based and threshold-based for multi-label classification and 
-    vote-based for multi-class classification) and (6) two averaging techniques for calculation of the final performance results 
-    (micro vs macro). Diagram \ref{sec:supporingMaterials} shows the parameters mentioned above along with the process 
-    through which the study was conducted.\\
-
-    To reproduce the original experiment, we first used the SVMLight application for classification. SVMLight is 
-    the implementation of the Support Vector Machines algorithm being used by authors in \cite{mishra2014prediction}. 
-    In a binary classification scenario, the application provides a probability estimate for each data point after classification. 
-    Since this application is a binary classifier, for classification problems with multiple involved classes, we first need to 
-    decompose the problem into multiple binary classification problems before using the classifier. The label prediction strategy 
-    that suits the project needs should then be implemented accordingly. Performance metrics could then be calculated 
-    by comparing the predicted labels against the original ones and producing the confusion matrix. 
-    We labelled the models based on this application as `SVMLight-based' models. 
-    The experiment details for all the involved parameters are described in \ref{sub:svmmodels}.\\
-    
-    Considering the popularity of the scikit-learn library in machine learning projects and studies, we also experimented on two 
-    available approaches provided by scikit-learn when dealing with a classification problem involving multiple classes. The 
-    first approach 
-    is to use the `predict\_proba()' function for prediction. The function provides a probability estimate for each data point 
-    after classification (like the SVMLight application mentioned above). Using this approach, you then need to build a 
-    label prediction process that suits the project needs. The performance metrics should then be calculated using the confusion matrix 
-    resulted from comparing the predicted labels with the original ones.
-    We labelled the models based on this approach as `scikit-learn probability-based' models. 
-    This experiment was conducted to see if SVMLight is replaceable with the `SVC' function from the scikit-learn library 
-    through the same settings. The process details for all the involved parameters are described in \ref{sub:scikitprob}.\\
-    
-    The second approach is to to use the `predict()' function for classification. This function deals with details like 
-    decomposing the problem into multiple binary problems and results' aggregation on its own (by passing the 
-    correspondent parameter to the function) and provides the final predicted labels after classification. 
-    Using this approach, you can then produce the `confusion matrix' using the predicted labels. 
-    The performance metrics for model evaluation could then be computed using the confusion matrix mentioned above. 
-    Since we receive the final prediction results and not the probability estimate for each data point, applying  
-    a threshold (in a way one can do on a probability-based model) is not possible.
-    We labelled the models based on this approach as `scikit-learn prediction-based' models. This experiment was 
-    conducted to see whether the produced results are comparable with the probability-based models. The process details 
-    for all the involved parameters are described in \ref{sub:scikitpred}.\\ 
-    
-
-\subsection{SVMLight-based models}
-\label{sub:svmmodels}
-
-    \subsubsection{Training and Test sets}
-    \label{sec:svmttraintest}
-    For the main dataset, we experimented on both seven and eight class-based sets as mentioned in section \ref{sec:dataset}.
-    We then generated three balanced, shuffled and down-sampled instances of each one of those sets
-    to observe how changes in order and number of the data points could affect the results in an imbalanced environment.\\
-
-    For the balanced instance, we classified all the involved sequences under the seven (for the 7 class-based transporter set)
-    or eight (for 8 class-based transporter and non-transporter set) categories labeled with the name of the class the sequence 
-    belonged to. We then applied 5-fold cross-validation to each category and 
-    created five folds with its correspondent train and test sets for each category. For the final folds which would include
-    all the involved classes (i.e. final dataset's first fold), we concatenated the related fold from all the classes of the set 
-    (i.e. first fold from the amino acid, anion, cation, etc.). Considering the imbalanced nature of our dataset, 
-    through each fold of the final dataset, this approach provides an equal portion of each class in both the train 
-    (4/5th of the class sequences) and the test (1/5th of the class sequences) sets.\\
-
-    For the shuffled instance, we shuffled the main dataset randomly and then applied 5-fold cross-validation and created 
-    the train and test sets for each fold. This approach creates folds with unequal portion of involved classes in  
-    the train and the test sets of each fold. \\
-
-    The down-sampled instance, contains 60 sequences from each class (number of records in our anion class with 
-    the least amount of sequences) being taken randomly from that specific class. 
-    We then classified them under seven (for the seven class-based sets) or eight (for 8 class-based sets) categories, 
-    applied 5-fold cross-validation to each one of those classes and finally assembled the correspondent folds 
-    from each category in a random order to create the final folds as mentioned above for the balanced instance. 
-    This process results in 420 data points for seven-class based set and 480 elements for the eight class-based sets.\\
+In the case of both the SVMLight and SKlearn Probability models, the resulting classification and performance for each
+model was determined by the aggregation of independent binary classifiers according to three distinct methods: maximum
+probability, unweighted average, and balanced average (Addr: 6). The maximum probability method assigns each sample a
+label corresponding to the binary classifier with the highest certainty, resulting in a non-overlapping classification
+result which was evaluated. In the case of both averaging methods, each probability is converted into a  binary
+classification through thresholding and is scored independently prior to aggregating the performance of all classifiers.
+The unweighted average thresholds probabilities at the median value, whereas the balanced case uses a threshold
+proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
+pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
 
-    For each one of the six datasets mentioned above (balanced, shuffled and down-sampled for 7 and 8 class-based sets), 
-    each fold was then transformed into a binary classification problem using `one versus rest' strategy.
-    In this format, through each fold and for each set (train or test), we produced seven (for the 7 class-based sets) 
-    or eight (for 8 class-based sets) sets in a way that, for each class (i.e. anion transporters), 
-    we labelled the records from that class (i.e. anion) with "+1" and the rest of the classes with "-1". 
-    So, for example, for fold one of 7-class based dataset, we generated 7 new sets through which for amino acid class, 
-    there are 70 elements (amino acid transporters) with "+1" label and 710 other elements with "-1" label. 
-    The same thing is done for the rest of the classes in the same fold as mentioned in \cite{mishra2014prediction}. 
-    The final generated sets are available at the paper’s \git{tree/master/svmLight/features/trainTest/aac7}{GitHub} repository. \\
-
-
-    \subsubsection{Classification Algorithm}
-    \label{sec:svmclassification}
-    To reproduce the same experiment mentioned in \cite{mishra2014prediction}, we used the SVMLight application
-    for our binary classification algorithm. The application documentation is available at the author's \svm{website}. 
-    We set the kernel to RBF for the classifier and considered the provided value ranges of 
-    1-e-5 to 10 for gamma and 1 to 4 for cost as mentioned in \cite{mishra2014prediction}.\\
-
-    Since we are using a binary classifier, we need to decompose our multi-class classification problem into 
-    multiple binary classification problems before fitting the classifier on the training set. 
-    There are two decomposition strategies for that purpose: `one versus the rest' and `one versus one'. 
-    The first one creates one classifier for each class which is fitted against all the other classes and the second one creates 
-    classifiers per pair of classes. 
-    For our problem, we used `one versus the rest' as mentioned in \cite{mishra2014prediction}. \\
-
-    After decomposition, we can either apply the same classifier settings (gamma and cost values) to all the resulted sets 
-    or we can apply different classifier settings to each one of those decomposed sets. Considering the imbalanced nature of our dataset, 
-    assigning one single pair of Gamma and Cost values to all the decomposed classes, could lead to less true positives 
-    for some involved classes in each fold. So, to observe the impact on the final results, through the classification process, 
-    we once experimented on assigning one global gamma and cost value pair to all the involved classes of a dataset 
-    (being chosen by applying grid search to the dataset of that model) 
-    and the other time we experimented on assigning different Gamma and Cost value pairs to each class 
-    being chosen by applying a grid search to the data points of that specific class (i.e. on amino acids class instead of the whole dataset). 
-    So, for each dataset (7 or 8 class-based sets), we tried 6 different scenarios (i.e. shuffled 7-class set with one Gamma and Cost values 
-    for all classes versus the same set with different value pairs for each class).\\        
-
-    To find the proper gamma and cost values from the provided ranges in \cite{mishra2014prediction} for a model using a 
-    grid search, we used `GridSearchCV' function from `sklearn.grid\_search' package of the scikit-learn library. We passed in the 
-    provided ranges for gamma and cost values mentioned above as the input parameters to `GridSearchCV' function and we set 
-    the kernel to 'rbf' for the `SVC' classifier. For each model, we used this function to find the gamma and cost value pair 
-    that could produce the highest MCC value for that specific model (`scoring' strategy).
-
-        
-
-\subsection{Scikit-learn probability-based models}
-\label{sub:scikitprob}
-    To observe if the SVMLight application is replaceable with the support vector machine classifier from the scikit-learn 
-    library, in this model, we used the same model settings mentioned in \ref{sub:svmmodels} and replaced the SVMLight application 
-    with the `SVC' function from `sklearn.svm' package of the scikit-learn. To reproduce the same experiment, 
-    we also needed our classifier to provide a probability estimate for each data point. So, after fitting the algorithm 
-    to the training set, at the time of prediction, we used the `predict\_proba' method (instead of `predict')
-    which produces a probability estimate value (instead of the predicted label) for each element of the test set.
-
-\subsection{Scikit-learn prediction-based model}
-\label{sub:scikitpred}
-
-    \subsubsection{Training and Test sets}
-    \label{subsub:scikittraintest}
-    For the main dataset, we experimented on both seven and eight class-based sets as mentioned in section \ref{sec:dataset}.
-    We then generated three sorted, shuffled and down-sampled instances of each one of those sets.\\
-
-    The sorted set is the dataset in its original order. For example, the sorted version of the seven class-based set, 
-    contains 780 data points. Each element has 21 values (20 for the extracted amino acid composition feature and one for the label) 
-    and represents a transporter in that dataset. The set starts with all 70 vectors of the amino acid class 
-    followed by 60 anions, 260 cations, 60 electrons, 70 proteins/mRNAs, 60 sugar and 200 transporters from other class. 
-    We then applied 5-fold cross-validation using `KFold' function with the `n\_splits' parameter value of 5 from scikit-learn library. 
-    The shuffled and down-sampled instances of the main dataset was generated according 
-    to the process mentioned in \ref{sec:svmttraintest}.\\
-   
-    \subsubsection{Classification Algorithm}
-    \label{subsub:scikitPredAlg}
-    For the support vector machine algorithm, we used `SVC' classifier from `sklearn.svm' package of scikit-learn library. 
-    For our problem, we set the kernel to `rbf' (Radial Basis Function) and considered the provided value ranges of 
-    1-e-5 to 10  and 1 to 4 for the associated gamma and cost parameters accordingly as mentioned in \cite{mishra2014prediction}.\\
-
-    For decomposing a multi-class classification problem into multiple binary classification problems, scikit-learn provides 
-    two different approaches. For applying `one vs rest' strategy, the first approach is to set the `decision\_function\_shape' 
-    parameter of the `SVC' classifier to `ovr' and the second approach is to use `OneVsRestClassifier' from `sklearn.multiclass' 
-    package and then pass in the `SVC' classifier into that function without assigning any value for the decision function 
-    shape. We experimented on both of those approaches which handles the decomposition of the main dataset on its own. For 
-    each one of those scenarios, we then fitted the classifier on the training set using the `fit' method of the classifier 
-    which creates multiple number of the same classifier and trains them on the decomposed instances of the main dataset.
-    We then performed classification using the `predict' method of the classifier that passes each element of the test set to 
-    all those trained classifiers mentioned above and then aggregates across all the resulted predictions. 
-    This function would return the final predicted labels for the whole test set.\\ 
-
-    Since, this approach uses the same classifier on all the decomposed sets, it uses the same gamma and cost 
-    values at the time of the training. 
-    To find the proper gamma and cost values from the provided ranges in \cite{mishra2014prediction} for a model, we applied 
-    grid search to the dataset of that model as mentioned in \ref{sec:svmclassification}. 
-
-
-\subsection{Performance metrics}
-\label{subsec:metrics}
-    As in \cite{mishra2014prediction}, we used Sensitivity, specificity, accuracy and Matthew's correlation coefficient (MCC) 
-    to measure the prediction performance. TP, FP, TN and FN are true positives, false positives, 
-    true negatives and false negatives, respectively. \\
-
-    Sensitivity (also termed as Recall) is a measure of the proportion of actual positive cases that is 
-    predicted as positive (or true positive). In this study, sensitivity is the percentage of correctly predicted transporters 
-    and is calculated as:
-    \begin{equation}
-        \text{Sensitivity} = \frac {\text{TP}}{\text{TP + FN}} * 100
-    \end{equation}
-
-    Specificity is defined as the proportion of actual negatives which is predicted as the negative (or true negative). It is  
-    the percentage of non-transporters that were correctly predicted as non-transport proteins and is computed as:
-    \begin{equation}
-        \text{Specificity} = \frac {\text{TN}}{\text{TN + FP}} * 100
-    \end{equation}
-
-    Accuracy is the overall percentage of the correctly predicted classes (true positives and true negatives) to all the 
-    predictions. In this study, it's the overall percentage of transporter and non-transporter proteins 
-    being predicted correctly. It's calculated as:
-    \begin{equation}
-        \text{Accuracy} = \frac {\text{TP + TN}}{\text{TP + FP + TN + FN}} * 100
-    \end{equation}
-
-    Matthews correlation coefficient (MCC) is the measure of the quality of binary classifications. 
-    The coefficient takes into account true 
-    and false positives and negatives. It is generally regarded as a balanced measure which can be used to 
-    the imbalanced classification problems where the distribution of examples across the classes is not equal.\cite{mcc2017optimal}
-    The MCC returns a value between -1 and +1. A coefficient of +1 represents a perfect prediction, 0 no better than 
-    random prediction and -1 indicates total disagreement between prediction and observation. The MCC is in 
-    essence a correlation coefficient between the observed and predicted binary classifications and is computed as:
-    
-    \begin{equation}
-        \text{MCC} = \frac {\text{(TP * TN) - (FN * FP)}}{\sqrt{(TP + FN) * (TN + FP) * (TP + FP) * (TN + FN)}}
-    \end{equation}
-
-    \subsection{Performance metrics calculation}
-        \subsubsection{Micro vs Macro averaging}
-        \label{subsubsec:micromacro}
-        In a multi-class classification problem, there are two different averaging techniques for calculating the final 
-        performance metrics of a fold (or a model if there are no folds). Micro versus macro-averaging (for any metric) 
-        computes slightly different things, and thus their interpretation differs. A macro-average computes the metric 
-        independently for each class and then takes the average (hence treats all classes equally), whereas a micro-average 
-        sums up the TPs, TNs, FPs and FNs from all the involved classes and then computes the metric. In this study,
-        we computed the metrics for each fold using both micro and macro averaging techniques.\\
-
-        \subsubsection{SVMLight-learn probability-based models}
-        \label{subsub:svmmetrics}
-        In this model, each one of the five folds is decomposed into a binary classification problem using one versus the rest 
-        strategy. So, after classification, there would be seven or eight classification results available in each fold 
-        in form of probabilities.\\
-
-        We implemented three different approaches for labelling the predicted probabilities: class-based, threshold-based and 
-        the vote-based. In the class-based approach, we assigned +1 label to the positive values and -1 label to the negative values. 
-        In the threshold-based approach, we applied a threshold value to all the classification results. We assigned +1 label to the values 
-        above the assigned threshold and -1 to the values below that threshold. In the vote-based approach, for each element, 
-        we voted across all the classification results and assigned the class label accordingly.\\
-        
-        We used the resulted labels to calculate the correspondent confusion matrix for each class of a fold 
-        (or a fold in the vote-based approach) by evaluating the produced labels against the original ones. 
-        We then calculated the performance metrics mentioned in \ref{subsec:metrics} 
-        for each fold. The final performance metrics for a model were then calculated by averaging across the performance metrics 
-        of all the five folds using both micro and macro averaging techniques as mentioned in \ref{subsubsec:micromacro}.\\
-
-        \subsubsection{Scikit-learn probability-based models}
-        For each model, the performance metrics were calculated through the same process mentioned in \ref{subsub:svmmetrics}.
-
-        \subsubsection{Scikit-learn prediction-based models}
-        After classification, for each fold of a model we obtained the confusion matrix by comparing the predicted labels 
-        against the original ones using the `confusion\_matrix' function from `sklearn.metrics' package. 
-        We then extracted the confusion matrix for each involved class from the confusion matrix of that fold.
-        We then calculated the performance metrics mentioned in \ref{subsec:metrics} for each fold using both micro and macro 
-        averaging techniques as mentioned in \ref{subsubsec:micromacro}. The final results for a model was then calculated by 
-        averaging across the performance metrics of all the five folds.
+\GK{Unrelated to here, but it would be good to replace or augment tables 2 and 3 with a contour density plot!}
