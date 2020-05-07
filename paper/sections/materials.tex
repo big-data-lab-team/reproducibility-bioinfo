@@ -1,7 +1,7 @@
 \section{Materials and Methods}
 \label{sec:materials}
 The materials and methods described in this section present a replication of the study performed
-by~\citet{mishra2014prediction}. In cases where insufficient details were provided for replication,
+by~\cite{mishra2014prediction}. In cases where insufficient details were provided for replication,
 these decision points were noted and several sensible options selected and compared. All software 
 developed to curate the dataset and perform the experiment, including a Jupyter notebook to reproduce our key results, can be found publicly available on
 our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility-bioinfo/}.
@@ -10,7 +10,7 @@ our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility
 \label{sec:dataset}
 
 The SwissProt UniProt database consisting of $10,780$ proteins with rich sequence and substrate
-annotations~\citep{boeckmann2003swiss} was subsampled to include $780$ membrane transport proteins and $660$
+annotations~\cite{boeckmann2003swiss} was subsampled to include $780$ membrane transport proteins and $660$
 non-transport proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
 transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
 transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
@@ -21,12 +21,12 @@ We should be clear about this}
 
 Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
 Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
-profile. Each feature was computed identically to the methods described by~\citet{mishra2014prediction} and are briefly
+profile. Each feature was computed identically to the methods described by~\cite{mishra2014prediction} and are briefly
 summarized below:
 
 \begin{itemize}
 \item \textbf{Amino Acid Composition (AAC)}: a feature vector of $20$ values ranging from $0$ -- $100$ indicating the
-percentage of all standard amino acids present within a protein, as defined by~\citet{gromiha2010protein}. Also known
+percentage of all standard amino acids present within a protein, as defined by~\cite{gromiha2010protein}. Also known
 as Monopeptide Composition (MPC).
 \item \textbf{Dipeptide Composition (DPC)}: a feature vector of $400$ values ranging from $0$ -- $100$ indicating the
 percentage of all possible ordered dipeptide pairs present within a protein, as defined by~\cite{gromiha2010protein}.
@@ -66,7 +66,7 @@ section alongside the process through which the study was conducted.
 Despite the multi-class nature of this task, the models developed and evaluated below were constructed in a binary
 classification scenario. This was accomplished using the ``one versus rest'' strategy which was performed either prior
 to training or automatically depending on the classifier. Support Vector Machine (SVM) Classifiers were initially built
-using the SVMLight library, originally used by~\citet{mishra2014prediction}, which reported a probability of class
+using the SVMLight library, originally used by~\cite{mishra2014prediction}, which reported a probability of class
 membership in each binary setting which were then combined as a multi-class confusion matrix. These models were
 replicated using SciKit-learn (SKlearn), a popular library for machine learning in Python, in both an identical setting
 to SVMLight (termed: SKlearn Probability) and an approach which automatically performs the class reconstruction and
@@ -91,7 +91,7 @@ the SKlearn Prediction model permitted only uniform pairs across all classes.
 \subsubsection{Performance Evaluation}
 Model performance was evaluated through standard measures of sensitivity, specificity, accuracy, true positives (TP),
 false positives (FP), true negatives (TN), false negatives (FN), and Matthew's Correlation Coefficient (MCC) which is a
-measure of correlation suitable for imbalanced classification problems~\citep{mcc2017optimal}. As micro- and
+measure of correlation suitable for imbalanced classification problems~\cite{mcc2017optimal}. As micro- and
 macro-averaging approaches -- evaluating binary classifiers before or after aggregation into a multi-class model,
 respectively -- lead to different results in an imbalanced classification setting, both approaches were used for
 scoring here (Addr: 5).

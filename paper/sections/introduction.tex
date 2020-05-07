@@ -1,33 +1,42 @@
 \section {Introduction}
 
 
-Two objectives: quantify methodological variability (Carp et al, Ioannidis) for this problem,
-and find practical guidelines for reproducibility.
+Reproducibility, the ability to reproduce a computational results using the
+same data and processing tools as in the initial experiment~\cite{peng}, is
+a cornerstone of scientific methodology. In the past decade, however,
+several studies revealed a lack of results reproducibility in various
+fields~\cite{xxx, narps}, to the point that the onset of a reproducibility crisis
+was widely acknowledged. 
 
+Several measures were identified to address this crisis, among which (1)
+study pre-registrations~\cite{cortexguy}, to limit  p-hacking, (2) open
+data and software sharing according to the FAIR (Findable, Accessible,
+Interoperable, Reusable) principles~\cite{fair,stodden}, to reduce
+technical and non-technical barriers to reproducibility studies, (3)
+stricter reporting of computational experiments, including through Jupyter
+notebooks~\cite{xxx}, checklists~\cite{cobidas, pineau} or structured
+provenance formats~\cite{xxx}, to provide a comprehensive documentation of
+experiment conditions. The latter, in particular, is critical given the
+important methodological flexibility associated with computational
+experiments, exemplified in studies such as~\cite{carp} where the number of
+valid pipelines to process a dataset was found to be in the thousands.
 
-\TG{Add a sentence starting with ``The goal of this paper is \ldots''}
-\tbm{FAIR: Finable, Accessible, Interoperable, Reusable}
-\tbm{Joelle Pineau:  Machine Learning Reproducibility Checklist}
+Machine Learning experiments are not immune to reproducibility
+issues~\cite{overview}, in particular given the flexibility available in
+data pre-processing, train/test set definitions, algorithm selection and
+parametrization, and evaluation metrics. 
+
+[link with bioinfo]
+
+This paper presents a reproducibility study of transmembrane protein
+classification using Machine Learning techniques. We report on our attempts
+to reproduce a classical paper of the field~\cite{ref}, showing the impact
+of methodological flexibility on classification performance, and
+highlighting associated best practices to report Machine Learning results
+in this field.  
+
+[Choice of the paper]
+
 \tbm{Plos One: Ten Simple Rules for Reproducible Computational Research}
 
 \tbm{We picked a paper with Imbalanced dataset problem}
-Reproducible results are an essential requirement for computational studies including those based on machine learning techniques. 
-Researchers' studies are often based on previously published experiments being conducted by their team or other scientists 
-through the same field of study. 
-Throughout the process, they may apply a new computational technique or a new model to the problem, 
-approach the same problem from a different perspective or add up their own contribution to the field. \\
-
-Failing to achieve the based results after reproducing a reported experiment, can cause significant financial costs 
-and loss of time depending on the conducted study. The problem can be often addressed either through running the same 
-experiment in an environment different than the original one (caused by changes in technology and tools available to a 
-researcher at the time the study was conducted) or failing to report some details which may not look important but 
-can significantly affect the reproduced results. \\
-
-The solution for this common problem is sharing the work's dataset, features, source code and dependencies with other 
-researchers using available means. Considering the fact that this may not be possible all the time, we need to make 
-sure to report on all the details involved in the process. Through this work, we conducted a reproducibility study on a paper 
-in bio-informatics field to address the missing details that could affect the reproduced results and create a guideline for 
-having a reproducible experiment.\\
-
-The diagram in Section~\ref{sec:supporingMaterials} illustrates the process through which our study was conducted. The code base for 
-this paper is available at the paper's \git{}{GitHub} repository.
