@@ -1,42 +1,41 @@
 \section {Introduction}
 
 
-Reproducibility, the ability to reproduce a computational results using the
-same data and processing tools as in the initial experiment~\cite{peng}, is
-a cornerstone of scientific methodology. In the past decade, however,
-several studies revealed a lack of results reproducibility in various
-fields~\cite{xxx, narps}, to the point that the onset of a reproducibility crisis
-was widely acknowledged. 
+Reproducibility, the ability to reproduce computational results using
+identical data and software~\cite{peng2011reproducible}, is a cornerstone
+of scientific methodology. In the past decade, however, several studies
+revealed a widespread lack of results reproducibility, to the
+point that the existence of a reproducibility crisis is now acknowledged in
+various fields~\cite{baker2016reproducibility}.
 
-Several measures were identified to address this crisis, among which (1)
-study pre-registrations~\cite{cortexguy}, to limit  p-hacking, (2) open
-data and software sharing according to the FAIR (Findable, Accessible,
-Interoperable, Reusable) principles~\cite{fair,stodden}, to reduce
+Counter-measures were identified to improve results
+reproducibility~\cite{sandve2013ten}, among which (1) study
+pre-registrations~\cite{chambers2015registered}, to limit  p-hacking, (2)
+open data and software sharing~\cite{wilkinson2016fair}, to reduce
 technical and non-technical barriers to reproducibility studies, (3)
 stricter reporting of computational experiments, including through Jupyter
-notebooks~\cite{xxx}, checklists~\cite{cobidas, pineau} or structured
-provenance formats~\cite{xxx}, to provide a comprehensive documentation of
+notebooks~\cite{xxx}, checklists~\cite{nichols2017best} or structured
+provenance formats~\cite{goble2020fair}, to provide a comprehensive documentation of
 experiment conditions. The latter, in particular, is critical given the
 important methodological flexibility associated with computational
-experiments, exemplified in studies such as~\cite{carp} where the number of
+experiments, exemplified in studies such as~\cite{carp2012plurality} where the number of
 valid pipelines to process a dataset was found to be in the thousands.
 
 Machine Learning experiments are not immune to reproducibility
-issues~\cite{overview}, in particular given the flexibility available in
+issues~\cite{raff2019step}, in particular given the flexibility available in
 data pre-processing, train/test set definitions, algorithm selection and
-parametrization, and evaluation metrics. 
+parametrization, and evaluation metrics. Due to the widespreading use of
+Machine Learning in scientific fields, this has implications in various
+disciplines such as in bioinformatics, our primary concern in this study.
 
-[link with bioinfo]
-
-This paper presents a reproducibility study of transmembrane protein
+This paper presents a reproducibility study of trans-membrane protein
 classification using Machine Learning techniques. We report on our attempts
-to reproduce a classical paper of the field~\cite{ref}, showing the impact
+to reproduce a classical paper of the field~\cite{mishra2014prediction}, showing the impact
 of methodological flexibility on classification performance, and
 highlighting associated best practices to report Machine Learning results
-in this field.  
+for similar problems. 
 
-[Choice of the paper]
-
-\tbm{Plos One: Ten Simple Rules for Reproducible Computational Research}
-
-\tbm{We picked a paper with Imbalanced dataset problem}
+Trans-membrane protein classification is an important problem in
+bioinformatics. The selected paper is a well-cited, reference contribution
+that we selected given the availability of its input data, the quality of
+its writing and methods reporting, and its overall impact in the field. 
