@@ -38,7 +38,7 @@ conformational amino acid properties which have been averaged across all amino a
 \item \textbf{Position-specific scoring matrix (PSSM) profile}: a feature vector of $400$ min-maxed scaled probabilities
 for the occurrence of each amino acid residue and position combination within the sequence. \GK{Hamid, please verify this sentence}.
 \end{itemize}
-
+\TG{Add a sentence to explain that no difference was observed between the features that we computed and the original ones.}
 % =====================================================================================================================
 % =====================================================================================================================
 \subsection{Model Flexibility}
@@ -54,6 +54,7 @@ remains flexibility along various axes in the analysis, namely:
 \item the aggregation technique applied to binary classifiers, and
 \item the prediction method for the final labels.
 \end{enumerate}
+\TG{There is also flexibility in the evaluation metrics (macro vs micro)}
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
 to train and evaluate model parameters. The best perfoming model using AAC was then re-trained using the full feature
