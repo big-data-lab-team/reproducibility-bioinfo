@@ -84,10 +84,9 @@ remains flexibility along various axes in the analysis, namely:
 \item the sorting and balancing of samples within the dataset,
 \item the selected SVM hyperparameters, gamma and cost,
 \item the uniformity (or possible lack of) SVM hyperparameters across binary classifiers,
-\item the aggregation technique applied to binary classifiers and
+\item the technique applied to aggregation and evaluation of binary classifiers, and
 \item the prediction method for the final labels.
 \end{enumerate}
-\TG{There is also flexibility in the evaluation metrics (macro vs micro)}
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
 to train and evaluate model parameters. The best performing model using AAC was then re-trained using the full feature
@@ -140,5 +139,3 @@ The unweighted average thresholds probabilities at the median value, whereas the
 proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
 pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
-
-\GK{Unrelated to here, but it would be good to replace or augment tables 2 and 3 with a contour density plot!}
