@@ -140,7 +140,7 @@
 \renewcommand{\figurename}{Fig}
 
 % Use the PLoS provided BiBTeX style
-\bibliographystyle{plos2015}
+% \bibliographystyle{plos2015}
 
 % Remove brackets from numbering in List of References
 \makeatletter
@@ -173,6 +173,8 @@
 
 
 %%%%%%PACKAGES
+\usepackage[normalem]{ulem}
+
 \usepackage{graphicx}
 \graphicspath{{images/}}
 
@@ -200,6 +202,7 @@
 \usepackage{color, colortbl}
 \definecolor{gray}{gray}{0.9}
 \definecolor{teal}{RGB}{0, 120, 120}
+\definecolor{teal2}{RGB}{0, 100, 30}
 \definecolor{brickred}{RGB}{199, 59, 55}
 % \usepackage{indentfirst}
 \usepackage{array}
@@ -219,6 +222,11 @@
 \newcommand{\tbm}[1]{\color{teal} {\begin{itemize} \item {\footnotesize #1} \end{itemize}}  \normalsize \color{black}}
 \newcommand{\TG}[1]{\color{blue}From Tristan: #1\\ \color{black}}
 \newcommand{\GK}[1]{\color{blue}From Greg: #1\\ \color{black}}
+\newcommand{\Hamid}[2]{\color{brickred} Hamid: #1\\ 
+                \color{brickred} ----------------------------------- \\
+                \color{black} #2\\ 
+                \color{brickred} ----------------------------------- 
+                \color{black}}
 \newcommand{\git}[1]{\href{https://github.com/big-data-lab-team/reproducibility-bioinfo/#1}}
 \newcommand{\svm}{\href{http://svmlight.joachims.org}}
 \newcommand{\trssp}[1]{\href{http://bioinfo.noble.org/TrSSP/#1}}

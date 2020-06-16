@@ -9,15 +9,37 @@ our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility
 \subsection{Dataset}
 \label{sec:dataset}
 
-The SwissProt UniProt database consisting of $10,780$ proteins with rich sequence and substrate
-annotations~\cite{boeckmann2003swiss} was subsampled to include $780$ membrane transport proteins and $660$
-non-transport proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
+The SwissProt UniProt database \sout{consisting of $10,780$ proteins} with rich sequence and substrate
+annotations~\cite{boeckmann2003swiss} was subsampled to include $780$ membrane transporter proteins and $660$
+non-transporter proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
 transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
 transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
 proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid: state explicitly the discrepancy between
 the 780 transporters we are using versus the 900 included in the original paper. This total appears to correspond to
 the ''main'' section of the dataset described in the original paper, which suggests we threw out the validation set?
 We should be clear about this}
+
+\Hamid{About the SwissProt, the initial $10,780$ sequences in the dataset, how they got to the final 
+dataset from there, and the subset we used for our experiment :: i wasn't sure how to mix it in with the text.
+[i can also add a table showing the number of proteins in each one]}
+{
+The dataset we used for this study is the same as the one being used in the initial work which is 
+available at \url{http://bioinfo.noble.org/TrSSP}. The authors in~\cite{mishra2014prediction} were initially collected 
+10,780 transporter, carrier, and channel proteins that were well characterized at the protein level and had clear substrate 
+annotations from the SwissProt(release 2013-03)~\cite{boeckmann2003swiss}. They then removed the transporters 
+with more than two substrate specificities, sequences with biological function annotations based solely on sequence 
+similarity, and sequences with greater than 70\% similarity. The final dataset contains 660 non-transporters and 
+900 transporters being divided into following 7 substrate classes: amino acid, anion, cation, electron, protein/mRNA, 
+sugar, and other.\\
+These $1,560$ sequences were then divided into two datasets: 1) Main dataset for the total of $1,380$ sequences 
+and 2) Independent Dataset which contains $180$ sequences. The work in~\cite{mishra2014prediction} reports on results of 
+all the developed models on the main dataset and the results from the best model (AAIndex+PSSM) on the independent set. 
+Through this study, we used the main dataset and experimented on all the models being developed on that set. 
+The main dataset contains $600$ non-transporter proteins and $780$ transporter proteins being divided into $7$ 
+substrate-specific classes ($70$ amino acid transporters, $60$ anion transporters, $260$ cation transporters, 
+$60$ electron transporters, $60$ sugar transporters, $70$ protein/mRNA transporters, and $200$ other transporters). 
+The sequences are also available in our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility-bioinfo/}.
+}\\
 
 Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
 Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
@@ -29,16 +51,27 @@ summarized below:
 percentage of all standard amino acids present within a protein, as defined by~\cite{gromiha2010protein}. Also known
 as Monopeptide Composition (MPC).
 \item \textbf{Dipeptide Composition (DPC)}: a feature vector of $400$ values ranging from $0$ -- $100$ indicating the
-percentage of all possible ordered dipeptide pairs present within a protein, as defined by~\cite{gromiha2010protein}.
-\item \textbf{Physico-Chemical Composition (PHC)}: a feature vector of $11$ present/absent binary values corresponding
-to physico-chemical residue classes, including: Aliphatic, Neutral, Aromatic, Hydrophobic, Charged, Positively charged,
+percentage of all possible ordered amino acid pairs present within a protein, as defined by~\cite{gromiha2010protein}.
+\item \textbf{Physico-Chemical Composition (PHC)}: a feature vector of $11$ values corresponding
+to percentage composition of physico-chemical residue classes, including: Aliphatic, Neutral, Aromatic, Hydrophobic, Charged, Positively charged,
 Negatively charged, Polar, Small, Large, and Tiny. 
 \item \textbf{Biochemical Composition (AAindex)}: a feature vector of $49$ physical, chemical, energetic, and
 conformational amino acid properties which have been averaged across all amino acids present within the protein.
-\item \textbf{Position-specific scoring matrix (PSSM) profile}: a feature vector of $400$ min-maxed scaled probabilities
-for the occurrence of each amino acid residue and position combination within the sequence. \GK{Hamid, please verify this sentence}.
+\item \textbf{Position-specific scoring matrix (PSSM) profile}: a feature vector of $400$ sequence
+likelihoods aggregated across min-max scaled probabilities for each ordered amino acid pair within
+proteins in the SwissProt database.
 \end{itemize}
+
 \TG{Add a sentence to explain that no difference was observed between the features that we computed and the original ones.}
+\Hamid{
+Regarding the comment above 
+:: I added the following sentence but, the reality is that i couldn't find the computed 
+features from the initial study anywhere. So, based on what i could find online from other people i computed the first 3. 
+and for the last 2, i just talked to Munira about it and that was one of my discussion points. 
+:: but i'm not insisting on it. just wanted to let you guys know. if it's better this way, i'll roll along.
+}
+{The computed features were compared against the ones of the initial work~\cite{mishra2014prediction} and no difference was 
+observed in that regard.}
 % =====================================================================================================================
 % =====================================================================================================================
 \subsection{Model Flexibility}
@@ -51,13 +84,13 @@ remains flexibility along various axes in the analysis, namely:
 \item the sorting and balancing of samples within the dataset,
 \item the selected SVM hyperparameters, gamma and cost,
 \item the uniformity (or possible lack of) SVM hyperparameters across binary classifiers,
-\item the aggregation technique applied to binary classifiers, and
+\item the aggregation technique applied to binary classifiers and
 \item the prediction method for the final labels.
 \end{enumerate}
 \TG{There is also flexibility in the evaluation metrics (macro vs micro)}
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
-to train and evaluate model parameters. The best perfoming model using AAC was then re-trained using the full feature
+to train and evaluate model parameters. The best performing model using AAC was then re-trained using the full feature
 set. In the following section, the experimental design is described in detail with reference to the axes of flexibility,
 above. Diagram~\ref{sec:supporingMaterials} provides a graphic representation of the parameters explored in this
 section alongside the process through which the study was conducted.
@@ -78,14 +111,14 @@ All models were fit for both $7$ and $8$ class scenarios (Addr: 1) -- excluding 
 respectively. The models were fit using $3$ distinct training paradigms: i) balanced, ii) shuffled, and iii)
 downsampled (Addr: 2). In the balanced case, training- and testing-sets were created for each model through $5$-fold
 cross validation (CV) that were randomly generated and stratified to balance class membership across folds. The
-shuffled case was perfomed similarly to the balanced case without stratification guaranteeing balanced class membership
+shuffled case was performed similarly to the balanced case without stratification guaranteeing balanced class membership
 across folds. The downsampled case was also performed in accordance to the balanced case following a reduction in
 samples to $60$ observations per class. This resulted in $6$ distinct training methods.
 
 \subsubsection{Model Hyperparameters}
 For all models, the Radial Basis Function (RBF) kernel was used and the gamma and cost parameters for the model ranged
 from $1e^{-5}$ -- $10$ and $1$ -- $4$, respectively, consistent with those presented by~\cite{mishra2014prediction}.
-Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and SKLearn Probabilty
+Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and SKLearn Probability
 scenarios, gamma and cost values were either uniform or varied across classes (Addr: 4), whereas the implementation of
 the SKlearn Prediction model permitted only uniform pairs across all classes.
 
