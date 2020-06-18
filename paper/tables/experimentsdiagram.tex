@@ -1,5 +1,6 @@
+\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
 \begin{tikzpicture}[node distance=2cm]
-
     \node (dataset) [mainNode] {\small{Main Dataset}};
     \node (features) [branchNode, below of=dataset, yshift=0.5cm, xshift=2.5cm] {\small{Feature Extraction}};
     \node (7class) [branchNode, below right of=dataset, xshift= 6.0cm,yshift=0.5cm] {\small{7 class-based set (780 sequences)}};
@@ -96,3 +97,4 @@
     \draw [arrow] (avg) |- (macro);
 
 \end{tikzpicture}
+\end{adjustwidth}

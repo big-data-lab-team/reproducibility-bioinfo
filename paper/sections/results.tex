@@ -1,107 +1,123 @@
 \section {Results}
 \label{sec:results}
 
-In this work, we experimented on 3 software programs (SvmLight binary classifier, ScikitLearn binary classifier 
-(which provides probabilities for each data point after classification) and ScikitLearn predictor 
-(which classifies data point, aggregates the results and provides a final predicted label for each element)) 
-for performing classification through the settings described in the section~\ref{sec:materials}. 
-We experimented on datasets with 7 and 8 classes of sequences through shuffled, balanced and downsampled settings. 
-The study also includes results from Micro and Macro averaging techniques through 3 different aggregation methodology 
-for final label prediction.
+The classifers developed in this replication attempt were constructed and evaluated according to the parameters
+and metrics described in the Section~\ref{sec:modelflex}, above. Figure~\ref{fig:7_class_model} shows the sensitivity
+and specificity of each tested model alongside the performance of the originally published model.
+Tables~\ref{tab:prob_7class} and~\ref{tab:prob_8class} contain the complete performance of the probability-based models
+evaluated using each performance metric for the 7- and 8-class settings, respectively. Table~\ref{tab:scikit_pred}
+shows the same for the SKlearn Prediction models. Finally, Table~\ref{tab:all_feature_performance} shows the evaluation
+of the best-performing model fit on AAC when applied across all features.
+\GK{Hamid: how come we never model all 5 at once? Didn't the original authors do this?}
 
-Table \ref{tab:table1} shows the average accuracy, sensitivity, specificity and Mathews correlation coefficient values 
-for amino acid composition (AAC) for models with 7 and 8 classes in their dataset when results are classified and predicted 
-using ScikitLearn predictor program. Table \ref{tab:table4} and Table \ref{tab:table5} on the other hand, 
-shows the average accuracy, sensitivity, specificity and Mathews correlation coefficient values for amino acid composition (AAC) 
-for models with 7 (Table 2) and 8 (Table 3) classes in their dataset when results are classified using SvmLight 
-and ScikitLearn binary classifiers programs.
+The remainder of this section will explore the differences in model performance based on the defined axes of
+flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 
+% Figure 1
+\begin{figure}
+  \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig71}
+  \end{subfigure}
+  \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/fig81}
+  \end{subfigure}
+  \caption{Sensitivity and Specificity of each tested model using 7 (left) or 8 (right) classes of proteins. The
+           published SVM performance is denoted with $X$, and the best models (i.e. closest replications) are shown
+           in a different colour for each type of classifier tested. The performance appears to naturally cluster into
+           three groups, annotated by A, B, and C, and are referenced in the exploration of the impact of design
+           decisions of model efficacy.
+           \GK{annotate the clusters with tickz for each plot, to make referencing them unambiguous.}
+           \GK{put values on the same axis and change symbol (full versus hollow) based on 7 or 8 classes.}
+          }
+   \label{fig:7_class_model}
+\end{figure}
+
+
+\subsection{Number of Classes}
 Overall, models with 8 classes of protein sequences in the dataset perform better and provide higher numerical values 
 compared to the ones with 7 classes of proteins in the dataset. The 8-class based datasets contain more sequences and 
 thus there are more data available for the classification algorithm to learn from which leads to better performance results.
+\GK{soften this claim; move speculation to discussion}
 
-Regrading the different aggregation techniques, the vote-based models corresponds to multi-class classification 
-problems where there is one predicted label for each element in the dataset. For the problems in this category, 
-the results from all 3 software programs are very close through the same settings. We suggest the ScikitLearn predictor 
-since it involves less coding and thus provides better reproducibility when merged with other tools from the ScikitLearn Library.
+\subsection{Dataset Sampling}
+Regarding different instances of the dataset, the performance metric results of the balanced and shuffled 
+instances of the dataset are close, where for down-sampled version of the dataset we observed lower 
+values for performance metrics since compared to the balanced and shuffled instances, the down-sampled version 
+contains less proteins sequences which mean less data for training the classifier.
+Also, for balanced datasets (down-sampled instance), although using different averaging techniques affects the results
+but the impact  is not as much as it is for imbalanced instances of the datasets (shuffled and balanced).
 
-The class-based and threshold-based models correspond to the multi-label classification problems where there can 
-be more than one predicted label for an element of the dataset. The difference is that, on class-based aggregation technique, 
-the specificity-sensitivity value pairs, initially show a considerable difference(the difference amount depends on 
-the software used for classification), wherein threshold-based technique we need to apply a threshold to 
-the predicted results to put the specificity-sensitivity value pairs in balance.
 
-Overall for both SvmLight and ScikitLearn binary classifiers, the closest results to the original ones are achieved through 
-threshold-based aggregation technique on shuffled and balanced datasets when the metrics are Micro averaged.
-
-ScikitLearn predictor program could not be used for class-based and threshold-based aggregation techniques because 
-it aggregates and provides one label result for each element. If you want to use ScikitLearn support vector machine 
-classier for these models (which is the case for problems like the work in~\cite{mishra2014prediction}) 
-you need to use it as a binary classifier that provides the probability for each point and you can manage the 
-aggregation technique on your own depending on the problem requirements (Table 2 and 3, ScikitLearn binary classifier).
-
+\subsection{SVM Hyperparameters}
+\subsection{Hypterparamter Heterogeneity}
 Regarding the 2 different settings for Gamma and Cost values, compared to applying on single value pair to all classes 
 of the dataset, applying different value pairs to each involved class, increases the chance of obtaining more true 
 positives and thus better results. But through this work, we didn’t observe a considerable difference in between the 
 results through any of those 2 settings mentioned above.
 
+\subsection{Aggregation Technique}
 Regarding Micro versus Macro averaging techniques, Micro averaging provides higher MCC values and less difference in between 
 sensitivity and specificity for almost all the models but it does not affect the accuracy greatly. Also, for balanced 
 datasets (down-sampled instance), although using different averaging techniques affects the results but the impact 
 is not as much as it is for imbalanced instances of the datasets (shuffled and balanced).
 
-Regarding different instances of the dataset, the performance metric results of the balanced and shuffled 
-instances of the dataset are close, where for down-sampled version of the dataset we observed lower 
-values for performance metrics since compared to the balanced and shuffled instances, the down-sampled version 
-contains less proteins sequences which mean less data for training the classifier.
+\subsection{Prediction Method}
+Regrading the different aggregation techniques, the maximum probability models corresponds to multi-class classification 
+problems where there is one predicted label for each element in the dataset. For the problems in this category, 
+the results from all 3 software programs are very close through the same settings. We suggest the ScikitLearn predictor 
+since it involves less coding and thus provides better reproducibility when merged with other tools from the ScikitLearn Library.
 
+The unweighted- and balanced-averaging methods correspond to the multi-label classification problems where there can 
+be more than one predicted label for an element of the dataset. The difference is that, on unweighted aggregation technique, 
+the specificity-sensitivity value pairs, initially show a considerable difference (the difference amount depends on 
+the software used for classification), wherein balanced-averaging technique we need to apply a threshold to
+the predicted results to put the specificity-sensitivity value pairs in balance.
 
-Figure~\ref{fig:figure7} and Figur ~\ref{fig:figure8} are the specificity-sensitivity contour density plot of all 
-the models built on datasets containing 7 (figure 1) and 8 (figure 2) classes of proteins. The results fit themselves 
-into 3 different groups. 
+Overall for both SvmLight and ScikitLearn binary classifiers, the closest results to the original ones are achieved through 
+balanced averaging aggregation technique on shuffled and balanced datasets when the metrics are Micro averaged.
+\GK{Shouldn't balanced average and unweighted average give the same result in the case of the balanced dataset?}
 
+ScikitLearn predictor program could not be used for unweighted average and balanced average aggregation techniques because 
+it aggregates and provides one label result for each element. If you want to use ScikitLearn support vector machine 
+classier for these models (which is the case for problems like the work in~\cite{mishra2014prediction}) 
+you need to use it as a binary classifier that provides the probability for each point and you can manage the 
+aggregation technique on your own depending on the problem requirements (Table 2 and 3, ScikitLearn binary classifier).
+
+The results fit themselves into 3 different groups.
 The first group include the data points with the least distance to the initial results which are the results being 
-achieved using threshold-based aggregation technique classified by either SvmLight or ScikitLearn binary classifiers. 
+achieved using balanced average aggregation technique classified by either SvmLight or ScikitLearn binary classifiers. 
+
+% In this work, we experimented on 3 software programs (SvmLight binary classifier, ScikitLearn binary classifier 
+% (which provides probabilities for each data point after classification) and ScikitLearn predictor 
+% (which classifies data point, aggregates the results and provides a final predicted label for each element)) 
+% for performing classification through the settings described in the Section~\ref{sec:materials}. 
+% We experimented on datasets with 7 and 8 classes of sequences through shuffled, balanced and downsampled settings. 
+% The study also includes results from Micro and Macro averaging techniques through 3 different aggregation methodology 
+% for final label prediction.
+
+\GK{note... threshold-based -> balanced average. class-based -> unweighted average. vote-based -> maximum probability}
+
+The results fit themselves into 3 different groups.
+The first group include the data points with the least distance to the initial results which are the results being 
+achieved using balanced average aggregation technique classified by either SvmLight or ScikitLearn binary classifiers. 
 The Micro averaged results appear closer to the initial results where the Macro averaged ones appear farther but 
 still in the same group. For 8 class based models (figure 8), closest results appear a bit farther from the initial 
 results because they provide better results (higher values) compared to the same models with 7 protein classes 
 in the dataset.
 
-The second group above the first one on the top, corresponds to the models with class-based aggregation technique when classified 
+The second group above the first one on the top, corresponds to the models with unweighted average aggregation technique when classified 
 using ScikitLearn binary classifier. The observed difference in between specificity and sensitivity values in these models 
 (compared to same models when classified using SvmLight program) is probably the product of the default threshold value 
 of the classifier. This group in figure 8 still appear on the top left but not completely separated from the next group as their 
 performance metric values does not differ greatly from the next group. 
+
 The third group in between these two, corresponds to all the other models of the experiment.
 
-Table \ref{tab:table6} shows the average accuracy, sensitivity, specificity and Mathews correlation coefficient values 
-from our best model setting being applied to all the features being mentioned in the table 1 of the 
-initial study~\cite{mishra2014prediction}.
-
-% Figure 1
-\begin{figure}
-    \begin{small}
-        \begin{center}
-            \includegraphics[width=0.8\textwidth]{figures/fig71}
-        \end{center}
-        \caption{Models with 7 classes of proteins in the dataset}
-        \label{fig:figure7}
-    \end{small}
-\end{figure}
-
-% Figure 2
-\begin{figure}
-    \begin{small}
-        \begin{center}
-            \includegraphics[width=0.8\textwidth]{figures/fig81}
-        \end{center}
-        \caption{Models with 8 classes of proteins in the dataset}
-        \label{fig:figure}
-    \end{small}
-\end{figure}
 
 % Table 1
-\input{tables/1basicScikit.tex}
-\input{tables/77classifers.tex}
-\input{tables/88classifers.tex}
-\input{tables/6finalresults.tex}
+\input{tables/tab_7_class_prob_performance.tex}
+\input{tables/tab_8_class_prob_performance.tex}
+\input{tables/tab_scikit_pred_performance.tex}
+\input{tables/tab_best_model_multifeature.tex}

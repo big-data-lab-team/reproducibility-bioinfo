@@ -102,7 +102,7 @@ In the case of both the SVMLight and SKlearn Probability models, the resulting c
 model was determined by the aggregation of independent binary classifiers according to three distinct methods: maximum
 probability, unweighted average, and balanced average (Addr: 6). The maximum probability method assigns each sample a
 label corresponding to the binary classifier with the highest certainty, resulting in a non-overlapping classification
-result which was evaluated. In the case of both averaging methods, each probability is converted into a  binary
+result which was evaluated. In the case of both averaging methods, each probability is converted into a binary
 classification through thresholding and is scored independently prior to aggregating the performance of all classifiers.
 The unweighted average thresholds probabilities at the median value, whereas the balanced case uses a threshold
 proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned

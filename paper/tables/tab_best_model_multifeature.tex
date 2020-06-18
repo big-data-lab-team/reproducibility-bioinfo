@@ -1,4 +1,6 @@
 \begin{table}[ht]
+\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+
     \centering
 
     \begin{tabular}{|L || g g g g || C C C C|}
@@ -37,17 +39,12 @@
     AAC + DPC + PSSM & 73.43 &73.73 &73.64 &0.44& -- & -- & -- & --  \\
     AAC + AAI + PHC & 73.01  & 73.82 &73.51 &  0.44& -- & -- & -- & --  \\
     AAC + AAI + PSSM & 72.34 &  74.62& 73.90 &  0.44 & -- & -- & -- & --  \\
-    \hline \hline
-    \multicolumn{9}{|c|}{\multirow{3}{*}{\footnotesize AAC:amino acid composition, 
-    DPC:dipeptide composition, PHC:physico-chemical class composition,}}\\
-    \multicolumn{9}{|c|}{}\\
-    \multicolumn{9}{|c|}{\footnotesize AAI:biochemical composition(AAIndex), PSSM:position specific scoring matrix}\\
     \hline
     \end{tabular}
-    
     \captionsetup{font=small,width=12cm}
     \caption{The average sensitivity, specificity, accuracy, and MCC for all seven 
     substrate-specific transporter classes for different SVM models on main dataset 
     comparing original results with the results from our best reproduced model}
-    \label{tab:table6}
+    \label{tab:all_feature_performance}
+\end{adjustwidth}
 \end{table}
