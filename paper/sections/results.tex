@@ -2,114 +2,79 @@
 \label{sec:results}
 
 The classifers developed in this replication attempt were constructed and evaluated according to the parameters
-and metrics described in the Section~\ref{sec:modelflex}, above. Figure~\ref{fig:7_class_model} shows the sensitivity
-and specificity of each tested model alongside the performance of the originally published model.
+and metrics described in Section~\ref{sec:modelflex}. Figure~\ref{fig:7_class_model} shows the sensitivity
+and specificity of each tested model alongside the performance of the originally published model, with 10\% of models
+most closely matching performance to the reference highlighted.
 Tables~\ref{tab:prob_7class} and~\ref{tab:prob_8class} contain the complete performance of the probability-based models
 evaluated using each performance metric for the 7- and 8-class settings, respectively. Table~\ref{tab:scikit_pred}
-shows the same for the SKlearn Prediction models. Finally, Table~\ref{tab:all_feature_performance} shows the evaluation
-of the best-performing model fit on AAC when applied across all features.
-\GK{Hamid: how come we never model all 5 at once? Didn't the original authors do this?}
+shows the same for the SKlearn Prediction models.
+
+Finally, Table~\ref{tab:all_feature_performance} shows the evaluation
+of the best-performing models fit on AAC when applied across all features.
+\GK{For Hamid: regenerate data in the all-feature-performance table based on more than just the "best" model. At
+present, we cannot include anything in the results about this because there isn't a result to discuss.}
+
 
 The remainder of this section will explore the differences in model performance based on the defined axes of
 flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 
 % Figure 1
 \begin{figure}
-  \begin{subfigure}{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/fig71}
-  \end{subfigure}
-  \begin{subfigure}{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/fig81}
-  \end{subfigure}
-  \caption{Sensitivity and Specificity of each tested model using 7 (left) or 8 (right) classes of proteins. The
-           published SVM performance is denoted with $X$, and the best models (i.e. closest replications) are shown
-           in a different colour for each type of classifier tested. The performance appears to naturally cluster into
-           three groups, annotated by A, B, and C, and are referenced in the exploration of the impact of design
-           decisions of model efficacy.
-           \GK{annotate the clusters with tickz for each plot, to make referencing them unambiguous.}
-           \GK{put values on the same axis and change symbol (full versus hollow) based on 7 or 8 classes.}
-          }
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig1_model_performance.pdf}
+  \caption{Sensitivity and Specificity of each tested model. Each panel contains models trained with a fixed number of
+categories (7: left; 8: right), and shows the published reference performance in red. The closest 10\% of models to
+this reference have been outlined in black. The symbol colour and shape refer to the classifier type and aggregation
+strategy, respectively. Each shaded region illustrates the bounds of performance for a given aggregation strategy.}
    \label{fig:7_class_model}
 \end{figure}
 
+\paragraph{Number of Classes}
+While the 7-class models appear to be slightly closer to the reference, there was no significant difference between
+the number of classes and the distance from reference ($p > 0.1$). Models trained with 8 classes tended to achieve
+higher sensitivity and specificity values, however, suggested improved performance with the addition of the background
+class. 
 
-\subsection{Number of Classes}
-Overall, models with 8 classes of protein sequences in the dataset perform better and provide higher numerical values 
-compared to the ones with 7 classes of proteins in the dataset. The 8-class based datasets contain more sequences and 
-thus there are more data available for the classification algorithm to learn from which leads to better performance results.
-\GK{soften this claim; move speculation to discussion}
+\paragraph{Dataset Sampling}
+The dataset composition had no significant impact on the closeness of the model to the reference ($p > 0.1$ for all
+comparisons).
 
-\subsection{Dataset Sampling}
-Regarding different instances of the dataset, the performance metric results of the balanced and shuffled 
-instances of the dataset are close, where for down-sampled version of the dataset we observed lower 
-values for performance metrics since compared to the balanced and shuffled instances, the down-sampled version 
-contains less proteins sequences which mean less data for training the classifier.
-Also, for balanced datasets (down-sampled instance), although using different averaging techniques affects the results
-but the impact  is not as much as it is for imbalanced instances of the datasets (shuffled and balanced).
+\paragraph{SVM Hyperparameters}
+All uniformly parameterized models converged to same set of hyperparameters within the number of classes, where the
+best performing 7-class models used Gamma and Cost values of $0.02$ and $4.5$ while 8-class models had best performance
+with $0.01$ and $4$, respectively. There was no significant difference between these sets of parameters.
 
+\paragraph{Hypterparamter Heterogeneity}
+Similarly to the case of uniform parameters, models converged on Gamma values between $0.02$ and $0.04$ for all classes
+and models, and Cost values between $4$ and $5$, with no statistically significant difference between models or classes.
 
-\subsection{SVM Hyperparameters}
-\subsection{Hypterparamter Heterogeneity}
-Regarding the 2 different settings for Gamma and Cost values, compared to applying on single value pair to all classes 
-of the dataset, applying different value pairs to each involved class, increases the chance of obtaining more true 
-positives and thus better results. But through this work, we didn’t observe a considerable difference in between the 
-results through any of those 2 settings mentioned above.
+\paragraph{Aggregation Technique}
+Models using the micro performance-aggregation technique (i.e. evaluating individual binary classifiers prior to
+aggregation into a multi-class classifier) obtained closer results to the reference than those using the macro
+technique ($p < 1\times 10^{-4}$). All of the closest models used micro-aggregation.
 
-\subsection{Aggregation Technique}
-Regarding Micro versus Macro averaging techniques, Micro averaging provides higher MCC values and less difference in between 
-sensitivity and specificity for almost all the models but it does not affect the accuracy greatly. Also, for balanced 
-datasets (down-sampled instance), although using different averaging techniques affects the results but the impact 
-is not as much as it is for imbalanced instances of the datasets (shuffled and balanced).
+\paragraph{Prediction Method}
+balanced closer than unweighted (p < 1e-5)
+maximum prob closer than unweighted (p < 1e-2)
+balanced closer than maximum prob (p < 1e-5) 
 
-\subsection{Prediction Method}
 Regrading the different aggregation techniques, the maximum probability models corresponds to multi-class classification 
 problems where there is one predicted label for each element in the dataset. For the problems in this category, 
 the results from all 3 software programs are very close through the same settings. We suggest the ScikitLearn predictor 
 since it involves less coding and thus provides better reproducibility when merged with other tools from the ScikitLearn Library.
 
-The unweighted- and balanced-averaging methods correspond to the multi-label classification problems where there can 
-be more than one predicted label for an element of the dataset. The difference is that, on unweighted aggregation technique, 
-the specificity-sensitivity value pairs, initially show a considerable difference (the difference amount depends on 
-the software used for classification), wherein balanced-averaging technique we need to apply a threshold to
-the predicted results to put the specificity-sensitivity value pairs in balance.
-
-Overall for both SvmLight and ScikitLearn binary classifiers, the closest results to the original ones are achieved through 
+Overall for both SvmLight and ScikitLearn binary classifiers, the closest results to the original ones are achieved through
 balanced averaging aggregation technique on shuffled and balanced datasets when the metrics are Micro averaged.
-\GK{Shouldn't balanced average and unweighted average give the same result in the case of the balanced dataset?}
 
-ScikitLearn predictor program could not be used for unweighted average and balanced average aggregation techniques because 
-it aggregates and provides one label result for each element. If you want to use ScikitLearn support vector machine 
-classier for these models (which is the case for problems like the work in~\cite{mishra2014prediction}) 
-you need to use it as a binary classifier that provides the probability for each point and you can manage the 
-aggregation technique on your own depending on the problem requirements (Table 2 and 3, ScikitLearn binary classifier).
+\paragraph{Tool}
+SVMLight closer than SKlearn prob (p < 0.005)
+SVMLight closer than SKlearn pred (p < 0.05)
 
-% In this work, we experimented on 3 software programs (SvmLight binary classifier, ScikitLearn binary classifier 
-% (which provides probabilities for each data point after classification) and ScikitLearn predictor 
-% (which classifies data point, aggregates the results and provides a final predicted label for each element)) 
-% for performing classification through the settings described in the Section~\ref{sec:materials}. 
-% We experimented on datasets with 7 and 8 classes of sequences through shuffled, balanced and downsampled settings. 
-% The study also includes results from Micro and Macro averaging techniques through 3 different aggregation methodology 
-% for final label prediction.
-
-\GK{note... threshold-based $\to$ balanced average. class-based $\to$ unweighted average. vote-based $\to$ maximum probability}
-
-The results fit themselves into 3 different groups.
-The first group include the data points with the least distance to the initial results which are the results being 
-achieved using balanced average aggregation technique classified by either SvmLight or ScikitLearn binary classifiers. 
-The Micro averaged results appear closer to the initial results where the Macro averaged ones appear farther but 
-still in the same group. For 8 class based models (figure 8), closest results appear a bit farther from the initial 
-results because they provide better results (higher values) compared to the same models with 7 protein classes 
-in the dataset.
-
-The second group above the first one on the top, corresponds to the models with unweighted average aggregation technique when classified 
-using ScikitLearn binary classifier. The observed difference in between specificity and sensitivity values in these models 
-(compared to same models when classified using SvmLight program) is probably the product of the default threshold value 
-of the classifier. This group in figure 8 still appear on the top left but not completely separated from the next group as their 
-performance metric values does not differ greatly from the next group. 
-
-The third group in between these two, corresponds to all the other models of the experiment.
+\subsection{Closest Models}
+The closest 10\% of models (16) used: micro aggregation (all), balanced average prediction method (all), the balanced (8)
+or shuffled (8) dataset, contained 7 (8) or 8 (8) classes in the dataset, were trained with uniform (8) or
+heterogeneous (8) hyperparameters, and were developed using SVMLight (8) or the SKlearn Probability (8) model
+architectures.
 
 
 % Table 1
