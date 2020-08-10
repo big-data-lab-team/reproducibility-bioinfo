@@ -144,15 +144,15 @@ Accuracy,Sensitivity,Specificity,MCC,Distance,Averaging,Dataset,Number of Classe
 0.84146,0.44526,0.90754,0.35,0.3800238635,Micro,down sampled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.84572,0.45998,0.91,0.37
 0.84982,0.3530314286,0.8972342857,0.29,0.4728552511,Macro,shuffled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.8304742857,0.3106342857,0.88954,0.24
 0.8498,0.47436,0.9124,0.38,0.3543529026,Micro,shuffled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.83048,0.40668,0.9011,0.3
-0.885325,0.3559675,0.9186075,0.29,0.4878987551,Macro,balanced,8,,value tbd,value tbd,SKlearn Prediction,0.864725,0.3086075,0.9125575,0.25
-0.88532,0.5413,0.93446,0.47,0.3240315941,Micro,balanced,8,,value tbd,value tbd,SKlearn Prediction,0.86474,0.45888,0.92268,0.38
-0.84792,0.391665,0.9131225,0.29,0.4469401511,Macro,down sampled,8,,value tbd,value tbd,SKlearn Prediction,0.845625,0.3825,0.911785,0.29
-0.84794,0.39168,0.9131,0.3,0.4432168025,Micro,down sampled,8,,value tbd,value tbd,SKlearn Prediction,0.84562,0.3825,0.91178,0.29
-0.8871425,0.353285,0.91947,0.29,0.4909286154,Macro,shuffled,8,,value tbd,value tbd,SKlearn Prediction,0.86639,0.3212475,0.91377,0.26
-0.88712,0.54856,0.9355,0.48,0.3214455039,Micro,shuffled,8,,value tbd,value tbd,SKlearn Prediction,0.86638,0.46554,0.92364,0.38
-0.8487085714,0.4029571429,0.9010257143,0.32,0.4225084787,Macro,balanced,7,,value tbd,value tbd,SKlearn Prediction,0.8319,0.34142,0.8937028571,0.27
-0.84872,0.4705,0.91176,0.38,0.3566650193,Micro,balanced,7,,value tbd,value tbd,SKlearn Prediction,0.83192,0.41166,0.90194,0.31
-0.8367228571,0.4285657143,0.9047657143,0.32,0.4004074996,Macro,down sampled,7,,value tbd,value tbd,SKlearn Prediction,0.84082,0.4428571429,0.9071485714,0.35
-0.8367,0.4286,0.90478,0.33,0.3969946554,Micro,down sampled,7,,value tbd,value tbd,SKlearn Prediction,0.84084,0.44286,0.90714,0.35
-0.85274,0.4331028571,0.9033857143,0.35,0.391057072,Macro,shuffled,7,,value tbd,value tbd,SKlearn Prediction,0.8318971429,0.34158,0.8933857143,0.27
-0.85276,0.4846,0.91408,0.39,0.3462367312,Micro,shuffled,7,,value tbd,value tbd,SKlearn Prediction,0.8319,0.41166,0.90194,0.31
+0.885325,0.3559675,0.9186075,0.29,0.4878987551,Macro,balanced,8,None,value tbd,value tbd,SKlearn Prediction,0.864725,0.3086075,0.9125575,0.25
+0.88532,0.5413,0.93446,0.47,0.3240315941,Micro,balanced,8,None,value tbd,value tbd,SKlearn Prediction,0.86474,0.45888,0.92268,0.38
+0.84792,0.391665,0.9131225,0.29,0.4469401511,Macro,down sampled,8,None,value tbd,value tbd,SKlearn Prediction,0.845625,0.3825,0.911785,0.29
+0.84794,0.39168,0.9131,0.3,0.4432168025,Micro,down sampled,8,None,value tbd,value tbd,SKlearn Prediction,0.84562,0.3825,0.91178,0.29
+0.8871425,0.353285,0.91947,0.29,0.4909286154,Macro,shuffled,8,None,value tbd,value tbd,SKlearn Prediction,0.86639,0.3212475,0.91377,0.26
+0.88712,0.54856,0.9355,0.48,0.3214455039,Micro,shuffled,8,None,value tbd,value tbd,SKlearn Prediction,0.86638,0.46554,0.92364,0.38
+0.8487085714,0.4029571429,0.9010257143,0.32,0.4225084787,Macro,balanced,7,None,value tbd,value tbd,SKlearn Prediction,0.8319,0.34142,0.8937028571,0.27
+0.84872,0.4705,0.91176,0.38,0.3566650193,Micro,balanced,7,None,value tbd,value tbd,SKlearn Prediction,0.83192,0.41166,0.90194,0.31
+0.8367228571,0.4285657143,0.9047657143,0.32,0.4004074996,Macro,down sampled,7,None,value tbd,value tbd,SKlearn Prediction,0.84082,0.4428571429,0.9071485714,0.35
+0.8367,0.4286,0.90478,0.33,0.3969946554,Micro,down sampled,7,None,value tbd,value tbd,SKlearn Prediction,0.84084,0.44286,0.90714,0.35
+0.85274,0.4331028571,0.9033857143,0.35,0.391057072,Macro,shuffled,7,None,value tbd,value tbd,SKlearn Prediction,0.8318971429,0.34158,0.8933857143,0.27
+0.85276,0.4846,0.91408,0.39,0.3462367312,Micro,shuffled,7,None,value tbd,value tbd,SKlearn Prediction,0.8319,0.41166,0.90194,0.31
