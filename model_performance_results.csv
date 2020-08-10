@@ -1,0 +1,158 @@
+Accuracy,Sensitivity,Specificity,MCC,Distance,Averaging,Dataset,Number of Classes,Aggregation,Gamma,Cost,Tool,Indep. Accuracy,Indep. Sensitivity,Indep. Specificity,Indep. MCC
+0.7374,0.7465,0.7322,0.46,0,,,,,,,ref,,,,
+0.8733725,0.3991825,0.8802275,0.3,0.4320070686,Macro,balanced,8,unweighted average,list tbd,list tbd,SVMLight,0.855835,0.401385,0.8792975,0.31
+0.87338,0.6493,0.90536,0.49,0.2425340924,Micro,balanced,8,unweighted average,list tbd,list tbd,SVMLight,0.85582,0.58444,0.8946,0.42
+0.85859,0.341665,0.93246,0.28,0.5010812917,Macro,down sampled,8,unweighted average,list tbd,list tbd,SVMLight,0.86875,0.375,0.93928,0.34
+0.85862,0.34168,0.93244,0.3,0.4942363588,Micro,down sampled,8,unweighted average,list tbd,list tbd,SVMLight,0.86874,0.375,0.9393,0.34
+0.870205,0.3881375,0.877175,0.28,0.4466302722,Macro,shuffled,8,unweighted average,list tbd,list tbd,SVMLight,0.8558325,0.4015275,0.88018,0.31
+0.8702,0.63986,0.9031,0.48,0.2421048112,Micro,shuffled,8,unweighted average,list tbd,list tbd,SVMLight,0.85586,0.57776,0.89558,0.42
+0.7820625,0.65184,0.7442625,0.29,0.200001896,Macro,balanced,8,balanced average,list tbd,list tbd,SVMLight,0.7632,0.6319425,0.7426025,0.29
+0.78204,0.81522,0.77732,0.42,0.1017397779,Micro,balanced,8,balanced average,list tbd,list tbd,SVMLight,0.7632,0.76222,0.76334,0.37
+0.697125,0.7145875,0.6946475,0.28,0.1909205948,Macro,down sampled,8,balanced average,list tbd,list tbd,SVMLight,0.7096875,0.7725,0.7007125,0.32
+0.69712,0.71458,0.69466,0.28,0.1909204452,Micro,down sampled,8,balanced average,list tbd,list tbd,SVMLight,0.70968,0.7725,0.7007,0.32
+0.780075,0.6288625,0.7452575,0.27,0.2278820645,Macro,shuffled,8,balanced average,list tbd,list tbd,SVMLight,0.76236,0.6405525,0.7401075,0.29
+0.78006,0.79564,0.77784,0.41,0.09390220871,Micro,shuffled,8,balanced average,list tbd,list tbd,SVMLight,0.76236,0.7711,0.7611,0.38
+0.889125,0.298745,0.9165225,0.26,0.5454170878,Macro,balanced,8,maximum probability,list tbd,list tbd,SVMLight,0.8663925,0.283055,0.9108425,0.22
+0.88912,0.55652,0.93662,0.49,0.3190593913,Micro,balanced,8,maximum probability,list tbd,list tbd,SVMLight,0.8664,0.46556,0.92364,0.38
+0.84844,0.3937525,0.9134125,0.29,0.4455318737,Macro,down sampled,8,maximum probability,list tbd,list tbd,SVMLight,0.855625,0.4225,0.9175025,0.34
+0.84846,0.39374,0.91338,0.3,0.4418145919,Micro,down sampled,8,maximum probability,list tbd,list tbd,SVMLight,0.85562,0.4225,0.9175,0.34
+0.8844225,0.278565,0.9128875,0.23,0.5710750847,Macro,shuffled,8,maximum probability,list tbd,list tbd,SVMLight,0.8652825,0.281945,0.9100975,0.23
+0.88442,0.53768,0.93396,0.47,0.3256190572,Micro,shuffled,8,maximum probability,list tbd,list tbd,SVMLight,0.86526,0.46112,0.923,0.38
+0.862225,0.347895,0.8671,0.25,0.486585282,Macro,balanced,8,unweighted average,value tbd,value tbd,SVMLight,0.8414,0.362495,0.8639525,0.24
+0.86222,0.63408,0.89482,0.46,0.2338023807,Micro,balanced,8,unweighted average,value tbd,value tbd,SVMLight,0.84142,0.56334,0.88112,0.38
+0.85026,0.40833,0.9134025,0.3,0.4307327182,Macro,down sampled,8,unweighted average,value tbd,value tbd,SVMLight,0.85875,0.3925,0.92536,0.3
+0.85026,0.40834,0.9134,0.32,0.423701552,Micro,down sampled,8,unweighted average,value tbd,value tbd,SVMLight,0.85874,0.3925,0.92534,0.33
+0.862405,0.33577,0.868905,0.23,0.5058790764,Macro,shuffled,8,unweighted average,value tbd,value tbd,SVMLight,0.8400075,0.35347,0.8638875,0.23
+0.86242,0.62462,0.8964,0.46,0.2396797338,Micro,shuffled,8,unweighted average,value tbd,value tbd,SVMLight,0.84,0.55334,0.88098,0.37
+0.7881325,0.5933125,0.751695,0.28,0.2425288678,Macro,balanced,8,balanced average,value tbd,value tbd,SVMLight,0.7673675,0.6183325,0.746295,0.31
+0.78812,0.79348,0.78738,0.42,0.0970797157,Micro,balanced,8,balanced average,value tbd,value tbd,SVMLight,0.76736,0.75558,0.76906,0.37
+0.68437,0.691665,0.6833375,0.25,0.2287063664,Macro,down sampled,8,balanced average,value tbd,value tbd,SVMLight,0.688125,0.815,0.67,0.32
+0.68438,0.69166,0.68334,0.25,0.2287047127,Micro,down sampled,8,balanced average,value tbd,value tbd,SVMLight,0.68814,0.815,0.67002,0.32
+0.7776325,0.60795,0.7394425,0.26,0.2467128095,Macro,shuffled,8,balanced average,value tbd,value tbd,SVMLight,0.759865,0.6616675,0.732765,0.32
+0.77764,0.7942,0.77526,0.41,0.09082241574,Micro,shuffled,8,balanced average,value tbd,value tbd,SVMLight,0.75988,0.78886,0.7557,0.38
+0.885135,0.259335,0.91354,0.22,0.591303275,Macro,balanced,8,maximum probability,value tbd,value tbd,SVMLight,0.8605575,0.2393025,0.907685,0.16
+0.88514,0.54056,0.93436,0.47,0.3243563731,Micro,balanced,8,maximum probability,value tbd,value tbd,SVMLight,0.86056,0.4422,0.9203,0.36
+0.84792,0.3916725,0.913105,0.28,0.4508257359,Macro,down sampled,8,maximum probability,value tbd,value tbd,SVMLight,0.86375,0.455,0.9221375,0.34
+0.84792,0.39168,0.91308,0.3,0.4432036521,Micro,down sampled,8,maximum probability,value tbd,value tbd,SVMLight,0.86376,0.455,0.92216,0.37
+0.883335,0.2493575,0.9122625,0.2,0.6070174573,Macro,shuffled,8,maximum probability,value tbd,value tbd,SVMLight,0.8602775,0.2413875,0.9077575,0.17
+0.88332,0.53336,0.93332,0.46,0.32736915,Micro,shuffled,8,maximum probability,value tbd,value tbd,SVMLight,0.86028,0.44112,0.92016,0.36
+0.9019925,0.17309,0.96854,0.22,0.6850885452,Macro,balanced,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.8887125,0.15459,0.968845,0.18
+0.90222,0.36338,0.97844,0.46,0.4843353223,Micro,balanced,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.88898,0.2852,0.97486,0.36
+0.88116,0.11969,0.98987,0.17,0.7510336494,Macro,down sampled,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.8841875,0.1144425,0.99356,0.18
+0.88118,0.11902,0.98988,0.23,0.7305496706,Micro,down sampled,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.88416,0.11342,0.99356,0.25
+0.9007475,0.171425,0.9665125,0.2,0.6927452699,Macro,shuffled,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.8890725,0.1537425,0.969375,0.17
+0.90094,0.36618,0.9768,0.45,0.4809550852,Micro,shuffled,8,unweighted average,list tbd,list tbd,SKlearn Probability,0.88936,0.28504,0.97504,0.36
+0.7722775,0.589245,0.73286,0.27,0.2490903664,Macro,balanced,8,balanced average,list tbd,list tbd,SKlearn Probability,0.736805,0.53306,0.716815,0.23
+0.7723,0.79926,0.76842,0.4,0.0944114188,Micro,balanced,8,balanced average,list tbd,list tbd,SKlearn Probability,0.73682,0.70666,0.7411,0.31
+0.674485,0.693745,0.67172,0.26,0.2244977008,Macro,down sampled,8,balanced average,list tbd,list tbd,SKlearn Probability,0.6834375,0.76,0.6725,0.3
+0.6745,0.69374,0.67172,0.25,0.2334477629,Micro,down sampled,8,balanced average,list tbd,list tbd,SKlearn Probability,0.68344,0.76,0.6725,0.29
+0.773095,0.56706,0.736075,0.26,0.2710864479,Macro,shuffled,8,balanced average,list tbd,list tbd,SKlearn Probability,0.7470925,0.54986,0.727675,0.26
+0.7731,0.78404,0.77152,0.4,0.08848617971,Micro,shuffled,8,balanced average,list tbd,list tbd,SKlearn Probability,0.74706,0.71666,0.75142,0.33
+0.893295,0.36121,0.919485,0.34,0.4714099133,Macro,balanced,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.8649975,0.303475,0.90939,0.25
+0.8933,0.57318,0.93902,0.51,0.3156250066,Micro,balanced,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.86502,0.46,0.92286,0.38
+0.8479225,0.3916625,0.9131175,0.29,0.4469407301,Macro,down sampled,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.84625,0.385,0.91213,0.28
+0.84794,0.39166,0.9131,0.3,0.4432328138,Micro,down sampled,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.84628,0.385,0.91214,0.29
+0.891495,0.34278,0.9178975,0.31,0.4936787102,Macro,shuffled,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.865835,0.31208,0.9098575,0.27
+0.89148,0.56596,0.938,0.5,0.3166843507,Micro,shuffled,8,maximum probability,list tbd,list tbd,SKlearn Probability,0.86582,0.46334,0.92332,0.38
+0.9009,0.1487,0.9698,0.17,0.7243278608,Macro,balanced,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8899,0.1417,0.9717,0.17
+0.901,0.3515,0.9792,0.45,0.4938612761,Micro,balanced,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8901,0.2747,0.9774,0.36
+0.8775,0.0971,0.9886,0.13,0.7848498774,Macro,down sampled,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8836,0.95,0.996,0.15
+0.8775,0.0963,0.9886,0.19,0.7622525894,Micro,down sampled,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8836,0.95,0.996,0.24
+0.8995,0.1349,0.9696,0.17,0.7353840697,Macro,shuffled,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8905,0.1385,0.9718,0.17
+0.8996,0.3403,0.979,0.44,0.5026107042,Micro,shuffled,8,unweighted average,value tbd,value tbd,SKlearn Probability,0.8907,0.2783,0.9774,0.37
+0.7661,0.5687,0.7266,0.26,0.269198607,Macro,balanced,8,balanced average,value tbd,value tbd,SKlearn Probability,0.7361,0.5306,0.7165,0.24
+0.7661,0.7956,0.7618,0.39,0.09492449631,Micro,balanced,8,balanced average,value tbd,value tbd,SKlearn Probability,0.7361,0.7111,0.7396,0.32
+0.6562,0.7,0.65,0.24,0.2528092759,Macro,down sampled,8,balanced average,value tbd,value tbd,SKlearn Probability,0.6693,0.7725,0.6546,0.3
+0.6562,0.7,0.65,0.23,0.2615578903,Micro,down sampled,8,balanced average,value tbd,value tbd,SKlearn Probability,0.6694,0.7725,0.6546,0.28
+0.7586,0.5397,0.7204,0.21,0.3253535308,Macro,shuffled,8,balanced average,value tbd,value tbd,SKlearn Probability,0.7373,0.549,0.716,0.25
+0.7586,0.7797,0.7555,0.38,0.09216599156,Micro,shuffled,8,balanced average,value tbd,value tbd,SKlearn Probability,0.7373,0.7244,0.7392,0.32
+0.8874,0.3144,0.9155,0.28,0.5246039458,Macro,balanced,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8619,0.2704,0.9078,0.21
+0.8874,0.55,0.9357,0.48,0.3208184845,Micro,balanced,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8619,0.4477,0.9211,0.36
+0.8536,0.4145,0.9163,0.31,0.4244045829,Macro,down sampled,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8481,0.3925,0.9132,0.28
+0.8536,0.4146,0.9163,0.33,0.4176755439,Micro,down sampled,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8481,0.3925,0.9132,0.3
+0.882,0.2852,0.9116,0.24,0.5606168121,Macro,shuffled,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8624,0.2747,0.9081,0.21
+0.882,0.5282,0.9326,0.46,0.3297335439,Micro,shuffled,8,maximum probability,value tbd,value tbd,SKlearn Probability,0.8625,0.45,0.9214,0.37
+0.8228971429,0.4376685714,0.8431085714,0.31,0.3707928316,Macro,balanced,7,unweighted average,list tbd,list tbd,SVMLight,0.8135828571,0.4449114286,0.8452828571,0.32
+0.82288,0.56538,0.86582,0.38,0.253703743,Micro,balanced,7,unweighted average,list tbd,list tbd,SVMLight,0.81358,0.54164,0.85888,0.32
+0.8408114286,0.39286,0.9154771429,0.32,0.4346788289,Macro,down sampled,7,unweighted average,list tbd,list tbd,SVMLight,0.8498,0.4171428571,0.9218971429,0.36
+0.84078,0.39288,0.9155,0.32,0.43466472,Micro,down sampled,7,unweighted average,list tbd,list tbd,SVMLight,0.84978,0.41716,0.9219,0.35
+0.8173942857,0.43276,0.8406571429,0.28,0.3859984782,Macro,shuffled,7,unweighted average,list tbd,list tbd,SVMLight,0.8128542857,0.4366628571,0.8449057143,0.32
+0.8174,0.54742,0.8624,0.36,0.2701571513,Micro,shuffled,7,unweighted average,list tbd,list tbd,SVMLight,0.81286,0.53836,0.8586,0.34
+0.7384714286,0.6418257143,0.7045857143,0.28,0.2100485725,Macro,balanced,7,balanced average,list tbd,list tbd,SVMLight,0.7290457143,0.6379428571,0.7122628571,0.31
+0.73848,0.75256,0.73608,0.36,0.1002643725,Micro,balanced,7,balanced average,list tbd,list tbd,SVMLight,0.72904,0.71502,0.73136,0.33
+0.6945685714,0.7000057143,0.6936428571,0.28,0.1946353081,Macro,down sampled,7,balanced average,list tbd,list tbd,SVMLight,0.7191857143,0.7828571429,0.7085657143,0.36
+0.69458,0.70002,0.69366,0.28,0.1946259859,Micro,down sampled,7,balanced average,list tbd,list tbd,SVMLight,0.71918,0.78284,0.70858,0.35
+0.7314971429,0.6391514286,0.6985885714,0.27,0.2208807091,Macro,shuffled,7,balanced average,list tbd,list tbd,SVMLight,0.7240428571,0.6404771429,0.70612,0.3
+0.7315,0.73848,0.73036,0.34,0.1204263925,Micro,shuffled,7,balanced average,list tbd,list tbd,SVMLight,0.72406,0.71668,0.72528,0.32
+0.8487171429,0.3405914286,0.8958371429,0.28,0.4861382408,Macro,balanced,7,maximum probability,list tbd,list tbd,SVMLight,0.8309542857,0.3077771429,0.8895628571,0.24
+0.84872,0.47052,0.91174,0.38,0.356639474,Micro,balanced,7,maximum probability,list tbd,list tbd,SVMLight,0.83096,0.40834,0.90138,0.3
+0.8435228571,0.45238,0.9087228571,0.34,0.3785881064,Macro,down sampled,7,maximum probability,list tbd,list tbd,SVMLight,0.8449028571,0.4571428571,0.9095171429,0.37
+0.8435,0.4524,0.90874,0.36,0.3727175762,Micro,down sampled,7,maximum probability,list tbd,list tbd,SVMLight,0.8449,0.45714,0.90952,0.36
+0.8432228571,0.33522,0.8914914286,0.27,0.491755503,Macro,shuffled,7,maximum probability,list tbd,list tbd,SVMLight,0.8295257143,0.3036514286,0.88854,0.23
+0.84322,0.45128,0.90856,0.35,0.3762387146,Micro,shuffled,7,maximum probability,list tbd,list tbd,SVMLight,0.82952,0.40334,0.90054,0.3
+0.8073285714,0.4664028571,0.81696,0.3,0.3407765722,Macro,balanced,7,unweighted average,value tbd,value tbd,SVMLight,0.7940457143,0.4682542857,0.8174714286,0.3
+0.80732,0.6,0.84186,0.37,0.2155837935,Micro,balanced,7,unweighted average,value tbd,value tbd,SVMLight,0.79406,0.56832,0.83166,0.33
+0.8190457143,0.4833285714,0.8749971429,0.33,0.3364762213,Macro,down sampled,7,unweighted average,value tbd,value tbd,SVMLight,0.8244885714,0.4771428571,0.88238,0.36
+0.81902,0.48334,0.875,0.32,0.3404509509,Micro,down sampled,7,unweighted average,value tbd,value tbd,SVMLight,0.82448,0.47714,0.88238,0.33
+0.8042114286,0.4696028571,0.8149171429,0.29,0.3418741296,Macro,shuffled,7,unweighted average,value tbd,value tbd,SVMLight,0.7933314286,0.4669828571,0.8163085714,0.31
+0.80424,0.59616,0.83888,0.36,0.2201143421,Micro,shuffled,7,unweighted average,value tbd,value tbd,SVMLight,0.9334,0.57,0.83056,0.33
+0.7457942857,0.6243285714,0.7140228571,0.28,0.2184644834,Macro,balanced,7,balanced average,value tbd,value tbd,SVMLight,0.73548,0.6455571429,0.7174257143,0.33
+0.74578,0.74486,0.74596,0.36,0.1013027719,Micro,balanced,7,balanced average,value tbd,value tbd,SVMLight,0.73548,0.73168,0.73612,0.34
+0.6996542857,0.7119085714,0.6976085714,0.3,0.1715163923,Macro,down sampled,7,balanced average,value tbd,value tbd,SVMLight,0.71388,0.7828571429,0.70238,0.36
+0.69968,0.71192,0.6976,0.29,0.1808749148,Micro,down sampled,7,balanced average,value tbd,value tbd,SVMLight,0.71388,0.78284,0.70238,0.35
+0.7331485714,0.6334685714,0.6993657143,0.26,0.2321040043,Macro,shuffled,7,balanced average,value tbd,value tbd,SVMLight,0.7266657143,0.6557114286,0.70524,0.32
+0.73314,0.74232,0.73162,0.35,0.1101633169,Micro,shuffled,7,balanced average,value tbd,value tbd,SVMLight,0.72668,0.73998,0.72444,0.34
+0.8454285714,0.3359342857,0.8948085714,0.27,0.4927229703,Macro,balanced,7,maximum probability,value tbd,value tbd,SVMLight,0.8276142857,0.2996885714,0.8894142857,0.23
+0.84542,0.45898,0.90982,0.36,0.3686257387,Micro,balanced,7,maximum probability,value tbd,value tbd,SVMLight,0.82762,0.39668,0.89946,0.29
+0.8387657143,0.4357257143,0.9059514286,0.33,0.3923585396,Macro,down sampled,7,maximum probability,value tbd,value tbd,SVMLight,0.8489771429,0.4714285714,0.9119,0.39
+0.83874,0.43574,0.90594,0.34,0.3891364295,Micro,down sampled,7,maximum probability,value tbd,value tbd,SVMLight,0.84898,0.47142,0.91188,0.38
+0.84212,0.3347542857,0.8915257143,0.27,0.4919202119,Macro,shuffled,7,maximum probability,value tbd,value tbd,SVMLight,0.8238142857,0.2912657143,0.8865914286,0.22
+0.84212,0.44744,0.90792,0.35,0.3786564147,Micro,shuffled,7,maximum probability,value tbd,value tbd,SVMLight,0.8238,0.38334,0.89724,0.28
+0.8764142857,0.1811914286,0.9830142857,0.25,0.6677623518,Macro,balanced,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.87148,0.15936,0.9803485714,0.23
+0.87658,0.21686,0.98524,0.34,0.6150762909,Micro,balanced,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.87152,0.1993,0.98304,0.31
+0.8705657143,0.1781371429,0.9852942857,0.24,0.6732207381,Macro,down sampled,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.8729028571,0.1557142857,0.9918942857,0.23
+0.87054,0.17762,0.9853,0.29,0.6590222485,Micro,down sampled,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.8729,0.15512,0.99192,0.3
+0.8755085714,0.1798114286,0.98232,0.24,0.6716918407,Macro,shuffled,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.8695342857,0.1575885714,0.9777028571,0.21
+0.8756,0.21832,0.98456,0.34,0.6133179616,Micro,shuffled,7,unweighted average,list tbd,list tbd,SKlearn Probability,0.8696,0.20056,0.98082,0.3
+0.7507257143,0.6202542857,0.7114171429,0.3,0.2052985197,Macro,balanced,7,balanced average,list tbd,list tbd,SKlearn Probability,0.7140457143,0.5715857143,0.6996714286,0.25
+0.75072,0.76668,0.74808,0.38,0.08506955507,Micro,balanced,7,balanced average,list tbd,list tbd,SKlearn Probability,0.71404,0.675,0.72056,0.29
+0.6727828571,0.7261914286,0.6638942857,0.29,0.1953291679,Macro,down sampled,7,balanced average,list tbd,list tbd,SKlearn Probability,0.68898,0.7685714286,0.6757171429,0.33
+0.67282,0.7262,0.66386,0.27,0.2129624897,Micro,down sampled,7,balanced average,list tbd,list tbd,SKlearn Probability,0.68898,0.76858,0.67572,0.31
+0.7441428571,0.6293942857,0.7051285714,0.28,0.2165457843,Macro,shuffled,7,balanced average,list tbd,list tbd,SKlearn Probability,0.7190457143,0.5704771429,0.7066914286,0.27
+0.74416,0.76284,0.74102,0.37,0.09214383105,Micro,shuffled,7,balanced average,list tbd,list tbd,SKlearn Probability,0.71904,0.67166,0.72696,0.29
+0.8549485714,0.3880028571,0.9011542857,0.32,0.4364440614,Macro,balanced,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.8319057143,0.3246028571,0.8906657143,0.26
+0.85494,0.4923,0.91538,0.4,0.3399826525,Micro,balanced,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.83188,0.41168,0.90196,0.31
+0.8401171429,0.4404685714,0.9067457143,0.32,0.3927750668,Macro,down sampled,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.84408,0.4542857143,0.9090457143,0.35
+0.8401,0.4405,0.90672,0.34,0.3860576646,Micro,down sampled,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.8441,0.45428,0.90904,0.36
+0.8512857143,0.3833371429,0.8994828571,0.31,0.441973722,Macro,shuffled,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.83286,0.3271371429,0.8915542857,0.26
+0.85128,0.4795,0.91324,0.39,0.3491892553,Micro,shuffled,7,maximum probability,list tbd,list tbd,SKlearn Probability,0.83286,0.415,0.90252,0.31
+0.8748942857,0.1572657143,0.9846171429,0.21,0.7016524325,Macro,balanced,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.8692257143,0.1399685714,0.9800742857,0.19
+0.87512,0.19846,0.98672,0.33,0.6332417156,Micro,balanced,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.86932,0.18326,0.98276,0.29
+0.8677057143,0.1508571429,0.9872514286,0.22,0.7031509252,Macro,down sampled,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.8713257143,0.1380942857,0.99332,0.2
+0.8677,0.15038,0.98726,0.27,0.6881080933,Micro,down sampled,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.87132,0.13752,0.99332,0.29
+0.8736857143,0.15132,0.9834514286,0.2,0.7096057417,Macro,shuffled,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.87038,0.1448742857,0.9802,0.2
+0.8738,0.19978,0.98566,0.32,0.6335216571,Micro,shuffled,7,unweighted average,value tbd,value tbd,SKlearn Probability,0.8705,0.19096,0.9833,0.3
+0.7459685714,0.6257942857,0.7043628571,0.28,0.2186737213,Macro,balanced,7,balanced average,value tbd,value tbd,SKlearn Probability,0.7140485714,0.5717342857,0.6993942857,0.26
+0.74596,0.77308,0.74144,0.38,0.08523583519,Micro,balanced,7,balanced average,value tbd,value tbd,SKlearn Probability,0.71404,0.67834,0.72002,0.29
+0.6765342857,0.7023771429,0.6722257143,0.28,0.2040793391,Macro,down sampled,7,balanced average,value tbd,value tbd,SKlearn Probability,0.6828542857,0.7285714286,0.6752342857,0.3
+0.67656,0.7024,0.67222,0.27,0.2129411092,Micro,down sampled,7,balanced average,value tbd,value tbd,SKlearn Probability,0.68286,0.72856,0.67526,0.29
+0.7355285714,0.6266714286,0.6930542857,0.26,0.2364207599,Macro,shuffled,7,balanced average,value tbd,value tbd,SKlearn Probability,0.7107228571,0.5874542857,0.6928285714,0.26
+0.73554,0.76538,0.73056,0.37,0.09199241056,Micro,shuffled,7,balanced average,value tbd,value tbd,SKlearn Probability,0.7107,0.69336,0.71362,0.29
+0.8527457143,0.3775657143,0.9000885714,0.3,0.4507812256,Macro,balanced,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.82714,0.2963485714,0.8877142857,0.22
+0.85274,0.48462,0.9141,0.39,0.3462254468,Micro,balanced,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.82714,0.395,0.89916,0.29
+0.8414771429,0.4452285714,0.9075428571,0.32,0.3897969252,Macro,down sampled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.8457228571,0.46,0.9100057143,0.34
+0.84146,0.44526,0.90754,0.35,0.3800238635,Micro,down sampled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.84572,0.45998,0.91,0.37
+0.84982,0.3530314286,0.8972342857,0.29,0.4728552511,Macro,shuffled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.8304742857,0.3106342857,0.88954,0.24
+0.8498,0.47436,0.9124,0.38,0.3543529026,Micro,shuffled,7,maximum probability,value tbd,value tbd,SKlearn Probability,0.83048,0.40668,0.9011,0.3
+0.885325,0.3559675,0.9186075,0.29,0.4878987551,Macro,balanced,8,,value tbd,value tbd,SKlearn Prediction,0.864725,0.3086075,0.9125575,0.25
+0.88532,0.5413,0.93446,0.47,0.3240315941,Micro,balanced,8,,value tbd,value tbd,SKlearn Prediction,0.86474,0.45888,0.92268,0.38
+0.84792,0.391665,0.9131225,0.29,0.4469401511,Macro,down sampled,8,,value tbd,value tbd,SKlearn Prediction,0.845625,0.3825,0.911785,0.29
+0.84794,0.39168,0.9131,0.3,0.4432168025,Micro,down sampled,8,,value tbd,value tbd,SKlearn Prediction,0.84562,0.3825,0.91178,0.29
+0.8871425,0.353285,0.91947,0.29,0.4909286154,Macro,shuffled,8,,value tbd,value tbd,SKlearn Prediction,0.86639,0.3212475,0.91377,0.26
+0.88712,0.54856,0.9355,0.48,0.3214455039,Micro,shuffled,8,,value tbd,value tbd,SKlearn Prediction,0.86638,0.46554,0.92364,0.38
+0.8487085714,0.4029571429,0.9010257143,0.32,0.4225084787,Macro,balanced,7,,value tbd,value tbd,SKlearn Prediction,0.8319,0.34142,0.8937028571,0.27
+0.84872,0.4705,0.91176,0.38,0.3566650193,Micro,balanced,7,,value tbd,value tbd,SKlearn Prediction,0.83192,0.41166,0.90194,0.31
+0.8367228571,0.4285657143,0.9047657143,0.32,0.4004074996,Macro,down sampled,7,,value tbd,value tbd,SKlearn Prediction,0.84082,0.4428571429,0.9071485714,0.35
+0.8367,0.4286,0.90478,0.33,0.3969946554,Micro,down sampled,7,,value tbd,value tbd,SKlearn Prediction,0.84084,0.44286,0.90714,0.35
+0.85274,0.4331028571,0.9033857143,0.35,0.391057072,Macro,shuffled,7,,value tbd,value tbd,SKlearn Prediction,0.8318971429,0.34158,0.8933857143,0.27
+0.85276,0.4846,0.91408,0.39,0.3462367312,Micro,shuffled,7,,value tbd,value tbd,SKlearn Prediction,0.8319,0.41166,0.90194,0.31
