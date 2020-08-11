@@ -114,4 +114,5 @@ feature vector containing Sensitivity, Specificity, Accuracy, and MCC. The close
 minimized this distance. Model settings, such as those defined to address points 1 -- 6 above, were compared
 quantitatively through the pairwise application of two-sided Mann–Whitney U Tests on the distribution of distance
 values for all unique settings within a given category (i.e. the distribution of distances for all models using
-micro-averaging was compared to the equivalent distribution for all models using macro-averaging).
+micro-averaging was compared to the equivalent distribution for all models using macro-averaging). To avoid
+overfitting, the closest 10\% of models to the reference were selected as the models used for further investigation.
