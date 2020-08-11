@@ -14,7 +14,6 @@ of the best-performing models fit on AAC when applied across all features.
 \GK{For Hamid: regenerate data in the all-feature-performance table based on more than just the "best" model. At
 present, we cannot include anything in the results about this because there isn't a result to discuss.}
 
-
 The remainder of this section will explore the differences in model performance based on the defined axes of
 flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 
@@ -25,7 +24,8 @@ flexibility enumerated in Section~\ref{sec:experimentaldesign}.
   \caption{Sensitivity and Specificity of each tested model. Each panel contains models trained with a fixed number of
 categories (7: left; 8: right), and shows the published reference performance in red. The closest 10\% of models to
 this reference have been outlined in black. The symbol colour and shape refer to the classifier type and aggregation
-strategy, respectively. Each shaded region illustrates the bounds of performance for a given aggregation strategy.}
+strategy, respectively. Each shaded region illustrates the bounds of performance for a given binary classifier
+aggregation strategy.}
    \label{fig:7_class_model}
 \end{figure}
 
@@ -37,7 +37,7 @@ class.
 
 \paragraph{Dataset Sampling}
 The dataset composition had no significant impact on the closeness of the model to the reference ($p > 0.1$ for all
-comparisons).
+comparisons). However, none of the closest 10\% of models were trained using the downsampled dataset.
 
 \paragraph{SVM Hyperparameters}
 All uniformly parameterized models converged to same set of hyperparameters within the number of classes, where the
@@ -54,28 +54,27 @@ aggregation into a multi-class classifier) obtained closer results to the refere
 technique ($p < 1\times 10^{-4}$). All of the closest models used micro-aggregation.
 
 \paragraph{Prediction Method}
-balanced closer than unweighted (p < 1e-5)
-maximum prob closer than unweighted (p < 1e-2)
-balanced closer than maximum prob (p < 1e-5) 
-
-Regrading the different aggregation techniques, the maximum probability models corresponds to multi-class classification 
-problems where there is one predicted label for each element in the dataset. For the problems in this category, 
-the results from all 3 software programs are very close through the same settings. We suggest the ScikitLearn predictor 
-since it involves less coding and thus provides better reproducibility when merged with other tools from the ScikitLearn Library.
-
-Overall for both SvmLight and ScikitLearn binary classifiers, the closest results to the original ones are achieved through
-balanced averaging aggregation technique on shuffled and balanced datasets when the metrics are Micro averaged.
+The balanced averaging prediction method produced significantly closer results to the reference than both the
+unweighted average and maximum probability methods ($p < 1\times 10^{-5}$ for both). The maximum probability method
+also produced significantly closer results than the unweighted average method ($p < 0.001$).
 
 \paragraph{Tool}
-SVMLight closer than SKlearn prob (p < 0.005)
-SVMLight closer than SKlearn pred (p < 0.05)
+The SVMLight classifiers produced closer results to the reference than both SKlearn Probability and Prediction models
+($p < 0.05$ for both). While the SKlearn Prediction model architecture did not appear in the set of closest models,
+there was no statistically significant difference between its performance and that of the SKlearn Probability models.
 
 \subsection{Closest Models}
-The closest 10\% of models (16) used: micro aggregation (all), balanced average prediction method (all), the balanced (8)
-or shuffled (8) dataset, contained 7 (8) or 8 (8) classes in the dataset, were trained with uniform (8) or
-heterogeneous (8) hyperparameters, and were developed using SVMLight (8) or the SKlearn Probability (8) model
-architectures.
+The closest 10\% of models (16) used a variety of configurations, and each reported a distance score of less than
+$0.13$ from the reference. The breakdown of configurations for these models included: micro aggregation (all), balanced
+average prediction method (all), balanced (8) or shuffled (8) dataset, contained 7 (8) or 8 (8) classes in the dataset,
+were trained with uniform (8) or heterogeneous (8) hyperparameters, and were developed using SVMLight (8) or the
+SKlearn Probability (8) model architectures. While the SKlearn Prediction model and downsampled dataset configuration
+are notably absent from these models, all other settings were either dominated by a single value, such as in the case
+of micro aggregation and the balanced average prediction method, or the settings were equally represented. This
+uniformity in representation is consistent with the direct comparisons between settings described above.
 
+\GK{TODO Hamid: add results for the other analyses, such as 1- running the best 10\% of models on more features and
+2- evaluating them on the independent dataset.}
 
 % Table 1
 \input{tables/tab_7_class_prob_performance.tex}

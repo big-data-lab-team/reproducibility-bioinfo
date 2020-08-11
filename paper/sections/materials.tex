@@ -72,7 +72,7 @@ using the SVMLight library, originally used by~\cite{mishra2014prediction}, whic
 membership in each binary setting which were then combined as a multi-class confusion matrix. These models were
 replicated using SciKit-learn (SKlearn), a popular library for machine learning in Python, in both an identical setting
 to SVMLight (termed: SKlearn Probability) and an approach which automatically performs the class reconstruction and
-prediction described above (termed: SKlearn Prediction).
+prediction described above (termed: SKlearn Prediction). 
 
 \subsubsection{Training}
 All models were fit for both $7$ and $8$ class scenarios (Addr: 1) -- excluding and including non-transport proteins,
@@ -108,3 +108,10 @@ The unweighted average thresholds probabilities at the median value, whereas the
 proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
 pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
+\subsection{Model Comparison}
+Models were compared to the reported reference classifier through the Euclidean distance between a 4-dimensional
+feature vector containing Sensitivity, Specificity, Accuracy, and MCC. The closest models were chosen as those which
+minimized this distance. Model settings, such as those defined to address points 1 -- 6 above, were compared
+quantitatively through the pairwise application of two-sided Mann–Whitney U Tests on the distribution of distance
+values for all unique settings within a given category (i.e. the distribution of distances for all models using
+micro-averaging was compared to the equivalent distribution for all models using macro-averaging).
