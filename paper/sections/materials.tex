@@ -14,32 +14,8 @@ annotations~\cite{boeckmann2003swiss} was subsampled to include $780$ membrane t
 non-transporter proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
 transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
 transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
-proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid: state explicitly the discrepancy between
-the 780 transporters we are using versus the 900 included in the original paper. This total appears to correspond to
-the ''main'' section of the dataset described in the original paper, which suggests we threw out the validation set?
-We should be clear about this}
-
-\Hamid{About the SwissProt, the initial $10,780$ sequences in the dataset, how they got to the final 
-dataset from there, and the subset we used for our experiment :: i wasn't sure how to mix it in with the text.
-[i can also add a table showing the number of proteins in each one]}
-{
-The dataset we used for this study is the same as the one being used in the initial work which is 
-available at \url{http://bioinfo.noble.org/TrSSP}. The authors in~\cite{mishra2014prediction} were initially collected 
-10,780 transporter, carrier, and channel proteins that were well characterized at the protein level and had clear substrate 
-annotations from the SwissProt(release 2013-03)~\cite{boeckmann2003swiss}. They then removed the transporters 
-with more than two substrate specificities, sequences with biological function annotations based solely on sequence 
-similarity, and sequences with greater than 70\% similarity. The final dataset contains 660 non-transporters and 
-900 transporters being divided into following 7 substrate classes: amino acid, anion, cation, electron, protein/mRNA, 
-sugar, and other.\\
-These $1,560$ sequences were then divided into two datasets: 1) Main dataset for the total of $1,380$ sequences 
-and 2) Independent Dataset which contains $180$ sequences. The work in~\cite{mishra2014prediction} reports on results of 
-all the developed models on the main dataset and the results from the best model (AAIndex+PSSM) on the independent set. 
-Through this study, we used the main dataset and experimented on all the models being developed on that set. 
-The main dataset contains $600$ non-transporter proteins and $780$ transporter proteins being divided into $7$ 
-substrate-specific classes ($70$ amino acid transporters, $60$ anion transporters, $260$ cation transporters, 
-$60$ electron transporters, $60$ sugar transporters, $70$ protein/mRNA transporters, and $200$ other transporters). 
-The sequences are also available in our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility-bioinfo/}.
-}\\
+proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid TODO: add the "Independent"/Validation set
+and run all of the models on it. Add sentence here bringing the total sample count up to $1,560$.}
 
 Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
 Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
@@ -62,16 +38,9 @@ likelihoods aggregated across min-max scaled probabilities for each ordered amin
 proteins in the SwissProt database.
 \end{itemize}
 
-\TG{Add a sentence to explain that no difference was observed between the features that we computed and the original ones.}
-\Hamid{
-Regarding the comment above 
-:: I added the following sentence but, the reality is that i couldn't find the computed 
-features from the initial study anywhere. So, based on what i could find online from other people i computed the first 3. 
-and for the last 2, i just talked to Munira about it and that was one of my discussion points. 
-:: but i'm not insisting on it. just wanted to let you guys know. if it's better this way, i'll roll along.
-}
-{The computed features were compared against the ones of the initial work~\cite{mishra2014prediction} and no difference was 
-observed in that regard.}
+While the computed AAC, DPC, and PHC features were verified against those previously generated in literature, no
+direct comparisons were available for AAindex and PSSM profiles to validate their similarity.
+\GK{Hamid: elaborate on the discussion with Munira in a later section.}
 % =====================================================================================================================
 % =====================================================================================================================
 \subsection{Model Flexibility}
@@ -84,10 +53,9 @@ remains flexibility along various axes in the analysis, namely:
 \item the sorting and balancing of samples within the dataset,
 \item the selected SVM hyperparameters, gamma and cost,
 \item the uniformity (or possible lack of) SVM hyperparameters across binary classifiers,
-\item the aggregation technique applied to binary classifiers and
+\item the technique applied to aggregation and evaluation of binary classifiers, and
 \item the prediction method for the final labels.
 \end{enumerate}
-\TG{There is also flexibility in the evaluation metrics (macro vs micro)}
 
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
 to train and evaluate model parameters. The best performing model using AAC was then re-trained using the full feature
@@ -104,7 +72,7 @@ using the SVMLight library, originally used by~\cite{mishra2014prediction}, whic
 membership in each binary setting which were then combined as a multi-class confusion matrix. These models were
 replicated using SciKit-learn (SKlearn), a popular library for machine learning in Python, in both an identical setting
 to SVMLight (termed: SKlearn Probability) and an approach which automatically performs the class reconstruction and
-prediction described above (termed: SKlearn Prediction).
+prediction described above (termed: SKlearn Prediction). 
 
 \subsubsection{Training}
 All models were fit for both $7$ and $8$ class scenarios (Addr: 1) -- excluding and including non-transport proteins,
@@ -134,11 +102,17 @@ In the case of both the SVMLight and SKlearn Probability models, the resulting c
 model was determined by the aggregation of independent binary classifiers according to three distinct methods: maximum
 probability, unweighted average, and balanced average (Addr: 6). The maximum probability method assigns each sample a
 label corresponding to the binary classifier with the highest certainty, resulting in a non-overlapping classification
-result which was evaluated. In the case of both averaging methods, each probability is converted into a  binary
+result which was evaluated. In the case of both averaging methods, each probability is converted into a binary
 classification through thresholding and is scored independently prior to aggregating the performance of all classifiers.
 The unweighted average thresholds probabilities at the median value, whereas the balanced case uses a threshold
 proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
 pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
-
-\GK{Unrelated to here, but it would be good to replace or augment tables 2 and 3 with a contour density plot!}
+\subsection{Model Comparison}
+Models were compared to the reported reference classifier through the Euclidean distance between a 4-dimensional
+feature vector containing Sensitivity, Specificity, Accuracy, and MCC. The closest models were chosen as those which
+minimized this distance. Model settings, such as those defined to address points 1 -- 6 above, were compared
+quantitatively through the pairwise application of two-sided Mann–Whitney U Tests on the distribution of distance
+values for all unique settings within a given category (i.e. the distribution of distances for all models using
+micro-averaging was compared to the equivalent distribution for all models using macro-averaging). To avoid
+overfitting, the closest 10\% of models to the reference were selected as the models used for further investigation.

@@ -1,0 +1,65 @@
+
+\begin{table}[ht]
+\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+    \centering
+    \begin{tabular}{|L | V |V V V V g g g V V V V | V |}
+        \hline
+        \multicolumn{14}{|g|}{Scikit-learn prediction-based models}\\
+        \hline
+        \multicolumn{1}{|l|}{\multirow{2}{*}{\footnotesize{Original Results}}}
+        &
+        \multicolumn{3}{g}{Accuracy} & \multicolumn{3}{g}{Sensitivity} &
+        \multicolumn{3}{g}{Specificity} & \multicolumn{4}{g|}{MCC}\\
+        \cline{2-14}&
+        \multicolumn{3}{C}{73.74} & \multicolumn{3}{C}{74.65} &
+        \multicolumn{3}{C}{73.22} & \multicolumn{4}{C|}{0.46} \\
+        \hline
+        
+        \cline{1-12}\multicolumn{1}{|g}{}&
+        
+        \multicolumn{1}{|g|}{\footnotesize{Dist}}&
+        \multicolumn{4}{g} {\footnotesize{7 class-based models}}&
+        \multicolumn{3}{g}{}&
+        \multicolumn{4}{g|} {\footnotesize{8 class-based models}}&
+        \multicolumn{1}{g|}{\footnotesize{Dist}}\\
+        
+        \cline{3-6}\cline{10-13}\multicolumn{1}{|g}{}&
+        \multicolumn{1}{|g|}{\footnotesize{ance}}&
+        \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+        \multicolumn{1}{g}{spec}&\multicolumn{1}{g}{mcc}&
+        \multicolumn{3}{g}{}&
+        \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+        \multicolumn{1}{g}{spec}&\multicolumn{1}{g|}{mcc}&\multicolumn{1}{g|}{\footnotesize{ance}}\\
+
+        \hline
+
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\footnotesize{Prediction-based}}}
+        
+        & 0.70 & 76.88 & 19.10 & 86.51 & 0.05 &    s&&s                & 84.58 & 38.33 & 91.19 & 0.29 & 0.45 \\
+        & 0.39 & 83.66 & 42.86 & 90.47 & 0.33 &    d&\small{Micro}&d   & 84.79 & 39.16 & 91.31 & 0.30 & 0.44 \\
+        & \mrkm{0.36}{84.43}{45.51}{90.91}{0.36}&    sh&&sh              & \mrkm{88.71}{54.85}{93.54}{0.48}{0.32} \\
+
+        
+        \cline{2-5}\cline{7-9}\cline{11-14}
+        
+        & 0.81 & 76.88 & 6.69 & 81.70 & 0.01 &    s&&s                & 84.58 & 76.82 & 86.79 & 0.03 & 0.81 \\
+        & 0.39 & 83.67 & 42.85 & 90.47 & 0.32 &    d&\small{Macro}&d   & 84.79 & 39.16 & 91.31 & 0.29 & 0.44 \\
+        & 0.39 & 85.27 & 43.31 & 90.33 & 0.35 &    sh&&sh              & 88.71 & 35.32 & 91.94 & 0.29 & 0.48 \\
+        
+        \hline\hline
+        
+        \multicolumn{14}{|c|} {\footnotesize{
+            S, D and SH are sorted, down-sampled and shuffled instances of the main dataset.
+        }}\\
+        \multicolumn{14}{|c|} {\footnotesize{
+            Acc: Accuracy, Sens: Sensitivity, Spec: Specificity, Mcc: Matthews correlation coefficient
+        }}\\
+
+        \hline
+    \end{tabular}
+    \captionsetup{font=small,width=14cm}
+    \caption{The average sensitivity, specificity, accuracy, and MCC values 
+    for scikit-learn prediction-based models for amino acid composition (AAC).}
+    \label{tab:scikit_pred}
+\end{adjustwidth}
+\end{table}
