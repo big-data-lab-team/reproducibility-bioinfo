@@ -1,0 +1,345 @@
+Exponential growth in generated raw data through various domains (e.g. security, bioinformatics, 
+finance, etc.), has introduced new challenges to the research community for knowledge discovery 
+and data analysis. The existing knowledge discovery and data engineering techniques have shown 
+great success in many real-world applications, but the problem of learning from imbalanced data 
+is a relatively new challenge. The problem is concerned with the performance of learning algorithms 
+in the presence of underrepresented data and severe class distribution skews. Due to the 
+characteristics of imbalanced data sets, learning from such data requires new principles, 
+algorithms, and tools for knowledge discovery and information extraction. Though this section 
+we will briefly go over the correspondent concepts and common approaches related to our study.
+
+\subsection{Problem Definition}
+Haibo He \cite{haibo_he_learning_2009}, defines imbalanced learning as “the learning process 
+for data representation and information extraction with severe data distribution skews to develop 
+effective decision boundaries to support the decision making process. The learning process could 
+involve supervised, unsupervised, semi supervised learning or combination two or all of them.” 
+In other words, it is learning from two (binary classification) or multiple classes (multi-class 
+or multi-label classification) of data where the member classes have an unequal amount of examples.
+
+Generally, any dataset with an unequal distribution of examples in between the member classes 
+is technically imbalanced. But when a dataset is labeled as “imbalanced”, it means that through 
+that dataset, there is a significant (or in some cases extreme) disproportion in between the number 
+of examples of member classes.
+
+In a binary classification problem with an imbalanced dataset, the class with lower number of 
+instances is called the minority (positive) class and the one with the higher number of examples 
+is called the majority (negative) class. In such a problem, Imbalance Ratio (IR) refers to the 
+degree of existing imbalance in between the two member classes of the dataset \cite{orriols-puig_evolutionary_2009}. 
+It is defined as the number of negative class examples divided by the number of positive class 
+examples which is 10 for our example in Figure [\ref{fig:sampleBinaryImbalanced}]. In other words, 
+IR 10 (or 1:10) refers to the fact that for every instance of the minority class, there exist 10 
+instances in the majority class.  Figure [\ref{fig:sampleBinaryImbalanced}] shows a sample 
+imbalanced dataset for a binary classification problem with an unequal distribution ratio of 1:10.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/07SampleBinaryImbalanced.png}
+    \caption{Sample binary imbalanced problem with ratio 1:10}
+    \label{fig:sampleBinaryImbalanced}
+\end{figure}
+
+In bioinformatics (as we mentioned earlier through the last section) protein research is one of the 
+fields where researchers try to identify the protein structures or its functions 
+\cite{mishra_prediction_2014,lesh_complete_2003}. One of the popular approaches for solving 
+these kinds of problems is protein classification. But the protein datasets are mostly imbalanced 
+and therefore specific techniques are required. However, bioinformatics is not the only domain 
+where researchers have to deal with imbalance datasets. Email classification \cite{bermejo_improving_2011}, 
+face recognition \cite{yi-hung_liu_total_2005}, anomaly detection \cite{khreich_iterative_2010} and 
+medical decision making \cite{mazurowski_training_2008} are among other applications where scientists 
+need to learn and model on imbalanced sets of data.
+
+Most of the imbalanced classification literature has been devoted to binary classification problems. 
+However, there are also multi-class problems where the dataset is imbalanced 
+\cite{mishra_prediction_2014,shuo_wang_multiclass_2012}. The approach for solving these sorts of 
+problems normally includes transforming the multi-class classification problem into multi-binary 
+classification problems. Which is one of the reasons the literature is mostly focused on binary 
+classification problems. The multi-class and multi-label classification problem and approaches 
+will be discussed in further details later through this section.
+
+\subsection{Challenges in Imbalanced learning}
+The main issue with the imbalanced problems is that normally, the underrepresented class 
+(minority class instances) is the class of interest of the problem from the application point of 
+view \cite{chawla_automatically_2008}. Usually, standard classifier learning algorithms are biased 
+toward the majority class. 
+
+In a standard learning algorithm, rules for prediction of the instances are positively weighted in 
+favour of the accuracy metric or the corresponding cost function. In such an algorithm, specific 
+rules for prediction of the examples from the minority class can be ignored (it treats them as noise), 
+because more general rules are preferred. As a consequence, compared to instances from the majority 
+class, minority class instances are more often misclassified. The amount of misclassified instances 
+is even greater for highly imbalanced datasets.
+
+By analyzing 26 binary-class datasets in a study, N. Japkowicz \cite{japkowicz_concept-learning_2001} 
+shows how class imbalance impacts minority class classification performance. Figure 8 (being generated 
+from the study) shows that the ratio between the minority and the majority class error rates is the 
+greatest when the dataset is highly imbalanced. It also shows that the above error rate decreases as 
+the amount of class imbalance decreases. With an error rate ratio above 1.0, it shows that class 
+imbalance leads to a poorer performance on classifying minority class elements.
+
+So, in similar problems, accuracy is no longer a proper metric for measuring the model performance 
+in an imbalance scenario. Because it does not distinguish between the numbers of correctly classified 
+examples of different classes. The accuracy only takes into account the total number of correctly 
+classified instances. So, in an imbalance scenario, it often provides a high accuracy value with a 
+very low true positive and a very high true negative value in the confusion matrix. We need to 
+somehow construct classifiers that are biased toward the minority class, without being harmful 
+to the accuracy over the majority class.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/08errorRate.png}
+    \caption{Impact of class imbalance on minority class performance \cite{japkowicz_concept-learning_2001}}
+    \label{fig:errorRate}
+\end{figure}
+
+\textbf{Small sample size:} Generally imbalanced datasets have a lack of minority class examples. 
+The ratio in between the minority and majority class examples indicates the degree of imbalance 
+in a problem. Datasets with the higher degree of imbalance produce greater error rates.
+
+\textbf{Overlapping (class separability):} When the elements from both minority and majority classes 
+are mixed in the feature space, the decision boundary cannot be clearly established. As a result, 
+more general rules will be applied to the problem in the classification phase, which will then lead 
+to misclassifying some instances from the minority class \cite{garcia_k-nn_2008}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/09overlapping.png}
+    \caption{Imbalanced datasets difficulties (a) Class overlapping. (b) Small disjuncts \cite{fernandez_learning_2018}}
+    \label{fig:overlapping}
+\end{figure}
+
+\textbf{Small disjuncts:} this problem occurs when the represented concept by the minority class is 
+formed of subconcepts \cite{weiss_learning_2003}. As an example, in case of protein classification, the transporter 
+proteins are classified into 7 substrate specific classes (amino acid transporter, anion 
+transporter, cation transporter, electron transporter, protein/mRNA transporter, sugar transporter 
+and other transporter). In most of the problems, small disjuncts increase the complexity of the 
+problem because the amount of instances among them is not usually balanced.
+
+\subsubsection{Imabalanced Classification Approaches}
+Various techniques have been developed to correctly classify the minority class examples. 
+These techniques can be categorized into four main groups, depending on the way they deal 
+with the problem.
+
+\textbf{Algorithm level} approaches are the ones trying to bias the existing learning 
+algorithms towards the minority class \cite{lin_support_2002}. 
+To achieve this goal, knowledge of both the corresponding classifier and the application 
+domain is required to comprehend the reasons behind the classifier failure when the 
+class distribution is uneven. 
+ 
+\textbf{Data level} approaches are the ones trying to rebalance the class distribution 
+by resampling the data space \cite{batista_study_2004}, \cite{fernandez_study_2008}. 
+This approach does not need to modify the learning algorithm since the effect caused 
+by the imbalance will decrease after the rebalancing process.
+ 
+\textbf{Cost-sensitive learning} approach falls between data and algorithm level 
+approaches. In order to achieve the desired classification result on the minority 
+class, It incorporates data level transformations and algorithm modifications 
+\cite{ling_test_2006}, \cite{chawla_automatically_2008}. 
+ 
+\textbf{Ensemble-based methods} are usually a combination of an ensemble learning 
+algorithm and one of the approaches above \cite{galar_review_2012}. In the data level ensemble learning 
+approach, the data will be preprocessed before training each classifier. On the 
+other hand, the  cost-sensitive ensemble learning hybrid guides the cost minimization 
+via the ensemble learning algorithm. 
+
+\subsection{Performance Measurement}
+The quality of the trained model is generally evaluated by analyzing how well it performs on the test data 
+\cite{alsheikh-ali_public_2011}. To evaluate the model, the provided predictions of the trained classifier 
+are compared to the true classes of test data and some performance measures will be then calculated. 
+Depending on the provided information by the classifier, we can evaluate the model using either of following approaches:
+
+\textbf{Nominal class} predictions where we compare the predicted class labels with the actual true class values, 
+create a confusion matrix and then calculate the performance measure(s) for evaluating the model.
+
+\textbf{Scoring Predictions} where we use the associated scores (or the probability values) of the predictions 
+to grade test examples according to the likelihood of pertaining to a class and then calculate the required 
+measure for evaluating the model.
+
+For the \textbf{nominal class predictions}, a convenient way for summarizing the performance of classifiers 
+is to create a confusion matrix [\ref{fig:confusionMatrix}]. The columns of the confusion matrix represent the counts of instances in 
+the predicted classes while the rows represent the counts of instances in the actual classes (or vice versa). 
+In this matrix (for a binary class problem), TP and TN (for true positives /true negatives ) indicate the 
+correct classification of positive and negative instances, respectively, and FN and FP 
+(for false negatives /false positives ) indicate positive/negative instances misclassified as 
+negative/positive, respectively. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/10ConfusionMatrix.png}
+    \caption{Confusion Matrix}
+    \label{fig:confusionMatrix}
+\end{figure}
+
+Various performance measures could be calculated using the confusion matrix. These measures correspond 
+to different views of what constitutes a good classifier. Using these different measures we can summarize 
+the confusion matrix into performance metrics so that we can assess the strengths and weaknesses of a 
+classifier from different perspectives.
+
+The first and mostly used measure for evaluating the classification performance is accuracy. 
+Accuracy [\ref{eq:accuracy}] is the ratio of the correctly classified instances to the total instances of 
+the test set. In the confusion matrix, it is the sum of the true positive and the true negative 
+(which in the binary case is TP + TN) divided by the total number of instances. Error rate [\ref{eq:errorRate}] 
+is the percentage of incorrectly classified instances.
+
+\begin{equation}
+    Accuracy = \frac{TP+TN}{N} 
+    \label{eq:accuracy}
+\end{equation}
+
+\begin{equation}
+    Error = 1-Accuracy = \frac{FP+FN}{N} 
+    \label{eq:errorRate}
+\end{equation}
+
+The accuracy / error rate is widely used as a performance measure in various problems. 
+But it is not a proper measure in the imbalance scenario [26]. In a highly imbalanced 
+scenario, It is easy to obtain high accuracy \ref{fig:confusionMatrixSameAccuracy}. 
+It also assumes that errors have an equal cost. But, in the imbalanced classification 
+problem, when compared to the instance of the majority class, misclassifying instances 
+of the minority class is much costlier.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/11ConfusionSameAccuracy.png}
+    \caption{3 confusion matrices with the same accuracy}
+    \label{fig:confusionMatrixSameAccuracy}
+\end{figure}
+
+Due to the drawbacks of the accuracy for assessing the performance of the models in an 
+imbalanced scenario, we need some other measures along with the accuracy through which 
+we could obtain more insight on the performance of the model. There are various measures 
+such as Kappa, G-mean, G-measure, Sensitivity, Specificity, MCC, Precision, Recall, 
+F-Measure etc. that could be calculated from the confusion matrix, but the common ones 
+for the problems with an imbalance datasets are as follow:
+
+\subsubsection{Sensitivity and Specificity:}
+
+The sensitivity of a classifier [\ref{eq:sensitivity}] corresponds to its true positive rate (TPR). 
+It is the proportion of the positive examples being predicted as positive by the model. 
+The complementary metric to the sensitivity is called the specificity of the classifier 
+[\ref{eq:specificity}]. It corresponds to the proportion of negative examples that are being 
+predicted correctly. These two metrics are typically used to assess the effectiveness of 
+a clinical test in detecting a disease.
+
+\begin{equation}
+    Sensitivity = \frac{TP}{TP+FN} 
+    \label{eq:sensitivity}
+\end{equation}
+
+\begin{equation}
+    Specificity = \frac{TN}{TN+FP} 
+    \label{eq:specificity}
+\end{equation}
+
+\subsubsection{MCC}
+The MCC \cite{matthews1975comparison} is a measure that comes from the field of Bioinformatics, 
+where class imbalance occurs very often [\ref{eq:mcc}]. It is a measure that takes into account 
+all values of the confusion matrix, considering errors and correct classification in both classes. 
+MCC ranges from 1 (when the classification is always wrong) to 0 (when it is no better than random) 
+to 1 (when it is always correct).
+
+\begin{equation}
+    MCC = \frac{(TP*TN)-(FP*FN)}{\sqrt(TP+FP)(TP+FN)(TN+FP)(TN+FN)} 
+    \label{eq:mcc}
+\end{equation}
+
+\subsubsection{Precision and Recall}
+
+The precision of a classifier indicates how precise the model is when identifying the examples 
+of a given class [\ref{eq:precision}]. It assesses whether the proportion of the examples being predicted 
+as positive are truly positive or not. In this pair, recall is the same as the Sensitivity measure 
+being mentioned above [\ref{eq:recall}]. These two measures are commonly used together where scientists 
+are interested in the proportion of the identified relevant information along with the amount of 
+actually relevant information.
+
+\begin{equation}
+    Precision = \frac{TP}{TP+FP} 
+    \label{eq:precision}
+\end{equation}
+\begin{equation}
+    Recall = \frac{TP}{TP+FN} 
+    \label{eq:recall}
+\end{equation}
+
+\subsubsection{Geometric Mean}
+Introduced by Kubat et al. \cite{kubat1998machine}, The G-mean [\ref{eq:gmean}] was a response to the class 
+imbalance problem in an effort to create a single metric by combining a pair. This measure takes 
+into account the relative balance of the classifier’s performance on both the positive and the 
+negative classes. By defining a function which takes into account both the sensitivity and the 
+specificity of the classifier.
+
+\begin{equation}
+    G-Mean = \sqrt(Sensitivity*Specificity) 
+    \label{eq:gmean}
+\end{equation}
+
+\subsubsection{F-Measure}
+The F-measure is a combination metric whose purpose is to combine the values of the precision and 
+recall of a classifier to a single scalar [\ref{eq:fmeasure}]. It does so in a different way than the G-mean, 
+as it allows the user to weigh the contribution of each component as desired.
+
+\begin{equation}
+    F \alpha = \frac{(1+\alpha)[Precision*Recall]}{[\alpha*Precision]+Recall} 
+    \label{eq:fmeasure}
+\end{equation}
+
+\subsubsection{Scoring Predictions}
+
+Let’s consider a classifier that gives a numeric score or a probability of an instance belonging to a 
+class. Therefore, instead of a simple positive or negative prediction, we will have a score 
+(probability value) for each predicted instance. instances with higher probabilities are more 
+likely to have to be classified as positive.
+
+Having a probability value (or a score) for an instance, gives us more control over the results. 
+We can determine our own threshold to interpret the result of the classifier. Different thresholds 
+will result in different values for the confusion matrix elements (TP, TN, FP, FN) which leads to 
+different values for the calculated measures (e.g sensitivity, specificity, etc.).
+
+A higher threshold will reduce the false positive rate (FPR) and increase the false negative rate 
+(FNR), because less instances will be classified as positive. On the other hand, a lower threshold 
+will increase the FPR and reduce the FNR value. To evaluate these kinds of models, we use the ROC curve.
+
+The ROC curve [14] is a graphical evaluation method that is not dependent 
+on a specific threshold. A ROC graph is a plot of False Positive Rate (FPR) on the x-axis, and 
+True Positive Rate (TPR) on the y-axis. The threshold starts with the one that produces the highest 
+score, all the way to the lowest score. For each possible value of the threshold, there is a point 
+in the ROC space based on the values of FPR and TPR for that threshold.
+
+The AUC (or the Area Under Curve) of the ROC can be interpreted as the probability that the 
+probabilities (or scores) given by a classifier will rank a randomly chosen positive instance 
+higher than a randomly chosen negative one. The AUC ROC of random guessing is 0.5, so it is 
+expected that the AUC ROC for a useful classifier is higher than 0.5 and the ideal classifier 
+would produce an AUC ROC value of 1.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/12RocExample.png}
+    \caption{Sample ROC graph}
+    \label{fig:roc}
+\end{figure}
+
+
+\subsection{Dealing with multiple classes}
+
+Traditionally, when we talk about imbalance classification, we refer to a binary classification problem with one class having more instances (majority) than the other one (minority) [9, 47, 67, 78, 92]. However, there are many cases in real life that we have to deal with more than two classes. Target detection [83],  microarray research [105] and protein classification [112] are among those topics where we face multiple classes of data and the distribution of examples among the classes is not homogeneous.
+ 
+In such cases, the problem that must be taken into account is the presence of multi-minority and multi-majority classes [98] which somehow implies that we can no longer just focus on a single class to reinforce the learning models towards it. Also, any further complication (e.g. overlapping classes) can affect the problem severely and must be analyzed in depth [94].
+
+To address all the issues, a simple and effective way is to somehow decompose the multi-class imbalance problem into multiple binary-class problems with an imbalanced dataset. We can then assign a classifier to each decomposed problem and the outputs of all the classifiers for a given instance will be aggregated to make the final decision [58]. Therefore, the difficulty in addressing the multi-class problem will be shifted from the classifier itself to the combination stage. 
+
+The underlying idea is to undertake the multi-classification using binary classifiers with a divide and conquer strategy. Among decomposition strategies, the most popular techniques are the One-vs-One (OVO) [46, 53] and One-vs-All (OVA) [5, 18].
+
+\subsubsection{The One-vs-All Scheme (OVA) }
+
+\subsubsection{The One-vs-One Scheme (OVO) }
+
+\subsubsection{Multi-class Classification vs Multi Label Classification}
+
+\subsubsection{Aggregation}
+
+\subsubsection{Threshold-Moving}
+
+\subsubsection{Micro averaging vs Macro averaging}
+
+\subsubsection{Support Vector Machine (SVM)}
+
+\subsubsection{SVM Implementation Library(SVMLight, Scikit-Learn)}
