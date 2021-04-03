@@ -12,3 +12,6 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces Confusion Matrix\relax }}{19}{figure.caption.19}
 \contentsline {figure}{\numberline {11}{\ignorespaces 3 confusion matrices with the same accuracy\relax }}{20}{figure.caption.20}
 \contentsline {figure}{\numberline {12}{\ignorespaces Sample ROC graph\relax }}{23}{figure.caption.27}
+\contentsline {figure}{\numberline {13}{\ignorespaces Sample OVA binarization technique for a 3-class problem \cite {fernandez_learning_2018}\relax }}{24}{figure.caption.29}
+\contentsline {figure}{\numberline {14}{\ignorespaces Sample OVO binarization technique for a 3-class problem \cite {fernandez_learning_2018}\relax }}{25}{figure.caption.31}
+\contentsline {figure}{\numberline {15}{\ignorespaces Support Vector Machine boundries for an imbalanced dataset: (left) standard approach; (right) instance-level weighting \cite {fernandez_learning_2018}\relax }}{28}{figure.caption.37}

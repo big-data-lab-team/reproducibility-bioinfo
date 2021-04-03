@@ -24,11 +24,11 @@
 \contentsline {subsubsection}{F-Measure}{22}{section*.25}
 \contentsline {subsubsection}{Scoring Predictions}{22}{section*.26}
 \contentsline {subsection}{\numberline {2.3.4}Dealing with multiple classes}{23}{subsection.2.3.4}
-\contentsline {subsubsection}{The One-vs-All Scheme (OVA) }{24}{section*.28}
-\contentsline {subsubsection}{The One-vs-One Scheme (OVO) }{24}{section*.29}
-\contentsline {subsubsection}{Multi-class Classification vs Multi Label Classification}{24}{section*.30}
-\contentsline {subsubsection}{Aggregation}{24}{section*.31}
-\contentsline {subsubsection}{Threshold-Moving}{24}{section*.32}
-\contentsline {subsubsection}{Micro averaging vs Macro averaging}{24}{section*.33}
-\contentsline {subsubsection}{Support Vector Machine (SVM)}{24}{section*.34}
-\contentsline {subsubsection}{SVM Implementation Library(SVMLight, Scikit-Learn)}{24}{section*.35}
+\contentsline {subsubsection}{The One-vs-All Scheme (OVA)}{24}{section*.28}
+\contentsline {subsubsection}{The One-vs-One Scheme (OVO)}{25}{section*.30}
+\contentsline {subsubsection}{Multi-class Classification vs Multi Label Classification}{25}{section*.32}
+\contentsline {subsubsection}{Aggregation}{26}{section*.33}
+\contentsline {subsubsection}{Threshold-Moving}{26}{section*.34}
+\contentsline {subsubsection}{Micro averaging vs Macro averaging}{27}{section*.35}
+\contentsline {subsubsection}{Support Vector Machine (SVM)}{28}{section*.36}
+\contentsline {subsubsection}{SVM Implementation Library(SVMLight, Scikit-Learn)}{31}{section*.38}

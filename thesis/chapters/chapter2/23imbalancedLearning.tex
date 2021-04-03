@@ -126,14 +126,14 @@ domain is required to comprehend the reasons behind the classifier failure when 
 class distribution is uneven. 
  
 \textbf{Data level} approaches are the ones trying to rebalance the class distribution 
-by resampling the data space \cite{batista_study_2004}, \cite{fernandez_study_2008}. 
+by resampling the data space \cite{batista_study_2004,fernandez_study_2008}. 
 This approach does not need to modify the learning algorithm since the effect caused 
 by the imbalance will decrease after the rebalancing process.
  
 \textbf{Cost-sensitive learning} approach falls between data and algorithm level 
 approaches. In order to achieve the desired classification result on the minority 
 class, It incorporates data level transformations and algorithm modifications 
-\cite{ling_test_2006}, \cite{chawla_automatically_2008}. 
+\cite{ling_test_2006,chawla_automatically_2008}.
  
 \textbf{Ensemble-based methods} are usually a combination of an ensemble learning 
 algorithm and one of the approaches above \cite{galar_review_2012}. In the data level ensemble learning 
@@ -298,7 +298,7 @@ A higher threshold will reduce the false positive rate (FPR) and increase the fa
 (FNR), because less instances will be classified as positive. On the other hand, a lower threshold 
 will increase the FPR and reduce the FNR value. To evaluate these kinds of models, we use the ROC curve.
 
-The ROC curve [14] is a graphical evaluation method that is not dependent 
+The ROC curve \cite{fawcett2006introduction} is a graphical evaluation method that is not dependent 
 on a specific threshold. A ROC graph is a plot of False Positive Rate (FPR) on the x-axis, and 
 True Positive Rate (TPR) on the y-axis. The threshold starts with the one that produces the highest 
 score, all the way to the lowest score. For each possible value of the threshold, there is a point 
@@ -320,26 +320,277 @@ would produce an AUC ROC value of 1.
 
 \subsection{Dealing with multiple classes}
 
-Traditionally, when we talk about imbalance classification, we refer to a binary classification problem with one class having more instances (majority) than the other one (minority) [9, 47, 67, 78, 92]. However, there are many cases in real life that we have to deal with more than two classes. Target detection [83],  microarray research [105] and protein classification [112] are among those topics where we face multiple classes of data and the distribution of examples among the classes is not homogeneous.
+Traditionally, when we talk about imbalance classification, we refer to a binary classification 
+problem with one class having more instances (majority) than the other one (minority)
+\cite{haibo_he_learning_2009, branco2015survey}. However, there are many cases in real life 
+that we have to deal with more than two classes. Target detection \cite{razakarivony2016vehicle},  
+microarray research \cite{yu2013recognition} and protein classification \cite{zhao2008protein} 
+are among those topics where we face multiple classes of data and the distribution of examples among 
+the classes is not homogeneous.
  
-In such cases, the problem that must be taken into account is the presence of multi-minority and multi-majority classes [98] which somehow implies that we can no longer just focus on a single class to reinforce the learning models towards it. Also, any further complication (e.g. overlapping classes) can affect the problem severely and must be analyzed in depth [94].
+In such cases, the problem that must be taken into account is the presence of multi-minority 
+and multi-majority classes \cite{wang2016dealing} which somehow implies that we can no 
+longer just focus on a single class to reinforce the learning models towards it. Also, 
+any further complication (e.g. overlapping classes) can affect the problem severely and must be 
+analyzed in depth \cite{saez2016analyzing}.
 
-To address all the issues, a simple and effective way is to somehow decompose the multi-class imbalance problem into multiple binary-class problems with an imbalanced dataset. We can then assign a classifier to each decomposed problem and the outputs of all the classifiers for a given instance will be aggregated to make the final decision [58]. Therefore, the difficulty in addressing the multi-class problem will be shifted from the classifier itself to the combination stage. 
+To address all the issues, a simple and effective way is to somehow decompose the multi-class 
+imbalance problem into multiple binary-class problems with an imbalanced dataset. We can 
+then assign a classifier to each decomposed problem and the outputs of all the classifiers 
+for a given instance will be aggregated to make the final decision \cite{kuncheva2014combining}. 
+Therefore, the difficulty in addressing the multi-class problem will be shifted from the classifier 
+itself to the combination stage. 
 
-The underlying idea is to undertake the multi-classification using binary classifiers with a divide and conquer strategy. Among decomposition strategies, the most popular techniques are the One-vs-One (OVO) [46, 53] and One-vs-All (OVA) [5, 18].
+The underlying idea is to undertake the multi-classification using binary classifiers 
+with a divide and conquer strategy. Among decomposition strategies, the most popular 
+techniques are the One-vs-One (OVO) \cite{hastie1998classification,knerr1990single}
+and One-vs-All (OVA) \cite{clark1991rule,anand1995efficient}.
 
-\subsubsection{The One-vs-All Scheme (OVA) }
+\subsubsection{The One-vs-All Scheme (OVA)}
+In OVA decomposition strategy, a problem with $n$ classes of instances is divided into $n$ 
+binary problems. An independent classifier will be then assigned to each binary sub-problem which 
+is responsible for distinguishing one of the classes from all other classes. The learning 
+step of the classifiers is done using the whole training data, considering the patterns from 
+the single class as positives and all other examples as negatives. \ref{fig:ova} shows the OVA 
+binarization technique for a 3-class problem.
 
-\subsubsection{The One-vs-One Scheme (OVO) }
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/11ova.png}
+    \caption{Sample OVA binarization technique for a 3-class problem \cite{fernandez_learning_2018}}
+    \label{fig:ova}
+\end{figure}
+
+\subsubsection{The One-vs-One Scheme (OVO)}
+In this strategy, a problem with $n$ classes is divided into $n*(n+1)/2$  binary class 
+problems (one for each possible pair of classes). An independent classifier will be then 
+assigned to each binary sub-problem. For each binary subset, the learning phase is then 
+carried out using a subset of the original training instances with only those that contain 
+any of the two classes. And the instances with different class labels are simply ignored. 
+\ref{fig:ovo} shows the OVO binarization technique for a 3-class problem.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/12ovo.png}
+    \caption{Sample OVO binarization technique for a 3-class problem \cite{fernandez_learning_2018}}
+    \label{fig:ovo}
+\end{figure}
 
 \subsubsection{Multi-class Classification vs Multi Label Classification}
+Multi-class classification refers to a classification task with more than two classes. The 
+classification makes the assumption that one and only one label will be assigned to an instance  
+through the prediction phase. As an example we can consider a fruit image classification problem 
+with 3 classes of Orange, Apple and Tangerine. Using a multi-class classification approach, 
+through the prediction phase, an image can be either an apple or an orange or a tangerine.
+ 
+Multi-label (multi-output) classification on the other hand, is a generalization of multiclass 
+classification where multiple labels may be assigned to each instance. As an example, we can 
+consider a comment classification problem with 4 classes of Positive, Negative, Toxic, Insulting. 
+Using a multi-label classification approach, an instance can be both Negative and Toxic. 
+While another one can be just Negative.
 
 \subsubsection{Aggregation}
+After decomposing the initial multi-class problem into multiple binary class problems, a classifier 
+will be assigned to each problem. As an example, in an OVA case, a problem with 3 classes 
+(labeled as Orange, Tangerine and Apple) will be decomposed into a 3 binary class problem with its 
+own classifier.  In order to classify a new example, the instance will be submitted to all the 
+classifiers. Then, the predictions of all the classifiers are considered in the combination phase, 
+which is also known as classifier fusion or aggregation \cite{wozniak2014survey}.
+
+In case of Multi-class classification problems, since we are looking for one and only one prediction 
+for each instance, in the aggregation phase, the result with the highest score/probability will 
+be chosen as the final prediction for that instance. In the example mentioned above,  if 
+classifier 1 predicts Orange with 0.75, classifier 2 predicts not a Tangerine with 0.64 and 
+classifier 3 predicts Apple with 0.82, then the final predicted label will be an Apple. The 
+predicted results are then put together and compared to the actual labels to generate the 
+confusion matrix which is then used to calculate the performance matrix.
+
+In case of Multi-label classification problems, since all the labels are acceptable, then all 
+will be considered. As an example, in a comment classification problem, a comment can be both 
+Negative and an Insult. 
+
 
 \subsubsection{Threshold-Moving}
+Many machine learning algorithms are capable of producing a probability or a score value for 
+an instance of a dataset. This value needs to be interpreted before being mapped to a class 
+label. The decision for converting a predicted probability or scoring into a class label is 
+governed by a parameter referred to as the “decision threshold,” “discrimination threshold,” 
+or simply the “threshold.” The default value for the threshold is 0.5 for normalized predicted 
+probabilities or scores in the range between 0 or 1.
+
+When studying problems with imbalanced data, using the classifiers produced by standard 
+machine learning algorithms without adjusting the output threshold may well be a critical 
+mistake” \cite{provost_machine_2000}. So, for those classification problems with an 
+imbalance dataset, the default threshold can result in poor performance. A simple and 
+straightforward approach for improving the performance of a classifier that predicts and 
+produces probability values for instances of an imbalanced classification problem, is 
+tuning the default threshold being used by the algorithm for mapping the probability 
+values to class labels.
+
+In a problem, if a specific threshold is considered, the threshold should be applied to each 
+classifier before the aggregation phase. For example in the case of the classifier for Oranges, 
+Tangerines and Apples, if the considered threshold is 0.71 (which means the scores/probabilities 
+above that threshold is considered as positive) then the results will be Oranges (classifier 1), 
+not a Tangerine (classifier 2) and not an Apple (Classifier 3). Which then leads to the final 
+prediction of the Orange as the label for the instance after aggregation. The threshold-moving 
+effect could be observed and analyzed through the ROC/AUC  or Precision/Recall curves.
 
 \subsubsection{Micro averaging vs Macro averaging}
+Considering a performance metric $P$ being calculated based on the confusion matrix elements 
+(true positives ($tp$), true negatives ($tn$), false positives ($fp$),false negatives ($fn$). 
+The macro and micro averages of a specific measure can be calculated as follow:
+
+\begin{equation}
+    P_{macro} = \frac{1}{q} \sum_{q}^{\lambda =1} P(tp_{\lambda},tn_{\lambda},fp_{\lambda},fn_{\lambda})
+    \label{eq:macro}
+\end{equation}
+
+\begin{equation}
+    P_{macro} = P (\sum_{q}^{\lambda =1}tp_{\lambda}, \sum_{q}^{\lambda =1}tn_{\lambda}, \sum_{q}^{\lambda =1}fp_{\lambda}, \sum_{q}^{\lambda =1}tp_{\lambda})
+    \label{eq:micro}
+\end{equation}
+Where $\lambda$ is a Label and $L = {\lambda_{j}: j= 1...q}$ is the set of all labels.
+
+For a problem in machine learning, normally, we take different samples from a dataset and then 
+we run the model on all of those samples independently to estimate the skill of a machine learning 
+model on the unseen data. A popular technique in this area is k-fold cross validation 
+\cite{james_introduction_2013}. In order to produce the final metrics for a model, we need 
+to average in between a performance metric (e.g. sensitivity) of different classifiers in 
+a model or multiple models on different samples of data (which is the case in multi-class 
+or multi-label classification problems). The averaging could be done by either macro or 
+micro averaging approach which can produce different results.
+
+Micro and macro-averages compute slightly different things. So, their generated result's interpretation is 
+different from one another. Macro-average approach, computes the metric independently for each class 
+and then takes the average (hence treating all classes equally), whereas the micro-average approach, 
+aggregates the contributions of all classes to compute the average metric \cite{sokolova_systematic_2009}. 
+For imbalanced problems involving multiple classes, the micro-averaging approach is preferable.
+
 
 \subsubsection{Support Vector Machine (SVM)}
+Algorithm-level solutions concentrate on modifying existing learners methods for handling 
+imbalanced datasets. Instead of focusing on modifying the training set in order to combat 
+class skew, this approach aims at modifying the classifier learning procedure itself to 
+alleviate their bias towards majority class instead on altering the supplied 
+training set \cite{krawczyk2016learning}.
+
+Due to their powerful generalization abilities, convergent properties and flexibility in 
+adapting to various learning difficulties, Support Vector Machines (SVMs)\cite{vapnik2013nature} 
+are among the most popular algorithms for pattern classification in this category. 
+The algorithm is effective in high dimensional spaces and it accepts different Kernel 
+functions for the decision making process.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.60\textwidth]{figures/13svmAlgorithm.png}
+    \caption{Support Vector Machine boundries for an imbalanced dataset: 
+    (left) standard approach; (right) instance-level 
+    weighting \cite{fernandez_learning_2018}}
+    \label{fig:svmBoundries}
+\end{figure}
+
+Fernandez et al \cite{fernandez_learning_2018} explains the support vector machine, involved parameters 
+and the algorithm's related imbalanced classification concerns as:
+
+SVM algorithm aims at finding the optimal hyperplane which separates instances into two 
+classes. Traditional linear classifiers offer many desirable properties, but they are not 
+able to cope with complex data structures. SVM transforms the input instances into a higher 
+dimensional artificial feature space(s). So, by using a non-linear mapping $\theta$, 
+it can achieve a linear separation between classes in the new space, 
+which in turn translates to a non-linear decision boundary in the original feature space. 
+The potential separating hyperplane can be represented as:
+
+\begin{equation}
+    w.\theta(x)+b=0
+    \label{eq:svmBasic}
+\end{equation}
+Where $w$ stands for a weight vector normal to this hyperplane. In case of considered data 
+are linearly separable, the decision hyperplane characterized by a maximum margin can be 
+obtained by optimization of margin as: $ min(1/2 w.w) $ subject to 
+$\forall_{i=1...l}, y_{i}(w.\theta(x_{i})+b)\geq 1$ where $l$ stands for the number of training instances.
+
+However, datasets are rarely linearly separable. So, we need to modify the 
+the equation to include the possibilities of classifying some of training instances, 
+to achieve greater generalization and reduce overfitting. This is 
+done by using slack variable associated with $i-th$ instance $\epsilon_{i} \geq 0$. 
+This allows to rewrite the margin optimization problem as soft margin:
+
+\begin{equation}
+    min(\frac{1}{2}w.w+C\sum_{i=1}^{l}\epsilon_{i}) \\
+    \label{eq:svmSoftMargin}
+\end{equation}
+Subject to $\forall_{i=1...l}, \forall_{\epsilon\geq0}, y_{i}(w.\theta(x_{i})+b)\geq 1-\epsilon_{i}$
+Where $C$ stands for the regularization parameter that controls the trade-off between maximizing 
+the separation margin between classes and minimizing the number of misclassified instances.
+This is a quadratic optimization problem that can be solved by transforming it into 
+Lagrangian optimization problem with the following dual form:
+
+\begin{equation}
+    max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} \theta(x_{i}).\theta(x_{j}) \right )
+    \label{eq:svmLagrange}
+\end{equation}
+Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
+As learning the mapping function $\theta(x)$ may be difficult or even impossible, SVMs use kernel 
+functions $K(x_{i},x_{j})=\theta(x_{i}).\theta(x_{j})$. So, would be able to write the dual optimization 
+problem in its kernelized form as:
+
+\begin{equation}
+    max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} K(x_{i},x_{j}) \right )
+    \label{eq:svmOptimization}
+\end{equation}
+Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
+Solving this kernelized dual optimization form and finding optimal values of $\alpha_{i}$ allows us 
+to calculate $w=\sum i = l\alpha_{i}y_{i}\theta(x_{i})$ and determine value of parameter $b$ from 
+Karush-Kuhn-Tucker conditions. Training instances with associated non-zero values of $\alpha_{i}$ 
+are known as support vectors and deemed as sufficient to represent the training set. 
+Therefore, SVMs achieve instance reduction by relying only on support vectors. This will lead to 
+the following equation:
+
+\begin{equation}
+    f(x)= sign (w.\theta(x)+b) = sign \left ( \sum_{i=1}^{l}\alpha_{i}y{i}K(x_{i},x)+b \right )
+    \label{eq:svmFinal}
+\end{equation}
+
+But, in its original form, SVM is prone to imbalanced class distributions. The first problem 
+is about the soft margin optimization task \ref{eq:svmSoftMargin}.The regularization parameter 
+$C$ here is the misclassification cost for penalizing errors on the training set. But, it 
+assumes that the cost assigned to both of classes are identical. Therefore, the learning 
+algorithm will favor the majority class over the minority class.
+
+Another potential drawback of SVM is related to the support vectors derived from imbalanced data. 
+Only instances with $\alpha_{i} \geq0$ will be preserved and used as support vectors. As this 
+process is also skew-insensitive, the larger imbalance ratio will lead to bigger disproportions in 
+the number of support vectors associated with each class. 
+
+Following algorithm-level solutions has been proposed to overcome these shortcomings:
+\begin{itemize}
+    \item \small{Kernel Modifications}
+    \item \small{Kernel Boundary and Margin Shift}
+    \item \small{Kernel Target Alignment}
+    \item \small{Kernel Scaling}
+    \item \small{Weighted Approaches}
+    \item \small{Instance Weighting}
+    \item \small{Support Vector Weighting}
+    \item \small{Fuzzy Approaches}
+\end{itemize}
+
+The idea here is to provide a perspective over how an imbalance classification can be different 
+from a balanced one. There are way more parameters involved in a simple classification problem 
+and failing to report on those details could easily result in an irreproducible experiment.
 
 \subsubsection{SVM Implementation Library(SVMLight, Scikit-Learn)}
+If you want to use an implementation of the support vector machine algorithm in a model,  
+SVMLight is an implementation of Vapnik's Support Vector Machine \cite{vapnik2013nature} 
+in C. According  to the description being provided by it’s creator 
+Thorsten Joachims \cite{joachims2002learning}, It can be used in pattern recognition, 
+regression and learning a ranking function. The software also provides methods for assessing 
+the generalization performance.
+
+Another popular library for machine learning is Scikit-learn \cite{Pedregosa2011scikitlearn} 
+that provides a wide range of functionalities for machine learning problems. As a part of 
+it's library, it provides an implementation of the Support Vector Machine algorithm with 
+more options. The support vector machines in scikit-learn support both dense 
+($numpy.ndarray$ and convertible to that by $numpy.asarray$) and sparse 
+(any $scipy.sparse$) sample vectors as input. However, to use an SVM to make predictions 
+for sparse data, it must have been fit on such data. For optimal performance, use C-ordered 
+$numpy.ndarray$ (dense) or $scipy.sparse.csr_matrix$ (sparse) with $dtype=float64$.
