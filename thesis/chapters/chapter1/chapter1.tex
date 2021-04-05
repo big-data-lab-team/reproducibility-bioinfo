@@ -1,3 +1,59 @@
 \chapter{Introduction}
-\section{Introduction}
-Sample Text \cite{Sample}
+Reproducibility, the ability to reproduce computational results using identical data 
+and software~\cite{peng2011reproducible}, is a cornerstone of scientific methodology. 
+In the past decade, however, several studies revealed a widespread lack of results 
+reproducibility, to the point that the existence of a reproducibility crisis is 
+now acknowledged in various fields~\cite{baker_1500_2016}.
+
+Counter-measures were identified to improve results reproducibility~\cite{sandve2013ten}, 
+among which study pre-registrations~\cite{chambers2015registered}, open data and software
+sharing~\cite{wilkinson2016fair}, and best practices~\cite{nichols2017best} to report 
+computational experiments. The latter, in particular, is critical given the important 
+methodological flexibility associated with computational experiments~\cite{carp2012plurality}.
+
+Machine Learning experiments are not immune to reproducibility
+issues~\cite{raff2019step}, in particular given the flexibility available in
+data pre-processing, train/test set definitions, algorithm selection and
+parametrization, library implementations, and evaluation metrics. 
+In case of imbalance learning for problems with multiple classes, 
+the problem is even more severe since there are more parameters in play for constructing 
+a computational model. The resulting reproducibility challenges have implications in various
+disciplines including bioinformatics, the primary focus of our study.
+
+
+Membrane proteins are vital molecules that act as gatekeepers to a cell. 
+It is estimated that one in every three proteins found in a cell is a membrane 
+protein~\cite{cell2016Membranes}.  In a living organism, they play several important roles such as: 
+cell signaling,  transportation of  molecules and nutrients across the membrane of a cell, 
+energy production and foreign bodies recognition~\cite{kozma2012pdbtm}. Considering the contribution of 
+these molecules to cell functionalities, defects in membrane proteins could lead to 
+different diseases~\cite{gromiha2014bioinformatics}. 
+
+Today, almost half of the drugs target these proteins~\cite{butt2017treatise}. 
+Due to the hydrophobic surfaces of these molecules and their lack of conformational stability, 
+using conventional experimental methods for annotation of these proteins are time-consuming, 
+costly and sometimes impossible. So, researchers have turned into computational 
+intelligent techniques for annotation and prediction of the structure and functionalities of the membrane proteins
+~\cite{gromiha2006discrimination,gromiha2008functional,ou2010classification,schaadt2012functional,butt2016prediction}. 
+Year after year, with advances in technology, researchers can use cheaper and 
+faster sequencing methods (more data for their problems), new computational intelligent 
+techniques and software tools. In search for more accurate and generalizable results, 
+reproducible studies allows applying the same technique on new datasets and new techniques 
+on the initial ones.
+
+This work presents a reproducibility study of a classification problem with an imbalanced dataset 
+involving multiple classes which is a common case when dealing with proteins in bioinformatics. 
+We report our attempts to reproduce a membrane protein classification problem with an imbalanced 
+dataset~\cite{mishra_prediction_2014}, showing the impact of methodological
+flexibility on classification performance, and deriving best practices to
+report Machine Learning results for similar problems. We explore
+methodological options related to data preparation, hyperparameter tuning,
+classifier implementation, aggregation of binary classifiers for
+multi-class classification, and prediction method for final labels. The
+resulting variations emulate the range of results that might be obtained by
+reasonably skilled experimenters aiming at reproducing the same model.
+
+The work in~\cite{mishra_prediction_2014}
+is a reference contribution that we selected given
+the availability of its input data, the quality of its writing and methods
+reporting, and its overall impact in the field. 
