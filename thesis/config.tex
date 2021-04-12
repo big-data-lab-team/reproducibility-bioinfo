@@ -50,4 +50,31 @@
 % \newcommand{\heading}[1]{\paragraph{#1}\mbox{}\\}
 
 % \newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
+\usepackage{multirow}
+\usepackage{color, colortbl}
+\usepackage{changepage}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+
+\definecolor{gray}{gray}{0.9}
+\definecolor{teal}{RGB}{0, 120, 120}
+\definecolor{teal2}{RGB}{0, 100, 30}
+\definecolor{brickred}{RGB}{199, 59, 55}
+
 \newcommand{\linkto}[1]{\footnotesize{\url{#1}}  \normalsize}
+\newcommand{\mrko}[1]{\color{brickred}{#1}\color{black}}
+\newcommand{\mrkm}[5]{
+        \color{brickred}{#1}&\color{brickred}{#2}&
+        \color{brickred}{#3}&\color{brickred}{#4}&
+        \color{brickred}{#5} \color{black}}
+\newcolumntype{g}{>{\small\columncolor{gray}}c}
+\newcolumntype{x}{>{\small\columncolor{gray}}l}
+\newcolumntype{C}{>{\small}c}
+\newcolumntype{V}{>{\footnotesize}c}
+\newcolumntype{L}[1]{>{\small}l{#1}}
+\newcolumntype{P}[1]{>{\small}p{#1}}

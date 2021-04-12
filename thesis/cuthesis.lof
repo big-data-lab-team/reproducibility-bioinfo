@@ -17,3 +17,7 @@
 \contentsline {figure}{\numberline {15}{\ignorespaces Support Vector Machine boundries for an imbalanced dataset: (left) standard approach; (right) instance-level weighting \cite {fernandez_learning_2018}\relax }}{29}{figure.caption.37}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {16}{\ignorespaces The study process\relax }}{38}{figure.caption.39}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {17}{\ignorespaces Sensitivity and Specificity of each tested model. Each panel contains models trained with a fixed number of categories (7: left; 8: right), and shows the published reference performance in red. The closest 10\% of models to this reference have been outlined in black. The symbol colour and shape refer to the classifier type and aggregation strategy, respectively. Each shaded region illustrates the bounds of performance for a given binary classifier aggregation strategy.\relax }}{40}{figure.caption.40}
+\contentsline {figure}{\numberline {18}{\ignorespaces MCC results from applying the closest 10\% models to all the features. The hybrid model that included the AAindex and the PSSM profile (7th box), outperforms others.\relax }}{50}{figure.caption.57}
+\addvspace {10\p@ }

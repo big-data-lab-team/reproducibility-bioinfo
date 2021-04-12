@@ -1,3 +1,14 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1}{\ignorespaces The average sensitivity, specificity, accuracy, and MCC for 7 class-based models.\relax }}{42}{table.caption.48}
+\contentsline {table}{\numberline {2}{\ignorespaces The average sensitivity, specificity, accuracy, and MCC for 8 class-based models.\relax }}{43}{table.caption.49}
+\contentsline {table}{\numberline {3}{\ignorespaces The average sensitivity, specificity, accuracy, and MCC values for scikit-learn prediction-based models for amino acid composition (AAC).\relax }}{44}{table.caption.50}
+\contentsline {table}{\numberline {4}{\ignorespaces The results from running 10\% best models on the hybrid feature set including AAindex and PSSM for both main and independent datasets. This feature set outperfms the other 18 combinations.\relax }}{44}{table.caption.51}
+\contentsline {table}{\numberline {5}{\ignorespaces The results from running 10\% best models for DPC, PHC, AAindex and PSSM feature sets on main dataset.\relax }}{45}{table.caption.52}
+\contentsline {table}{\numberline {6}{\ignorespaces The results from running 10\% best models for AAC+DPC, AAC+PHC, AAC+AAindex and AAC+PSSM hybrid feature sets on main dataset.\relax }}{46}{table.caption.53}
+\contentsline {table}{\numberline {7}{\ignorespaces The results from running 10\% best models for DPC+PHC, DPC+AAindex, DPC+PSSM and AAindex+PHC hybrid feature sets on main dataset.\relax }}{47}{table.caption.54}
+\contentsline {table}{\numberline {8}{\ignorespaces The results from running 10\% best models for AAC+DPC+PHC, AAC+DPC+AAindex, AAC+DPC+PSSM and AAindex+PSSM hybrid feature sets on main dataset.\relax }}{48}{table.caption.55}
+\contentsline {table}{\numberline {9}{\ignorespaces The results from running 10\% best models for AAC+AAindex+PHC, AAC+AAindex+PSSM, hybrid feature sets on main dataset.\relax }}{49}{table.caption.56}
+\addvspace {10\p@ }

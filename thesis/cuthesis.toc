@@ -1,5 +1,5 @@
-\contentsline {chapter}{List of Figures}{vi}{chapter*.2}
-\contentsline {chapter}{List of Tables}{vii}{chapter*.3}
+\contentsline {chapter}{List of Figures}{vii}{chapter*.2}
+\contentsline {chapter}{List of Tables}{ix}{chapter*.3}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {chapter}{\numberline {2}Background}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Reproducible Experiment}{3}{section.2.1}
@@ -35,7 +35,17 @@
 \contentsline {section}{\numberline {3.1}Dataset}{33}{section.3.1}
 \contentsline {section}{\numberline {3.2}Model Flexibility}{34}{section.3.2}
 \contentsline {section}{\numberline {3.3}Experimental Design}{35}{section.3.3}
-\contentsline {section}{\numberline {3.4}Training}{36}{section.3.4}
-\contentsline {section}{\numberline {3.5}Model Hyperparameters}{36}{section.3.5}
-\contentsline {section}{\numberline {3.6}Performance Evaluation}{36}{section.3.6}
-\contentsline {section}{\numberline {3.7}Model Comparison}{37}{section.3.7}
+\contentsline {subsection}{\numberline {3.3.1}Training}{36}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Model Hyperparameters}{36}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Performance Evaluation}{36}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Model Comparison}{37}{section.3.4}
+\contentsline {chapter}{\numberline {4}Results}{39}{chapter.4}
+\contentsline {paragraph}{Number of Classes}{39}{section*.41}
+\contentsline {paragraph}{Dataset Sampling}{40}{section*.42}
+\contentsline {paragraph}{SVM Hyperparameters}{40}{section*.43}
+\contentsline {paragraph}{Hypterparamter Heterogeneity}{40}{section*.44}
+\contentsline {paragraph}{Aggregation Technique}{40}{section*.45}
+\contentsline {paragraph}{Prediction Method}{41}{section*.46}
+\contentsline {paragraph}{Tool}{41}{section*.47}
+\contentsline {section}{\numberline {4.1}Closest Models}{41}{section.4.1}
+\contentsline {chapter}{\numberline {5}conclusion}{51}{chapter.5}
