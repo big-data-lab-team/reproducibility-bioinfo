@@ -1,0 +1,32 @@
+\documentclass[12pt]{report}
+
+\include{config}
+\include{constants}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfiles}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize, labelfont=footnotesize}
+
+\begin{document}
+
+\include{pages/abstract}
+\include{pages/acknowledgements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Body of Thesis goes here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%To inlcude new chapter add "\include{chapters/chapter-no/chapter-no.tex"
+\include{chapters/chapter1/chapter1}
+\include{chapters/chapter2/chapter2}
+\include{chapters/chapter3/chapter3}
+\include{chapters/chapter4/chapter4}
+\include{chapters/chapter5/chapter5}
+
+%You can edit your citation style by changing the name in \bibliographystyle{plain} --> \bibliographystyle{new style name}
+\bibliographystyle{plain}
+%Add the bibilography file name below
+\bibliography{bibfile}
+
+\end{document}

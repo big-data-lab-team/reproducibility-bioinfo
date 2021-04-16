@@ -1,0 +1,23 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces Reproducible, Replicable, Robust and Generalizable research \cite {whitaker_showing_2017}\relax }}{5}{figure.caption.7}
+\contentsline {figure}{\numberline {2}{\ignorespaces Studies with Low, Medium and High degree of Reproducibility\relax }}{7}{figure.caption.10}
+\contentsline {figure}{\numberline {3}{\ignorespaces Reproducibility crisis related results of the survey conducted by Nature in 2016 \cite {baker_1500_2016}\relax }}{8}{figure.caption.11}
+\contentsline {figure}{\numberline {4}{\ignorespaces publications recorded in the Scopus that have, in the title or abstract, at least one of the reproducibility-related expressions \cite {goodman_what_2016}\relax }}{10}{figure.caption.12}
+\contentsline {figure}{\numberline {5}{\ignorespaces Disciplines contributed to the formation of bioinformatics \cite {bayat_science_2002}\relax }}{12}{figure.caption.13}
+\contentsline {figure}{\numberline {6}{\ignorespaces Main biological problems where computational methods are applied \cite {larranaga_machine_2006}\relax }}{13}{figure.caption.14}
+\contentsline {figure}{\numberline {7}{\ignorespaces Sample binary imbalanced problem with ratio 1:10\relax }}{16}{figure.caption.15}
+\contentsline {figure}{\numberline {8}{\ignorespaces Impact of class imbalance on minority class performance \cite {japkowicz_concept-learning_2001}\relax }}{18}{figure.caption.16}
+\contentsline {figure}{\numberline {9}{\ignorespaces Imbalanced datasets difficulties (a) Class overlapping. (b) Small disjuncts \cite {fernandez_learning_2018}\relax }}{18}{figure.caption.17}
+\contentsline {figure}{\numberline {10}{\ignorespaces Confusion Matrix\relax }}{20}{figure.caption.19}
+\contentsline {figure}{\numberline {11}{\ignorespaces 3 confusion matrices with the same accuracy\relax }}{21}{figure.caption.20}
+\contentsline {figure}{\numberline {12}{\ignorespaces Sample ROC graph\relax }}{24}{figure.caption.27}
+\contentsline {figure}{\numberline {13}{\ignorespaces Sample OVA binarization technique for a 3-class problem \cite {fernandez_learning_2018}\relax }}{25}{figure.caption.29}
+\contentsline {figure}{\numberline {14}{\ignorespaces Sample OVO binarization technique for a 3-class problem \cite {fernandez_learning_2018}\relax }}{26}{figure.caption.31}
+\contentsline {figure}{\numberline {15}{\ignorespaces Support Vector Machine boundries for an imbalanced dataset: (left) standard approach; (right) instance-level weighting \cite {fernandez_learning_2018}\relax }}{29}{figure.caption.37}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {16}{\ignorespaces The study process\relax }}{38}{figure.caption.39}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {17}{\ignorespaces Sensitivity and Specificity of each tested model. Each panel contains models trained with a fixed number of categories (7: left; 8: right), and shows the published reference performance in red. The closest 10\% of models to this reference have been outlined in black. The symbol colour and shape refer to the classifier type and aggregation strategy, respectively. Each shaded region illustrates the bounds of performance for a given binary classifier aggregation strategy.\relax }}{40}{figure.caption.40}
+\contentsline {figure}{\numberline {18}{\ignorespaces MCC results from applying the closest 10\% models to all the features. The hybrid model that included the AAindex and the PSSM profile (7th box), outperforms others.\relax }}{50}{figure.caption.57}
+\addvspace {10\p@ }
