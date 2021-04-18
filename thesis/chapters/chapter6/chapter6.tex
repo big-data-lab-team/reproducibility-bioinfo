@@ -1,0 +1,129 @@
+\chapter{Conclusion}
+
+Reproducibility, the ability to reproduce computational results using identical data and software, 
+is a cornerstone of the scientific methodology. However, through the past decade, several studies 
+revealed a widespread lack of results’ reproducibility, to the point that the existence of a 
+reproducibility crisis is now acknowledged in various fields.
+In Machine Learning, given the flexibility available in various phases of constructing a 
+computational model, the experiments are not immune to reproducibility issues either. 
+In case of imbalance learning for problems with multiple classes, the problem is even more 
+severe since there are more parameters in play for constructing a model.
+
+In this work we tried to demonstrate that in an imbalanced learning problem with multiple classes,
+a study report with a fair amount of details, could reproduce a wide range of results if 
+methodological flexibility is permitted. The flexibilities that may not affect the results 
+much in a generic balanced scenario. 
+
+Among all the methodological flexibilities, we believe dataset sampling, aggregation and 
+averaging techniques affect the final results the most. Regarding the dataset, if the applied 
+re-sampling technique balances out the sets (e.g. down-sampling, up-sampling, etc.), micro and 
+macro averaging, produce close results. If the model is built on the imbalance data, since the 
+ratio between the minority and the majority class error rates increases with the amount of 
+available degree of imbalance in the dataset~\cite{japkowicz_concept-learning_2001}, the 
+Imbalance Ratio should be kept the lowest. In such a scenario, stratified sampling with micro 
+averaging technique produces better results. 
+
+With regards to the aggregation technique, According to Haibo He et al.~\cite{haibo_he_learning_2009}: 
+“It has been stated that trying other methods, such as sampling, without trying by simply setting the 
+threshold may be misleading”. Because, usually, standard classifier learning algorithms are 
+biased toward the majority class. “When studying problems with imbalanced data, using the 
+classifiers produced by standard machine learning algorithms without adjusting the output 
+threshold may well be a critical mistake”~\cite{provost_machine_2000}. So, for imbalanced 
+learning problems, applying the threshold-moving technique is recommended. 
+
+For such problems, we believe following recommendations would ensure a high degree of reproducibility. 
+The recommendations are categorized under data provenance, feature provenance, model provenance, 
+software provenance and pipeline provenance. According to W3C Incubator Group Report~\cite{w3c}, 
+provenance of a resource is a record that describes entities and processes involved in producing 
+and delivering or otherwise influencing that resource. Provenance provides a critical foundation 
+for assessing authenticity, enabling trust, and allowing reproducibility. 
+
+\paragraph{Data Provenance and Sharing:}
+includes all the details and processes involved in assembling a dataset from the raw data.
+\begin{itemize}
+    \tabitem{Report on the source(s) of the raw data}
+    \tabitem{Explain the curation process}
+    \tabitem{Share the final dataset.}
+\end{itemize}
+
+\paragraph{Feature Provenance and Sharing:}
+refers to the process through which feature values are generated from the dataset.
+\begin{itemize}
+    \tabitem{Explain the concept associated with the extracted feature }
+    \tabitem{Explain the process through which the feature is extracted}
+    \tabitem{For formulas, describe the associated parameters}
+    \tabitem {Share the extracted feature file. If sharing the generated results are not possible, 
+    share reasonable amount of the final extracted feature file.}
+\end{itemize}
+
+\paragraph{Model Provenance and Sharing:}
+The report on this aspect should cover how the model is constructed, trained and evaluated. 
+It includes any applied data pre-processing technique, applied feature engineering technique, 
+the algorithm along with its hyper-parameters, the evaluation metrics, 
+the aggregation and the averaging techniques.
+\begin{itemize}
+    \item{Data Pre-processing}
+    \tabitem{Explain the pre-processing technique concept along with any involved process, formula and parameters}
+    \tabitem{Share the final transformed feature set, If sharing the entire generated result is not possible, 
+    share reasonable amount of the final transformed feature file}
+\end{itemize}
+\begin{itemize}
+    \item{Feature Engineering}
+    \tabitem{Explain the feature engineering technique concept along with any involved process, formula and parameters}
+    \tabitem{Share the final feature set, If sharing the entire generated result is not possible, 
+    name the selected features.}
+\end{itemize}
+\begin{itemize}
+    \item{Model Structure}
+    \tabitem{Explain any applied sampling technique along with the process formula and parameters }
+    \tabitem{Describe the strategy for splitting the original data into train, validation and test}
+    \tabitem{For problems with multiple classes, describe the decomposition strategy}
+    \tabitem{Explain the deployed algorithm, considered range of hyper-parameters and the associated values for 
+    obtaining the published results. For problems with multiple classes, this process should be done for all the 
+    decomposed models.}
+    \tabitem{If a specific optimal hyper-parameters search technique is used, provide the final deployed values 
+    resulted from the process, describe the method, any involved parameter(s), the process and 
+    how it has been applied to the model(s).}
+    \tabitem{For problems with multiple classes (or ensemble models), report on the structure, describe the 
+    underlying models and the aggregation strategy and how all those were applied to the model to generate 
+    the final results. If the results are generated using a different threshold rather 
+    than using the default one used by the classification algorithm, report on the threshold value for each 
+    decomposed model.}
+    \tabitem{Share reasonable amount of the generated results (where possible)}
+\end{itemize}
+\begin{itemize}
+    \item{Model Evaluation}
+    \tabitem{Describe the choice of statistical method used for evaluation of the results, any involved formula 
+    and its parameter(s)}
+    \tabitem{If averaging through multiple results, describe the technique (micro vs macro)}
+    \tabitem{Define error bars (if any)}
+\end{itemize}
+
+
+\paragraph{Software Provenance and Sharing}
+From the data curation to model training and evaluation, various software and coded programs could get involved 
+in a typical machine learning problem. The report on this aspect should cover all the details on the software, 
+coded programs and the libraries being involved throughout the whole process. 
+\begin{itemize}
+    \tabitem{For the coded programs, report on the programming language, version, involved libraries and the 
+    required environment for running the program.}
+    \tabitem{If a random function is used, report on the random seed and the library details}
+    \tabitem{For any involved software, report on the reuired details and a reference to the software documentation} 
+    \tabitem{Share your codes (as much as possible)}
+    
+\end{itemize}
+
+\paragraph{Pipeline Provenance and Sharing}
+In software engineering, a pipeline is a chain of processing modules, in a way that, the output from each module 
+is the input to the next one. The report on this aspect should cover the pipeline structure and how the modules 
+within that pipeline are connected and work together to produce the final results.
+\begin{itemize}
+    \tabitem{Design and code your pipeline as a chain of independently runnable modules
+    in a way that the output from each phase would be the input to the next one.}
+    \tabitem{Report on the overall pipeline structure and how all the modules are connected.}
+    \tabitem{If your pipeline is environment-dependent, then, provide details on the underlying infrastructure 
+    and how to setup the pipeline through that environment.}
+    \tabitem{Containerize your pipeline and share it in the state that the results are produced (if possible)}
+\end{itemize}
+
+
