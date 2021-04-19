@@ -9,13 +9,18 @@ our GitHub repository: \url{https://github.com/big-data-lab-team/reproducibility
 \subsection{Dataset}
 \label{sec:dataset}
 
-The SwissProt UniProt database \sout{consisting of $10,780$ proteins} with rich sequence and substrate
-annotations~\cite{boeckmann2003swiss} was subsampled to include $780$ membrane transporter proteins and $660$
-non-transporter proteins. The transport proteins were divided into $7$ substrate-specific classes ($70$ amino acid
-transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ sugar
-transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
-proteins, the total dataset contained $1,380$ protein sequences. \GK{Hamid TODO: add the "Independent"/Validation set
-and run all of the models on it. Add sentence here bringing the total sample count up to $1,560$.}
+The SwissProt UniProt database with rich sequence and substrate
+annotations~\cite{boeckmann2003swiss} was subsampled to include $900$ membrane transporter proteins and $660$
+non-transporter proteins. For the training set, $780$ transport proteins were divided into $7$ substrate-specific 
+classes ($70$ amino acid transporters, $60$ anion transporters, $260$ cation transporters, $60$ electron transporters, $60$ 
+sugar transporters, $70$ protein/mRNA transporters, and $200$ other transporters). With the addition of 600 non-transporter
+proteins, the total dataset contained $1,380$ protein sequences. 
+
+The independent set contains $60$ non-transporter proteins
+and the remaining $120$ transporter proteins being divided into the same $7$ substrate-specific classes 
+($15$ amino acid transporters, $12$ anion transporters, $36$ cation transporters, $10$ electron transporters, 
+$12$ sugar transporters, $15$ protein/mRNA transporters, and $20$ other transporters).
+ 
 
 Features were computed for each protein, including: Amino Acid Composition (AAC), Dipeptide Composition (DPC),
 Physico-Chemical Composition (PHC), Biochemical Composition (AAindex) and Position-specific scoring matrix (PSSM)
@@ -38,9 +43,10 @@ likelihoods aggregated across min-max scaled probabilities for each ordered amin
 proteins in the SwissProt database.
 \end{itemize}
 
-While the computed AAC, DPC, and PHC features were verified against those previously generated in literature, no
-direct comparisons were available for AAindex and PSSM profiles to validate their similarity.
-\GK{Hamid: elaborate on the discussion with Munira in a later section.}
+While the computed AAC, DPC, and PHC features were verified against those previously generated in literature, the 
+web reference on the initial study for AAindex and PSSM profiles were not available. So, to validate their similarity 
+they were checked with Munira Alballa, a PHD student of Dr. Gregory Butler who was working on related subject \cite{alballa2020trancep}
+and was experienced with the matter.
 % =====================================================================================================================
 % =====================================================================================================================
 \subsection{Model Flexibility}
@@ -60,7 +66,7 @@ remains flexibility along various axes in the analysis, namely:
 Considering the available degrees of freedom and limited computational resources, the AAC feature was used initially
 to train and evaluate model parameters. The best performing model using AAC was then re-trained using the full feature
 set. In the following section, the experimental design is described in detail with reference to the axes of flexibility,
-above. Diagram~\ref{sec:supporingMaterials} provides a graphic representation of the parameters explored in this
+above. Diagram~\ref{fig:studyProcess} provides a graphic representation of the parameters explored in this
 section alongside the process through which the study was conducted.
 
 \subsection{Experimental Design}
@@ -116,3 +122,5 @@ quantitatively through the pairwise application of two-sided Mann–Whitney U Te
 values for all unique settings within a given category (i.e. the distribution of distances for all models using
 micro-averaging was compared to the equivalent distribution for all models using macro-averaging). To avoid
 overfitting, the closest 10\% of models to the reference were selected as the models used for further investigation.
+
+

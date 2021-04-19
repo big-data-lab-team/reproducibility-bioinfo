@@ -1,21 +1,14 @@
 \section {Discussion}
 \label{sec:discussion}
 \TG{Add discussion points you may already have}
-\tbm{it would be helpful if the authors could share their final generated feature files for
- all or few sequences or any other resources. So,  one could compare the reproduced results with
- the original ones.}
- \tbm{Discussion over choice of algorithm (distance function) and we chose the closest results to the published one, but best one
- is the one with 8 classes}
- \tbm{Discussion over the difference betwwen Gamma and Cost (one for each class or one for all the classes)}
- \tbm{Discussion over which one make sense or which one should we choose? (thresholding, before voting, after voting)}
- \tbm{Possible Box chart analysis}
- \tbm{Discussion over how svc in scikit learn works (probability vs classification) and which one we chose,
-        and which one is the better}
- \tbm {Why we tried also SVC from Scikit-learn, to find a replacement for SVMligth}
- \tbm {How to make it better? feature selection? data transformation?}
- \tbm {Discussion over uncertainty between equivalent models -> precision measure}
- \tbm {Discussion over sequence update, so, version number should be mentioned or provide the original dataset}
- \tbm {is there are any challenges associated with the computation of the features and their reproducibility? explain
- hoe you compared your results. }
- \tbm{when to use scikit prabability based vs confusion matrix based is SVMligth replacebale}
  \TG{which of the studied params is the most critical?}
+
+With regards to the sorting and balancing the samples within the dataset 
+(section~\ref{sec:modelflex}, Addr: 2), the models produced close results for the balanced and shuffled 
+versions of the dataset. But, for highly imbalanced datasets with multiple classes of data, 
+these variations could lead to different results. 
+A possible scenario with such a dataset with high degree of imbalance is that, if shuffled randomly 
+and then split into train and test sets, there is a good chance that the class with the 
+least number of instances, would have no representative in the test set. While in the balanced 
+version, even the classes with the least amount of samples will always have representatives in the 
+test set. 
