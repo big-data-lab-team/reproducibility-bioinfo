@@ -1,7 +1,7 @@
 \section {Results}
 \label{sec:results}
 
-The classifers developed in this replication attempt were constructed and evaluated according to the parameters
+The classifiers developed in this replication attempt were constructed and evaluated according to the parameters
 and metrics described in Section~\ref{sec:modelflex}. Figure~\ref{fig:7_class_model} shows the sensitivity
 and specificity of each tested model alongside the performance of the originally published model, with 10\% of models
 most closely matching performance to the reference highlighted.
@@ -9,8 +9,14 @@ Tables~\ref{tab:prob_7class} and~\ref{tab:prob_8class} contain the complete perf
 evaluated using each performance metric for the 7- and 8-class settings, respectively. Table~\ref{tab:scikit_pred}
 shows the same for the SKlearn Prediction models.
 
-Finally, Table~\ref{tab:all_feature_performance} shows the evaluation
-of the best-performing models fit on AAC when applied across all features.
+Table~\ref{tab:dpcPhcAaindexPssm},~\ref{tab:aacDpcPhcAaindexPssm},~\ref{tab:dpcPhcAaindexPssmAaindexPhc},
+~\ref{tab:aacDpcAaindexPssmHybrid3},~\ref{tab:aacAaindexPhcPssmHybrid3}
+contain the evaluation of the best-performing models fit on AAC when 
+applied across all the other 18 features. Figure~\ref{fig:MccAllModels} compared the MCC values resulted 
+from running the the best-performing models on all the features. Finally, Table~\ref{tab:pssmAaindex} 
+shows the results of running the best-performing models on the main and independent datasets for the 
+hybrid model that included the biochemical composition and the PSSM profile.
+
 \GK{For Hamid: regenerate data in the all-feature-performance table based on more than just the "best" model. At
 present, we cannot include anything in the results about this because there isn't a result to discuss.}
 
@@ -73,11 +79,15 @@ are notably absent from these models, all other settings were either dominated b
 of micro aggregation and the balanced average prediction method, or the settings were equally represented. This
 uniformity in representation is consistent with the direct comparisons between settings described above.
 
+For all the other 18 feature sets (dpc, phc, pssm, aaindex and 14 hybrid feature sets) the closest 10\% of the models (16) 
+each reported a distance score of less than $0.13$ from the feature's reference values. 
+Figure~\ref{fig:MccAllModels} shows the MCC values resulted from running 
+the closest 10\% models (16) on all the features (19). 
+The hybrid dataset that included the biochemical composition (AAindex) and the PSSM profile 
+outperforms others. For this feature set, the closest models (Table~\ref{tab:pssmAaindex}) reported 
+the distance score of less than $0.09$ on the main dataset and less than $0.08$ on the independent dataset.
+
 \GK{TODO Hamid: add results for the other analyses, such as 1- running the best 10\% of models on more features and
 2- evaluating them on the independent dataset.}
 
 % Table 1
-\input{tables/tab_7_class_prob_performance.tex}
-\input{tables/tab_8_class_prob_performance.tex}
-\input{tables/tab_scikit_pred_performance.tex}
-\input{tables/tab_best_model_multifeature.tex}

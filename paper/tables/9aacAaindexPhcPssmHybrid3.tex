@@ -1,0 +1,96 @@
+\begin{table}[ht]
+    \begin{adjustwidth}{-1.70in}{40in}
+        \centering
+        \begin{tabular}{| C | C | V |V V V V g g g V V V V | V |}
+            
+            \hline
+            \cline{1-13}
+            \multicolumn{1}{|g}{\footnotesize{number of}}&
+            \multicolumn{1}{|g}{\footnotesize{gamma}}&
+            \multicolumn{1}{|g|}{\footnotesize{Dist}}&
+            \multicolumn{4}{g} {aac+aaindex+phc}&
+            \multicolumn{3}{g}{}&
+            \multicolumn{4}{g|} {aac+aaindex+pssm}&
+            \multicolumn{1}{g|}{\footnotesize{Dist}}\\
+            
+            \cline{4-7}\cline{11-14}
+            \multicolumn{1}{|g}{\footnotesize{classes}}&
+            \multicolumn{1}{|g}{\footnotesize{cost}}&
+            \multicolumn{1}{|g|}{\footnotesize{ance}}&
+            \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+            \multicolumn{1}{g}{spec}&\multicolumn{1}{g}{mcc}&
+            \multicolumn{3}{g}{}&
+            \multicolumn{1}{g}{acc}&\multicolumn{1}{g}{sens}&
+            \multicolumn{1}{g}{spec}&\multicolumn{1}{g|}{mcc}&
+            \multicolumn{1}{g|}{\footnotesize{ance}}\\
+
+            \hline
+
+            \multicolumn{1}{|c|}{\multirow{8}{*}{\footnotesize{7}}}
+            & \multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{different}}}
+
+            &  0.07 & 74.854 & 74.486 & 74.914 & 0.37 &    b&                       &b   & 77.068 & 77.694 & 76.966 & 0.41 & 0.07  \\
+            && 0.08 & 73.864 & 73.846 & 73.868 & 0.36 &    sh&\footnotesize{scikit}&sh   & 75.934 & 75.514 & 76.004 & 0.39 & 0.07  \\
+            
+            \cline{2-6}\cline{12-15}
+            
+            & \multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{same}}}
+            &  0.07 & 74.414 & 74.744 & 74.360 & 0.37 &    b&\footnotesize{learn} &b    &  76.208 & 76.282 & 76.196 & 0.40 & 0.06  \\
+            && 0.08 & 73.956 & 73.716 & 73.996 & 0.36 &    sh&                    &sh   &  75.238 & 75.386 & 75.216 & 0.38 & 0.07  \\
+            
+            \cline{2-15}
+
+            &\multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{different}}}
+            &  0.07 & 75.000 & 75.128 & 74.978 & 0.38 &    b&                    &b     &  76.082 & 76.796 & 75.962 & 0.40 & 0.06 \\
+            && 0.08 & 74.214 & 74.358 & 74.190 & 0.36 &    sh&\footnotesize{svm}&sh     &  75.018 & 75.126 & 75.000 & 0.38 & 0.07 \\
+            
+            \cline{2-6}\cline{12-15}
+            
+            &\multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{same}}}
+            &  0.07 & 74.468 & 74.616 & 74.444 & 0.37 &    b&\footnotesize{light} &b    &  75.018 & 75.000 & 75.020 & 0.37 & 0.08 \\
+            && 0.09 & 73.076 & 73.716 & 72.968 & 0.35 &    sh&                    &sh   &  73.918 & 73.460 & 73.994 & 0.35 & 0.09 \\
+            
+            \hline
+
+            \multicolumn{1}{|c|}{\multirow{8}{*}{\footnotesize{8}}}
+            & \multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{different}}}
+            &  0.08 & 77.996 & 77.968 & 78.002 & 0.41 &    b&                       &b   & 78.196 & 78.114 & 78.212 & 0.41 & 0.09  \\
+            && 0.08 & 77.038 & 77.030 & 77.040 & 0.39 &    sh&\footnotesize{scikit}&sh   & 78.010 & 78.406 & 77.950 & 0.41 & 0.08  \\
+            
+            \cline{2-6}\cline{12-15}
+            
+            & \multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{same}}}
+            &  0.08 & 77.928 & 77.682 & 77.962 & 0.41  &    b&\footnotesize{learn} &b    & 78.650 & 78.696 & 78.642 & 0.42 & 0.09  \\
+            && 0.08 & 76.984 & 76.956 & 76.988 & 0.39  &    sh&                    &sh   & 78.532 & 78.190 & 78.582 & 0.42 & 0.09  \\
+       
+            \cline{2-15}
+
+            &\multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{different}}}
+            &  0.09 & 78.324 & 78.042 & 78.366 & 0.41 &    b&                    &b     &  78.416 & 78.334 & 78.424 & 0.42 & 0.09 \\
+            && 0.08 & 77.852 & 77.680 & 77.878 & 0.41 &    sh&\footnotesize{svm}&sh     &  77.798 & 77.608 & 77.826 & 0.40 & 0.08 \\
+            
+            \cline{2-6}\cline{12-15}
+            
+            &\multicolumn{1}{|c|}{\multirow{2}{*}{\footnotesize{same}}}
+            &  0.09 & 78.044 & 78.044 & 78.044 & 0.41  &    b&\footnotesize{light} &b    & 77.842 & 77.898 & 77.838 & 0.41 & 0.08  \\
+            && 0.08 & 77.628 & 77.606 & 77.628 & 0.40  &    sh&                    &sh   & 77.990 & 77.972 & 77.992 & 0.41 & 0.08  \\
+            
+            \hline
+            
+            \multicolumn{15}{|c|} {\footnotesize{
+                b and sh are balanced and shuffled instances of the main dataset.
+            }}\\
+            \multicolumn{15}{|c|} {\footnotesize{
+                Acc: Accuracy, Sens: Sensitivity, Spec: Specificity, Mcc: Matthews correlation coefficient
+            }}\\
+
+            \hline
+    
+        \end{tabular}
+        \captionsetup{font=footnotesize,width=17cm, justification=centering}
+        \caption{The results from running 10\% best models for AAC+AAindex+PHC, AAC+AAindex+PSSM,  
+        hybrid feature sets on main dataset.}
+        \label{tab:aacAaindexPhcPssmHybrid3}
+        
+    \end{adjustwidth}
+\end{table}
