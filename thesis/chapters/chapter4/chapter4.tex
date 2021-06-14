@@ -2,19 +2,50 @@
 
 The classifiers developed in this replication attempt were constructed and evaluated according to the parameters
 and metrics described in Section~\ref{sec:modelflex}. Figure~\ref{fig:modelPerformance} shows the sensitivity 
-and specificity of each tested model alongside the performance of the originally published model, with 10\% of models
-most closely matching performance to the reference highlighted.
-Tables~\ref{tab:prob_7class} and~\ref{tab:prob_8class} contain the complete performance of the probability-based models
-evaluated using each performance metric for the 7- and 8-class settings, respectively. Table~\ref{tab:scikit_pred}
-shows the same for the SKlearn Prediction models.
+and specificity of each tested model alongside the performance of the originally published model (on AAC feature set), 
+with 10\% of models most closely matching performance to the reference highlighted.
+
+Tables~\ref{tab:prob_7class} contains the complete performance of the probability-based models
+being evaluated using each the performance metrics in~\cite{mishra_prediction_2014} for the 7-class settings. 
+Among all the models, 8 reported the closest performance with the distance values between $0.07$ and $0.13$
+from the reference. Tables~\ref{tab:prob_8class} shows the performance of the probability-based models through the 
+8-class settings with the closest performance values between $0.08$ and $0.10$ for 8 models. 
+In both of those settings mentioned above, the models were all aggregated using balanced averaging technique and 
+the performance results were calculated using micro averaging technique. 
+Table~\ref{tab:scikit_pred} shows the same for the Scikit-Learn Prediction models. Through this setting, 
+all the models reported the distance values above $0.32$ from the reference.
 
 Table~\ref{tab:dpcPhcAaindexPssm},~\ref{tab:aacDpcPhcAaindexPssm},~\ref{tab:dpcPhcAaindexPssmAaindexPhc},
 ~\ref{tab:aacDpcAaindexPssmHybrid3},~\ref{tab:aacAaindexPhcPssmHybrid3}
-contain the evaluation of the best-performing models fit on AAC when 
-applied across all the other 18 features. Figure~\ref{fig:MccAllModels} compared the MCC values resulted 
-from running the the best-performing models on all the features. Finally, Table~\ref{tab:pssmAaindex} 
-shows the results of running the best-performing models on the main and independent datasets for the 
-hybrid model that included the biochemical composition and the PSSM profile.
+contain the performance metrics values from running the closest models settings ($10\%$ being selected from 
+the AAC experiment) when applied to all the other 18 features. 
+Table~\ref{tab:dpcPhcAaindexPssm} shows the results from running the $10\%$ (16) best models on DPC, PHC, 
+AAindex and PSSM feature sets. They all reported the distance values between $0.06$ and $0.13$ from the reference. 
+The models being built on DPC feature set seems to perform slightly better in 7-class settings while for the 
+other 3 feature sets performance is quite close through both 7- and 8-class settings.
+
+Tables~\ref{tab:aacDpcPhcAaindexPssm},~\ref{tab:dpcPhcAaindexPssmAaindexPhc} shows the results from running 
+the $10\%$ (16) best models on hybrid sets when 2 feature sets are combined (8). All the models reported 
+the distance values between $0.06$ and $0.13$ from their correspondent reference point in~\cite{mishra_prediction_2014}. 
+The models being built on DPC+AAC, DPC+PSSM and DPC+AAINDEX hybrid feature sets seems to perform slightly better 
+in 7-class settings while the results from all the other 5 feature sets shows a close performance through 
+both 7- and 8-class settings.
+
+Tables~\ref{tab:aacDpcAaindexPssmHybrid3},~\ref{tab:aacAaindexPhcPssmHybrid3} shows the results from running 
+the $10\%$ (16) best models on hybrid sets when 3 feature sets are combined (6). All the models reported 
+the distance values between $0.06$ and $0.11$ from their correspondent reference. The hybrid AAC+DPC+AAINDEX 
+model seems to perform slightly better in 7-class settings while all the models using all the other 5 hybrid 
+feature sets shows a close performance through both 7- and 8-class settings.
+
+Figure~\ref{fig:MccAllModels} compares the MCC values resulted 
+from running the closest models settings on all the other 18 features. Finally, Table~\ref{tab:pssmAaindex} 
+shows the results from running the best-performing models on the main and independent datasets for the 
+hybrid model that included the biochemical composition and the PSSM profile. All the models (16) reported 
+the distance values between $0.07$ and $0.09$ from the reference. According to~\cite{mishra_prediction_2014},
+compared to the other feature sets, this hybrid features set produces the best results for the 
+membrane protein classification with the highest MCC values. 
+Figure~\ref{fig:MccAllModels} shows that the MCC value being calculated for this 
+feature set is higher than the other models being built using other 18 feature sets.
 
 The remainder of this section will explore the differences in model performance based on the defined axes of
 flexibility enumerated in Section~\ref{sec:experimentaldesign}.
@@ -34,17 +65,19 @@ flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 \paragraph{Number of Classes}
 While the 7-class models appear to be slightly closer to the reference, there was no significant difference between
 the number of classes and the distance from reference ($p > 0.1$). Models trained with 8 classes tended to achieve
-higher sensitivity and specificity values, however, suggested improved performance with the addition of the background
-class. 
+higher sensitivity and specificity values. It seems that the addition of the background class has improve the 
+performance.
 
 \paragraph{Dataset Sampling}
 The dataset composition had no significant impact on the closeness of the model to the reference ($p > 0.1$ for all
 comparisons). However, none of the closest 10\% of models were trained using the downsampled dataset.
 
 \paragraph{SVM Hyperparameters}
-All uniformly parameterized models converged to same set of hyperparameters within the number of classes, where the
-best performing 7-class models used Gamma and Cost values of $0.02$ and $4.5$ while 8-class models had best performance
-with $0.01$ and $4$, respectively. There was no significant difference between these sets of parameters.
+All uniformly parameterized models converged to same set of hyperparameters within the number of classes. For the 
+models with 7-classes of proteins, the ones with the closest performance used Gamma and Cost 
+values of $0.02$ and $4.5$ while for the models with 8-classes of proteins, the closest results were achieved using 
+the values of $0.01$ and $4$ for Gamma and Cost respectively. There was no significant difference between these 
+sets of parameters.
 
 \paragraph{Hypterparamter Heterogeneity}
 Similarly to the case of uniform parameters, models converged on Gamma values between $0.02$ and $0.04$ for all classes
@@ -61,27 +94,29 @@ unweighted average and maximum probability methods ($p < 1\times 10^{-5}$ for bo
 also produced significantly closer results than the unweighted average method ($p < 0.001$).
 
 \paragraph{Tool}
-The SVMLight classifiers produced closer results to the reference than both SKlearn Probability and Prediction models
-($p < 0.05$ for both). While the SKlearn Prediction model architecture did not appear in the set of closest models,
-there was no statistically significant difference between its performance and that of the SKlearn Probability models.
+The SVMLight classifiers produced closer results to the reference than both Scikit-Learn Probability and Prediction models
+($p < 0.05$ for both). While the Scikit-Learn Prediction model architecture did not appear in the set of closest models,
+there was no statistically significant difference between its performance and that of the Scikit-Learn Probability models.
 
-\section{Closest Models}
+% \section{Closest Models}
+\paragraph{Closest Models}
 The closest 10\% of models (16) used a variety of configurations, and each reported a distance score of less than
 $0.13$ from the reference. The breakdown of configurations for these models included: micro aggregation (all), balanced
 average prediction method (all), balanced (8) or shuffled (8) dataset, contained 7 (8) or 8 (8) classes in the dataset,
 were trained with uniform (8) or heterogeneous (8) hyperparameters, and were developed using SVMLight (8) or the
-SKlearn Probability (8) model architectures. While the SKlearn Prediction model and downsampled dataset configuration
+Scikit-Learn Probability (8) model architectures. While the Scikit-Learn Prediction model and downsampled dataset configuration
 are notably absent from these models, all other settings were either dominated by a single value, such as in the case
 of micro aggregation and the balanced average prediction method, or the settings were equally represented. This
 uniformity in representation is consistent with the direct comparisons between settings described above.
 
-For all the other 18 feature sets (dpc, phc, pssm, aaindex and 14 hybrid feature sets) the closest 10\% of the models (16) 
+For all the other 18 feature sets (DPC, PHC, PSSM, AAINDEX and 14 hybrid feature sets) the closest 10\% of the models (16) 
 each reported a distance score of less than $0.13$ from the feature's reference values. 
 Figure~\ref{fig:MccAllModels} shows the MCC values resulted from running 
 the closest 10\% models (16) on all the features (19). 
 The hybrid dataset that included the biochemical composition (AAindex) and the PSSM profile 
-outperforms others. For this feature set, the closest models (Table~\ref{tab:pssmAaindex}) reported 
-the distance score of less than $0.09$ on the main dataset and less than $0.08$ on the independent dataset.
+outperforms others. For this hybrid feature set, the reported distance from the reference values 
+for the closest models (Table~\ref{tab:pssmAaindex}) 
+were between $0.09$ and $0.07$ on the main dataset and between $0.08$ and $0.02$ on the independent dataset.
 
 %Tables
 \input{tables/1aac7Probability.tex}

@@ -9,10 +9,13 @@ algorithms, and tools for knowledge discovery and information extraction. Though
 we will briefly go over the correspondent concepts and common approaches related to our study.
 
 \subsection{Problem Definition}
-Haibo He \cite{haibo_he_learning_2009}, defines imbalanced learning as “the learning process 
+Haibo He~\cite{haibo_he_learning_2009}, defines imbalanced learning as 
+\begin{quote}
+the learning process 
 for data representation and information extraction with severe data distribution skews to develop 
 effective decision boundaries to support the decision making process. The learning process could 
-involve supervised, unsupervised, semi supervised learning or combination two or all of them.” 
+involve supervised, unsupervised, semi supervised learning or combination two or all of them.
+\end{quote}
 In other words, it is learning from two (binary classification) or multiple classes (multi-class 
 or multi-label classification) of data where the member classes have an unequal amount of examples.
 
@@ -26,9 +29,9 @@ instances is called the minority (positive) class and the one with the higher nu
 is called the majority (negative) class. In such a problem, Imbalance Ratio (IR) refers to the 
 degree of existing imbalance in between the two member classes of the dataset \cite{orriols-puig_evolutionary_2009}. 
 It is defined as the number of negative class examples divided by the number of positive class 
-examples which is 10 for our example in Figure [\ref{fig:sampleBinaryImbalanced}]. In other words, 
+examples which is 10 for our example in Figure~\ref{fig:sampleBinaryImbalanced}. In other words, 
 IR 10 (or 1:10) refers to the fact that for every instance of the minority class, there exist 10 
-instances in the majority class.  Figure [\ref{fig:sampleBinaryImbalanced}] shows a sample 
+instances in the majority class.  Figure~\ref{fig:sampleBinaryImbalanced} shows a sample 
 imbalanced dataset for a binary classification problem with an unequal distribution ratio of 1:10.
 
 \begin{figure}[ht]
@@ -70,32 +73,35 @@ class, minority class instances are more often misclassified. The amount of misc
 is even greater for highly imbalanced datasets.
 
 By analyzing 26 binary-class datasets in a study, N. Japkowicz \cite{japkowicz_concept-learning_2001} 
-shows how class imbalance impacts minority class classification performance. Figure 8 (being generated 
-from the study) shows that the ratio between the minority and the majority class error rates is the 
+shows how class imbalance impacts minority class classification performance. Figure~\ref{fig:errorRate} 
+(being extracted from the study) shows that the ratio between the minority and the majority class error rates is the 
 greatest when the dataset is highly imbalanced. It also shows that the above error rate decreases as 
 the amount of class imbalance decreases. With an error rate ratio above 1.0, it shows that class 
 imbalance leads to a poorer performance on classifying minority class elements.
 
 So, in similar problems, accuracy is no longer a proper metric for measuring the model performance 
-in an imbalance scenario. Because it does not distinguish between the numbers of correctly classified 
-examples of different classes. The accuracy only takes into account the total number of correctly 
-classified instances. So, in an imbalance scenario, it often provides a high accuracy value with a 
-very low true positive and a very high true negative value in the confusion matrix. We need to 
-somehow construct classifiers that are biased toward the minority class, without being harmful 
-to the accuracy over the majority class.
+in an imbalance scenario. The accuracy only takes into account the total number of correctly 
+classified instances. In an imbalance scenario, it often provides a high accuracy value with a 
+very low true positive and a very high true negative value in the confusion matrix. For such 
+a problem, We need to somehow construct classifiers that are biased toward the minority class 
+without being harmful to the accuracy over the majority class.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/08errorRate.png}
-    \caption{Impact of class imbalance on minority class performance \cite{japkowicz_concept-learning_2001}}
+    \caption{Impact of class imbalance on minority class performance 
+    reproduced from~\cite{japkowicz_concept-learning_2001}}
     \label{fig:errorRate}
 \end{figure}
 
-\textbf{Small sample size:} Generally imbalanced datasets have a lack of minority class examples. 
+In an imbalanced scenario, the following distributions of the instances of the minority 
+class could also add up to the difficulty of the classification task. 
+
+\paragraph{Small sample size} Generally imbalanced datasets have a lack of minority class examples. 
 The ratio in between the minority and majority class examples indicates the degree of imbalance 
 in a problem. Datasets with the higher degree of imbalance produce greater error rates.
 
-\textbf{Overlapping (class separability):} When the elements from both minority and majority classes 
+\paragraph{Overlapping (class separability)} When the elements from both minority and majority classes 
 are mixed in the feature space, the decision boundary cannot be clearly established. As a result, 
 more general rules will be applied to the problem in the classification phase, which will then lead 
 to misclassifying some instances from the minority class \cite{garcia_k-nn_2008}.
@@ -103,39 +109,40 @@ to misclassifying some instances from the minority class \cite{garcia_k-nn_2008}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/09overlapping.png}
-    \caption{Imbalanced datasets difficulties (a) Class overlapping. (b) Small disjuncts \cite{fernandez_learning_2018}}
+    \caption{Imbalanced datasets difficulties (a) Class overlapping. (b) Small disjuncts 
+    extracted from~\cite{fernandez_learning_2018}}
     \label{fig:overlapping}
 \end{figure}
 
-\textbf{Small disjuncts:} this problem occurs when the represented concept by the minority class is 
+\paragraph{Small disjuncts} this problem occurs when the represented concept by the minority class is 
 formed of subconcepts \cite{weiss_learning_2003}. As an example, in case of protein classification, the transporter 
 proteins are classified into 7 substrate specific classes (amino acid transporter, anion 
 transporter, cation transporter, electron transporter, protein/mRNA transporter, sugar transporter 
 and other transporter). In most of the problems, small disjuncts increase the complexity of the 
 problem because the amount of instances among them is not usually balanced.
 
-\subsubsection{Imabalanced Classification Approaches}
+\subsubsection{Imbalanced Classification Approaches}
 Various techniques have been developed to correctly classify the minority class examples. 
 These techniques can be categorized into four main groups, depending on the way they deal 
 with the problem.
 
-\textbf{Algorithm level} approaches are the ones trying to bias the existing learning 
+\paragraph{Algorithm level} approaches are the ones trying to bias the existing learning 
 algorithms towards the minority class \cite{lin_support_2002}. 
 To achieve this goal, knowledge of both the corresponding classifier and the application 
 domain is required to comprehend the reasons behind the classifier failure when the 
 class distribution is uneven. 
  
-\textbf{Data level} approaches are the ones trying to rebalance the class distribution 
+\paragraph{Data level} approaches are the ones trying to rebalance the class distribution 
 by resampling the data space \cite{batista_study_2004,fernandez_study_2008}. 
 This approach does not need to modify the learning algorithm since the effect caused 
 by the imbalance will decrease after the rebalancing process.
  
-\textbf{Cost-sensitive learning} approach falls between data and algorithm level 
+\paragraph{Cost-sensitive learning} approach falls between data and algorithm level 
 approaches. In order to achieve the desired classification result on the minority 
 class, It incorporates data level transformations and algorithm modifications 
 \cite{ling_test_2006,chawla_automatically_2008}.
  
-\textbf{Ensemble-based methods} are usually a combination of an ensemble learning 
+\paragraph{Ensemble-based methods} are usually a combination of an ensemble learning 
 algorithm and one of the approaches above \cite{galar_review_2012}. In the data level ensemble learning 
 approach, the data will be preprocessed before training each classifier. On the 
 other hand, the  cost-sensitive ensemble learning hybrid guides the cost minimization 
@@ -145,12 +152,12 @@ via the ensemble learning algorithm.
 The quality of the trained model is generally evaluated by analyzing how well it performs on the test data 
 \cite{alsheikh-ali_public_2011}. To evaluate the model, the provided predictions of the trained classifier 
 are compared to the true classes of test data and some performance measures will be then calculated. 
-Depending on the provided information by the classifier, we can evaluate the model using either of following approaches:
+Depending on the information being provided by the classifier, we can evaluate the model using either of following approaches:
 
-\textbf{Nominal class} predictions where we compare the predicted class labels with the actual true class values, 
+\paragraph{Nominal class} predictions where we compare the predicted class labels with the actual true class values, 
 create a confusion matrix and then calculate the performance measure(s) for evaluating the model.
 
-\textbf{Scoring Predictions} where we use the associated scores (or the probability values) of the predictions 
+\paragraph{Scoring Predictions} where we use the associated scores (or the probability values) of the predictions 
 to grade test examples according to the likelihood of pertaining to a class and then calculate the required 
 measure for evaluating the model.
 
@@ -190,10 +197,12 @@ is the percentage of incorrectly classified instances.
     \label{eq:errorRate}
 \end{equation}
 
-The accuracy / error rate is widely used as a performance measure in various problems. 
+The accuracy or error rate is widely used as a performance measure in various problems. 
 But it is not a proper measure in the imbalance scenario [26]. In a highly imbalanced 
-scenario, It is easy to obtain high accuracy \ref{fig:confusionMatrixSameAccuracy}. 
-It also assumes that errors have an equal cost. But, in the imbalanced classification 
+scenario, regardless of number of truly classified instances (tp), 
+it is easy to obtain high accuracy. Figure~\ref{fig:confusionMatrixSameAccuracy} 
+shows three possible scenarios for an imbalanced problem where all produce the same accuracy value. 
+Accuracy assumes that errors have an equal cost. But, in an imbalanced classification 
 problem, when compared to the instance of the majority class, misclassifying instances 
 of the minority class is much costlier.
 
@@ -209,7 +218,7 @@ imbalanced scenario, we need some other measures along with the accuracy through
 we could obtain more insight on the performance of the model. There are various measures 
 such as Kappa, G-mean, G-measure, Sensitivity, Specificity, MCC, Precision, Recall, 
 F-Measure etc. that could be calculated from the confusion matrix, but the common ones 
-for the problems with an imbalance datasets are as follow:
+for the problems with an imbalance datasets are as follow.
 
 \subsubsection{Sensitivity and Specificity:}
 
@@ -238,7 +247,7 @@ MCC ranges from 1 (when the classification is always wrong) to 0 (when it is no 
 to 1 (when it is always correct).
 
 \begin{equation}
-    MCC = \frac{(TP*TN)-(FP*FN)}{\sqrt(TP+FP)(TP+FN)(TN+FP)(TN+FN)} 
+    MCC = \frac{(TP*TN)-(FP*FN)}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
     \label{eq:mcc}
 \end{equation}
 
@@ -268,7 +277,7 @@ negative classes. By defining a function which takes into account both the sensi
 specificity of the classifier.
 
 \begin{equation}
-    G-Mean = \sqrt(Sensitivity*Specificity) 
+    G-Mean = \sqrt{(Sensitivity*Specificity)}
     \label{eq:gmean}
 \end{equation}
 
@@ -286,11 +295,11 @@ as it allows the user to weigh the contribution of each component as desired.
 
 Let’s consider a classifier that gives a numeric score or a probability of an instance belonging to a 
 class. Therefore, instead of a simple positive or negative prediction, we will have a score 
-(probability value) for each predicted instance. instances with higher probabilities are more 
+(probability value) for each predicted instance, instances with higher probabilities are more 
 likely to have to be classified as positive.
 
-Having a probability value (or a score) for an instance, gives us more control over the results. 
-We can determine our own threshold to interpret the result of the classifier. Different thresholds 
+Having a probability value (or a score) for an instance, we can determine our own threshold to 
+interpret the result of the classifier. Different thresholds 
 will result in different values for the confusion matrix elements (TP, TN, FP, FN) which leads to 
 different values for the calculated measures (e.g sensitivity, specificity, etc.).
 
@@ -313,7 +322,7 @@ would produce an AUC ROC value of 1.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/12RocExample.png}
-    \caption{Sample ROC graph}
+    \caption{Sample ROC graph extracted from~\cite{fernandez_learning_2018}}
     \label{fig:roc}
 \end{figure}
 
@@ -351,13 +360,14 @@ In OVA decomposition strategy, a problem with $n$ classes of instances is divide
 binary problems. An independent classifier will be then assigned to each binary sub-problem which 
 is responsible for distinguishing one of the classes from all other classes. The learning 
 step of the classifiers is done using the whole training data, considering the patterns from 
-the single class as positives and all other examples as negatives. \ref{fig:ova} shows the OVA 
+the single class as positives and all other examples as negatives. Figure~\ref{fig:ova} shows the OVA 
 binarization technique for a 3-class problem.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/11ova.png}
-    \caption{Sample OVA binarization technique for a 3-class problem \cite{fernandez_learning_2018}}
+    \caption{Sample OVA binarization technique for a 3-class problem 
+    extracted from~\cite{fernandez_learning_2018}}
     \label{fig:ova}
 \end{figure}
 
@@ -366,13 +376,14 @@ In this strategy, a problem with $n$ classes is divided into $n*(n+1)/2$  binary
 problems (one for each possible pair of classes). An independent classifier will be then 
 assigned to each binary sub-problem. For each binary subset, the learning phase is then 
 carried out using a subset of the original training instances with only those that contain 
-any of the two classes. And the instances with different class labels are simply ignored. 
-\ref{fig:ovo} shows the OVO binarization technique for a 3-class problem.
+any of the two classes and the instances with different class labels are simply ignored. 
+Figure~\ref{fig:ovo} shows the OVO binarization technique for a 3-class problem.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/12ovo.png}
-    \caption{Sample OVO binarization technique for a 3-class problem \cite{fernandez_learning_2018}}
+    \caption{Sample OVO binarization technique for a 3-class problem 
+    extracted from~\cite{fernandez_learning_2018}}
     \label{fig:ovo}
 \end{figure}
 
@@ -383,11 +394,11 @@ through the prediction phase. As an example we can consider a fruit image classi
 with 3 classes of Orange, Apple and Tangerine. Using a multi-class classification approach, 
 through the prediction phase, an image can be either an apple or an orange or a tangerine.
  
-Multi-label (multi-output) classification on the other hand, is a generalization of multiclass 
+Multi-label (multi-output) classification on the other hand, is a generalization of multi-class 
 classification where multiple labels may be assigned to each instance. As an example, we can 
 consider a comment classification problem with 4 classes of Positive, Negative, Toxic, Insulting. 
-Using a multi-label classification approach, an instance can be both Negative and Toxic. 
-While another one can be just Negative.
+Using a multi-label classification approach, an instance can be both Negative and Toxic 
+while another one can be just Negative.
 
 \subsubsection{Aggregation}
 After decomposing the initial multi-class problem into multiple binary class problems, a classifier 
@@ -403,7 +414,7 @@ be chosen as the final prediction for that instance. In the example mentioned ab
 classifier 1 predicts Orange with 0.75, classifier 2 predicts not a Tangerine with 0.64 and 
 classifier 3 predicts Apple with 0.82, then the final predicted label will be an Apple. The 
 predicted results are then put together and compared to the actual labels to generate the 
-confusion matrix which is then used to calculate the performance matrix.
+confusion matrix which is then used to calculate the performance metrics.
 
 In case of Multi-label classification problems, since all the labels are acceptable, then all 
 will be considered. As an example, in a comment classification problem, a comment can be both 
@@ -437,25 +448,25 @@ effect could be observed and analyzed through the ROC/AUC  or Precision/Recall c
 
 \subsubsection{Micro averaging vs Macro averaging}
 Considering a performance metric $P$ being calculated based on the confusion matrix elements 
-(true positives ($tp$), true negatives ($tn$), false positives ($fp$),false negatives ($fn$). 
+(true positives $tp$, true negatives $tn$, false positives $fp$, false negatives $fn$). 
 The macro and micro averages of a specific measure can be calculated as follow:
 
 \begin{equation}
-    P_{macro} = \frac{1}{q} \sum_{q}^{\lambda =1} P(tp_{\lambda},tn_{\lambda},fp_{\lambda},fn_{\lambda})
+    P_{macro} = \frac{1}{q} \sum_{\lambda =1}^{q} P(tp_{\lambda},tn_{\lambda},fp_{\lambda},fn_{\lambda})
     \label{eq:macro}
 \end{equation}
 
 \begin{equation}
-    P_{macro} = P (\sum_{q}^{\lambda =1}tp_{\lambda}, \sum_{q}^{\lambda =1}tn_{\lambda}, \sum_{q}^{\lambda =1}fp_{\lambda}, \sum_{q}^{\lambda =1}tp_{\lambda})
+    P_{micro} = P (\sum_{\lambda =1}^{q}tp_{\lambda}, \sum_{\lambda =1}^{q}tn_{\lambda}, \sum_{\lambda =1}^{q}fp_{\lambda}, \sum_{\lambda =1}^{q}tp_{\lambda})
     \label{eq:micro}
 \end{equation}
 Where $\lambda$ is a Label and $L = {\lambda_{j}: j= 1...q}$ is the set of all labels.
 
 For a problem in machine learning, normally, we take different samples from a dataset and then 
-we run the model on all of those samples independently to estimate the skill of a machine learning 
+we run the model on all of those samples independently to estimate the performance of a machine learning 
 model on the unseen data. A popular technique in this area is k-fold cross validation 
 \cite{james_introduction_2013}. In order to produce the final metrics for a model, we need 
-to average in between a performance metric (e.g. sensitivity) of different classifiers in 
+to average between a performance metric (e.g. sensitivity) of different classifiers in 
 a model or multiple models on different samples of data (which is the case in multi-class 
 or multi-label classification problems). The averaging could be done by either macro or 
 micro averaging approach which can produce different results.
@@ -467,8 +478,10 @@ aggregates the contributions of all classes to compute the average metric \cite{
 For imbalanced problems involving multiple classes, the micro-averaging approach is preferable.
 
 
-\subsubsection{Support Vector Machine (SVM)}
-Algorithm-level solutions concentrate on modifying existing learners methods for handling 
+\subsubsection{Support Vector Machines (SVM)}
+Algorithm-level solutions (the ones trying to bias the existing learning algorithms towards 
+the minority class~\cite{lin_support_2002}) concentrate on modifying existing learners 
+methods for handling 
 imbalanced datasets. Instead of focusing on modifying the training set in order to combat 
 class skew, this approach aims at modifying the classifier learning procedure itself to 
 alleviate their bias towards majority class instead on altering the supplied 
@@ -476,7 +489,7 @@ training set \cite{krawczyk2016learning}.
 
 Due to their powerful generalization abilities, convergent properties and flexibility in 
 adapting to various learning difficulties, Support Vector Machines (SVMs)\cite{vapnik2013nature} 
-are among the most popular algorithms for pattern classification in this category. 
+are among the most popular algorithms for pattern classification in problems with imbalanced datasets. 
 The algorithm is effective in high dimensional spaces and it accepts different Kernel 
 functions for the decision making process.
 
@@ -485,84 +498,89 @@ functions for the decision making process.
     \includegraphics[width=0.60\textwidth]{figures/13svmAlgorithm.png}
     \caption{Support Vector Machine boundries for an imbalanced dataset: 
     (left) standard approach; (right) instance-level 
-    weighting \cite{fernandez_learning_2018}}
+    weighting extracted from~\cite{fernandez_learning_2018}}
     \label{fig:svmBoundries}
 \end{figure}
 
 Fernandez et al \cite{fernandez_learning_2018} explains the support vector machine, involved parameters 
 and the algorithm's related imbalanced classification concerns as:
 
-SVM algorithm aims at finding the optimal hyperplane which separates instances into two 
-classes. Traditional linear classifiers offer many desirable properties, but they are not 
-able to cope with complex data structures. SVM transforms the input instances into a higher 
-dimensional artificial feature space(s). So, by using a non-linear mapping $\theta$, 
-it can achieve a linear separation between classes in the new space, 
-which in turn translates to a non-linear decision boundary in the original feature space. 
-The potential separating hyperplane can be represented as:
+\begin{quote}
+    
+        SVM algorithm aims at finding the optimal hyperplane which separates instances into two 
+    classes. Traditional linear classifiers offer many desirable properties, but they are not 
+    able to cope with complex data structures. SVM transforms the input instances into a higher 
+    dimensional artificial feature space(s). So, by using a non-linear mapping $\theta$, 
+    it can achieve a linear separation between classes in the new space, 
+    which in turn translates to a non-linear decision boundary in the original feature space. 
+    The potential separating hyperplane can be represented as:
 
-\begin{equation}
-    w.\theta(x)+b=0
-    \label{eq:svmBasic}
-\end{equation}
-Where $w$ stands for a weight vector normal to this hyperplane. In case of considered data 
-are linearly separable, the decision hyperplane characterized by a maximum margin can be 
-obtained by optimization of margin as: $ min(1/2 w.w) $ subject to 
-$\forall_{i=1...l}, y_{i}(w.\theta(x_{i})+b)\geq 1$ where $l$ stands for the number of training instances.
+    \begin{equation}
+        w.\theta(x)+b=0
+        \label{eq:svmBasic}
+    \end{equation}
+    Where $w$ stands for a weight vector normal to this hyperplane. In case of considered data 
+    are linearly separable, the decision hyperplane characterized by a maximum margin can be 
+    obtained by optimization of margin as: $ min(1/2 w.w) $ subject to 
+    $\forall_{i=1...l}, y_{i}(w.\theta(x_{i})+b)\geq 1$ where $l$ stands for the number of training instances.
 
-However, datasets are rarely linearly separable. So, we need to modify the 
-the equation to include the possibilities of classifying some of training instances, 
-to achieve greater generalization and reduce overfitting. This is 
-done by using slack variable associated with $i-th$ instance $\epsilon_{i} \geq 0$. 
-This allows to rewrite the margin optimization problem as soft margin:
+    However, datasets are rarely linearly separable. So, we need to modify the 
+    the equation to include the possibilities of classifying some of training instances, 
+    to achieve greater generalization and reduce overfitting. This is 
+    done by using slack variable associated with $i-th$ instance $\epsilon_{i} \geq 0$. 
+    This allows to rewrite the margin optimization problem as soft margin:
 
-\begin{equation}
-    min(\frac{1}{2}w.w+C\sum_{i=1}^{l}\epsilon_{i}) \\
-    \label{eq:svmSoftMargin}
-\end{equation}
-Subject to $\forall_{i=1...l}, \forall_{\epsilon\geq0}, y_{i}(w.\theta(x_{i})+b)\geq 1-\epsilon_{i}$
-Where $C$ stands for the regularization parameter that controls the trade-off between maximizing 
-the separation margin between classes and minimizing the number of misclassified instances.
-This is a quadratic optimization problem that can be solved by transforming it into 
-Lagrangian optimization problem with the following dual form:
+    \begin{equation}
+        min(\frac{1}{2}w.w+C\sum_{i=1}^{l}\epsilon_{i}) \\
+        \label{eq:svmSoftMargin}
+    \end{equation}
+    Subject to $\forall_{i=1...l}, \forall_{\epsilon\geq0}, y_{i}(w.\theta(x_{i})+b)\geq 1-\epsilon_{i}$
+    Where $C$ stands for the regularization parameter that controls the trade-off between maximizing 
+    the separation margin between classes and minimizing the number of misclassified instances.
+    This is a quadratic optimization problem that can be solved by transforming it into 
+    Lagrangian optimization problem with the following dual form:
 
-\begin{equation}
-    max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} \theta(x_{i}).\theta(x_{j}) \right )
-    \label{eq:svmLagrange}
-\end{equation}
-Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
-As learning the mapping function $\theta(x)$ may be difficult or even impossible, SVMs use kernel 
-functions $K(x_{i},x_{j})=\theta(x_{i}).\theta(x_{j})$. So, would be able to write the dual optimization 
-problem in its kernelized form as:
+    \begin{equation}
+        max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} \theta(x_{i}).\theta(x_{j}) \right )
+        \label{eq:svmLagrange}
+    \end{equation}
+    Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
+    As learning the mapping function $\theta(x)$ may be difficult or even impossible, SVMs use kernel 
+    functions $K(x_{i},x_{j})=\theta(x_{i}).\theta(x_{j})$. So, would be able to write the dual optimization 
+    problem in its kernelized form as:
 
-\begin{equation}
-    max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} K(x_{i},x_{j}) \right )
-    \label{eq:svmOptimization}
-\end{equation}
-Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
-Solving this kernelized dual optimization form and finding optimal values of $\alpha_{i}$ allows us 
-to calculate $w=\sum i = l\alpha_{i}y_{i}\theta(x_{i})$ and determine value of parameter $b$ from 
-Karush-Kuhn-Tucker conditions. Training instances with associated non-zero values of $\alpha_{i}$ 
-are known as support vectors and deemed as sufficient to represent the training set. 
-Therefore, SVMs achieve instance reduction by relying only on support vectors. This will lead to 
-the following equation:
+    \begin{equation}
+        max_{\alpha_{i}} \left ( \sum_{i=1}^{l}\alpha_{i} - \frac{1}{2}\sum_{i=1}^{l}\sum_{j=1}^{l}\alpha_{i}\alpha_{j}y_{i}y_{j} K(x_{i},x_{j}) \right )
+        \label{eq:svmOptimization}
+    \end{equation}
+    Subject to $\forall_{i=1...l}, \forall_{0\leq\epsilon_{i} \leq C}, \sum_{i=1}^{l} y_{i}\alpha_{i}=0$. 
+    Solving this kernelized dual optimization form and finding optimal values of $\alpha_{i}$ allows us 
+    to calculate $w=\sum i = l\alpha_{i}y_{i}\theta(x_{i})$ and determine value of parameter $b$ from 
+    Karush-Kuhn-Tucker conditions. Training instances with associated non-zero values of $\alpha_{i}$ 
+    are known as support vectors and deemed as sufficient to represent the training set. 
+    Therefore, SVMs achieve instance reduction by relying only on support vectors. This will lead to 
+    the following equation:
 
-\begin{equation}
-    f(x)= sign (w.\theta(x)+b) = sign \left ( \sum_{i=1}^{l}\alpha_{i}y{i}K(x_{i},x)+b \right )
-    \label{eq:svmFinal}
-\end{equation}
+    \begin{equation}
+        f(x)= sign (w.\theta(x)+b) = sign \left ( \sum_{i=1}^{l}\alpha_{i}y{i}K(x_{i},x)+b \right )
+        \label{eq:svmFinal}
+    \end{equation}
 
-But, in its original form, SVM is prone to imbalanced class distributions. The first problem 
-is about the soft margin optimization task \ref{eq:svmSoftMargin}.The regularization parameter 
+
+\end{quote}
+
+In its original form, SVMs are prone to imbalanced class distributions. The first problem 
+is about the soft margin optimization task (formula~\ref{eq:svmSoftMargin}).The regularization parameter 
 $C$ here is the misclassification cost for penalizing errors on the training set. But, it 
 assumes that the cost assigned to both of classes are identical. Therefore, the learning 
 algorithm will favor the majority class over the minority class.
 
-Another potential drawback of SVM is related to the support vectors derived from imbalanced data. 
+Another potential drawback of SVMs is related to the support vectors derived from imbalanced data. 
 Only instances with $\alpha_{i} \geq0$ will be preserved and used as support vectors. As this 
 process is also skew-insensitive, the larger imbalance ratio will lead to bigger disproportions in 
 the number of support vectors associated with each class. 
 
-Following algorithm-level solutions has been proposed to overcome these shortcomings:
+The following algorithm-level solutions has been proposed to overcome these shortcomings:
 \begin{itemize}
     \item \small{Kernel Modifications}
     \item \small{Kernel Boundary and Margin Shift}
@@ -574,23 +592,35 @@ Following algorithm-level solutions has been proposed to overcome these shortcom
     \item \small{Fuzzy Approaches}
 \end{itemize}
 
-The idea here is to provide a perspective over how an imbalance classification can be different 
-from a balanced one. There are way more parameters involved in a simple classification problem 
-and failing to report on those details could easily result in an irreproducible experiment.
 
-\subsubsection{SVM Implementation Library(SVMLight, Scikit-Learn)}
-If you want to use an implementation of the support vector machine algorithm in a model,  
-SVMLight is an implementation of Vapnik's Support Vector Machine \cite{vapnik2013nature} 
-in C. According  to the description being provided by it’s creator 
-Thorsten Joachims \cite{joachims2002learning}, It can be used in pattern recognition, 
-regression and learning a ranking function. The software also provides methods for assessing 
-the generalization performance.
-
-Another popular library for machine learning is Scikit-learn \cite{Pedregosa2011scikitlearn} 
-that provides a wide range of functionalities for machine learning problems. As a part of 
-it's library, it provides an implementation of the Support Vector Machine algorithm with 
+\subsubsection{SVM Implementation Libraries (SVMLight, Scikit-Learn)}
+  
+Scikit-learn \cite{Pedregosa2011scikitlearn} is one of the main libraries for machine 
+learning in python. It provides a wide range of functionalities for machine learning problems. 
+As a part of it's library, it provides an implementation of the Support Vector Machine algorithm with 
 more options. The support vector machines in scikit-learn support both dense 
 ($numpy.ndarray$ and convertible to that by $numpy.asarray$) and sparse 
 (any $scipy.sparse$) sample vectors as input. However, to use an SVM to make predictions 
 for sparse data, it must have been fit on such data. For optimal performance, use C-ordered 
 $numpy.ndarray$ (dense) or $scipy.sparse.csr_matrix$ (sparse) with $dtype=float64$.
+
+SVMLight, is another implementation of Vapnik's Support Vector Machine \cite{vapnik2013nature} 
+in C. According  to the description being provided by it’s creator 
+Thorsten Joachims \cite{joachims2002learning}, It can be used in pattern recognition, 
+regression and learning a ranking function. The software also provides methods for assessing 
+the generalization performance.
+
+Through this chapter, we explained 
+how learning from the imbalanced sets of data is different from the balanced ones when dealing 
+with multiple classes (which is a common case for protein classification).
+The issue was addressed by describing the reproducibility-related terms, 
+reproducibility-related studies in machine learning, bioinformatics context and its subdomains, 
+the characteristics of the protein classification problems, imbalanced learning approach 
+in machine learning and the involved phases and parameters for calculation of the final results.
+
+Compared to the machine learning problems with balanced sets of data, imbalanced learning 
+involves more parameters. The model also needs to go through extra phases to predict 
+the labels and eventually calculate the final performance metrics.  
+Failing to report on these parameters creates methodological flexibility in the replication process 
+which could then produce a wide range of results. 
+

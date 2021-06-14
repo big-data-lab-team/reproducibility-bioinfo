@@ -3,7 +3,7 @@ own domain of study. Reproducible research saves a great amount of time and budg
 a study and tries to recreate the same experiment. Overall, it avoids “reinventing the wheel.”
 
 In the scientific community, the reproducibility concept is often approached from two different perspectives. 
-Some researchers view that as a tool for verifying a claim. This approach is required when for example new 
+Some researchers view it as a tool for verifying a claim. This approach is required when for example new 
 findings are planned to be applied to real life problems. There is also a complementary perspective through 
 which the scientists view reproducibility as a tool for improving an existing method, adapting it to new 
 requirements and needs, or applying the methodology to a new domain of research.
@@ -54,7 +54,7 @@ analytical tools and through the same environment.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/01ReproducibleReplicable.jpg}
-    \caption{Reproducible, Replicable, Robust and Generalizable research \cite{whitaker_showing_2017}}
+    \caption{Reproducible, Replicable, Robust and Generalizable research reproduced from~\cite{whitaker_showing_2017}}
     \label{fig:ReproducibleReplicable}
 \end{figure}
 
@@ -74,13 +74,13 @@ in a different environment or using the same algorithm from a different well-rec
 A \textbf{generalizable} study leads to the same results if a different analysis is applied to a different set of data 
 (in such a way mentioned above). 
 
-Figure [\ref{fig:ReproducibleReplicable}] illustrates reproducible, replicable, robust and generalizable research in regards 
+Figure~\ref{fig:ReproducibleReplicable} illustrates reproducible, replicable, robust and generalizable research in regards 
 to data and analysis. If a study is not reproducible, then replicability, robustness and generalizability of that experiment 
 could not be assessed. Through this study, our focus is on reproducible research as being addressed in this section.
 
 \subsubsection{Method reproducibility, Result reproducibility, Inferential reproducibility}
-Goodman et al [8] believe that the reproducibility and replicability definitions being provided by the U.S.National 
-Science Foundation (NSF) \cite{cacioppo_social_2015}, does not provide a clear operational criteria for making a distinction 
+Goodman et al [8] explain that the reproducibility and replicability definitions being provided by the U.S.National 
+Science Foundation (NSF) \cite{cacioppo_social_2015}, do not provide a clear operational criteria for making a distinction 
 in between these two concepts. Based on the published definitions, one can not draw a clear line in between what constitutes 
 a successful reproduction or replication. To address the underlying construct of a reproducibility study, they suggest using 
 three following terms instead of reproducibility. They believe these terms can make a more meaningful distinction in between 
@@ -104,9 +104,9 @@ According to the current standards (being placed to ensure the reproducibility o
 reproducible (adopted by conferences like NeurIPS \cite{pineau_improving_2020}), all the details of the study should be 
 included in the submitted paper. Also, the data, programs and any involved  software needs to be submitted along with 
 the study report. But sometimes due to some restrictions (e.g. confidentiality \cite{dwork_fienberg_2018}) submitting all 
-the required materials are not possible.Thus, the “reproducible” term, can not describe how reproducible an experiment is. 
+the required materials are not possible. Thus, the “reproducible” term, can not describe how reproducible an experiment is. 
 When it comes to older studies, this problem is even more visible as some involved materials are not accessible anymore.
- To address this problem, \cite{tatman_practical_2018} proposes three following terms by which the amount of 
+ To address this problem~\cite{tatman_practical_2018} proposes three following terms by which the amount of 
  reproducibility could be expressed.
 
 \textbf{Low reproducibility:} A low reproducible study is one that has only submitted the experiment report for the claim. 
@@ -129,7 +129,7 @@ has been conducted, is also shared along with the data, code and the submitted p
 includes all the libraries and dependencies necessary for a program to be run on a new machine. This level of reproducibility 
 has been referred to as "linked and executable code and data" in \cite{peng_reproducible_2011}.
 
-Figure [\ref{fig:LowHighReproducibility}], shows the reproducibility spectrum through which the above three terms 
+Figure~\ref{fig:LowHighReproducibility}, shows the reproducibility spectrum through which the above three terms 
 could be addressed. In our study of classification problems with an imbalance dataset, we address the potential 
 underlying issues of the studies with low degree of reproducibility and how those could lead to a wide range of 
 results in reproduction.
@@ -143,7 +143,8 @@ claimed that few published results are reproducible in practice.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.90\textwidth]{figures/04NatureMagazine.png}
-    \caption{Reproducibility crisis related results of the survey conducted by Nature in 2016 \cite{baker_1500_2016}}
+    \caption{Reproducibility crisis related results of the survey conducted by Nature in 2016 extracted 
+    from~\cite{baker_1500_2016}}
     \label{fig:reproducibilityCrisis}
 \end{figure}
 
@@ -154,15 +155,15 @@ reported failure in their attempt to reproduce another scientist's experiments, 
 that science is facing a “reproducibility crisis”. The cause of the problem covers a wide range of subjects from 
 pressure to publish and selective reporting to poor analysis. Most of the researchers believed that failure to reproduce 
 published results does not mean that the result is probably wrong, and most say that they still trust the published 
-literature. Figure [\ref{fig:reproducibilityCrisis}] shows reproducibility crisis related  results of the survey 
+literature. Figure~\ref{fig:reproducibilityCrisis} shows reproducibility crisis related  results of the survey 
 conducted by Nature in 2016 .
 
 On the same subject in machine learning, Nicolas Rougier, a computational neuroscientist says “I think people 
-outside the field might assume that because we have code, reproducibility is kind of guaranteed,” 
-\cite{hutson_artificial_2018}. In fact, compared to some other domains, due to the culture of sharing datasets, 
-codes or both of them, the reproducibility exists to some degree. But for full reproducibility or replicability, 
-the scientists face the same problem. One of the common problems is that due to some restrictions (e.g. confidentiality), 
-the dataset or source code used in the study is not open-sourced.  For example, In a reproducibility study on 400 
+outside the field might assume that because we have code, reproducibility is kind of 
+guaranteed” but "far from it" he said at France's National Institute for Research in Computer Science 
+and Automation in Bordeaux~\cite{hutson_artificial_2018}. 
+One of the common problems is that due to some restrictions (e.g. confidentiality), 
+the dataset or source code used in the study is not open-sourced.  For example in a reproducibility study on 400 
 presented papers at two top AI conferences conducted by Odd Erik Gundersen, 6\% of the presenters had released 
 their codes, third of them had shared their data, and 50\% had shared their pseudocodes \cite{gundersen_state_2018}.
 
@@ -175,14 +176,14 @@ reproducibility-related issues of the classification problems with imbalanced da
 
 \subsection{Reproducibility-related works}
 Throughout the past decade, reproducibility-related studies have received a notable amount of attention in the 
-scientific community. Figure[\ref{fig:publications}] shows the publications recorded in the Scopus that have, in the title or abstract, 
+scientific community. Figure~\ref{fig:publications} shows the publications recorded in the Scopus that have, in the title or abstract, 
 at least one of the reproducibility-related expressions \cite{goodman_what_2016}. The studies have been conducted in 
 various domains from different perspectives to define the terms, address the cause of the problem, create frameworks, 
 platforms, guidelines and mandated to encourage reproducible research in practice. In this section, we will mention 
 some of the related works in the field.
 
-In 1991 in a book named "Earth Soundings Analysis", John Claerbout claimed that few published results are reproducible 
-in any practical sense \cite{claerbout_earth_1992}. Around the same time a computer scientist, Donald Knuth, introduced 
+Around the same time when Claerbout claimed that few published results are reproducible~\cite{claerbout_earth_1992}, 
+a computer scientist, Donald Knuth, introduced 
 the concept of Literate Programming \cite{knuth_literate_1984}. In Literate Programming, computer code is embedded within 
 the program's documentation making it more understandable for humans. The consolidated standards of reporting trials 
 or consort [\linkto{http://www.consort-statement.org}], published a set of guidelines In 1996 to fix problems associated 
@@ -200,7 +201,7 @@ paper is reproducible.
     \centering
     \includegraphics[width=0.60\textwidth]{figures/03ReproducibilityPubTimeline.jpg}
     \caption{ publications recorded in the Scopus that have, in the title or abstract, 
-    at least one of the reproducibility-related expressions \cite{goodman_what_2016}}
+    at least one of the reproducibility-related expressions extracted from~\cite{goodman_what_2016}}
     \label{fig:publications}
 \end{figure}
 
@@ -218,26 +219,31 @@ scientists reported failure in their attempt to reproduce another scientist's ex
 \cite{wilkinson_fair_2016} wrote a paper on FAIR principles, providing guidelines for implementing Findable, 
 Accessible, interoperable and Reusable research in practice.
 
-Steven N. Goodman et al in 2016 \cite{goodman_what_2016} published a paper suggesting new terms for reproducibility. 
+Steven N. Goodman et al in 2016~\cite{goodman_what_2016} published a paper suggesting new terms for reproducibility. 
 They believed the underlying construct of the reproducibility studies could be addressed by using these new terminologies. 
-In 2017, Babatunde K. Olorisade et al \cite{olorisade_reproducibility_2017}, published a paper on practicing reproducibility 
+In 2017, Babatunde K. Olorisade et al~\cite{olorisade_reproducibility_2017}, published a paper on practicing reproducibility 
 in machine Learning studies by providing an example in the text mining domain. Through the same year 
-Hans E. Plesser \cite{plesser_reproducibility_2018} also published a paper in “Frontiers in Neuroinformatics” 
+Hans E. Plesser~\cite{plesser_reproducibility_2018} also published a paper in “Frontiers in Neuroinformatics” 
 clearing up on the various in-use definitions of the reproducibility-related term in the field.
 
 In 2018, Joelle Pineau et al \cite{pineau_improving_2020} provided guidelines for improving reproducibility in 
 machine learning research. She also published a “The Machine Learning Reproducibility Checklist”  designed to be used 
-simultaneously with the ML code submission checklist for NeurIPS. In his paper, Rachael Tatman \cite{tatman_practical_2018} 
+simultaneously with the ML code submission checklist for NeurIPS. In his paper, Rachael Tatman~\cite{tatman_practical_2018} 
 provided a new taxonomy for reproducibility for machine learning research in 2018 by which the amount of reproducibility 
-could be expressed. In 2019, Andrew L. Beam et al \cite{beam_challenges_2020} published a paper on the existing 
-challenges for the reproducibility of the machine learning models in health care. Through the same year, 
-Matthew B.A. McDermott et al \cite{mcdermott_reproducibility_2019} also published a paper on reproducibility in 
-machine learning for health providing a comparison between the available amount of reproducibility in the field 
-and other machine learning-based domains of studies. They also discussed the cause of the problem and how they 
-could be addressed and improved.
+could be expressed. 
 
-The scientific community has also initiated and developed various softwares and platforms (such as scikit-learn 
-\cite{pedregosa_scikit-learn_2018}, R \cite{chambers_software_2008},  etc.) for software development in general and 
-statistical computing in specific (in our case) through the reproducible research framework. All these cumulitive 
+In 2019, Andrew L. Beam et al~\cite{beam_challenges_2020} published a paper on the reproducibility 
+of the machine learning models in health care discussing the unique challenges for the problems using machine learning 
+models to predict the outcome. Since a machine learning model should be reproduced, and ideally replicated, before it 
+is deployed in a clinical setting, they highly encourage adopting reproducible research practices for the studies in 
+this field. Through the same year, Matthew B.A. McDermott et al~\cite{mcdermott_reproducibility_2019} 
+also published a paper on reproducibility in machine learning for health (ML4H) providing a comparison between the 
+available amount of reproducibility in the field and other machine learning-based domains of studies. 
+They also discuss the causes of the problem, the unique challenges associated with the problems in this field 
+(e.g. confidentiality) providing guidelines over how to improve reproducibility considering the current challenges.
+
+The scientific community has also initiated and developed various softwares and platforms (such as 
+scikit-learn ~\cite{pedregosa_scikit-learn_2018}, R~\cite{chambers_software_2008},  etc.) for software development in general and 
+statistical computing in specific (in our case) through the reproducible research framework. All these cumulative 
 efforts have been done in an aim to provide all the researchers with free, well-documented and publicly accessible 
 softwares leading to creation of standard practices and reproducible studies.

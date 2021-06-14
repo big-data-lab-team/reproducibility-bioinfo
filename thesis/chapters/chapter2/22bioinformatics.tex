@@ -3,7 +3,7 @@ through which they defined bioinformatics as “Research, development, or applic
 for expanding the use of biological, medical, behavioral or health data, including those to acquire, store, organize, 
 archive, analyze, or visualize such data.”
 
-Bioinformatics is a highly interdisciplinary field. Figure[\ref{fig:bioinformaticsDisciplines}] shows the Interaction 
+Bioinformatics is a highly interdisciplinary field. Figure~\ref{fig:bioinformaticsDisciplines} shows the Interaction 
 of various disciplines that have contributed to the formation of bioinformatics \cite{bayat_science_2002}. 
 It conceptualizes biology in terms of macromolecules and aims to extract knowledge from the information associated with 
 these molecules on a large-scale. It extracts the intended information by applying "informatics" techniques 
@@ -15,7 +15,7 @@ genetic code, experimental results, patient statistics, scientific literature, e
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.60\textwidth]{figures/05Bioinformatics.jpg}
-    \caption{Disciplines contributed to the formation of bioinformatics \cite{bayat_science_2002}}
+    \caption{Disciplines contributed to the formation of bioinformatics reproduced from~\cite{bayat_science_2002}}
     \label{fig:bioinformaticsDisciplines}
 \end{figure}
 
@@ -29,32 +29,36 @@ a model, we will be able to predict the behavior of the system. In modern biolog
 and has many practical applications in different areas of those fields.
 
 One of the popular data analysis tools by which researchers try to predict the behavior of a system is “Machine Learning”. 
-Machine learning is a direct descendant of statistical model fitting. According to \cite{baldi_bioinformatics_2001}, 
-“the goal in machine learning is to extract useful information from a set of data by building good probabilistic models. 
-The particular twist behind machine learning, however, is to automate this process as much as possible, often by using 
-very flexible models characterized by large numbers of parameters, and to let the machine take care of the rest”. 
-In a problem, the term ‘learning’ refers to running a computer program to induce a model by using training data or 
+It is a direct descendant of statistical model fitting. 
+Machine learning tries to extract useful information from a set of data by building good probabilistic models. However,  
+according to~\cite{baldi_bioinformatics_2001},
+\begin{quote}
+the particular twist behind machine learning, is to automate this process as much as possible, often by using 
+very flexible models characterized by large numbers of parameters, and to let the machine take care of the rest
+\end{quote}
+In a problem, the term “learning” refers to running a computer program to induce a model by using training data or 
 past experience.  Machine-learning approaches are best suited for areas where there is a large amount of data 
 but little theory which is exactly the situation in computational molecular biology \cite{chauvin_backpropagation_1995}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.70\textwidth]{figures/06BioinformaticsTopics.jpg}
-    \caption{Main biological problems where computational methods are applied \cite{larranaga_machine_2006}}
+    \caption{Main biological problems where computational methods are applied 
+    extracted from~\cite{larranaga_machine_2006}}
     \label{fig:bioinformaticsTopics}
 \end{figure}
 
 There are various biological domains where computational methods and techniques are applied for data analysis and knowledge 
 extraction from the data. Pedro Larrañaga et al. \cite{larranaga_machine_2006} have classified those problems into 
 following domains: genomics, proteomics, microarrays, systems biology, evolution and text mining. 
-Figure [\ref{fig:bioinformaticsTopics}] shows the main biological problems where machine learning and computational methods 
-are being applied. The ‘other applications’ category includes all the remaining problems besides the ones mentioned above.
+Figure~\ref{fig:bioinformaticsTopics} shows the main biological problems where machine learning and computational methods 
+are being applied. The “other applications” category includes all the remaining problems besides the ones mentioned above.
 
 In the proteomics domain, supervised machine learning techniques are used for protein structure prediction and protein 
 function prediction \cite{lesh_complete_2003,mishra_prediction_2014}. As a subcategory of machine learning, supervised 
 learning is defined by its use of labeled datasets for training the algorithm that is supposed to classify data or 
 predict the outcome accurately. Unlike supervised learning, unsupervised learning tries to discover patterns in an unlabeled 
-set of data by which the problem could be solved.
+set of data.
 
 Since extraction and annotation of the protein sequences are a time consuming and expensive process, the researchers 
 often have to build and train models on imbalanced datasets (imbalanced learning). As we mentioned earlier, bioinformatics 
@@ -71,12 +75,12 @@ tool for both claim verification and research improvement and adjustment.
 
 In the case of imbalanced learning (which is the focus of this study), a researcher needs to take some extra steps 
 (compared to machine learning problems on a balanced set of data) for building the model and predicting the final outcome. 
-Since there are more parameters in play, we believe in similar problems, the study report should also include details on 
+Since there are more parameters involved, we believe in similar problems, the study report should also include details on 
 these important parameters to ensure high degree of reproducibility. Otherwise, older studies need to be remodeled and 
 programmed from scratch which could be time consuming, expensive and sometimes may not be possible since some resources 
 being used in the initial study may not be available anymore.
 
-The following section will provide a brief introduction into the supervised classification of the  imbalance data 
-(imbalanced learning). We will briefly review the correspondent concepts, how imbalanced data classes could affect the 
+The following section will provide a brief introduction to the supervised classification of imbalance data 
+(imbalanced learning). We will briefly review the corresponding concepts, how imbalanced data classes could affect the 
 learning process, performance metrics and suggested solutions for similar problems through different domains of studies. 
-The section intends to picture how imbalanced classification is different from the balanced one which is the focus of this study.
+The section intends to picture how balanced classification is different from the imbalanced one which is the focus of this study.
