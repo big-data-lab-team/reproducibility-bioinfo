@@ -1,4 +1,10 @@
-\chapter{Materials and Methods}
+\chapter{Protein Classification Process}
+
+Through this chapter and the next one, we demonstrate 
+the impact of methodological flexibility 
+(the flexibility associated with implementing the original study experiment using the same data, 
+analysis tools and through the same environment to obtain the same result) on the
+classification performance in an imbalanced scenario.
 
 \label{sec:materials}
 The materials and methods described in this section present a replication of the study performed
@@ -43,7 +49,8 @@ likelihoods aggregated across min-max scaled probabilities for each ordered amin
 proteins in the SwissProt database.
 \end{itemize}
 
-While the computed AAC, DPC, and PHC features were verified against those previously generated in literature, the 
+While the computed AAC, DPC, and PHC features were verified against those previously generated 
+in literature~\cite{mishra_prediction_2014}, the 
 web reference on the initial study for AAindex and PSSM profiles were not available. So, to validate their similarity 
 they were checked with Munira Alballa, a PHD student of Dr. Gregory Butler who was working on related subject \cite{alballa2020trancep}
 and was experienced with the matter.
@@ -76,9 +83,9 @@ classification scenario. This was accomplished using the ``one versus rest'' str
 to training or automatically depending on the classifier. Support Vector Machine (SVM) Classifiers were initially built
 using the SVMLight library, originally used by~\cite{mishra_prediction_2014}, which reported a probability of class
 membership in each binary setting which were then combined as a multi-class confusion matrix. These models were
-replicated using SciKit-learn (SKlearn), a popular library for machine learning in Python, in both an identical setting
-to SVMLight (termed: SKlearn Probability) and an approach which automatically performs the class reconstruction and
-prediction described above (termed: SKlearn Prediction). 
+replicated using SciKit-learn (Scikit-Learn), a popular library for machine learning in Python, in both an identical setting
+to SVMLight (termed: Scikit-Learn Probability) and an approach which automatically performs the class reconstruction and
+prediction described above (termed: Scikit-Learn Prediction). 
 
 \subsection{Training}
 All models were fit for both $7$ and $8$ class scenarios (Addr: 1) -- excluding and including non-transport proteins,
@@ -86,15 +93,15 @@ respectively. The models were fit using $3$ distinct training paradigms: i) bala
 downsampled (Addr: 2). In the balanced case, training- and testing-sets were created for each model through $5$-fold
 cross validation (CV) that were randomly generated and stratified to balance class membership across folds. The
 shuffled case was performed similarly to the balanced case without stratification guaranteeing balanced class membership
-across folds. The downsampled case was also performed in accordance to the balanced case following a reduction in
+across folds. The downsampled case was performed in accordance to the balanced case following a reduction in
 samples to $60$ observations per class. This resulted in $6$ distinct training methods.
 
 \subsection{Model Hyperparameters}
 For all models, the Radial Basis Function (RBF) kernel was used and the gamma and cost parameters for the model ranged
-from $1e^{-5}$ -- $10$ and $1$ -- $4$, respectively, consistent with those presented by~\cite{mishra_prediction_2014}.
-Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and SKLearn Probability
+from $1e^{-5}$ -- $10$ (gamma) and $1$ -- $4$ (cost), respectively, consistent with those presented by~\cite{mishra_prediction_2014}.
+Specific values were determined through a grid search (Addr: 3). In the case of SVMLight and Scikit-Learn Probability
 scenarios, gamma and cost values were either uniform or varied across classes (Addr: 4), whereas the implementation of
-the SKlearn Prediction model permitted only uniform pairs across all classes.
+the Scikit-Learn Prediction model permitted only uniform pairs across all classes.
 
 \subsection{Performance Evaluation}
 Model performance was evaluated through standard measures of sensitivity, specificity, accuracy, true positives (TP),
@@ -104,14 +111,14 @@ macro-averaging approaches -- evaluating binary classifiers before or after aggr
 respectively -- lead to different results in an imbalanced classification setting, both approaches were used for
 scoring here (Addr: 5).
 
-In the case of both the SVMLight and SKlearn Probability models, the resulting classification and performance for each
+In the case of both the SVMLight and Scikit-Learn Probability models, the resulting classification and performance for each
 model was determined by the aggregation of independent binary classifiers according to three distinct methods: maximum
 probability, unweighted average, and balanced average (Addr: 6). The maximum probability method assigns each sample a
 label corresponding to the binary classifier with the highest certainty, resulting in a non-overlapping classification
 result which was evaluated. In the case of both averaging methods, each probability is converted into a binary
 classification through thresholding and is scored independently prior to aggregating the performance of all classifiers.
 The unweighted average thresholds probabilities at the median value, whereas the balanced case uses a threshold
-proportional to the true number of members belonging to a given class. As the SKlearn Prediction model returned
+proportional to the true number of members belonging to a given class. As the Scikit-Learn Prediction model returned
 pre-determined group confusion matrix and class memberships, performance metrics were computed upon these directly.
 
 \section{Model Comparison}

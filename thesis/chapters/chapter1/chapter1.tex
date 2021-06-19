@@ -5,21 +5,33 @@ In the past decade, however, several studies revealed a widespread lack of resul
 reproducibility, to the point that the existence of a reproducibility crisis is 
 now acknowledged in various fields~\cite{baker_1500_2016}.
 
-Counter-measures were identified to improve results reproducibility~\cite{sandve2013ten}, 
-among which study pre-registrations~\cite{chambers2015registered}, open data and software
-sharing~\cite{wilkinson2016fair}, and best practices~\cite{nichols2017best} to report 
-computational experiments. The latter, in particular, is critical given the important 
-methodological flexibility associated with computational experiments~\cite{carp2012plurality}.
+% Counter-measures were identified to improve results reproducibility~\cite{sandve2013ten}, 
+% among which study pre-registrations~\cite{chambers2015registered}, open data and software
+% sharing~\cite{wilkinson2016fair}, and best practices~\cite{nichols2017best} to report 
+% computational experiments. The latter, in particular, is critical given the important 
+% methodological flexibility associated with computational experiments~\cite{carp2012plurality}.
 
-Machine Learning experiments are not immune to reproducibility
-issues~\cite{raff2019step}, in particular given the flexibility available in
+To improve the results’ reproducibility, counter-measures were identified and the movement 
+towards examining and enhancing the reliability of research was expanded~\cite{begley2015reproducibility}.  
+Scientists addressed the issue by defining reproducibility-specific terms and terminologies 
+(e.g. methodological reproducibility, replicability, robustness, etc.)
+and providing guidelines~\cite{cacioppo_social_2015,goodman_what_2016} and 
+best practices~\cite{nichols2017best,sandve2013ten} 
+for having a reproducible research.  It was then suggested that the scientific community 
+needs to develop a “culture of reproducibility” for computational science and require it for the 
+published claims~\cite{peng_reproducible_2011}. Given the methodological flexibility associated with 
+computational experiments, a reproducible study through this culture is required to 
+share the analytical data sets (original raw or processed data), 
+the relevant metadata, the analytical code(s) and the related software~\cite{wilkinson2016fair}. 
+
+Given the available flexibility in
 data pre-processing, train/test set definitions, algorithm selection and
-parametrization, library implementations, and evaluation metrics. 
+parametrization, library implementations, and evaluation metrics, machine learning experiments 
+are not immune to reproducibility issues either~\cite{raff2019step}. 
 In case of imbalance learning for problems with multiple classes, 
 the problem is even more severe since there are more parameters in play for constructing 
 a computational model. The resulting reproducibility challenges have implications in various
 disciplines including bioinformatics, the primary focus of our study.
-
 
 Membrane proteins are vital molecules that act as gatekeepers to a cell. 
 It is estimated that one in every three proteins found in a cell is a membrane 
@@ -45,7 +57,9 @@ This work presents a reproducibility study of a classification problem with an i
 involving multiple classes which is a common case when dealing with proteins in bioinformatics. 
 We report our attempts to reproduce a membrane protein classification problem with an imbalanced 
 dataset~\cite{mishra_prediction_2014}, showing the impact of methodological
-flexibility on classification performance, and deriving best practices to
+flexibility (the flexibility associated with implementing the original study experiment 
+using the same data, analysis tools and through the same environment to obtain the same result)
+on classification performance, and deriving best practices to
 report Machine Learning results for similar problems. We explore
 methodological options related to data preparation, hyperparameter tuning,
 classifier implementation, aggregation of binary classifiers for
