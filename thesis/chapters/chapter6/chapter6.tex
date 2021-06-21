@@ -1,27 +1,65 @@
-\chapter{Conclusion}
+\chapter{Conclusion and future work}
+\section{Conclusion}
+% to be re-written
+Reproducible research saves a great amount of time and budget as it enables other researchers to 
+quickly run either the same experiment or a modified version of the same experiment for 
+various purposes. However, through the past decade, concerns over the reproducibility of scientific 
+results have been steadily rising with reports revealing a widespread lack of results’ reproducibility 
+in numerous domains of science. In Machine Learning, since there are more parameters in play for 
+constructing a model, the experiments are not immune to reproducibility issues either. When it comes 
+to learning from multiple imbalanced sets of data, a problem is more prone to reproducibility issues 
+since the process (from building a model to performance metrics calculation) requires a researcher 
+to go through more phases and consider extra parameters.
 
-Reproducibility, the ability to reproduce computational results using identical data and software, 
-is a cornerstone of the scientific methodology. However, through the past decade, several studies 
-revealed a widespread lack of results’ reproducibility, to the point that the existence of a 
-reproducibility crisis is now acknowledged in various fields.
-In Machine Learning, given the flexibility available in various phases of constructing a 
-computational model, the experiments are not immune to reproducibility issues either. 
-In case of imbalance learning for problems with multiple classes, the problem is even more 
-severe since there are more parameters in play for constructing a model.
+% In this work we tried to demonstrate that in an imbalanced learning problem with multiple classes,
+% a study report with a fair amount of details, could reproduce a wide range of results if 
+% methodological flexibility is permitted. The flexibilities that may not affect the results 
+% much in a generic balanced scenario. 
 
-In this work we tried to demonstrate that in an imbalanced learning problem with multiple classes,
-a study report with a fair amount of details, could reproduce a wide range of results if 
-methodological flexibility is permitted. The flexibilities that may not affect the results 
-much in a generic balanced scenario. 
+In this work, we demonstrated that in an imbalanced learning problem with multiple classes,
+(in contrast to learning from balanced datasets) a study report with a fair amount of details, 
+could generate a wide range of results on a reproducibility attempt if methodological flexibility 
+is permitted. 
+
+As being explained in~\ref{sec:imbalanceBackground}, for learning from imbalanced sets of data, 
+we need to go through more phases and consider more parameters. So, the resulting variation in 
+performance metrics could occur due to making different assumptions through various phases of 
+constructing a model and then building the model 
+based on those assumptions. For example in or work (table~\ref{tab:prob_8class}), 
+for a model using scikit-learn library, if we re-sample data by shuffling and average the metrics using 
+micro averaging technique, 3 different assumptions for aggregation results in various performance 
+metrics showing $0.09$ to $0.56$ distance from the reference values. For the same problem, if we use 
+balanced averaging technique, 2 different averaging methods (micro vs macro) result in  
+distance values between $0.08$ and $0.30$.
+
+Another source of variation could be using different approaches for building a model and 
+producing the final performance metrics available within the same library. For example in  
+tables~\ref{tab:prob_7class},~\ref{tab:scikit_pred}, using two different approaches for building 
+the model using maximum probability technique, micro averaging on shuffled sets results in $0.34$ 
+and $0.70$ values for distance from the reference values. The difference could occur due to the 
+existing assumptions in the underlying layers of that specific approach for different phases of 
+building a model on imbalanced data. 
+
+Although insignificant, using different libraries for the same algorithm could also produce 
+different results. As an example, in table~\ref{tab:prob_7class}, using different libraries 
+(SvmLight vs Scikit-Learn) result in distance values of $0.10$ and $0.08$ for performance metrics 
+being averaged using micro averaging technique and on a model being built on a shuffled dataset 
+where results are aggregated using a balanced averaging approach.
 
 Among all the methodological flexibilities, we believe dataset sampling, aggregation and 
-averaging techniques affect the final results the most. Regarding the dataset, if the applied 
-re-sampling technique balances out the sets (e.g. down-sampling, up-sampling, etc.), micro and 
-macro averaging, produce close results. If the model is built on the imbalance data, since the 
-ratio between the minority and the majority class error rates increases with the amount of 
-available degree of imbalance in the dataset~\cite{japkowicz_concept-learning_2001}, the 
-Imbalance Ratio should be kept the lowest. In such a scenario, stratified sampling with micro 
-averaging technique produces better results. 
+averaging techniques affect the final results the most. In Tables~\ref{tab:prob_8class} 
+same model using different aggregation techniques shows distance values of $0.10$ and $0.24$ 
+from the reference. Using different averaging approaches (micro vs macro) the model produces 
+distance values of $0.10$ and $0.21$ and using different dataset re-sampling methods 
+(shuffling vs down-sampling) the distance values are $0.10$ and $0.19$.
+
+Regarding the dataset, if the applied re-sampling technique balances out the sets 
+(e.g. down-sampling, up-sampling, etc.), micro and macro averaging, produce close results. 
+If the model is built on an imbalanced sets of data, since the ratio between the minority and the 
+majority class error rates increase with the amount of available degree of imbalance 
+in the dataset~\cite{japkowicz_concept-learning_2001}, the Imbalance Ratio should be kept the lowest. 
+In such a scenario, stratified sampling with micro averaging technique produces the closest results 
+($0.08$ to $0.13$ in our study). 
 
 With regards to the aggregation technique, According to Haibo He et al.~\cite{haibo_he_learning_2009}: 
 “It has been stated that trying other methods, such as sampling, without trying by simply setting the 
@@ -31,99 +69,35 @@ classifiers produced by standard machine learning algorithms without adjusting t
 threshold may well be a critical mistake”~\cite{provost_machine_2000}. So, for imbalanced 
 learning problems, applying the threshold-moving technique is recommended. 
 
-For such problems, we believe following recommendations would ensure a high degree of reproducibility. 
+For such problems, we believe the recommendations in appendix ~\ref{appendix:a} could ensure 
+an agreeable amount of reproducibility. We produce this recommendations as an extension to 
+the "The Machine Learning Reproducibility Checklist" which according to the authors 
+in~\cite{pineau_improving_2020} along with 2 other components is "designed to improve the 
+standards across the community for how we conduct, communicate and evaluate machine 
+learning research."
+
 The recommendations are categorized under data provenance, feature provenance, model provenance, 
 software provenance and pipeline provenance. According to W3C Incubator Group Report~\cite{w3c}, 
 provenance of a resource is a record that describes entities and processes involved in producing 
 and delivering or otherwise influencing that resource. Provenance provides a critical foundation 
 for assessing authenticity, enabling trust, and allowing reproducibility. 
 
-\paragraph{Data Provenance and Sharing:}
-includes all the details and processes involved in assembling a dataset from the raw data.
-\begin{itemize}
-    \tabitem{Report on the source(s) of the raw data}
-    \tabitem{Explain the curation process}
-    \tabitem{Share the final dataset.}
-\end{itemize}
-
-\paragraph{Feature Provenance and Sharing:}
-refers to the process through which feature values are generated from the dataset.
-\begin{itemize}
-    \tabitem{Explain the concept associated with the extracted feature }
-    \tabitem{Explain the process through which the feature is extracted}
-    \tabitem{For formulas, describe the associated parameters}
-    \tabitem {Share the extracted feature file. If sharing the generated results are not possible, 
-    share reasonable amount of the final extracted feature file.}
-\end{itemize}
-
-\paragraph{Model Provenance and Sharing:}
-The report on this aspect should cover how the model is constructed, trained and evaluated. 
-It includes any applied data pre-processing technique, applied feature engineering technique, 
-the algorithm along with its hyper-parameters, the evaluation metrics, 
-the aggregation and the averaging techniques.
-\begin{itemize}
-    \item{Data Pre-processing}
-    \tabitem{Explain the pre-processing technique concept along with any involved process, formula and parameters}
-    \tabitem{Share the final transformed feature set, If sharing the entire generated result is not possible, 
-    share reasonable amount of the final transformed feature file}
-\end{itemize}
-\begin{itemize}
-    \item{Feature Engineering}
-    \tabitem{Explain the feature engineering technique concept along with any involved process, formula and parameters}
-    \tabitem{Share the final feature set, If sharing the entire generated result is not possible, 
-    name the selected features.}
-\end{itemize}
-\begin{itemize}
-    \item{Model Structure}
-    \tabitem{Explain any applied sampling technique along with the process formula and parameters }
-    \tabitem{Describe the strategy for splitting the original data into train, validation and test}
-    \tabitem{For problems with multiple classes, describe the decomposition strategy}
-    \tabitem{Explain the deployed algorithm, considered range of hyper-parameters and the associated values for 
-    obtaining the published results. For problems with multiple classes, this process should be done for all the 
-    decomposed models.}
-    \tabitem{If a specific optimal hyper-parameters search technique is used, provide the final deployed values 
-    resulted from the process, describe the method, any involved parameter(s), the process and 
-    how it has been applied to the model(s).}
-    \tabitem{For problems with multiple classes (or ensemble models), report on the structure, describe the 
-    underlying models and the aggregation strategy and how all those were applied to the model to generate 
-    the final results. If the results are generated using a different threshold rather 
-    than using the default one used by the classification algorithm, report on the threshold value for each 
-    decomposed model.}
-    \tabitem{Share reasonable amount of the generated results (where possible)}
-\end{itemize}
-\begin{itemize}
-    \item{Model Evaluation}
-    \tabitem{Describe the choice of statistical method used for evaluation of the results, any involved formula 
-    and its parameter(s)}
-    \tabitem{If averaging through multiple results, describe the technique (micro vs macro)}
-    \tabitem{Define error bars (if any)}
-\end{itemize}
-
-
-\paragraph{Software Provenance and Sharing}
-From the data curation to model training and evaluation, various software and coded programs could get involved 
-in a typical machine learning problem. The report on this aspect should cover all the details on the software, 
-coded programs and the libraries being involved throughout the whole process. 
-\begin{itemize}
-    \tabitem{For the coded programs, report on the programming language, version, involved libraries and the 
-    required environment for running the program.}
-    \tabitem{If a random function is used, report on the random seed and the library details}
-    \tabitem{For any involved software, report on the reuired details and a reference to the software documentation} 
-    \tabitem{Share your codes (as much as possible)}
-    
-\end{itemize}
-
-\paragraph{Pipeline Provenance and Sharing}
-In software engineering, a pipeline is a chain of processing modules, in a way that, the output from each module 
-is the input to the next one. The report on this aspect should cover the pipeline structure and how the modules 
-within that pipeline are connected and work together to produce the final results.
-\begin{itemize}
-    \tabitem{Design and code your pipeline as a chain of independently runnable modules
-    in a way that the output from each phase would be the input to the next one.}
-    \tabitem{Report on the overall pipeline structure and how all the modules are connected.}
-    \tabitem{If your pipeline is environment-dependent, then, provide details on the underlying infrastructure 
-    and how to setup the pipeline through that environment.}
-    \tabitem{Containerize your pipeline and share it in the state that the results are produced (if possible)}
-\end{itemize}
-
-
+\section{Future Work}
+Learning from multiple imbalanced sets of data generally involves taking extra steps and considering 
+more parameters. So, they are more prone to reproducibility issues. Following the same path, my future 
+works concern a deeper analysis into deep learning-based approaches for learning from imbalanced datasets 
+through various domains of machine learning applications with regards to the key points 
+and parameters that could lead to different results on replication attempts. The following ideas 
+could be studied:
+\paragraph{Deep learning-based feature engineering for imbalanced data}
+Working on problems with high dimensional feature space, feature engineering as one 
+of the phases of building a model could help with reducing the data dimensionality, 
+decreasing the prediction model complexity, and dealing with noisy information. On this subject, 
+deep learning-based feature engineering approaches for imbalanced datasets with regards to their 
+impact on the final results could be explored.
+\paragraph{Deep learning approaches for learning from imblanaced data}
+As being mentioned in ~\ref{sec:imbalanceBackground}, there are various domains of studies 
+where researchers have to learn from multiple imbalanced classes of data. On the same subject, 
+Deep learning approaches for learning from the imbalanced data with applications in 
+Image classification, Activity recognition, Natural language processing, 
+Security-related problems, Bioinformatics, etc. could be each explored.
