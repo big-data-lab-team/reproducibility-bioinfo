@@ -47,6 +47,7 @@ membrane protein classification with the highest MCC values.
 Figure~\ref{fig:MccAllModels} shows that the MCC value being calculated for this 
 feature set is higher than the other models being built using other 18 feature sets.
 
+\section{Models Differences}
 The remainder of this section will explore the differences in model performance based on the defined axes of
 flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 
@@ -98,8 +99,8 @@ The SVMLight classifiers produced closer results to the reference than both Scik
 ($p < 0.05$ for both). While the Scikit-Learn Prediction model architecture did not appear in the set of closest models,
 there was no statistically significant difference between its performance and that of the Scikit-Learn Probability models.
 
-% \section{Closest Models}
-\paragraph{Closest Models}
+\section{Closest Models}
+% \paragraph{Closest Models}
 The closest 10\% of models (16) used a variety of configurations, and each reported a distance score of less than
 $0.13$ from the reference. The breakdown of configurations for these models included: micro aggregation (all), balanced
 average prediction method (all), balanced (8) or shuffled (8) dataset, contained 7 (8) or 8 (8) classes in the dataset,

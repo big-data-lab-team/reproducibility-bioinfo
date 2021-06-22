@@ -1,0 +1,61 @@
+\chapter{Reproducible Experiment Report}
+\label{appendix:a}
+
+\begin{table}[ht]
+    \scriptsize
+    \begin{adjustwidth}{-0.0in}{-0.0in} 
+        \centering
+        \begin{tabular}{|l|}
+            
+            \hline
+            \multicolumn{1}{|g|} {Data Provenance and Sharing}\\
+            \hline
+                \textbullet {Report on the source(s) of the raw data}\\
+                \textbullet{Explain the curation process}\\
+                \textbullet{Share the final dataset.}\\
+            \hline
+            \multicolumn{1}{|g|} {Feature Provenance and Sharing}\\
+            \hline
+                \textbullet{Explain the concept associated with the extracted feature }\\
+                \textbullet{Explain the process through which the feature is extracted}\\
+                \textbullet{For formulas, describe the associated parameters}\\
+                \textbullet Share the extracted feature file (or reasonable amount of 
+                the final extracted feature file)\\
+            \hline
+            \multicolumn{1}{|g|} {Model Provenance and Sharing:}\\
+            \hline
+            \multicolumn{1}{|c|} {Data Pre-processing}\\
+            \hline
+                \textbullet{Explain the pre-processing technique concept along with any involved process, formula and parameters}\\
+                \textbullet Share the final transformed feature file (or reasonable amount of 
+                the final transformed feature file)\\
+            \hline
+            \multicolumn{1}{|c|} {Model Structure}\\
+            \hline
+                \textbullet{Explain any applied sampling technique along with the process formula and parameters }\\
+                \textbullet{Describe the strategy for splitting the original data into train, validation and test}\\
+                \textbullet{For problems with multiple classes, describe the decomposition strategy}\\
+                \textbullet Explain the deployed algorithm, considered range of hyper-parameters and the associated values for 
+                obtaining \\the published results. For multiple classes, this process should be done for all the 
+                decomposed models.\\
+                \textbullet If a specific optimal hyper-parameters search technique is used, provide the final deployed values 
+                resulted\\ from the process, describe the method, any involved parameter(s), the process and 
+                how it has been \\ applied to the model(s).\\
+                \textbullet For problems with multiple classes (or ensemble models), report on the structure, describe the 
+                underlying\\ models and the aggregation strategy and how all those were applied to the model to generate 
+                the final\\ results. If the results are generated using a different threshold rather 
+                than using\\ the default one used by the classification algorithm, report on the threshold value for each 
+                decomposed model.\\
+                \textbullet{Share reasonable amount of the generated results (where possible)}\\
+            \hline
+            \multicolumn{1}{|c|} {Model Evaluation}\\
+            \hline
+                \textbullet Describe the choice of statistical method used for evaluation of the results, any involved formula 
+                \\ and its parameter(s)\\
+                \textbullet{If averaging through multiple results, describe the technique (micro vs macro)}\\
+                \textbullet{Define error bars (if any)}\\
+            \hline
+
+        \end{tabular}
+    \end{adjustwidth}    
+\end{table}
