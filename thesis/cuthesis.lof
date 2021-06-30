@@ -19,5 +19,6 @@
 \contentsline {figure}{\numberline {16}{\ignorespaces The study process\relax }}{39}{figure.caption.48}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {17}{\ignorespaces Sensitivity and Specificity of each tested model. Each panel contains models trained with a fixed number of categories (7: left; 8: right), and shows the published reference performance in red. The closest 10\% of models to this reference have been outlined in black. The symbol colour and shape refer to the classifier type and aggregation strategy, respectively. Each shaded region illustrates the bounds of performance for a given binary classifier aggregation strategy.\relax }}{42}{figure.caption.49}
-\contentsline {figure}{\numberline {18}{\ignorespaces MCC results from applying the closest 10\% models to all the features. The hybrid model that included the AAindex and the PSSM profile (7th box), outperforms others.\relax }}{52}{figure.caption.67}
+\contentsline {figure}{\numberline {18}{\ignorespaces MCC results from applying the closest 10\% models to all the features. The hybrid model that included the AAindex and the PSSM profile (7th box), outperforms others.\relax }}{53}{figure.caption.66}
+\addvspace {10\p@ }
 \addvspace {10\p@ }
