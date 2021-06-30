@@ -16,8 +16,8 @@ organized accordingly.
 \section{AAC Models}
 Tables~\ref{tab:prob_7class} contains the results of the probability-based models with 
 7-classes of proteins in the dataset. All the models were evaluated using the performance 
-metrics in in~\cite{mishra_prediction_2014}. Among all the models, 8 highlighted ones reported 
-the distance values between $0.07$ and $0.13$ from the reference. These are the ones that produced 
+metrics in~\cite{mishra_prediction_2014}. Among all the models, the 8 highlighted ones had 
+a distance value between $0.07$ and $0.13$ from the reference. These are the ones that produced 
 the closest results to the initial ones.
 
 Tables~\ref{tab:prob_8class} shows the performance of the probability-based models with 
@@ -47,7 +47,7 @@ uniformity in representation is consistent with the direct comparisons between s
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.90\textwidth]{figures/14ModelPerformance.png}
+    \includegraphics[width=\textwidth]{figures/14ModelPerformance.png}
     \caption{Sensitivity and Specificity of each tested model. Each panel contains models 
     trained with a fixed number of categories (7: left; 8: right), and shows the published 
     reference performance in red. The closest 10\% of models to this reference have been 
@@ -64,7 +64,7 @@ flexibility enumerated in Section~\ref{sec:experimentaldesign}.
 \paragraph{Number of Classes}
 While the 7-class models appear to be slightly closer to the reference, there was no significant difference between
 the number of classes and the distance from reference ($p > 0.1$). Models trained with 8 classes tended to achieve
-higher sensitivity and specificity values. It seems that the addition of the background class has improve the 
+higher sensitivity and specificity values. It seems that the addition of the background class improved the 
 performance.
 
 \paragraph{Dataset Sampling}
@@ -78,7 +78,7 @@ values of $0.02$ and $4.5$ while for the models with 8-classes of proteins, the 
 the values of $0.01$ and $4$ for Gamma and Cost respectively. There was no significant difference between these 
 sets of parameters.
 
-\paragraph{Hypterparamter Heterogeneity}
+\paragraph{Hyperparamter Heterogeneity}
 Similarly to the case of uniform parameters, models converged on Gamma values between $0.02$ and $0.04$ for all classes
 and models, and Cost values between $4$ and $5$, with no statistically significant difference between models or classes.
 
