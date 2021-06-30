@@ -1,65 +1,43 @@
 \chapter{Conclusion and future work}
 \section{Conclusion}
-% to be re-written
-Reproducible research saves a great amount of time and budget as it enables other researchers to 
-quickly run either the same experiment or a modified version of the same experiment for 
-various purposes. However, through the past decade, concerns over the reproducibility of scientific 
-results have been steadily rising with reports revealing a widespread lack of results’ reproducibility 
-in numerous domains of science. In Machine Learning, since there are more parameters in play for 
-constructing a model, the experiments are not immune to reproducibility issues either. When it comes 
-to learning from multiple imbalanced sets of data, a problem is more prone to reproducibility issues 
-since the process (from building a model to performance metrics calculation) requires a researcher 
-to go through more phases and consider extra parameters.
 
-% In this work we tried to demonstrate that in an imbalanced learning problem with multiple classes,
-% a study report with a fair amount of details, could reproduce a wide range of results if 
-% methodological flexibility is permitted. The flexibilities that may not affect the results 
-% much in a generic balanced scenario. 
+Reproducible research saves a great amount of time and budget as it enables other researchers 
+to quickly run either the same experiment or a modified version of the same experiment for 
+various purposes. However, through the past decade, concerns over the reproducibility of 
+scientific results have been steadily rising with reports revealing a widespread lack of 
+results reproducibility in various domains of science. 
 
-In this work, we demonstrated that in an imbalanced learning problem with multiple classes,
-(in contrast to learning from balanced datasets) a study report with a fair amount of details, 
-could generate a wide range of results on a reproducibility attempt if methodological flexibility 
-is permitted. 
+Since there are numerous parameters involved in building a model for a problem in machine learning, 
+the experiments in this field of study are not immune to reproducibility-related issues either. When it 
+comes to learning from multiple imbalanced sets of data, the process (from data sampling  
+to calculating the performance metrics) requires even more analysis and considering more parameters. 
 
-As being explained in~\ref{sec:imbalanceBackground}, for learning from imbalanced sets of data, 
-we need to go through more phases and consider more parameters. So, the resulting variation in 
-performance metrics could occur due to making different assumptions through various phases of 
-constructing a model and then building the model 
-based on those assumptions. For example in or work (table~\ref{tab:prob_8class}), 
-for a model using scikit-learn library, if we re-sample data by shuffling and average the metrics using 
-micro averaging technique, 3 different assumptions for aggregation results in various performance 
-metrics showing $0.09$ to $0.56$ distance from the reference values. For the same problem, if we use 
-balanced averaging technique, 2 different averaging methods (micro vs macro) result in  
-distance values between $0.08$ and $0.30$.
+In this work, we demonstrated that in an imbalanced learning problem with multiple classes 
+in the dataset, a study report with a fair amount of details could generate a wide range of 
+results on a reproducibility attempt if methodological flexibility is permitted. 
 
-Another source of variation could be using different approaches for building a model and 
-producing the final performance metrics available within the same library. For example in  
-tables~\ref{tab:prob_7class},~\ref{tab:scikit_pred}, using two different approaches for building 
-the model using maximum probability technique, micro averaging on shuffled sets results in $0.34$ 
-and $0.70$ values for distance from the reference values. The difference could occur due to the 
-existing assumptions in the underlying layers of that specific approach for different phases of 
-building a model on imbalanced data. 
+For such a problem, flexibility allows researchers to make different assumptions for the 
+parameters involved in constructing a model.  As mentioned in ~\ref{sec:imbalanceBackground}, 
+compared to balanced binary datasets, learning from imbalanced multiclass datasets involves 
+more parameters. So, one should even make more assumptions for building a model. These 
+different assumptions made by various experts could then lead to numerous results for 
+the same problem.  Some close to the initial one published in the study and some far from it.
 
-Although insignificant, using different libraries for the same algorithm could also produce 
-different results. As an example, in table~\ref{tab:prob_7class}, using different libraries 
-(SvmLight vs Scikit-Learn) result in distance values of $0.10$ and $0.08$ for performance metrics 
-being averaged using micro averaging technique and on a model being built on a shuffled dataset 
-where results are aggregated using a balanced averaging approach.
+Another source of variation could be using different approaches (from the same library) for 
+building a model and calculating the final performance metrics. The difference could occur due 
+to the existing presumptions in the underlying layers of that specific approach for different 
+phases of building a model on imbalanced data. Although insignificant, for the same classification 
+algorithm (e.g. support vector machines), various libraries could also produce different results. 
 
 Among all the methodological flexibilities, we believe dataset sampling, aggregation and 
-averaging techniques affect the final results the most. In Tables~\ref{tab:prob_8class} 
-same model using different aggregation techniques shows distance values of $0.10$ and $0.24$ 
-from the reference. Using different averaging approaches (micro vs macro) the model produces 
-distance values of $0.10$ and $0.21$ and using different dataset re-sampling methods 
-(shuffling vs down-sampling) the distance values are $0.10$ and $0.19$.
+averaging techniques affect the final results the most.
 
 Regarding the dataset, if the applied re-sampling technique balances out the sets 
 (e.g. down-sampling, up-sampling, etc.), micro and macro averaging, produce close results. 
 If the model is built on an imbalanced sets of data, since the ratio between the minority and the 
 majority class error rates increase with the amount of available degree of imbalance 
 in the dataset~\cite{japkowicz_concept-learning_2001}, the Imbalance Ratio should be kept the lowest. 
-In such a scenario, stratified sampling with micro averaging technique produces the closest results 
-($0.08$ to $0.13$ in our study). 
+In such a scenario, stratified sampling with micro averaging technique produces the closest results. 
 
 With regards to the aggregation technique, According to Haibo He et al.~\cite{haibo_he_learning_2009}: 
 “It has been stated that trying other methods, such as sampling, without trying by simply setting the 
@@ -70,34 +48,84 @@ threshold may well be a critical mistake”~\cite{provost_machine_2000}. So, for
 learning problems, applying the threshold-moving technique is recommended. 
 
 For such problems, we believe the recommendations in appendix ~\ref{appendix:a} could ensure 
-an agreeable amount of reproducibility. We produce this recommendations as an extension to 
-the "The Machine Learning Reproducibility Checklist" which according to the authors 
-in~\cite{pineau_improving_2020} along with 2 other components is "designed to improve the 
+an agreeable amount of reproducibility. We produced this recommendations as an extension to 
+the "The Machine Learning Reproducibility Checklist". According to the authors 
+in~\cite{pineau_improving_2020} the checklist was "designed to improve the 
 standards across the community for how we conduct, communicate and evaluate machine 
 learning research."
 
-The recommendations are categorized under data provenance, feature provenance, model provenance, 
-software provenance and pipeline provenance. According to W3C Incubator Group Report~\cite{w3c}, 
+The recommendations are organized under data provenance, feature provenance and 
+model provenance. According to W3C Incubator Group Report~\cite{w3c}, 
 provenance of a resource is a record that describes entities and processes involved in producing 
 and delivering or otherwise influencing that resource. Provenance provides a critical foundation 
 for assessing authenticity, enabling trust, and allowing reproducibility. 
 
 \section{Future Work}
-Learning from multiple imbalanced sets of data generally involves taking extra steps and considering 
-more parameters. So, they are more prone to reproducibility issues. Following the same path, my future 
-works concern a deeper analysis into deep learning-based approaches for learning from imbalanced datasets 
-through various domains of machine learning applications with regards to the key points 
-and parameters that could lead to different results on replication attempts. The following ideas 
-could be studied:
-\paragraph{Deep learning-based feature engineering for imbalanced data}
-Working on problems with high dimensional feature space, feature engineering as one 
-of the phases of building a model could help with reducing the data dimensionality, 
-decreasing the prediction model complexity, and dealing with noisy information. On this subject, 
-deep learning-based feature engineering approaches for imbalanced datasets with regards to their 
-impact on the final results could be explored.
-\paragraph{Deep learning approaches for learning from imblanaced data}
-As being mentioned in ~\ref{sec:imbalanceBackground}, there are various domains of studies 
-where researchers have to learn from multiple imbalanced classes of data. On the same subject, 
-Deep learning approaches for learning from the imbalanced data with applications in 
-Image classification, Activity recognition, Natural language processing, 
-Security-related problems, Bioinformatics, etc. could be each explored.
+Considering the nature of the Imbalanced data, and characteristics of the machine learning 
+algorithms (Section~\ref{sec:imbalanceBackground}), learning from imbalanced sets of data 
+requires more analysis. A researcher also needs to consider more parameters. When it comes 
+to learning from multiple imbalanced classes of data, the process takes even more analysis 
+and involves even more parameters. 
+
+So, there could be 2 directions to follow from here. The first path to follow would be to 
+focus on exploring the approaches that could improve the results for such problems. 
+It would be interesting to explore how combining several individual models on the same 
+dataset could lead to a better generalization performance (ensemble learning for imbalanced data).
+
+The second one would be to focus on the approaches through which reproducibility-related 
+issues coils be avoided for these types of problems. There are various applications for 
+imbalanced data in various domains of science, reproducible experiments could save a big 
+amount of time and budget. 
+
+\paragraph{Results Improvement}
+In machine learning, combining several classifiers into a single one (ensemble learning) 
+is known to improve performance. However, ensemble learning techniques by themselves are 
+not able to solve the class imbalance problem. 
+
+To solve this problem, we need to adapt the ensemble learning algorithms. For this purpose, 
+usually, we can combine an ensemble learning strategy with any of the methods that deal 
+with the class imbalance (section 2.3). Different solutions mainly differ on how this 
+hybridization is done and which ones are the methods considered for the construction of 
+the new model.
+
+On the other hand, there are several approaches for building a model in ensemble settings. 
+The ensemble models could be broadly categorised into models like bagging, boosting and 
+stacking, negative correlation based deep ensemble models, explicit/implicit ensembles, 
+homogeneous/heterogeneous ensemble, decision fusion strategies, unsupervised, semi-supervised, 
+reinforcement learning and online/incremental, multilabel based deep 
+ensemble models~\cite{ganaie2021ensemble}.
+
+An interesting field of study would be exploring hybridization techniques. One can research 
+what type of hybridization would improve the performance in a specific domain. 
+Combining and training the classifiers in this category also could increase the 
+training cost. Hence, one can investigate the alternate ways of inducing diversity 
+in the base models with lesser training costs.
+
+\paragraph{Reproducibility-related Issues}
+Through this path, one can conduct deeper analysis into various approaches for learning 
+from imbalanced datasets through various domains of machine learning applications with a 
+focus on the key points and parameters that could lead to an irreproducible experiment.
+
+When it comes to learning from imbalanced sets of data, there are numerous approaches 
+available for different applications in this field. Each model depending on the problem 
+it solves has its own characteristics. These approaches could be explored and the key points 
+could be addressed to improve reporting on the matter.
+
+% Learning from multiple imbalanced sets of data generally involves taking extra steps and considering 
+% more parameters. So, they are more prone to reproducibility-related issues. Following the same path, my future 
+% works concern a deeper analysis into deep learning-based approaches for learning from imbalanced datasets 
+% through various domains of machine learning applications with regards to the key points 
+% and parameters that could lead to different results on replication attempts. The following ideas 
+% could be studied:
+% \paragraph{Deep learning-based feature engineering for imbalanced data}
+% Working on problems with high dimensional feature space, feature engineering as one 
+% of the phases of building a model could help with reducing the data dimensionality, 
+% decreasing the prediction model complexity, and dealing with noisy information. On this subject, 
+% deep learning-based feature engineering approaches for imbalanced datasets with regards to their 
+% impact on the final results could be explored.
+% \paragraph{Deep learning approaches for learning from imblanaced data}
+% As being mentioned in ~\ref{sec:imbalanceBackground}, there are various domains of studies 
+% where researchers have to learn from multiple imbalanced classes of data. On the same subject, 
+% Deep learning approaches for learning from the imbalanced data with applications in 
+% Image classification, Activity recognition, Natural language processing, 
+% Security-related problems, Bioinformatics, etc. could be each explored.
